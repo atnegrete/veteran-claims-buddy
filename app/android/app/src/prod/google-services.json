@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "654435706200",
+    "project_id": "veteran-claims-buddy-prod",
+    "storage_bucket": "veteran-claims-buddy-prod.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654435706200:android:8ddf891f83c4c45c62712d",
+        "android_client_info": {
+          "package_name": "com.veteranclaimsbuddy.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANArjoeWug0UL_rW6GKaB0lzMKPo4UduI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
