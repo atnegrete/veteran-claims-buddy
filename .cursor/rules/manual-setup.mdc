@@ -1,0 +1,18 @@
+---
+description: Owner runs project-bootstrap CLIs; plain packages may be added at the latest stable version
+alwaysApply: true
+---
+
+# Manual setup
+
+When a step creates or connects a project, the owner runs the command. Stop, print the exact command, directory, and success check, and wait.
+
+This includes `flutter create`, `flutterfire configure`, `firebase init`, `firebase login`, and icon or splash generators.
+
+Do not hand-write the Flutter, Firebase, or Node project those commands generate.
+
+Cloud Functions and `/scripts` are JavaScript. Official VA PDFs are filled with `pdf-lib` in Functions, not in Flutter.
+
+Plain Dart or JavaScript packages that need no account, API key, or store setup may be added to `pubspec.yaml` or `package.json`. Use `flutter pub add` or `npm install` with no version pin so the latest stable major is selected.
+
+`purchases_flutter` and `flutter_stripe` wait until their owner gates are done.

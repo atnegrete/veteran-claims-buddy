@@ -1,0 +1,19 @@
+---
+description: Check the page navigation map before adding screens, routes, or related plans
+alwaysApply: true
+---
+
+# Page navigation
+
+Before creating or implementing a plan that adds, removes, renames, or re-nests a screen, route, tab, or purchase guard, read `docs/page-navigation.md`.
+
+That file wins over older route lists in `Veteran_Claims_Buddy_Engineering_Handoff.md` and over any new plan.
+
+If the work conflicts with the map:
+
+1. Stop before scaffolding or coding the conflicting part.
+2. Tell the owner what the map says and what the new plan would do instead.
+3. Wait for a decision.
+4. If the map should change, update `docs/page-navigation.md` in the same change. Do not leave a second navigation plan somewhere else.
+
+`/plans` is the only Premium versus per-Case sales page. Do not add another paywall screen.
