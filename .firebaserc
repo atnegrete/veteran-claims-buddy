@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "veteran-claims-buddy-dev",
+    "dev": "veteran-claims-buddy-dev",
+    "prod": "veteran-claims-buddy-prod"
+  }
+}

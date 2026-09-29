@@ -16,7 +16,9 @@ Do not start a later build-sequence step until its checklist has been expanded i
 
 Firestore is `nam5` in both projects. Storage is `us-central1` in both projects. FlutterFire options files exist for dev and prod.
 
-**Next owner gate is 4C, `firebase init`.** Functions in that init use `us-central1`, not `nam5`.
+**Gate 4C is done.** One Firebase config serves both projects. Aliases are `dev` and `prod` in `.firebaserc`. There is no second `firebase init` for prod.
+
+**Next code work is Phase 3C:** bootstrap the Flutter app by flavor using the FlutterFire options files. Prod deploys of rules and functions wait until a production release.
 
 ## Phase 2 — what the owner does next
 
@@ -47,6 +49,7 @@ Done on 2026-09-29. Ids are in `docs/environment-values.md`.
 | 2026-09-29 | Phase 1 packages added. Dev and prod flavors configured. `fvm flutter analyze` and `fvm flutter test` passed. `fvm flutter build apk --flavor dev` produced `app-dev-release.apk`. |
 | 2026-09-29 | Owner created `veteran-claims-buddy-dev` and `veteran-claims-buddy-prod`, upgraded both to Blaze, and set budget alerts. |
 | 2026-09-29 | Firestore location is `nam5`. Storage and Cloud Functions stay `us-central1`. |
+| 2026-09-29 | Owner ran `firebase init` for Firestore, Functions, and Storage against dev. Prod is an alias of the same config, not a second init. Functions runtime pinned to Node 22 in `us-central1`. |
 
 ## Phase 0 — Owner workstation
 
@@ -85,8 +88,8 @@ Known build warning, not a failure: Firebase Android plugins still apply the Kot
 
 - [x] **4A** Firestore is Standard edition, Native mode, location `nam5`, in dev and prod.
 - [x] **4B** Storage is `us-central1` in dev and prod. No public read.
-- [ ] **4C** Owner runs `firebase init` for Firestore, JavaScript Functions, and Storage. Node 22, 2nd-gen Functions. Do not hand-write that skeleton. Functions region in that init is `us-central1`, not `nam5`.
-- [ ] **4D** Set `PRIMARY_REGION` to `us-central1`. Same source deploys to dev and prod. Secrets stay per project.
+- [x] **4C** Owner ran `firebase init` for Firestore, JavaScript Functions, and Storage against `veteran-claims-buddy-dev`. Rules files are locked (`if false`).
+- [x] **4D** `functions/region.js` sets `PRIMARY_REGION` to `us-central1`. `functions/package.json` engines is Node 22. `.firebaserc` aliases: `default` and `dev` are the dev project, `prod` is `veteran-claims-buddy-prod`. Same source deploys to both. Secrets stay per project.
 
 Hosting targets (`marketing` and `app`) are initialized after the Firebase projects exist. Custom domain connection is a separate owner gate and does not block claim-domain work.
 
