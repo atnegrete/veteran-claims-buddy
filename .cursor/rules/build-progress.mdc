@@ -1,0 +1,14 @@
+---
+description: Keep the handoff implementation checklist current
+alwaysApply: true
+---
+
+# Build progress
+
+`docs/build-progress.md` is the step-by-step checklist for `Veteran_Claims_Buddy_Engineering_Handoff.md`.
+
+Before implementing, read the current position in that file and continue from the first open item.
+
+When a step finishes, blocks, or is newly expanded from the handoff, update `docs/build-progress.md` in the same change. Do not mark a phase complete while any of its items are open. Stop at owner gates.
+
+`docs/page-navigation.md` wins for screens and routes. Do not start a later build-sequence step until its checklist has been expanded into `docs/build-progress.md`.

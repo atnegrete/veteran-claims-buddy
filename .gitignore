@@ -1,0 +1,5 @@
+.DS_Store
+
+# Machine-local FVM symlink. Commit the version pin, not the SDK path.
+.fvm/flutter_sdk
+app/.fvm/flutter_sdk

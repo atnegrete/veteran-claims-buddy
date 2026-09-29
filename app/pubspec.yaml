@@ -1,5 +1,5 @@
 name: app
-description: "A new Flutter project."
+description: "Veteran Claims Buddy"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -34,6 +34,21 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  firebase_core: ^4.15.0
+  firebase_auth: ^6.7.0
+  cloud_firestore: ^6.10.0
+  firebase_storage: ^13.6.0
+  cloud_functions: ^6.5.0
+  firebase_app_check: ^0.4.8
+  firebase_messaging: ^16.7.0
+  flutter_riverpod: ^3.4.3
+  go_router: ^18.0.2
+  flutter_adaptive_scaffold: ^0.3.3+1
+  flutter_svg: ^2.3.0
+  intl: ^0.20.3
+  uuid: ^4.6.0
+  collection: ^1.19.1
+  package_info_plus: ^10.2.1
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +66,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  default-flavor: dev
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

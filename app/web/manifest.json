@@ -1,11 +1,11 @@
 {
-    "name": "app",
-    "short_name": "app",
+    "name": "Veteran Claims Buddy",
+    "short_name": "Vet Claims Buddy",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Veteran Claims Buddy",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

@@ -9,7 +9,7 @@ When a step creates or connects a project, the owner runs the command. Stop, pri
 
 This includes `fvm flutter create`, `flutterfire configure`, `firebase init`, `firebase login`, and icon or splash generators.
 
-Flutter is installed through FVM. There is no `flutter` binary on PATH. Run Flutter and Dart as `fvm flutter` and `fvm dart` from the repo root after a version is pinned with `fvm use`. Do not tell the owner to install a global Flutter SDK. The cached SDK named `stable` is an old 3.0.5 install and does not run on this Mac. Use an installed 3.x SDK such as `3.41.4`. The `flutterfire` shim on PATH is bound to a system Dart that is too old to run it. Activate and run FlutterFire with `fvm dart` when that gate is reached.
+Flutter is installed through FVM. There is no `flutter` binary on PATH. The project pin is Flutter 3.47.5. Run `fvm flutter` and `fvm dart` from `/app`. FVM 2.4.1 does not use a pin that lives only in the repo root. Do not tell the owner to install a global Flutter SDK. The cached SDK named `stable` is an old 3.0.5 install and does not run on this Mac. The `flutterfire` shim on PATH is bound to a system Dart that is too old to run it. Activate and run FlutterFire with `fvm dart` when that gate is reached.
 
 Do not hand-write the Flutter, Firebase, or Node project those commands generate.
 
