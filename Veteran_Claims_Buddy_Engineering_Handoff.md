@@ -2143,9 +2143,7 @@ Do not copy dev secret values into prod. Vertex and other provider keys follow t
 
 Firebase Console -> Databases & Storage -> Firestore Database -> Create database.
 
-Select a region deliberately.
-
-The region is difficult/expensive to change later, so select a U.S. region appropriate for expected users and adjacent services.
+Settled location, both projects: multi-region `nam5` (United States). Standard edition, Native mode. The location and edition cannot be changed later.
 
 Start in locked/production mode rather than permissive test rules.
 
@@ -2157,7 +2155,7 @@ https://firebase.google.com/docs/firestore/security/get-started
 
 Firebase Console -> Databases & Storage -> Storage -> Get started.
 
-Choose a location that aligns sensibly with the app's Google Cloud region and cost objectives.
+Settled location, both projects: `us-central1`. Storage does not use the Firestore multi-region `nam5`.
 
 Cloud Storage for Firebase requires Blaze.
 
@@ -2197,10 +2195,12 @@ Use a currently supported Node runtime. Prefer Node 22 unless a dependency requi
 
 Set the Functions region explicitly in shared config so functions are not accidentally scattered across regions.
 
+Cloud Functions cannot run in the Firestore multi-region `nam5`. Use `us-central1`, which is inside `nam5` and matches the Storage bucket.
+
 Use a shared constant:
 
 ```js
-exports.PRIMARY_REGION = "<chosen-region>";
+exports.PRIMARY_REGION = "us-central1";
 ```
 
 ---

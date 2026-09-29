@@ -14,7 +14,9 @@ Do not start a later build-sequence step until its checklist has been expanded i
 
 **Phase 2 is done.** Project ids are `veteran-claims-buddy-dev` and `veteran-claims-buddy-prod`. Both are on Blaze with budget alerts.
 
-**Next owner work is Phase 3, then the Phase 4 console setup.** FlutterFire registration comes first. Firestore and Storage can be created in the same sitting. Stop before `firebase init` and report back.
+Firestore is `nam5` in both projects. Storage is `us-central1` in both projects. FlutterFire options files exist for dev and prod.
+
+**Next owner gate is 4C, `firebase init`.** Functions in that init use `us-central1`, not `nam5`.
 
 ## Phase 2 — what the owner does next
 
@@ -32,7 +34,10 @@ Done on 2026-09-29. Ids are in `docs/environment-values.md`.
 - Do not commit `.fvm/flutter_sdk`. It is a machine-local symlink. Commit `fvm_config.json` only. The root symlink was removed from the git index on 2026-09-29 and still needs a commit.
 - Node on this machine is v24.14.0. Cloud Functions still pin Node 22 when they are initialized.
 - Firebase CLI is 15.10.1. `firebase login` is still an owner gate.
-- `flutterfire` on PATH is bound to Homebrew Dart 2.18.4 and cannot run. Activate it later with `fvm dart`.
+- Run FlutterFire with `fvm dart pub global run flutterfire_cli:flutterfire`. The shim on PATH was built for Homebrew Dart 2.18.4. Installed CLI is 1.4.1.
+- Firestore is multi-region `nam5` in both projects. Standard edition, Native mode.
+- Storage is `us-central1` in both projects. No public read.
+- Cloud Functions use `us-central1`. They cannot be deployed to `nam5`. That region is inside the Firestore multi-region and matches Storage.
 
 ## Log
 
@@ -41,13 +46,14 @@ Done on 2026-09-29. Ids are in `docs/environment-values.md`.
 | 2026-09-29 | Tracker created. Flutter app exists at `/app` from `fvm flutter create` (commit `e7f419b`). Phase 1 packages and flavors started. |
 | 2026-09-29 | Phase 1 packages added. Dev and prod flavors configured. `fvm flutter analyze` and `fvm flutter test` passed. `fvm flutter build apk --flavor dev` produced `app-dev-release.apk`. |
 | 2026-09-29 | Owner created `veteran-claims-buddy-dev` and `veteran-claims-buddy-prod`, upgraded both to Blaze, and set budget alerts. |
+| 2026-09-29 | Firestore location is `nam5`. Storage and Cloud Functions stay `us-central1`. |
 
 ## Phase 0 — Owner workstation
 
 - [x] **0A Install/verify Flutter.** FVM 3.47.5. `fvm flutter doctor` on 2026-09-29: Xcode and Chrome are healthy. Remaining warnings: Intel Mac deprecation, Homebrew Dart 2.18.4 is ahead of the Flutter SDK on PATH, and some Android licenses are not accepted. The dev APK still built. From `/app`, the owner can clear the license warning with `fvm flutter doctor --android-licenses`.
 - [x] **0B Install Node.js.** `node` v24.14.0.
 - [x] **0C Install Firebase CLI.** `firebase` 15.10.1.
-- [ ] **0D Install FlutterFire CLI.** `blocked`. The shim at `~/.pub-cache/bin/flutterfire` fails on Dart 2.18.4. When Phase 3 starts, from `/app` the owner runs `fvm dart pub global activate flutterfire_cli`, then runs FlutterFire with `fvm dart` rather than the old shim.
+- [x] **0D Install FlutterFire CLI.** `flutterfire_cli` 1.4.1, activated with `fvm dart`. Invoke it through `fvm dart pub global run flutterfire_cli:flutterfire`, not the old PATH shim.
 - [x] **0E Choose identifiers.** Confirmed by the create command. See decisions above.
 
 ## Phase 1 — Scaffold the Flutter repository
@@ -69,18 +75,18 @@ Known build warning, not a failure: Firebase Android plugins still apply the Kot
 
 ## Phase 3 — Connect Flutter to Firebase
 
-- [ ] **3A** Owner runs FlutterFire for the dev project and produces `app/lib/firebase_options_dev.dart`.
-- [ ] **3B** Owner runs FlutterFire for the prod project and produces `app/lib/firebase_options_prod.dart`.
+- [x] **3A** Dev FlutterFire config written: `app/lib/firebase_options_dev.dart`, `app/android/app/src/dev/google-services.json`, `app/ios/config/dev/GoogleService-Info.plist`. iOS build configuration `Debug-dev`.
+- [x] **3B** Prod FlutterFire config written: `app/lib/firebase_options_prod.dart`, `app/android/app/src/prod/google-services.json`, `app/ios/config/prod/GoogleService-Info.plist`. iOS build configuration `Debug-prod`.
 - [ ] **3C** Bootstrap Firebase by flavor. A production binary must not be able to point at dev.
 - [ ] **3D** Dev-only environment banner.
 - [ ] **Definition of done.** Dev app connects to the dev project and prod app connects to the prod project. Temporary diagnostic screen shows project id, flavor, and application id.
 
 ## Phase 4 — Initialize Firebase backend resources
 
-- [ ] **4A** Owner creates the Firestore database in a deliberate U.S. region, locked rules.
-- [ ] **4B** Owner creates the Storage bucket in an aligned location. No public read.
-- [ ] **4C** Owner runs `firebase init` for Firestore, JavaScript Functions, and Storage. Node 22, 2nd-gen Functions. Do not hand-write that skeleton.
-- [ ] **4D** Set one shared Functions region constant. Same source deploys to dev and prod. Secrets stay per project.
+- [x] **4A** Firestore is Standard edition, Native mode, location `nam5`, in dev and prod.
+- [x] **4B** Storage is `us-central1` in dev and prod. No public read.
+- [ ] **4C** Owner runs `firebase init` for Firestore, JavaScript Functions, and Storage. Node 22, 2nd-gen Functions. Do not hand-write that skeleton. Functions region in that init is `us-central1`, not `nam5`.
+- [ ] **4D** Set `PRIMARY_REGION` to `us-central1`. Same source deploys to dev and prod. Secrets stay per project.
 
 Hosting targets (`marketing` and `app`) are initialized after the Firebase projects exist. Custom domain connection is a separate owner gate and does not block claim-domain work.
 
