@@ -20,9 +20,17 @@ Firestore is `nam5` in both projects. Storage is `us-central1` in both projects.
 
 **Phase 3 is done.** Owner confirmed both flavor runs on 2026-09-29. Dev shows `veteran-claims-buddy-dev` and the DEV banner. Prod shows `veteran-claims-buddy-prod` with no banner.
 
-The iOS `GoogleService-Info.plist` files are on disk under `app/ios/config/`, but they are not yet members of the Xcode target. They get wired before SMS and push.
+The iOS `GoogleService-Info.plist` files are copied into the app bundle for `Debug`, `Release`, and `Profile` of each flavor. Unflavored iOS configurations do not get a plist.
 
-**Stopped at owner gate 5A.** Upgrade Authentication to Identity Platform in the dev project, then do the same in prod (gate 5B). Do not create production test users. Auth code waits until both are confirmed.
+**Gates 5A–5H.1 are done.** The development Android app has the debug SHA-256. Release builds still share that debug keystore until a real upload key exists.
+
+**iOS phone verification is prepared in the Xcode project.** Push Notifications is on. Background mode includes remote notifications. Debug and Profile use the development push environment. Release uses production. Each flavor build copies its own `GoogleService-Info.plist` into the app.
+
+**Gate 5I.1 is done.** The same APNs `.p8` is uploaded to both the development and production slots on `veteran-claims-buddy-dev`, for `com.veteranclaimsbuddy.app.dev`. The `.p8` stays out of the repo.
+
+**Production APNs stays closed** until a production release. At that time the same file is uploaded to both slots on `veteran-claims-buddy-prod`, for `com.veteranclaimsbuddy.app`.
+
+**Web SMS is not verified.** Gate 5J waits until Flutter web is being tested. The next code work is mandatory SMS enrollment in the app.
 
 ## Phase 2 — what the owner does next
 
@@ -55,6 +63,10 @@ Done on 2026-09-29. Ids are in `docs/environment-values.md`.
 | 2026-09-29 | Firestore location is `nam5`. Storage and Cloud Functions stay `us-central1`. |
 | 2026-09-29 | Owner ran `firebase init` for Firestore, Functions, and Storage against dev. Prod is an alias of the same config, not a second init. Functions runtime pinned to Node 22 in `us-central1`. |
 | 2026-09-29 | Phase 3 bootstrap and DEV banner landed. Owner confirmed both flavor diagnostics. Next gate is Identity Platform in dev and prod. |
+| 2026-09-29 | Owner enabled Identity Platform in dev and prod. Next gates are email/password, SMS MFA, dev test numbers, and SMS region policy. |
+| 2026-09-29 | Owner enabled email/password and SMS MFA in both projects, added dev test numbers, and set the SMS region policy. Email/password gates are in the app. Next owner step is the dev Android SHA fingerprint. |
+| 2026-09-29 | Owner registered the dev Android SHA-256. iOS push and remote-notification background mode are in the Xcode project. Next owner step is the dev APNs key. |
+| 2026-09-29 | Owner uploaded the APNs key to both slots on the dev Firebase project. Production Firebase APNs stays closed until a production release. |
 
 ## Phase 0 — Owner workstation
 
@@ -100,21 +112,21 @@ Hosting targets (`marketing` and `app`) are initialized after the Firebase proje
 
 ## Phase 5 — Authentication and required SMS MFA
 
-- [ ] **5A** Upgrade DEV Authentication to Identity Platform.
-- [ ] **5B** Upgrade PROD Authentication to Identity Platform.
-- [ ] **5C** Enable email/password in DEV and PROD.
-- [ ] **5D** Enable SMS multi-factor authentication.
-- [ ] **5E** Configure DEV fictional/test phone numbers.
-- [ ] **5F** Configure SMS region policy.
-- [ ] **5G** Email/password flow and verified email.
-- [ ] **5H** Prepare Android fingerprint values, then stop.
-- [ ] **5H.1** Owner registers the Android DEV fingerprint.
-- [ ] **5I** Prepare iOS phone-verification capabilities, then stop.
-- [ ] **5I.1** Owner configures Apple APNs authentication for DEV Firebase.
-- [ ] **5J** Owner configures a DEV web domain for SMS MFA testing.
+- [x] **5A** DEV Authentication upgraded to Identity Platform. Confirmed 2026-09-29.
+- [x] **5B** PROD Authentication upgraded to Identity Platform. Confirmed 2026-09-29. No production test users.
+- [x] **5C** Email/Password enabled in DEV and PROD. Confirmed 2026-09-29. Anonymous auth and phone-as-primary stay off.
+- [x] **5D** SMS multi-factor authentication enabled in DEV and PROD. Confirmed 2026-09-29. The console still asks for platform setup; that is 5H, 5I, and 5J.
+- [x] **5E** DEV fictional test phone numbers configured. Values stay in the owner's password manager, not in the repo.
+- [x] **5F** SMS region policy reviewed in DEV and PROD. U.S. numbers are allowed.
+- [x] **5G** Email/password create, sign-in, forgot password, reset-password handler, verify-email, and sign-out. Unverified users cannot leave `/verify-email`. Verified users without a factor land on `/mfa/enroll`, which does not send SMS yet.
+- [x] **5H** Debug signing fingerprints captured from `./gradlew :app:signingReport` on 2026-09-29. Dev and prod variants currently share the debug keystore. SHA-1 `1D:5B:2C:AF:3C:1D:A5:FC:AA:6C:F2:10:58:7D:D5:B2:D8:A2:64:C7`. SHA-256 `9E:2C:28:0E:A2:04:DC:CB:A1:4B:F5:EC:C6:B0:A4:C4:BB:37:ED:E8:F9:8E:74:98:AB:64:5C:62:64:F5:AF:CB`.
+- [x] **5H.1** Owner registered the Android DEV SHA-256 on 2026-09-29. Production Android app was not changed.
+- [x] **5I** iOS Runner has Push Notifications and Background Modes → Remote notifications. `app/ios/Runner/Debug.entitlements` is `development`. `Release.entitlements` is `production`. Flavor builds copy `app/ios/config/<flavor>/GoogleService-Info.plist`.
+- [x] **5I.1** Owner uploaded the APNs `.p8` to both the development and production slots on DEV Firebase on 2026-09-29. Production Firebase was left empty.
+- [ ] **5J** DEV web domain for SMS MFA. Deferred. Web MFA is not verified.
 - [ ] **5K** Mandatory SMS MFA enrollment.
 - [ ] **5L** MFA challenge during sign-in.
-- [ ] **5M** Centralized authentication/access state machine. Shell routes stay closed until email is verified and SMS MFA is enrolled.
+- [ ] **5M** Centralized authentication/access state machine. The client redirect for the gates above is in `app/lib/auth/auth_redirect.dart`. Still open for a sign-in MFA challenge and for deletion scheduling. Shell routes stay closed until email is verified and SMS MFA is enrolled.
 - [ ] **5N** Server-authoritative MFA enrollment marker.
 - [ ] **5O** Firestore and Storage gating before sensitive onboarding data.
 - [ ] **5P** MFA recovery and factor-management UX. Lost phone goes to support contact. No self-serve bypass.
