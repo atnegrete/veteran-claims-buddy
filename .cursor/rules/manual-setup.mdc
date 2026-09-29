@@ -7,12 +7,14 @@ alwaysApply: true
 
 When a step creates or connects a project, the owner runs the command. Stop, print the exact command, directory, and success check, and wait.
 
-This includes `flutter create`, `flutterfire configure`, `firebase init`, `firebase login`, and icon or splash generators.
+This includes `fvm flutter create`, `flutterfire configure`, `firebase init`, `firebase login`, and icon or splash generators.
+
+Flutter is installed through FVM. There is no `flutter` binary on PATH. Run Flutter and Dart as `fvm flutter` and `fvm dart` from the repo root after a version is pinned with `fvm use`. Do not tell the owner to install a global Flutter SDK. The cached SDK named `stable` is an old 3.0.5 install and does not run on this Mac. Use an installed 3.x SDK such as `3.41.4`. The `flutterfire` shim on PATH is bound to a system Dart that is too old to run it. Activate and run FlutterFire with `fvm dart` when that gate is reached.
 
 Do not hand-write the Flutter, Firebase, or Node project those commands generate.
 
 Cloud Functions and `/scripts` are JavaScript. Official VA PDFs are filled with `pdf-lib` in Functions, not in Flutter.
 
-Plain Dart or JavaScript packages that need no account, API key, or store setup may be added to `pubspec.yaml` or `package.json`. Use `flutter pub add` or `npm install` with no version pin so the latest stable major is selected.
+Plain Dart or JavaScript packages that need no account, API key, or store setup may be added to `pubspec.yaml` or `package.json`. Use `fvm flutter pub add` or `npm install` with no version pin so the latest stable major is selected.
 
 `purchases_flutter` and `flutter_stripe` wait until their owner gates are done.
