@@ -18,7 +18,11 @@ Firestore is `nam5` in both projects. Storage is `us-central1` in both projects.
 
 **Gate 4C is done.** One Firebase config serves both projects. Aliases are `dev` and `prod` in `.firebaserc`. There is no second `firebase init` for prod.
 
-**Next code work is Phase 3C:** bootstrap the Flutter app by flavor using the FlutterFire options files. Prod deploys of rules and functions wait until a production release.
+**Phase 3 is done.** Owner confirmed both flavor runs on 2026-09-29. Dev shows `veteran-claims-buddy-dev` and the DEV banner. Prod shows `veteran-claims-buddy-prod` with no banner.
+
+The iOS `GoogleService-Info.plist` files are on disk under `app/ios/config/`, but they are not yet members of the Xcode target. They get wired before SMS and push.
+
+**Stopped at owner gate 5A.** Upgrade Authentication to Identity Platform in the dev project, then do the same in prod (gate 5B). Do not create production test users. Auth code waits until both are confirmed.
 
 ## Phase 2 — what the owner does next
 
@@ -50,6 +54,7 @@ Done on 2026-09-29. Ids are in `docs/environment-values.md`.
 | 2026-09-29 | Owner created `veteran-claims-buddy-dev` and `veteran-claims-buddy-prod`, upgraded both to Blaze, and set budget alerts. |
 | 2026-09-29 | Firestore location is `nam5`. Storage and Cloud Functions stay `us-central1`. |
 | 2026-09-29 | Owner ran `firebase init` for Firestore, Functions, and Storage against dev. Prod is an alias of the same config, not a second init. Functions runtime pinned to Node 22 in `us-central1`. |
+| 2026-09-29 | Phase 3 bootstrap and DEV banner landed. Owner confirmed both flavor diagnostics. Next gate is Identity Platform in dev and prod. |
 
 ## Phase 0 — Owner workstation
 
@@ -80,9 +85,9 @@ Known build warning, not a failure: Firebase Android plugins still apply the Kot
 
 - [x] **3A** Dev FlutterFire config written: `app/lib/firebase_options_dev.dart`, `app/android/app/src/dev/google-services.json`, `app/ios/config/dev/GoogleService-Info.plist`. iOS build configuration `Debug-dev`.
 - [x] **3B** Prod FlutterFire config written: `app/lib/firebase_options_prod.dart`, `app/android/app/src/prod/google-services.json`, `app/ios/config/prod/GoogleService-Info.plist`. iOS build configuration `Debug-prod`.
-- [ ] **3C** Bootstrap Firebase by flavor. A production binary must not be able to point at dev.
-- [ ] **3D** Dev-only environment banner.
-- [ ] **Definition of done.** Dev app connects to the dev project and prod app connects to the prod project. Temporary diagnostic screen shows project id, flavor, and application id.
+- [x] **3C** Bootstrap Firebase by flavor in `app/lib/app/app_bootstrap.dart`. Dev loads only the dev options. Prod loads only the prod options. A release build with no flavor fails.
+- [x] **3D** Dev-only DEV banner on the diagnostic screen.
+- [x] **Definition of done.** Owner confirmed `--flavor dev` and `--flavor prod` on 2026-09-29. Each screen showed the matching project id, flavor, and application id.
 
 ## Phase 4 — Initialize Firebase backend resources
 
