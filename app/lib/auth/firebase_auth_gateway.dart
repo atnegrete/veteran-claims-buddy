@@ -118,9 +118,41 @@ class FirebaseAuthGateway implements AuthGateway {
 
   @override
   Future<void> confirmServerAuthState() {
+    return _callAuthState('confirmAuthState');
+  }
+
+  @override
+  Future<void> clearServerAuthState() {
+    return _callAuthState('clearAuthState');
+  }
+
+  Future<void> _callAuthState(String name) {
     return _guard(() async {
       final functions = FirebaseFunctions.instanceFor(region: 'us-central1');
-      await functions.httpsCallable('confirmAuthState').call();
+      await functions.httpsCallable(name).call();
+    });
+  }
+
+  @override
+  Future<void> reauthenticate(String password) {
+    return _guard(() async {
+      final user = _requireUser();
+      final email = user.email;
+      if (email == null || email.isEmpty) {
+        throw const AuthFailure(AuthFailureCode.unknown);
+      }
+      await user.reauthenticateWithCredential(
+        EmailAuthProvider.credential(email: email, password: password),
+      );
+    });
+  }
+
+  @override
+  Future<void> unenrollFactor(String factorUid) {
+    return _guard(() async {
+      final user = _requireUser();
+      await user.multiFactor.unenroll(factorUid: factorUid);
+      await user.reload();
     });
   }
 
@@ -231,14 +263,18 @@ class FirebaseAuthGateway implements AuthGateway {
   Future<AuthSession?> _sessionFor(User? user) async {
     if (user == null) return null;
     var mfaEnrolled = false;
-    String? maskedPhone;
+    final phoneFactors = <PhoneFactorHint>[];
     try {
       final factors = await user.multiFactor.getEnrolledFactors();
       mfaEnrolled = factors.isNotEmpty;
       for (final factor in factors) {
         if (factor is PhoneMultiFactorInfo) {
-          maskedPhone = maskPhoneNumber(factor.phoneNumber);
-          break;
+          phoneFactors.add(
+            PhoneFactorHint(
+              uid: factor.uid,
+              label: maskPhoneNumber(factor.phoneNumber),
+            ),
+          );
         }
       }
     } on FirebaseAuthException {
@@ -249,7 +285,8 @@ class FirebaseAuthGateway implements AuthGateway {
       email: user.email,
       emailVerified: user.emailVerified,
       mfaEnrolled: mfaEnrolled,
-      maskedPhone: maskedPhone,
+      maskedPhone: phoneFactors.isEmpty ? null : phoneFactors.first.label,
+      factors: phoneFactors,
     );
   }
 
@@ -310,6 +347,8 @@ class FirebaseAuthGateway implements AuthGateway {
           return const AuthFailure(AuthFailureCode.smsRegionBlocked);
         }
         return const AuthFailure(AuthFailureCode.unknown);
+      case 'requires-recent-login':
+        return const AuthFailure(AuthFailureCode.recentLoginRequired);
       case 'too-many-requests':
       case 'quota-exceeded':
         return const AuthFailure(AuthFailureCode.tooManyRequests);

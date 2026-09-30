@@ -15,4 +15,10 @@ function assertEnrollmentConfirmed(user) {
   return { ok: true };
 }
 
-module.exports = { assertEnrollmentConfirmed };
+function assertNoEnrolledFactor(user) {
+  const factors = user?.multiFactor?.enrolledFactors;
+  const factorCount = Array.isArray(factors) ? factors.length : 0;
+  return { ok: factorCount === 0 };
+}
+
+module.exports = { assertEnrollmentConfirmed, assertNoEnrolledFactor };

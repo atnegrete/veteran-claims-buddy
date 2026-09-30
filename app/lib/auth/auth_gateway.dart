@@ -31,6 +31,13 @@ abstract class AuthGateway {
   /// The client cannot write that marker itself.
   Future<void> confirmServerAuthState();
 
+  /// Asks the server to clear the enrollment marker after the last factor is gone.
+  Future<void> clearServerAuthState();
+
+  Future<void> reauthenticate(String password);
+
+  Future<void> unenrollFactor(String factorUid);
+
   Future<void> sendEmailVerification();
 
   /// Fetches the account from Firebase so a verification link is visible.

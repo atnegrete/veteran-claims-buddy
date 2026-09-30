@@ -99,6 +99,33 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
   Widget build(BuildContext context) {
     final gate = ref.watch(authControllerProvider);
     final enrolled = gate.session?.mfaEnrolled ?? false;
+    if (!enrolled && gate.serverAuthConfirmed && gate.serverConfirmFailed) {
+      return AuthScaffold(
+        title: 'Add a phone number',
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Text(
+              'The phone was removed, and security setup did not finish.',
+            ),
+            const SizedBox(height: 16),
+            const AuthMessageText('Security setup did not finish. Try again.'),
+            FilledButton(
+              onPressed: () {
+                ref.read(authControllerProvider.notifier).clearServerAuthState();
+              },
+              child: const Text('Try again'),
+            ),
+            TextButton(
+              onPressed: () =>
+                  ref.read(authControllerProvider.notifier).signOut(),
+              child: const Text('Sign out'),
+            ),
+          ],
+        ),
+      );
+    }
+
     if (enrolled && !gate.serverAuthConfirmed) {
       return AuthScaffold(
         title: 'Add a phone number',

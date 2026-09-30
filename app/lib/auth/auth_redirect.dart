@@ -15,6 +15,11 @@ abstract final class AuthRoutes {
   static const cases = '/cases';
   static const buddy = '/buddy';
   static const you = '/you';
+  static const security = '/you/settings/security';
+  static const plans = '/plans';
+  static const calculator = '/calculator';
+
+  static String caseOverview(String caseId) => '/cases/$caseId/overview';
 }
 
 const signedOutRoutes = <String>{
@@ -73,6 +78,8 @@ bool isShellLocation(String location) {
     AuthRoutes.cases,
     AuthRoutes.buddy,
     AuthRoutes.you,
+    AuthRoutes.plans,
+    AuthRoutes.calculator,
   ];
   for (final root in roots) {
     if (location == root || location.startsWith('$root/')) return true;

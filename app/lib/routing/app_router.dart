@@ -17,6 +17,12 @@ import '../screens/onboarding/remaining_screens.dart';
 import '../screens/onboarding/service_screen.dart';
 import '../screens/onboarding/welcome_screen.dart';
 import '../screens/shell/app_shell.dart';
+import '../screens/shell/calculator_screen.dart';
+import '../screens/shell/case_overview_screen.dart';
+import '../screens/shell/cases_screen.dart';
+import '../screens/shell/home_screen.dart';
+import '../screens/shell/plans_screen.dart';
+import '../screens/shell/security_screen.dart';
 import '../screens/shell/shell_pages.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -114,6 +120,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AuthRoutes.cases,
             builder: (context, state) => const CasesScreen(),
+            routes: [
+              GoRoute(
+                path: ':caseId/overview',
+                builder: (context, state) => CaseOverviewScreen(
+                  caseId: state.pathParameters['caseId']!,
+                ),
+              ),
+            ],
           ),
           GoRoute(
             path: AuthRoutes.buddy,
@@ -122,6 +136,23 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AuthRoutes.you,
             builder: (context, state) => const YouScreen(),
+            routes: [
+              GoRoute(
+                path: 'settings/security',
+                builder: (context, state) => const SecurityScreen(),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AuthRoutes.plans,
+            builder: (context, state) => PlansScreen(
+              reason: state.uri.queryParameters['reason'],
+              caseId: state.uri.queryParameters['caseId'],
+            ),
+          ),
+          GoRoute(
+            path: AuthRoutes.calculator,
+            builder: (context, state) => const CalculatorScreen(),
           ),
         ],
       ),

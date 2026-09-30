@@ -1,36 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../auth/auth_controller.dart';
+import '../../auth/auth_redirect.dart';
 import 'signed_in_bar.dart';
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const ShellPage(
-      title: 'Home',
-      child: Text(
-        'No case yet. When you have one, this page shows its status, the next action, and deadlines.',
-      ),
-    );
-  }
-}
-
-class CasesScreen extends StatelessWidget {
-  const CasesScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const ShellPage(
-      title: 'Cases',
-      child: Text(
-        'No cases yet. You can keep up to 12. Starting one is not open yet.',
-      ),
-    );
-  }
-}
 
 class BuddyScreen extends StatelessWidget {
   const BuddyScreen({super.key});
@@ -61,7 +35,13 @@ class YouScreen extends ConsumerWidget {
             Text(session!.maskedPhone!),
           ],
           const SizedBox(height: 16),
-          const Text('Security settings are not open yet.'),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton(
+              onPressed: () => context.go(AuthRoutes.security),
+              child: const Text('Security'),
+            ),
+          ),
         ],
       ),
     );
@@ -73,10 +53,12 @@ class ShellPage extends StatelessWidget {
     super.key,
     required this.title,
     required this.child,
+    this.wrapInCard = true,
   });
 
   final String title;
   final Widget child;
+  final bool wrapInCard;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +73,7 @@ class ShellPage extends StatelessWidget {
             children: [
               Text(title, style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: 16),
-              SurfaceCard(child: child),
+              if (wrapInCard) SurfaceCard(child: child) else child,
             ],
           ),
         ),

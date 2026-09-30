@@ -1,7 +1,7 @@
 # Page and navigation map
 
 **Status:** Source of truth for pages, routes, and navigation nesting.
-**Last updated:** 2026-09-29
+**Last updated:** 2026-09-30
 
 Implementation and later plans must follow this file. If another document or plan disagrees, stop and raise the conflict before building. When the product decision changes, edit this file in the same change so it does not go stale.
 
@@ -84,7 +84,7 @@ Shown once, after MFA, before Home. Order is fixed. Skipping is not allowed.
 
 Legal name, date of birth, SSN, and VA file number are not collected here. They are collected later, only when a form needs them.
 
-Finishing onboarding opens Home. If there is no Case yet, the Case area of Home asks them to start one. Quick links and the plans page are still there.
+Finishing onboarding opens Home. The first case is created for them and shown as Open Case. They are not asked to name it. Quick links and the plans page are still there.
 
 ## App shell
 
@@ -101,7 +101,7 @@ Primary navigation after onboarding:
   The single next action
   Open tasks
   Deadlines from background Cases, without private medical detail
-  Start a Case, when none exists
+  The first case is created at the end of onboarding and shown as Open Case
   Entry to Vet Buddy
   Quick links
     Calculator                         Opens /calculator
@@ -115,8 +115,8 @@ Primary navigation after onboarding:
 /cases
   List of Cases
   Switch the current working Case
-  Start a Case
-  Cap of 12 Cases, with that limit explained on this list
+  Starting another case is a later workflow. The list does not ask for a name
+  or explain a case cap.
 
 /cases/:caseId                          The Case tab opens the current working Case
   /overview

@@ -9,6 +9,7 @@ enum AuthFailureCode {
   appNotAuthorized,
   smsRegionBlocked,
   serverAuthUnconfirmed,
+  recentLoginRequired,
   tooManyRequests,
   network,
   invalidActionCode,
@@ -42,6 +43,8 @@ class AuthFailure implements Exception {
         return 'Text messages to that number\'s country are not allowed. Use the fictional U.S. test number.';
       case AuthFailureCode.serverAuthUnconfirmed:
         return 'Security setup did not finish. Try again.';
+      case AuthFailureCode.recentLoginRequired:
+        return 'Enter your password again, then try that action.';
       case AuthFailureCode.tooManyRequests:
         return 'Too many attempts. Wait a moment and try again.';
       case AuthFailureCode.network:

@@ -154,13 +154,22 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.textContaining('No case yet.'), findsOneWidget);
+    expect(find.textContaining('Opening your case.'), findsOneWidget);
+    expect(find.text('Next action'), findsOneWidget);
+    expect(find.text('Compare plans'), findsOneWidget);
+    await tester.drag(find.byType(ListView).hitTestable(), const Offset(0, -800));
+    await tester.pump();
+    await tester.tap(find.text('Compare plans').hitTestable());
+    await tester.pump();
+    await tester.pump();
+    expect(find.textContaining('charges a card'), findsOneWidget);
+    expect(find.textContaining('\$250'), findsOneWidget);
     await tester.pump(const Duration(seconds: 1));
     await tester.tap(find.byIcon(Icons.folder_outlined).hitTestable());
     await tester.pump();
     await tester.pump();
 
-    expect(find.textContaining('No cases yet.'), findsOneWidget);
+    expect(find.textContaining('Opening your case.'), findsOneWidget);
     expect(find.text('Onboarding'), findsNothing);
   });
 }
@@ -228,6 +237,15 @@ class _IdleAuthGateway implements AuthGateway {
 
   @override
   Future<void> confirmServerAuthState() async {}
+
+  @override
+  Future<void> clearServerAuthState() async {}
+
+  @override
+  Future<void> reauthenticate(String password) async {}
+
+  @override
+  Future<void> unenrollFactor(String factorUid) async {}
 }
 
 class _RecordingAuthGateway extends _IdleAuthGateway {

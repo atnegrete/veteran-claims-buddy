@@ -34,6 +34,11 @@ service cloud.firestore {
         ]);
     }
 
+    function sameCurrentWorkingCase() {
+      return request.resource.data.get('currentWorkingCaseId', null)
+        == resource.data.get('currentWorkingCaseId', null);
+    }
+
     // Admin SDK writes this from confirmAuthState. A client must not set it.
     match /users/{uid}/security/{document} {
       allow read, write: if false;
@@ -43,10 +48,12 @@ service cloud.firestore {
       allow read: if veteranReady(uid);
       allow create: if veteranReady(uid)
         && onboardingFieldsOk()
+        && !request.resource.data.keys().hasAny(['currentWorkingCaseId'])
         && request.resource.data.createdAt == request.time
         && request.resource.data.updatedAt == request.time;
       allow update: if veteranReady(uid)
         && onboardingFieldsOk()
+        && sameCurrentWorkingCase()
         && request.resource.data.updatedAt == request.time
         && request.resource.data.createdAt == resource.data.createdAt;
       allow delete: if false;
@@ -97,6 +104,12 @@ service cloud.firestore {
         && request.resource.data.updatedAt == request.time
         && request.resource.data.createdAt == resource.data.createdAt;
       allow delete: if veteranReady(uid);
+    }
+
+    // startCase and setWorkingCase write these. A client can read, not write.
+    match /users/{uid}/cases/{caseId} {
+      allow read: if veteranReady(uid);
+      allow write: if false;
     }
 
     match /{document=**} {

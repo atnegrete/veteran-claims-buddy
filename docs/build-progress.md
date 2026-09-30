@@ -36,6 +36,10 @@ The iOS `GoogleService-Info.plist` files are copied into the app bundle for `Deb
 
 **Step 6 frame is in the app.** Home, Case, Vet Buddy, and You use `AdaptiveScaffold`: a bottom bar on a phone and a navigation rail on a wide window. Signed-in screens share an app bar: a logo placeholder, the app name, and an account menu with sign out. Page content sits on cards. A ready account stays in onboarding until review is finished, then opens `/home`. `/plans` is not a tab.
 
+**Home shows the empty case state.** There is no working Case, next action, or deadline until a Case exists. Quick links open the combined-rating calculator, Vet Buddy, and `/plans` for a symptom event. The Premium card opens `/plans`. Buying is not open. The calculator does not apply the bilateral factor or estimate monthly pay.
+
+**The first case is created for the Veteran.** Finishing onboarding opens a case named Open Case. They are not asked to name it, and the list does not mention a case cap. The Case tab opens that case. Starting another case is a later workflow. Issues, evidence, exams, and the claim package stay closed.
+
 **Onboarding is open through review.** Welcome, service, deployments, reported exposures, a discovery hold, and review. Finishing review opens Home. The symptom questionnaire is still step 10.
 
 ## Phase 2 — what the owner does next
@@ -85,6 +89,10 @@ Done on 2026-09-29. Ids are in `docs/environment-values.md`.
 | 2026-09-30 | Chrome on this Mac's Intel and Radeon GPUs loops Flutter WebGL context warnings. The web app draws with the CPU on those GPUs. |
 | 2026-09-30 | Deployment onboarding asks for a description and a best-guess month and year, instead of a country and a full date. |
 | 2026-09-30 | Step forms use a shared stepper. Onboarding can go back to a step already reached. Later steps stay closed until Continue opens them. |
+| 2026-09-30 | Security settings list enrolled phones, can add or remove one after the password is entered again, and send a lost phone to support. Removing the last phone closes the app until a new one is enrolled. |
+| 2026-09-30 | Home shows the working case, next action, deadlines, quick links, and a Premium card. With no Case, those sections are empty. The calculator estimates a combined rating only. `/plans` explains the $250 Case unlock and $30 Premium and does not charge a card. |
+| 2026-09-30 | The case list can start a case and choose the working case, up to 12. The Case tab opens that case. Nested issue, evidence, exam, and package pages stay closed. |
+| 2026-09-30 | The first case is created when onboarding is finished and shown as Open Case. The name field and the 12-case explanation are removed from the list. Starting another case waits for a later workflow. |
 
 ## Phase 0 — Owner workstation
 
@@ -147,7 +155,7 @@ Hosting targets (`marketing` and `app`) are initialized after the Firebase proje
 - [ ] **5M** Centralized authentication/access state machine. Client redirects cover sign-out, email verification, enrollment, the sign-in challenge, and deletion. Deletion scheduling is not wired yet. Shell routes stay closed until email is verified and SMS MFA is enrolled.
 - [x] **5N** `confirmAuthState` in `functions/index.js` reads the Auth user with the Admin SDK, requires a verified email and at least one enrolled factor, and writes `users/{uid}/security/authState`. The document stores no phone number. Firestore rules deny client reads and writes. Deployed to the dev project. Cloud Run invoker is `allUsers` so the callable can run; the function still rejects a caller who is not signed in.
 - [x] **5O** Service history under `users/{uid}` can be read and written only by that verified user after `confirmAuthState`. Rules are released on dev. The auth marker document stays closed to clients. Other collections stay denied. Case files and Storage are still closed.
-- [ ] **5P** MFA recovery and factor-management UX. Lost phone goes to support contact. No self-serve bypass.
+- [x] **5P** Security at `/you/settings/security` lists each enrolled phone as a masked label. Adding or removing a phone asks for the password again. Removing the only phone clears the server marker and returns the account to enrollment. Lost-phone help is support email only. Password reset is not described as a way around the text-message check. The audited recovery procedure for production is still the production auth release gate.
 - [ ] **5Q** Owner DEV end-to-end auth acceptance test.
 - [ ] **Definition of done — Phase 5.** Not complete until 5Q passes.
 
@@ -159,11 +167,11 @@ Expanded from the page map. Nested Case, Vet Buddy, and You pages stay closed un
 
 - [x] **6A** `AdaptiveScaffold` frame. A phone uses the bottom bar. A wide window uses the navigation rail. Destinations are Home, Case, Vet Buddy, and You. `/plans` is not a tab. Signed-in screens, including onboarding, share one app bar. Sign out is in that account menu.
 - [x] **6B** Routes `/home`, `/cases`, `/buddy`, and `/you`. Incomplete onboarding stays on `/onboarding`. Finished onboarding opens `/home`.
-- [ ] **6C** Home content: working Case, next action, deadlines, quick links, and the Premium widget. The page is an empty state.
-- [ ] **6D** Case list and the Case tree.
+- [x] **6C** Home content: working Case, next action, deadlines, quick links, and the Premium widget. With no Case, each of those is an empty state. The Premium card is omitted once Premium is active. Symptom entry opens `/plans?reason=symptoms` until then.
+- [x] **6D** Case list. The first case is created at the end of onboarding and shown as Open Case. The Case tab opens `/cases/:caseId/overview`. Switching the working case stays available. Naming a case, starting another one, and explaining the cap of 12 wait for a later workflow. Issues, evidence, exams, forms, and the package stay closed.
 - [ ] **6E** Vet Buddy chats.
-- [ ] **6F** You: calculator, symptoms, support, billing, settings, and legal links. Sign out is in the signed-in account menu. Security settings are still 5P.
-- [ ] **6G** `/plans` as the only sales page. No `purchases_flutter` until that owner gate.
+- [ ] **6F** You: calculator, symptoms, support, billing, settings, and legal links. Sign out is in the signed-in account menu. Security is open. The calculator estimates a combined rating and does not estimate pay or apply the bilateral factor. Profile, notifications, deletion, and the symptom form are not.
+- [x] **6G** `/plans` explains the $250 Case unlock and $30 Premium, including what stops when Premium ends. Nothing on the page charges a card. No `purchases_flutter` until that owner gate.
 
 ## Step 9 — Veteran onboarding
 
@@ -189,7 +197,7 @@ Checklist not expanded beyond the handoff rollout. Do not start until Phase 5 is
 
 These follow handoff section 6. Expand each one into concrete tasks in this file before writing that code.
 
-- [ ] **6. Application shell and navigation.** The frame and four destinations are in the step 6 section above. Home content, the Case tree, Vet Buddy, You, and `/plans` are still open.
+- [ ] **6. Application shell and navigation.** The frame, Home, the case list, and `/plans` are in the step 6 section above. Vet Buddy, the rest of You, and the nested Case pages are still open.
 - [ ] **7. Firestore domain model and repositories.**
 - [ ] **8. Dev reset and seed tooling.** Reset must refuse to run against production.
 - [ ] **9. Veteran onboarding and service history.** Expanded in the step 9 section. Discovery's symptom questionnaire is still step 10.

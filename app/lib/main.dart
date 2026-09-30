@@ -7,6 +7,8 @@ import 'app/app_environment.dart';
 import 'app/app_theme.dart';
 import 'auth/auth_controller.dart';
 import 'auth/auth_gateway.dart';
+import 'cases/cases_progress.dart';
+import 'cases/veteran_case.dart';
 import 'onboarding/onboarding_progress.dart';
 import 'routing/app_router.dart';
 
@@ -55,6 +57,13 @@ class VeteranClaimsBuddyApp extends StatelessWidget {
         if (authGateway != null) ...[
           authGatewayProvider.overrideWithValue(authGateway!),
           onboardingCompleteProvider.overrideWithValue(onboardingComplete),
+          onboardingDocProvider.overrideWith((ref) => Stream.value(null)),
+          casesProvider.overrideWith(
+            (ref) => Stream.value(const <VeteranCase>[]),
+          ),
+          ensureWorkingCaseCallerProvider.overrideWith(
+            (ref) => () async => 'case-test',
+          ),
         ],
       ],
       child: const AuthApp(),

@@ -80,6 +80,8 @@ class SignedInAppBar extends ConsumerWidget implements PreferredSizeWidget {
             switch (value) {
               case 'account':
                 context.go(AuthRoutes.you);
+              case 'security':
+                context.go(AuthRoutes.security);
               case 'signOut':
                 ref.read(authControllerProvider.notifier).signOut();
             }
@@ -91,11 +93,16 @@ class SignedInAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 child: Text(email),
               ),
             if (email != null) const PopupMenuDivider(),
-            if (showAccountLink)
+            if (showAccountLink) ...[
               const PopupMenuItem<String>(
                 value: 'account',
                 child: Text('You'),
               ),
+              const PopupMenuItem<String>(
+                value: 'security',
+                child: Text('Security'),
+              ),
+            ],
             const PopupMenuItem<String>(
               value: 'signOut',
               child: Text('Sign out'),

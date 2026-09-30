@@ -1,3 +1,5 @@
+import 'mfa_challenge.dart';
+
 class AuthSession {
   const AuthSession({
     required this.uid,
@@ -5,6 +7,7 @@ class AuthSession {
     required this.emailVerified,
     required this.mfaEnrolled,
     this.maskedPhone,
+    this.factors = const [],
   });
 
   final String uid;
@@ -16,4 +19,7 @@ class AuthSession {
 
   /// A display label such as "Text message ending in 0100". Never the raw number.
   final String? maskedPhone;
+
+  /// Every enrolled phone, masked. Never the raw number.
+  final List<PhoneFactorHint> factors;
 }

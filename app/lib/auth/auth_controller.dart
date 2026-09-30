@@ -95,6 +95,12 @@ class AuthController extends Notifier<AuthGateState> {
             !state.serverAuthConfirmed) {
           unawaited(confirmServerAuthState());
         }
+        if (current != null &&
+            current.emailVerified &&
+            !current.mfaEnrolled &&
+            state.serverAuthConfirmed) {
+          unawaited(clearServerAuthState());
+        }
       },
       onError: (Object _, StackTrace _) {
         state = state.copyWith(ready: true);
@@ -170,7 +176,26 @@ class AuthController extends Notifier<AuthGateState> {
     await confirmServerAuthState();
   }
 
+  Future<void> reauthenticate(String password) {
+    return ref.read(authGatewayProvider).reauthenticate(password);
+  }
+
+  Future<void> removePhoneFactor({
+    required String password,
+    required String factorUid,
+  }) async {
+    final gateway = ref.read(authGatewayProvider);
+    await gateway.reauthenticate(password);
+    await gateway.unenrollFactor(factorUid);
+    final session = await gateway.currentSession();
+    state = state.copyWith(ready: true, session: session);
+    if (session?.mfaEnrolled != true) {
+      await clearServerAuthState();
+    }
+  }
+
   Future<void>? _serverConfirm;
+  Future<void>? _serverClear;
 
   Future<void> confirmServerAuthState() {
     final existing = _serverConfirm;
@@ -180,6 +205,33 @@ class AuthController extends Notifier<AuthGateState> {
     return run.whenComplete(() {
       if (identical(_serverConfirm, run)) _serverConfirm = null;
     });
+  }
+
+  Future<void> clearServerAuthState() {
+    final existing = _serverClear;
+    if (existing != null) return existing;
+    final run = _clearServerAuthState();
+    _serverClear = run;
+    return run.whenComplete(() {
+      if (identical(_serverClear, run)) _serverClear = null;
+    });
+  }
+
+  Future<void> _clearServerAuthState() async {
+    final uid = state.session?.uid;
+    if (uid == null || state.session?.mfaEnrolled == true) return;
+    try {
+      await ref.read(authGatewayProvider).clearServerAuthState();
+      if (state.session?.uid != uid) return;
+      state = state.copyWith(
+        serverAuthConfirmed: false,
+        serverConfirmFailed: false,
+      );
+    } catch (_) {
+      if (state.session?.uid != uid) return;
+      state = state.copyWith(serverConfirmFailed: true);
+      rethrow;
+    }
   }
 
   Future<void> _writeServerAuthState() async {

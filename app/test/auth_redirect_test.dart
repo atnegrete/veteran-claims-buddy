@@ -135,5 +135,45 @@ void main() {
       ),
       isNull,
     );
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.security,
+        onboardingComplete: true,
+      ),
+      isNull,
+    );
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.security,
+        onboardingComplete: false,
+      ),
+      AuthRoutes.onboarding,
+    );
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.plans,
+        onboardingComplete: true,
+      ),
+      isNull,
+    );
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.calculator,
+        onboardingComplete: true,
+      ),
+      isNull,
+    );
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.plans,
+        onboardingComplete: false,
+      ),
+      AuthRoutes.onboarding,
+    );
   });
 }

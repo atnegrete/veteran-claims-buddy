@@ -1,6 +1,9 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { assertEnrollmentConfirmed } = require("./auth_state");
+const {
+  assertEnrollmentConfirmed,
+  assertNoEnrolledFactor,
+} = require("./auth_state");
 
 test("verified email and one factor is confirmed", () => {
   assert.deepEqual(
@@ -44,4 +47,15 @@ test("verified email with no factor is rejected", () => {
 
 test("a missing auth record is rejected", () => {
   assert.equal(assertEnrollmentConfirmed(null).ok, false);
+});
+
+test("the marker can be cleared only when no factor is enrolled", () => {
+  assert.equal(assertNoEnrolledFactor({ multiFactor: { enrolledFactors: [] } }).ok, true);
+  assert.equal(assertNoEnrolledFactor(null).ok, true);
+  assert.equal(
+    assertNoEnrolledFactor({
+      multiFactor: { enrolledFactors: [{ uid: "factor-1" }] },
+    }).ok,
+    false,
+  );
 });
