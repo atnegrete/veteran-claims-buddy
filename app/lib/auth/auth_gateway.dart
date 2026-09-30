@@ -1,4 +1,5 @@
 import 'auth_session.dart';
+import 'mfa_challenge.dart';
 
 abstract class AuthGateway {
   Stream<AuthSession?> watchSession();
@@ -15,7 +16,21 @@ abstract class AuthGateway {
     required String password,
   });
 
+  /// Sends an enrollment text. [phoneNumber] is E.164.
+  Future<void> sendEnrollmentCode(String phoneNumber);
+
+  Future<void> confirmEnrollmentCode(String smsCode);
+
+  /// Sends a sign-in text for one enrolled factor. Call after [signIn] throws
+  /// [MfaChallengeRequired].
+  Future<void> sendChallengeCode(String factorUid);
+
+  Future<void> confirmChallengeCode(String smsCode);
+
   Future<void> sendEmailVerification();
+
+  /// Fetches the account from Firebase so a verification link is visible.
+  Future<void> reloadCurrentUser();
 
   Future<void> sendPasswordReset(String email);
 

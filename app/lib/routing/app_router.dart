@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import '../auth/auth_controller.dart';
 import '../auth/auth_redirect.dart';
 import '../screens/auth/gate_screens.dart';
+import '../screens/auth/mfa_challenge_screen.dart';
+import '../screens/auth/mfa_enroll_screen.dart';
 import '../screens/auth/password_screens.dart';
 import '../screens/auth/register_screen.dart';
 import '../screens/auth/sign_in_screen.dart';

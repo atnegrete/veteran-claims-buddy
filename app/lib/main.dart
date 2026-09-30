@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app/app_bootstrap.dart';
 import 'app/app_environment.dart';
-import 'app/dev_banner.dart';
+import 'app/app_theme.dart';
 import 'auth/auth_controller.dart';
 import 'auth/auth_gateway.dart';
 import 'routing/app_router.dart';
@@ -62,28 +62,15 @@ class AuthApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final environment = ref.watch(appEnvironmentProvider);
-    final projectId = ref.watch(firebaseProjectIdProvider);
     final gate = ref.watch(authControllerProvider);
-    final banner = environment == AppEnvironment.dev
-        ? DevBanner(projectId: projectId)
-        : null;
 
     if (!gate.ready) {
       return MaterialApp(
         title: 'Veteran Claims Buddy',
-        theme: _theme,
-        home: Scaffold(
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ?banner,
-              const Expanded(
-                child: Center(
-                  child: CircularProgressIndicator(key: authLoadingKey),
-                ),
-              ),
-            ],
+        theme: appTheme(),
+        home: const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(key: authLoadingKey),
           ),
         ),
       );
@@ -92,24 +79,8 @@ class AuthApp extends ConsumerWidget {
     final router = ref.watch(appRouterProvider);
     return MaterialApp.router(
       title: 'Veteran Claims Buddy',
-      theme: _theme,
+      theme: appTheme(),
       routerConfig: router,
-      builder: (context, child) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ?banner,
-            Expanded(child: child ?? const SizedBox.shrink()),
-          ],
-        );
-      },
     );
   }
 }
-
-final _theme = ThemeData(
-  colorScheme: ColorScheme.fromSeed(
-    seedColor: const Color(0xFF1F4E79),
-    brightness: Brightness.dark,
-  ),
-);

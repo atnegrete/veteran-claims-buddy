@@ -2,7 +2,7 @@
 
 **Spec:** `Veteran_Claims_Buddy_Engineering_Handoff.md`  
 **Routes:** `docs/page-navigation.md` wins if a screen or route disagrees with the handoff.  
-**Updated:** 2026-09-29
+**Updated:** 2026-09-30
 
 This file is the implementation checklist. The handoff stays the spec. Update this file in the same change that finishes, blocks, or expands a step. Do not mark a phase complete while any item in it is open. Stop at owner gates.
 
@@ -18,7 +18,7 @@ Firestore is `nam5` in both projects. Storage is `us-central1` in both projects.
 
 **Gate 4C is done.** One Firebase config serves both projects. Aliases are `dev` and `prod` in `.firebaserc`. There is no second `firebase init` for prod.
 
-**Phase 3 is done.** Owner confirmed both flavor runs on 2026-09-29. Dev shows `veteran-claims-buddy-dev` and the DEV banner. Prod shows `veteran-claims-buddy-prod` with no banner.
+**Phase 3 is done.** Owner confirmed both flavor runs on 2026-09-29. The orange DEV banner was removed on 2026-09-30. Debug runs use Flutter's Debug ribbon.
 
 The iOS `GoogleService-Info.plist` files are copied into the app bundle for `Debug`, `Release`, and `Profile` of each flavor. Unflavored iOS configurations do not get a plist.
 
@@ -30,7 +30,9 @@ The iOS `GoogleService-Info.plist` files are copied into the app bundle for `Deb
 
 **Production APNs stays closed** until a production release. At that time the same file is uploaded to both slots on `veteran-claims-buddy-prod`, for `com.veteranclaimsbuddy.app`.
 
-**Web SMS is not verified.** Gate 5J waits until Flutter web is being tested. The next code work is mandatory SMS enrollment in the app.
+**SMS enrollment and the sign-in code step are in the app.** A verified account enters a phone number, agrees to the sign-in check, and confirms the 6-digit code. A later sign-in with an enrolled phone stops on `/mfa/challenge` and can choose among enrolled phone factors. The screen shows a masked label, not the raw number. The website uses the same enrollment screen. The dev flavor skips the live reCAPTCHA and accepts only a fictional number from the DEV console. Production keeps the live check. The server-side enrollment marker is still gate 5N, so no claim data is stored from this step.
+
+**Auth gates share one frame.** `AuthScaffold` centers a 400-point column on phone and wide web. Color, inputs, and buttons come from `appTheme()`. The logo and a short description in the wide-web side space wait for the brand package. The signed-in shell still waits for build step 6.
 
 ## Phase 2 — what the owner does next
 
@@ -67,6 +69,11 @@ Done on 2026-09-29. Ids are in `docs/environment-values.md`.
 | 2026-09-29 | Owner enabled email/password and SMS MFA in both projects, added dev test numbers, and set the SMS region policy. Email/password gates are in the app. Next owner step is the dev Android SHA fingerprint. |
 | 2026-09-29 | Owner registered the dev Android SHA-256. iOS push and remote-notification background mode are in the Xcode project. Next owner step is the dev APNs key. |
 | 2026-09-29 | Owner uploaded the APNs key to both slots on the dev Firebase project. Production Firebase APNs stays closed until a production release. |
+| 2026-09-29 | App enrolls an SMS second factor and challenges it on the next sign-in. Web SMS and the server enrollment marker are still open. |
+| 2026-09-30 | Dev flavor skips the live reCAPTCHA for fictional numbers only. DEV SMS allowlist already includes the United States. The saved test number's area code is not a real U.S. area code, so send-code still fails until that number is replaced. |
+| 2026-09-30 | Auth gates use one centered frame and the shared dark theme. The signed-in shell is still build step 6. |
+| 2026-09-30 | Orange DEV banner removed. Debug runs keep Flutter's Debug ribbon. |
+| 2026-09-30 | Brand package now includes the wide auth layout: logo and a short app description beside the form. Phone stays one column. Not started. |
 
 ## Phase 0 — Owner workstation
 
@@ -98,7 +105,7 @@ Known build warning, not a failure: Firebase Android plugins still apply the Kot
 - [x] **3A** Dev FlutterFire config written: `app/lib/firebase_options_dev.dart`, `app/android/app/src/dev/google-services.json`, `app/ios/config/dev/GoogleService-Info.plist`. iOS build configuration `Debug-dev`.
 - [x] **3B** Prod FlutterFire config written: `app/lib/firebase_options_prod.dart`, `app/android/app/src/prod/google-services.json`, `app/ios/config/prod/GoogleService-Info.plist`. iOS build configuration `Debug-prod`.
 - [x] **3C** Bootstrap Firebase by flavor in `app/lib/app/app_bootstrap.dart`. Dev loads only the dev options. Prod loads only the prod options. A release build with no flavor fails.
-- [x] **3D** Dev-only DEV banner on the diagnostic screen.
+- [x] **3D** Dev-only DEV banner confirmed the flavor diagnostic on 2026-09-29. Removed 2026-09-30. Debug runs already show Flutter's Debug ribbon.
 - [x] **Definition of done.** Owner confirmed `--flavor dev` and `--flavor prod` on 2026-09-29. Each screen showed the matching project id, flavor, and application id.
 
 ## Phase 4 — Initialize Firebase backend resources
@@ -116,7 +123,7 @@ Hosting targets (`marketing` and `app`) are initialized after the Firebase proje
 - [x] **5B** PROD Authentication upgraded to Identity Platform. Confirmed 2026-09-29. No production test users.
 - [x] **5C** Email/Password enabled in DEV and PROD. Confirmed 2026-09-29. Anonymous auth and phone-as-primary stay off.
 - [x] **5D** SMS multi-factor authentication enabled in DEV and PROD. Confirmed 2026-09-29. The console still asks for platform setup; that is 5H, 5I, and 5J.
-- [x] **5E** DEV fictional test phone numbers configured. Values stay in the owner's password manager, not in the repo.
+- [x] **5E** DEV fictional test phone numbers configured. Values stay in the owner's password manager, not in the repo. The saved number uses area code 123, which is not a real U.S. area code, so the SMS region check rejects it. Replace it with a real area code and a 555 exchange, such as `+1 650-555-3434`.
 - [x] **5F** SMS region policy reviewed in DEV and PROD. U.S. numbers are allowed.
 - [x] **5G** Email/password create, sign-in, forgot password, reset-password handler, verify-email, and sign-out. Unverified users cannot leave `/verify-email`. Verified users without a factor land on `/mfa/enroll`, which does not send SMS yet.
 - [x] **5H** Debug signing fingerprints captured from `./gradlew :app:signingReport` on 2026-09-29. Dev and prod variants currently share the debug keystore. SHA-1 `1D:5B:2C:AF:3C:1D:A5:FC:AA:6C:F2:10:58:7D:D5:B2:D8:A2:64:C7`. SHA-256 `9E:2C:28:0E:A2:04:DC:CB:A1:4B:F5:EC:C6:B0:A4:C4:BB:37:ED:E8:F9:8E:74:98:AB:64:5C:62:64:F5:AF:CB`.
@@ -124,9 +131,9 @@ Hosting targets (`marketing` and `app`) are initialized after the Firebase proje
 - [x] **5I** iOS Runner has Push Notifications and Background Modes → Remote notifications. `app/ios/Runner/Debug.entitlements` is `development`. `Release.entitlements` is `production`. Flavor builds copy `app/ios/config/<flavor>/GoogleService-Info.plist`.
 - [x] **5I.1** Owner uploaded the APNs `.p8` to both the development and production slots on DEV Firebase on 2026-09-29. Production Firebase was left empty.
 - [ ] **5J** DEV web domain for SMS MFA. Deferred. Web MFA is not verified.
-- [ ] **5K** Mandatory SMS MFA enrollment.
-- [ ] **5L** MFA challenge during sign-in.
-- [ ] **5M** Centralized authentication/access state machine. The client redirect for the gates above is in `app/lib/auth/auth_redirect.dart`. Still open for a sign-in MFA challenge and for deletion scheduling. Shell routes stay closed until email is verified and SMS MFA is enrolled.
+- [x] **5K** SMS enrollment. The user agrees before a code is sent. Firebase stores the number. The app shows only a masked label. The website uses the same screen.
+- [x] **5L** Sign-in catches the multi-factor exception, lists each enrolled phone factor, and completes with the text-message code.
+- [ ] **5M** Centralized authentication/access state machine. Client redirects cover sign-out, email verification, enrollment, the sign-in challenge, and deletion. Deletion scheduling is not wired yet. Shell routes stay closed until email is verified and SMS MFA is enrolled.
 - [ ] **5N** Server-authoritative MFA enrollment marker.
 - [ ] **5O** Firestore and Storage gating before sensitive onboarding data.
 - [ ] **5P** MFA recovery and factor-management UX. Lost phone goes to support contact. No self-serve bypass.
@@ -170,7 +177,7 @@ These follow handoff section 6. Expand each one into concrete tasks in this file
 
 ## Parallel tracks that are not the critical path
 
-- [ ] **Brand package.** `/brand` with logo, mark, wordmark, and tokens. Does not block Phase 1. Do it before polishing the marketing site.
+- [ ] **Brand package.** `/brand` with a generated logo, mark, wordmark, and tokens. Does not block Phase 5. Do it before polishing the marketing site. After the assets exist, wide auth screens put the logo and a short description of the app beside the form. Phone stays the single column.
 - [ ] **Marketing site.** Static HTML in `/marketing-site` after the brand package. Legal drafts already live in `docs/legal/`.
 - [ ] **Domain connection.** Owner gate. Connect `veteranclaimsbuddy.com`, `www`, and `app.veteranclaimsbuddy.com` only when the owner is ready to expose production. The agent reads the DNS records Firebase shows at that time and does not invent them.
 - [ ] **AGENTS.md.** Short summary of handoff sections 1–4 and 2A, plus a pointer at this file and `docs/page-navigation.md`.

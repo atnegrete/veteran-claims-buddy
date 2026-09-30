@@ -4,6 +4,7 @@ import 'auth_access.dart';
 import 'auth_gateway.dart';
 import 'auth_session.dart';
 import 'firebase_auth_gateway.dart';
+import 'mfa_challenge.dart';
 
 final authGatewayProvider = Provider<AuthGateway>(
   (ref) => FirebaseAuthGateway(),
@@ -16,6 +17,7 @@ class AuthGateState {
     this.mfaChallengeInProgress = false,
     this.deletionScheduled = false,
     this.recoveryRequired = false,
+    this.challengeHints = const [],
   });
 
   const AuthGateState.loading() : this(ready: false, session: null);
@@ -25,6 +27,7 @@ class AuthGateState {
   final bool mfaChallengeInProgress;
   final bool deletionScheduled;
   final bool recoveryRequired;
+  final List<PhoneFactorHint> challengeHints;
 
   AuthAccess get access {
     final current = session;
@@ -44,6 +47,7 @@ class AuthGateState {
     bool? mfaChallengeInProgress,
     bool? deletionScheduled,
     bool? recoveryRequired,
+    List<PhoneFactorHint>? challengeHints,
   }) {
     return AuthGateState(
       ready: ready ?? this.ready,
@@ -52,6 +56,7 @@ class AuthGateState {
           mfaChallengeInProgress ?? this.mfaChallengeInProgress,
       deletionScheduled: deletionScheduled ?? this.deletionScheduled,
       recoveryRequired: recoveryRequired ?? this.recoveryRequired,
+      challengeHints: challengeHints ?? this.challengeHints,
     );
   }
 }
@@ -89,12 +94,52 @@ class AuthController extends Notifier<AuthGateState> {
   Future<void> signIn({
     required String email,
     required String password,
-  }) {
-    return _refreshAfter(
-      () => ref.read(authGatewayProvider).signIn(
+  }) async {
+    try {
+      await ref.read(authGatewayProvider).signIn(
             email: email,
             password: password,
-          ),
+          );
+    } on MfaChallengeRequired catch (required) {
+      state = state.copyWith(
+        ready: true,
+        session: null,
+        mfaChallengeInProgress: true,
+        challengeHints: required.hints,
+      );
+      return;
+    }
+    final session = await ref.read(authGatewayProvider).currentSession();
+    state = state.copyWith(
+      ready: true,
+      session: session,
+      mfaChallengeInProgress: false,
+      challengeHints: const [],
+    );
+  }
+
+  Future<void> sendEnrollmentCode(String phoneNumber) {
+    return ref.read(authGatewayProvider).sendEnrollmentCode(phoneNumber);
+  }
+
+  Future<void> confirmEnrollmentCode(String smsCode) {
+    return _refreshAfter(
+      () => ref.read(authGatewayProvider).confirmEnrollmentCode(smsCode),
+    );
+  }
+
+  Future<void> sendChallengeCode(String factorUid) {
+    return ref.read(authGatewayProvider).sendChallengeCode(factorUid);
+  }
+
+  Future<void> confirmChallengeCode(String smsCode) async {
+    await ref.read(authGatewayProvider).confirmChallengeCode(smsCode);
+    final session = await ref.read(authGatewayProvider).currentSession();
+    state = state.copyWith(
+      ready: true,
+      session: session,
+      mfaChallengeInProgress: false,
+      challengeHints: const [],
     );
   }
 
@@ -102,7 +147,11 @@ class AuthController extends Notifier<AuthGateState> {
     return ref.read(authGatewayProvider).sendEmailVerification();
   }
 
-  Future<void> refreshSession() => _refreshAfter(() async {});
+  Future<void> refreshSession() {
+    return _refreshAfter(
+      () => ref.read(authGatewayProvider).reloadCurrentUser(),
+    );
+  }
 
   Future<void> sendPasswordReset(String email) {
     return ref.read(authGatewayProvider).sendPasswordReset(email);
@@ -126,6 +175,7 @@ class AuthController extends Notifier<AuthGateState> {
       session: session,
       mfaChallengeInProgress: false,
       recoveryRequired: false,
+      challengeHints: const [],
     );
   }
 

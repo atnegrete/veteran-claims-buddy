@@ -3,13 +3,11 @@ import 'package:app/auth/auth_gateway.dart';
 import 'package:app/auth/auth_session.dart';
 import 'package:app/main.dart';
 import 'package:app/screens/auth/auth_scaffold.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('signed-out dev app shows sign in and the DEV banner', (
-    tester,
-  ) async {
+  testWidgets('signed-out dev app shows sign in', (tester) async {
     await _pumpApp(
       tester,
       const VeteranClaimsBuddyApp(
@@ -19,7 +17,7 @@ void main() {
       ),
     );
 
-    expect(find.text('DEV · veteran-claims-buddy-dev'), findsOneWidget);
+    expect(find.text('DEV · veteran-claims-buddy-dev'), findsNothing);
     expect(find.text('Sign in'), findsWidgets);
     expect(find.text('Create account'), findsOneWidget);
   });
@@ -96,8 +94,43 @@ void main() {
     );
 
     expect(find.text('Add a phone number'), findsOneWidget);
+    expect(find.textContaining('before any claim information'), findsOneWidget);
     expect(find.text('Onboarding'), findsNothing);
     expect(find.textContaining('DEV'), findsNothing);
+  });
+
+  testWidgets('enrollment sends E.164 and then shows only a masked number', (
+    tester,
+  ) async {
+    final gateway = _RecordingAuthGateway(
+      session: const AuthSession(
+        uid: 'user-1',
+        email: 'veteran@example.com',
+        emailVerified: true,
+        mfaEnrolled: false,
+      ),
+    );
+    await _pumpApp(
+      tester,
+      VeteranClaimsBuddyApp(
+        environment: AppEnvironment.dev,
+        authGateway: gateway,
+      ),
+    );
+
+    await tester.enterText(find.byType(TextField), '5555550100');
+    await tester.ensureVisible(find.byType(Checkbox));
+    await tester.tap(find.byType(Checkbox));
+    await tester.pump();
+    await tester.ensureVisible(find.text('Send code'));
+    await tester.tap(find.text('Send code'));
+    await tester.pump();
+    await tester.pump();
+
+    expect(gateway.sentTo, '+15555550100');
+    expect(find.textContaining('Text message ending in 0100'), findsOneWidget);
+    expect(find.textContaining('5555550100'), findsNothing);
+    expect(find.textContaining('+15555550100'), findsNothing);
   });
 }
 
@@ -136,6 +169,9 @@ class _IdleAuthGateway implements AuthGateway {
   Future<void> sendEmailVerification() async {}
 
   @override
+  Future<void> reloadCurrentUser() async {}
+
+  @override
   Future<void> sendPasswordReset(String email) async {}
 
   @override
@@ -146,4 +182,27 @@ class _IdleAuthGateway implements AuthGateway {
 
   @override
   Future<void> signOut() async {}
+
+  @override
+  Future<void> sendEnrollmentCode(String phoneNumber) async {}
+
+  @override
+  Future<void> confirmEnrollmentCode(String smsCode) async {}
+
+  @override
+  Future<void> sendChallengeCode(String factorUid) async {}
+
+  @override
+  Future<void> confirmChallengeCode(String smsCode) async {}
+}
+
+class _RecordingAuthGateway extends _IdleAuthGateway {
+  _RecordingAuthGateway({required AuthSession session}) : super(session: session);
+
+  String? sentTo;
+
+  @override
+  Future<void> sendEnrollmentCode(String phoneNumber) async {
+    sentTo = phoneNumber;
+  }
 }

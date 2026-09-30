@@ -5,6 +5,7 @@ const independentProductDisclaimer =
 
 const supportEmail = 'support@veteranclaimsbuddy.com';
 
+/// Shared frame for every signed-out gate. Phone and wide web use the same column.
 class AuthScaffold extends StatelessWidget {
   const AuthScaffold({
     super.key,
@@ -12,21 +13,49 @@ class AuthScaffold extends StatelessWidget {
     required this.child,
   });
 
+  static const formWidth = 400.0;
+
   final String title;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Veteran Claims Buddy')),
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.all(24),
-          children: [
-            Text(title, style: Theme.of(context).textTheme.headlineSmall),
-            const SizedBox(height: 16),
-            child,
-          ],
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight - 64,
+                ),
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: formWidth),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          'Veteran Claims Buddy',
+                          textAlign: TextAlign.center,
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 28),
+                        Text(title, style: theme.textTheme.headlineMedium),
+                        const SizedBox(height: 20),
+                        child,
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

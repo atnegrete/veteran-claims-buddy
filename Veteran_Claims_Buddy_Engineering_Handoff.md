@@ -363,6 +363,8 @@ The brand guide must define at minimum:
 
 Do not block early engineering on a perfect logo. Create a professional initial vector identity, keep source assets version-controlled, and allow later replacement without changing product architecture.
 
+When those assets exist, the wide auth layout uses the empty space beside the form for the logo and a short description of the app. Phone stays a single column. Do not add a second auth screen for the web.
+
 ## 2A.2 Public marketing site and authenticated application are separate surfaces
 
 Use Firebase Hosting for the public website and Flutter Web for the authenticated application.

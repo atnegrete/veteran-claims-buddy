@@ -3,6 +3,11 @@ enum AuthFailureCode {
   emailAlreadyInUse,
   weakPassword,
   invalidCredential,
+  invalidPhone,
+  invalidSmsCode,
+  sessionExpired,
+  appNotAuthorized,
+  smsRegionBlocked,
   tooManyRequests,
   network,
   invalidActionCode,
@@ -24,6 +29,16 @@ class AuthFailure implements Exception {
         return 'Use at least 6 characters.';
       case AuthFailureCode.invalidCredential:
         return 'That email and password do not match.';
+      case AuthFailureCode.invalidPhone:
+        return 'Enter a valid mobile number.';
+      case AuthFailureCode.invalidSmsCode:
+        return 'That code is incorrect. Try again.';
+      case AuthFailureCode.sessionExpired:
+        return 'That code expired. Send a new one.';
+      case AuthFailureCode.appNotAuthorized:
+        return 'This app is not authorized to send text messages yet.';
+      case AuthFailureCode.smsRegionBlocked:
+        return 'Text messages to that number\'s country are not allowed. Use the fictional U.S. test number.';
       case AuthFailureCode.tooManyRequests:
         return 'Too many attempts. Wait a moment and try again.';
       case AuthFailureCode.network:

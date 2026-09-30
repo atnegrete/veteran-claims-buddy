@@ -17,21 +17,45 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
   bool _messageIsError = false;
   bool _busy = false;
 
-  Future<void> _run(
-    Future<void> Function() action,
-    String success, {
-    bool successIsError = false,
-  }) async {
+  Future<void> _checkVerified() async {
     setState(() {
       _busy = true;
       _message = null;
     });
     try {
-      await action();
+      await ref.read(authControllerProvider.notifier).refreshSession();
+      final verified =
+          ref.read(authControllerProvider).session?.emailVerified ?? false;
+      if (!verified && mounted) {
+        setState(() {
+          _message =
+              'Still waiting on verification. Open the link, then try again.';
+          _messageIsError = true;
+        });
+      }
+    } on AuthFailure catch (failure) {
       if (mounted) {
         setState(() {
-          _message = success;
-          _messageIsError = successIsError;
+          _message = failure.message;
+          _messageIsError = true;
+        });
+      }
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _resend() async {
+    setState(() {
+      _busy = true;
+      _message = null;
+    });
+    try {
+      await ref.read(authControllerProvider.notifier).sendEmailVerification();
+      if (mounted) {
+        setState(() {
+          _message = 'Verification email sent.';
+          _messageIsError = false;
         });
       }
     } on AuthFailure catch (failure) {
@@ -61,27 +85,12 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
           const SizedBox(height: 16),
           AuthMessageText(_message, isError: _messageIsError),
           FilledButton(
-            onPressed: _busy
-                ? null
-                : () => _run(
-                      () => ref
-                          .read(authControllerProvider.notifier)
-                          .refreshSession(),
-                      'Still waiting on verification. Open the link, then try again.',
-                      successIsError: true,
-                    ),
+            onPressed: _busy ? null : _checkVerified,
             child: Text(_busy ? 'Checking…' : 'I verified my email'),
           ),
           const SizedBox(height: 8),
           OutlinedButton(
-            onPressed: _busy
-                ? null
-                : () => _run(
-                      () => ref
-                          .read(authControllerProvider.notifier)
-                          .sendEmailVerification(),
-                      'Verification email sent.',
-                    ),
+            onPressed: _busy ? null : _resend,
             child: const Text('Resend email'),
           ),
           TextButton(
