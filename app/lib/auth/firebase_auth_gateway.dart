@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'auth_failure.dart';
@@ -112,6 +113,14 @@ class FirebaseAuthGateway implements AuthGateway {
         PhoneMultiFactorGenerator.getAssertion(credential),
       );
       _clearPhoneChallenge();
+    });
+  }
+
+  @override
+  Future<void> confirmServerAuthState() {
+    return _guard(() async {
+      final functions = FirebaseFunctions.instanceFor(region: 'us-central1');
+      await functions.httpsCallable('confirmAuthState').call();
     });
   }
 
@@ -256,6 +265,8 @@ class FirebaseAuthGateway implements AuthGateway {
       throw MfaChallengeRequired(_hintsFor(error.resolver.hints));
     } on FirebaseAuthException catch (error) {
       throw _map(error);
+    } on FirebaseFunctionsException {
+      throw const AuthFailure(AuthFailureCode.serverAuthUnconfirmed);
     }
   }
 

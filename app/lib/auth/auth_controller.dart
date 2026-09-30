@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'auth_access.dart';
@@ -17,6 +19,8 @@ class AuthGateState {
     this.mfaChallengeInProgress = false,
     this.deletionScheduled = false,
     this.recoveryRequired = false,
+    this.serverAuthConfirmed = false,
+    this.serverConfirmFailed = false,
     this.challengeHints = const [],
   });
 
@@ -27,6 +31,8 @@ class AuthGateState {
   final bool mfaChallengeInProgress;
   final bool deletionScheduled;
   final bool recoveryRequired;
+  final bool serverAuthConfirmed;
+  final bool serverConfirmFailed;
   final List<PhoneFactorHint> challengeHints;
 
   AuthAccess get access {
@@ -38,6 +44,7 @@ class AuthGateState {
       mfaChallengeInProgress: mfaChallengeInProgress,
       deletionScheduled: deletionScheduled,
       recoveryRequired: recoveryRequired,
+      serverAuthConfirmed: serverAuthConfirmed,
     );
   }
 
@@ -47,6 +54,8 @@ class AuthGateState {
     bool? mfaChallengeInProgress,
     bool? deletionScheduled,
     bool? recoveryRequired,
+    bool? serverAuthConfirmed,
+    bool? serverConfirmFailed,
     List<PhoneFactorHint>? challengeHints,
   }) {
     return AuthGateState(
@@ -56,6 +65,8 @@ class AuthGateState {
           mfaChallengeInProgress ?? this.mfaChallengeInProgress,
       deletionScheduled: deletionScheduled ?? this.deletionScheduled,
       recoveryRequired: recoveryRequired ?? this.recoveryRequired,
+      serverAuthConfirmed: serverAuthConfirmed ?? this.serverAuthConfirmed,
+      serverConfirmFailed: serverConfirmFailed ?? this.serverConfirmFailed,
       challengeHints: challengeHints ?? this.challengeHints,
     );
   }
@@ -69,7 +80,21 @@ class AuthController extends Notifier<AuthGateState> {
     final gateway = ref.watch(authGatewayProvider);
     final subscription = gateway.watchSession().listen(
       (session) {
-        state = state.copyWith(ready: true, session: session);
+        final sameUser =
+            session != null && session.uid == state.session?.uid;
+        state = state.copyWith(
+          ready: true,
+          session: session,
+          serverAuthConfirmed: sameUser ? state.serverAuthConfirmed : false,
+          serverConfirmFailed: sameUser ? state.serverConfirmFailed : false,
+        );
+        final current = state.session;
+        if (current != null &&
+            current.emailVerified &&
+            current.mfaEnrolled &&
+            !state.serverAuthConfirmed) {
+          unawaited(confirmServerAuthState());
+        }
       },
       onError: (Object _, StackTrace _) {
         state = state.copyWith(ready: true);
@@ -122,10 +147,11 @@ class AuthController extends Notifier<AuthGateState> {
     return ref.read(authGatewayProvider).sendEnrollmentCode(phoneNumber);
   }
 
-  Future<void> confirmEnrollmentCode(String smsCode) {
-    return _refreshAfter(
-      () => ref.read(authGatewayProvider).confirmEnrollmentCode(smsCode),
-    );
+  Future<void> confirmEnrollmentCode(String smsCode) async {
+    await ref.read(authGatewayProvider).confirmEnrollmentCode(smsCode);
+    final session = await ref.read(authGatewayProvider).currentSession();
+    state = state.copyWith(ready: true, session: session);
+    await confirmServerAuthState();
   }
 
   Future<void> sendChallengeCode(String factorUid) {
@@ -141,6 +167,37 @@ class AuthController extends Notifier<AuthGateState> {
       mfaChallengeInProgress: false,
       challengeHints: const [],
     );
+    await confirmServerAuthState();
+  }
+
+  Future<void>? _serverConfirm;
+
+  Future<void> confirmServerAuthState() {
+    final existing = _serverConfirm;
+    if (existing != null) return existing;
+    final run = _writeServerAuthState();
+    _serverConfirm = run;
+    return run.whenComplete(() {
+      if (identical(_serverConfirm, run)) _serverConfirm = null;
+    });
+  }
+
+  Future<void> _writeServerAuthState() async {
+    if (state.serverAuthConfirmed) return;
+    final uid = state.session?.uid;
+    if (uid == null) return;
+    state = state.copyWith(serverConfirmFailed: false);
+    try {
+      await ref.read(authGatewayProvider).confirmServerAuthState();
+      if (state.session?.uid != uid) return;
+      state = state.copyWith(
+        serverAuthConfirmed: true,
+        serverConfirmFailed: false,
+      );
+    } catch (_) {
+      if (state.session?.uid != uid) return;
+      state = state.copyWith(serverConfirmFailed: true);
+    }
   }
 
   Future<void> sendEmailVerification() {
@@ -175,6 +232,8 @@ class AuthController extends Notifier<AuthGateState> {
       session: session,
       mfaChallengeInProgress: false,
       recoveryRequired: false,
+      serverAuthConfirmed: false,
+      serverConfirmFailed: false,
       challengeHints: const [],
     );
   }

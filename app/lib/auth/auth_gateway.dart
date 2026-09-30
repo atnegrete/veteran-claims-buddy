@@ -27,6 +27,10 @@ abstract class AuthGateway {
 
   Future<void> confirmChallengeCode(String smsCode);
 
+  /// Asks the server to record verified email plus an enrolled factor.
+  /// The client cannot write that marker itself.
+  Future<void> confirmServerAuthState();
+
   Future<void> sendEmailVerification();
 
   /// Fetches the account from Firebase so a verification link is visible.

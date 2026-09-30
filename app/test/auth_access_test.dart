@@ -35,12 +35,24 @@ void main() {
     );
   });
 
-  test('verified email with a factor is ready', () {
+  test('verified email with a factor waits for the server marker', () {
     expect(
       resolveAuthAccess(
         signedIn: true,
         emailVerified: true,
         mfaEnrolled: true,
+      ),
+      AuthAccess.mfaEnrollmentRequired,
+    );
+  });
+
+  test('verified email with a factor and server marker is ready', () {
+    expect(
+      resolveAuthAccess(
+        signedIn: true,
+        emailVerified: true,
+        mfaEnrolled: true,
+        serverAuthConfirmed: true,
       ),
       AuthAccess.authenticatedReady,
     );

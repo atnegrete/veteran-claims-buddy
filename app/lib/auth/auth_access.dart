@@ -17,6 +17,7 @@ AuthAccess resolveAuthAccess({
   bool mfaChallengeInProgress = false,
   bool deletionScheduled = false,
   bool recoveryRequired = false,
+  bool serverAuthConfirmed = false,
 }) {
   if (!signedIn) {
     if (mfaChallengeInProgress) return AuthAccess.mfaChallengeInProgress;
@@ -26,6 +27,8 @@ AuthAccess resolveAuthAccess({
   if (deletionScheduled) return AuthAccess.deletionScheduled;
   if (!emailVerified) return AuthAccess.emailVerificationRequired;
   if (mfaChallengeInProgress) return AuthAccess.mfaChallengeInProgress;
-  if (!mfaEnrolled) return AuthAccess.mfaEnrollmentRequired;
+  if (!mfaEnrolled || !serverAuthConfirmed) {
+    return AuthAccess.mfaEnrollmentRequired;
+  }
   return AuthAccess.authenticatedReady;
 }

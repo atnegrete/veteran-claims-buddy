@@ -30,7 +30,7 @@ The iOS `GoogleService-Info.plist` files are copied into the app bundle for `Deb
 
 **Production APNs stays closed** until a production release. At that time the same file is uploaded to both slots on `veteran-claims-buddy-prod`, for `com.veteranclaimsbuddy.app`.
 
-**SMS enrollment and the sign-in code step are in the app.** A verified account enters a phone number, agrees to the sign-in check, and confirms the 6-digit code. A later sign-in with an enrolled phone stops on `/mfa/challenge` and can choose among enrolled phone factors. The screen shows a masked label, not the raw number. The website uses the same enrollment screen. The dev flavor skips the live reCAPTCHA and accepts only a fictional number from the DEV console. Production keeps the live check. The server-side enrollment marker is still gate 5N, so no claim data is stored from this step.
+**SMS enrollment and the sign-in code step are in the app.** A verified account enters a phone number, agrees to the sign-in check, and confirms the 6-digit code. A later sign-in with an enrolled phone stops on `/mfa/challenge` and can choose among enrolled phone factors. The screen shows a masked label, not the raw number. The website uses the same enrollment screen. The dev flavor skips the live reCAPTCHA and accepts only a fictional number from the DEV console. Production keeps the live check. After the code succeeds, `confirmAuthState` records verified email and an enrolled factor at `users/{uid}/security/authState`. The client cannot write that document. Onboarding stays closed until that call succeeds.
 
 **Auth gates share one frame.** `AuthScaffold` centers a 400-point column on phone and wide web. Color, inputs, and buttons come from `appTheme()`. The logo and a short description in the wide-web side space wait for the brand package. The signed-in shell still waits for build step 6.
 
@@ -74,6 +74,7 @@ Done on 2026-09-29. Ids are in `docs/environment-values.md`.
 | 2026-09-30 | Auth gates use one centered frame and the shared dark theme. The signed-in shell is still build step 6. |
 | 2026-09-30 | Orange DEV banner removed. Debug runs keep Flutter's Debug ribbon. |
 | 2026-09-30 | Brand package now includes the wide auth layout: logo and a short app description beside the form. Phone stays one column. Not started. |
+| 2026-09-30 | `confirmAuthState` writes the server enrollment marker after a verified email and an enrolled factor. Clients cannot write it. |
 
 ## Phase 0 — Owner workstation
 
@@ -123,7 +124,7 @@ Hosting targets (`marketing` and `app`) are initialized after the Firebase proje
 - [x] **5B** PROD Authentication upgraded to Identity Platform. Confirmed 2026-09-29. No production test users.
 - [x] **5C** Email/Password enabled in DEV and PROD. Confirmed 2026-09-29. Anonymous auth and phone-as-primary stay off.
 - [x] **5D** SMS multi-factor authentication enabled in DEV and PROD. Confirmed 2026-09-29. The console still asks for platform setup; that is 5H, 5I, and 5J.
-- [x] **5E** DEV fictional test phone numbers configured. Values stay in the owner's password manager, not in the repo. The saved number uses area code 123, which is not a real U.S. area code, so the SMS region check rejects it. Replace it with a real area code and a 555 exchange, such as `+1 650-555-3434`.
+- [x] **5E** DEV fictional test phone numbers configured. Values stay in the owner's password manager, not in the repo. The owner replaced the area-code 123 number on 2026-09-30.
 - [x] **5F** SMS region policy reviewed in DEV and PROD. U.S. numbers are allowed.
 - [x] **5G** Email/password create, sign-in, forgot password, reset-password handler, verify-email, and sign-out. Unverified users cannot leave `/verify-email`. Verified users without a factor land on `/mfa/enroll`, which does not send SMS yet.
 - [x] **5H** Debug signing fingerprints captured from `./gradlew :app:signingReport` on 2026-09-29. Dev and prod variants currently share the debug keystore. SHA-1 `1D:5B:2C:AF:3C:1D:A5:FC:AA:6C:F2:10:58:7D:D5:B2:D8:A2:64:C7`. SHA-256 `9E:2C:28:0E:A2:04:DC:CB:A1:4B:F5:EC:C6:B0:A4:C4:BB:37:ED:E8:F9:8E:74:98:AB:64:5C:62:64:F5:AF:CB`.
@@ -134,8 +135,8 @@ Hosting targets (`marketing` and `app`) are initialized after the Firebase proje
 - [x] **5K** SMS enrollment. The user agrees before a code is sent. Firebase stores the number. The app shows only a masked label. The website uses the same screen.
 - [x] **5L** Sign-in catches the multi-factor exception, lists each enrolled phone factor, and completes with the text-message code.
 - [ ] **5M** Centralized authentication/access state machine. Client redirects cover sign-out, email verification, enrollment, the sign-in challenge, and deletion. Deletion scheduling is not wired yet. Shell routes stay closed until email is verified and SMS MFA is enrolled.
-- [ ] **5N** Server-authoritative MFA enrollment marker.
-- [ ] **5O** Firestore and Storage gating before sensitive onboarding data.
+- [x] **5N** `confirmAuthState` in `functions/index.js` reads the Auth user with the Admin SDK, requires a verified email and at least one enrolled factor, and writes `users/{uid}/security/authState`. The document stores no phone number. Firestore rules deny client reads and writes. Deployed to the dev project. Cloud Run invoker is `allUsers` so the callable can run; the function still rejects a caller who is not signed in.
+- [ ] **5O** The auth marker document is closed to clients. Every other document stays denied. Veteran-private collections do not exist yet, so their marker check is still open.
 - [ ] **5P** MFA recovery and factor-management UX. Lost phone goes to support contact. No self-serve bypass.
 - [ ] **5Q** Owner DEV end-to-end auth acceptance test.
 - [ ] **Definition of done — Phase 5.** Not complete until 5Q passes.

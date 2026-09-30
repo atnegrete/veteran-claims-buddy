@@ -194,6 +194,9 @@ class _IdleAuthGateway implements AuthGateway {
 
   @override
   Future<void> confirmChallengeCode(String smsCode) async {}
+
+  @override
+  Future<void> confirmServerAuthState() async {}
 }
 
 class _RecordingAuthGateway extends _IdleAuthGateway {
