@@ -13,6 +13,10 @@ initializeApp();
 setGlobalOptions({ maxInstances: 10, region: PRIMARY_REGION });
 
 const { startCase, setWorkingCase, ensureWorkingCase } = require("./cases");
+const {
+  scheduleAccountDeletion,
+  cancelAccountDeletion,
+} = require("./account_deletion");
 
 exports.confirmAuthState = onCall(async (request) => {
   if (!request.auth) {
@@ -65,3 +69,5 @@ exports.clearAuthState = onCall(async (request) => {
 exports.startCase = startCase;
 exports.setWorkingCase = setWorkingCase;
 exports.ensureWorkingCase = ensureWorkingCase;
+exports.scheduleAccountDeletion = scheduleAccountDeletion;
+exports.cancelAccountDeletion = cancelAccountDeletion;

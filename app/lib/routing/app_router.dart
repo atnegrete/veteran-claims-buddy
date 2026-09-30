@@ -17,13 +17,15 @@ import '../screens/onboarding/remaining_screens.dart';
 import '../screens/onboarding/service_screen.dart';
 import '../screens/onboarding/welcome_screen.dart';
 import '../screens/shell/app_shell.dart';
+import '../screens/shell/buddy_screen.dart';
 import '../screens/shell/calculator_screen.dart';
 import '../screens/shell/case_overview_screen.dart';
 import '../screens/shell/cases_screen.dart';
+import '../screens/shell/delete_account_screen.dart';
 import '../screens/shell/home_screen.dart';
 import '../screens/shell/plans_screen.dart';
 import '../screens/shell/security_screen.dart';
-import '../screens/shell/shell_pages.dart';
+import '../screens/shell/you_screen.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   final refresh = _AuthRefresh(ref);
@@ -140,6 +142,26 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: 'settings/security',
                 builder: (context, state) => const SecurityScreen(),
+              ),
+              GoRoute(
+                path: 'settings/delete',
+                builder: (context, state) => const DeleteAccountScreen(),
+              ),
+              GoRoute(
+                path: 'support',
+                builder: (context, state) => const SupportScreen(),
+              ),
+              GoRoute(
+                path: 'billing/premium',
+                builder: (context, state) => const BillingPremiumScreen(),
+              ),
+              GoRoute(
+                path: 'billing/cases',
+                builder: (context, state) => const BillingCasesScreen(),
+              ),
+              GoRoute(
+                path: 'legal',
+                builder: (context, state) => const LegalScreen(),
               ),
             ],
           ),

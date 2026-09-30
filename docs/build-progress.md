@@ -40,6 +40,12 @@ The iOS `GoogleService-Info.plist` files are copied into the app bundle for `Deb
 
 **The first case is created for the Veteran.** Finishing onboarding opens a case named Open Case. They are not asked to name it, and the list does not mention a case cap. The Case tab opens that case. Starting another case is a later workflow. Issues, evidence, exams, and the claim package stay closed.
 
+**Vet Buddy is the chat list.** There are no chats until the assistant can reply. The safety footer is on the page. It does not ask for a message.
+
+**You links to the calculator, symptoms, support, billing, security, and legal.** Support shows the support email. Billing says Premium is not active and no case is unlocked. Legal names the marketing pages. Those public pages are not connected yet.
+
+**Account deletion can be scheduled.** You → Delete account asks for the password and explains the 30-day wait. Until reactivation, sign-in opens only that page. Nothing is deleted until the later purge job.
+
 **Onboarding is open through review.** Welcome, service, deployments, reported exposures, a discovery hold, and review. Finishing review opens Home. The symptom questionnaire is still step 10.
 
 ## Phase 2 — what the owner does next
@@ -63,6 +69,7 @@ Done on 2026-09-29. Ids are in `docs/environment-values.md`.
 - Firestore is multi-region `nam5` in both projects. Standard edition, Native mode.
 - Storage is `us-central1` in both projects. No public read.
 - Cloud Functions use `us-central1`. They cannot be deployed to `nam5`. That region is inside the Firestore multi-region and matches Storage.
+- The app is one blue family, with red only for danger and errors. Tokens and button roles are in `docs/color-scheme.md` and `app/lib/app/app_theme.dart`.
 
 ## Log
 
@@ -93,6 +100,9 @@ Done on 2026-09-29. Ids are in `docs/environment-values.md`.
 | 2026-09-30 | Home shows the working case, next action, deadlines, quick links, and a Premium card. With no Case, those sections are empty. The calculator estimates a combined rating only. `/plans` explains the $250 Case unlock and $30 Premium and does not charge a card. |
 | 2026-09-30 | The case list can start a case and choose the working case, up to 12. The Case tab opens that case. Nested issue, evidence, exam, and package pages stay closed. |
 | 2026-09-30 | The first case is created when onboarding is finished and shown as Open Case. The name field and the 12-case explanation are removed from the list. Starting another case waits for a later workflow. |
+| 2026-09-30 | Vet Buddy shows an empty chat list and the safety footer. You links to the calculator, symptoms, support email, billing, security, and legal. Assistant replies and the marketing-site legal URLs are still later. |
+| 2026-09-30 | Delete account schedules a 30-day wait after the password is entered again. Sign-in during that wait opens only reactivation. The job that deletes the data after 30 days is still later. |
+| 2026-09-30 | The dark theme is one blue family. Red is only for danger and errors. Delete account is centered danger text. Schedule deletion and the confirm-remove button are danger fill. |
 
 ## Phase 0 — Owner workstation
 
@@ -152,7 +162,7 @@ Hosting targets (`marketing` and `app`) are initialized after the Firebase proje
 - [ ] **5J** DEV web domain for SMS MFA. Deferred. Web MFA is not verified.
 - [x] **5K** SMS enrollment. The user agrees before a code is sent. Firebase stores the number. The app shows only a masked label. The website uses the same screen.
 - [x] **5L** Sign-in catches the multi-factor exception, lists each enrolled phone factor, and completes with the text-message code.
-- [ ] **5M** Centralized authentication/access state machine. Client redirects cover sign-out, email verification, enrollment, the sign-in challenge, and deletion. Deletion scheduling is not wired yet. Shell routes stay closed until email is verified and SMS MFA is enrolled.
+- [x] **5M** Centralized authentication/access state machine. Client redirects cover sign-out, email verification, enrollment, the sign-in challenge, and deletion. Scheduling deletion asks for the password again, waits 30 days, and closes the app except for reactivation. The purge job that deletes the account after those 30 days is step 22.
 - [x] **5N** `confirmAuthState` in `functions/index.js` reads the Auth user with the Admin SDK, requires a verified email and at least one enrolled factor, and writes `users/{uid}/security/authState`. The document stores no phone number. Firestore rules deny client reads and writes. Deployed to the dev project. Cloud Run invoker is `allUsers` so the callable can run; the function still rejects a caller who is not signed in.
 - [x] **5O** Service history under `users/{uid}` can be read and written only by that verified user after `confirmAuthState`. Rules are released on dev. The auth marker document stays closed to clients. Other collections stay denied. Case files and Storage are still closed.
 - [x] **5P** Security at `/you/settings/security` lists each enrolled phone as a masked label. Adding or removing a phone asks for the password again. Removing the only phone clears the server marker and returns the account to enrollment. Lost-phone help is support email only. Password reset is not described as a way around the text-message check. The audited recovery procedure for production is still the production auth release gate.
@@ -169,8 +179,8 @@ Expanded from the page map. Nested Case, Vet Buddy, and You pages stay closed un
 - [x] **6B** Routes `/home`, `/cases`, `/buddy`, and `/you`. Incomplete onboarding stays on `/onboarding`. Finished onboarding opens `/home`.
 - [x] **6C** Home content: working Case, next action, deadlines, quick links, and the Premium widget. With no Case, each of those is an empty state. The Premium card is omitted once Premium is active. Symptom entry opens `/plans?reason=symptoms` until then.
 - [x] **6D** Case list. The first case is created at the end of onboarding and shown as Open Case. The Case tab opens `/cases/:caseId/overview`. Switching the working case stays available. Naming a case, starting another one, and explaining the cap of 12 wait for a later workflow. Issues, evidence, exams, forms, and the package stay closed.
-- [ ] **6E** Vet Buddy chats.
-- [ ] **6F** You: calculator, symptoms, support, billing, settings, and legal links. Sign out is in the signed-in account menu. Security is open. The calculator estimates a combined rating and does not estimate pay or apply the bilateral factor. Profile, notifications, deletion, and the symptom form are not.
+- [x] **6E** Vet Buddy chat list. The page explains that Vet Buddy does not file a claim or decide one. There are no chats, and there is no message box, until the assistant in step 14 can reply. The safety footer is on the page.
+- [ ] **6F** You links to the calculator, symptoms, support, billing, security, legal, and delete account. Support shows the support email. Billing shows that Premium is not active and no case is unlocked. Legal names the marketing pages. Delete account schedules the 30-day wait. Profile, notifications, support tickets, the symptom form, and the public legal URLs are not. The calculator estimates a combined rating and does not estimate pay or apply the bilateral factor.
 - [x] **6G** `/plans` explains the $250 Case unlock and $30 Premium, including what stops when Premium ends. Nothing on the page charges a card. No `purchases_flutter` until that owner gate.
 
 ## Step 9 — Veteran onboarding
@@ -197,7 +207,7 @@ Checklist not expanded beyond the handoff rollout. Do not start until Phase 5 is
 
 These follow handoff section 6. Expand each one into concrete tasks in this file before writing that code.
 
-- [ ] **6. Application shell and navigation.** The frame, Home, the case list, and `/plans` are in the step 6 section above. Vet Buddy, the rest of You, and the nested Case pages are still open.
+- [ ] **6. Application shell and navigation.** The frame, Home, the case list, Vet Buddy's chat list, `/plans`, and the You links are in the step 6 section above. The rest of You and the nested Case pages are still open.
 - [ ] **7. Firestore domain model and repositories.**
 - [ ] **8. Dev reset and seed tooling.** Reset must refuse to run against production.
 - [ ] **9. Veteran onboarding and service history.** Expanded in the step 9 section. Discovery's symptom questionnaire is still step 10.

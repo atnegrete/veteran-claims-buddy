@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'account/account_deletion.dart';
 import 'app/app_bootstrap.dart';
 import 'app/app_environment.dart';
 import 'app/app_theme.dart';
@@ -13,6 +14,17 @@ import 'onboarding/onboarding_progress.dart';
 import 'routing/app_router.dart';
 
 const authLoadingKey = Key('auth-loading');
+
+void _applyDeletionSchedule(
+  WidgetRef ref,
+  AsyncValue<Map<String, dynamic>?> account,
+) {
+  account.whenData((data) {
+    ref.read(authControllerProvider.notifier).setDeletionScheduled(
+          data?['accountStatus'] == 'deletionScheduled',
+        );
+  });
+}
 
 final appEnvironmentProvider = Provider<AppEnvironment>(
   (ref) => currentEnvironment,
@@ -64,6 +76,9 @@ class VeteranClaimsBuddyApp extends StatelessWidget {
           ensureWorkingCaseCallerProvider.overrideWith(
             (ref) => () async => 'case-test',
           ),
+          accountDeletionClientProvider.overrideWithValue(
+            const IdleAccountDeletion(),
+          ),
         ],
       ],
       child: const AuthApp(),
@@ -76,6 +91,12 @@ class AuthApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(onboardingDocProvider, (_, next) {
+      _applyDeletionSchedule(ref, next);
+    });
+    final accountDoc = ref.watch(onboardingDocProvider);
+    Future.microtask(() => _applyDeletionSchedule(ref, accountDoc));
+
     final gate = ref.watch(authControllerProvider);
 
     if (!gate.ready) {

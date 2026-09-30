@@ -60,7 +60,10 @@ class _EmptyCases extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(error!),
+        Text(
+          error!,
+          style: TextStyle(color: Theme.of(context).colorScheme.error),
+        ),
         const SizedBox(height: 16),
         FilledButton(
           onPressed: () => ref.read(caseEnsureProvider.notifier).retry(),

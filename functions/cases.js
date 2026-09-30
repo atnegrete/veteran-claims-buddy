@@ -59,6 +59,12 @@ function throwCaseOutcome(outcome) {
   if (outcome.error === "missing") {
     throw new HttpsError("not-found", "That case is not on this account.");
   }
+  if (outcome.error === "deletion") {
+    throw new HttpsError(
+      "failed-precondition",
+      "This account is scheduled for deletion.",
+    );
+  }
   if (outcome.error === "archived") {
     throw new HttpsError(
       "failed-precondition",
@@ -117,6 +123,9 @@ const ensureWorkingCase = onCall(async (request) => {
     if (!userSnap.exists || userSnap.get("onboardingStatus") !== "complete") {
       return { error: "onboarding" };
     }
+    if (userSnap.get("accountStatus") === "deletionScheduled") {
+      return { error: "deletion" };
+    }
     const cases = casesSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     const decision = resolveWorkingCase(
       cases,
@@ -161,6 +170,9 @@ const startCase = onCall(async (request) => {
     if (!userSnap.exists || userSnap.get("onboardingStatus") !== "complete") {
       return { error: "onboarding" };
     }
+    if (userSnap.get("accountStatus") === "deletionScheduled") {
+      return { error: "deletion" };
+    }
     const cases = casesSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     if (!canStartCase(cases)) return { error: "limit" };
 
@@ -198,6 +210,9 @@ const setWorkingCase = onCall(async (request) => {
     const casesSnap = await tx.get(casesRef);
     if (!userSnap.exists || userSnap.get("onboardingStatus") !== "complete") {
       return { error: "onboarding" };
+    }
+    if (userSnap.get("accountStatus") === "deletionScheduled") {
+      return { error: "deletion" };
     }
     const target = casesSnap.docs.find((doc) => doc.id === caseId);
     if (!target) return { error: "missing" };

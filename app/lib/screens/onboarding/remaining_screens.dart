@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/app_theme.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_redirect.dart';
 import '../../onboarding/onboarding_progress.dart';
@@ -146,6 +147,7 @@ class _ExposuresScreenState extends ConsumerState<ExposuresScreen> {
                         ),
                       ),
                       TextButton(
+                        style: dangerTextStyle(),
                         onPressed: _busy ? null : () => _remove(exposure.id),
                         child: const Text('Remove'),
                       ),

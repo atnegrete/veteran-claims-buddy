@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/app_theme.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_redirect.dart';
 
@@ -18,7 +19,7 @@ class AppLogoMark extends StatelessWidget {
       height: size,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
+        color: AppColors.navy,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(

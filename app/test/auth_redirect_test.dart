@@ -175,5 +175,21 @@ void main() {
       ),
       AuthRoutes.onboarding,
     );
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.support,
+        onboardingComplete: true,
+      ),
+      isNull,
+    );
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.legal,
+        onboardingComplete: true,
+      ),
+      isNull,
+    );
   });
 }

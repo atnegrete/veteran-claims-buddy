@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/app_theme.dart';
 import '../../auth/auth_controller.dart';
 import '../../forms/iso_date_field.dart';
 import '../../auth/auth_redirect.dart';
@@ -169,6 +170,7 @@ class _ServiceScreenState extends ConsumerState<ServiceScreen> {
                         ),
                       ),
                       TextButton(
+                        style: dangerTextStyle(),
                         onPressed: _busy ? null : () => _remove(period.id),
                         child: const Text('Remove'),
                       ),

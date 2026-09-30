@@ -180,6 +180,11 @@ class AuthController extends Notifier<AuthGateState> {
     return ref.read(authGatewayProvider).reauthenticate(password);
   }
 
+  void setDeletionScheduled(bool value) {
+    if (state.deletionScheduled == value) return;
+    state = state.copyWith(deletionScheduled: value);
+  }
+
   Future<void> removePhoneFactor({
     required String password,
     required String factorUid,
@@ -284,6 +289,7 @@ class AuthController extends Notifier<AuthGateState> {
       session: session,
       mfaChallengeInProgress: false,
       recoveryRequired: false,
+      deletionScheduled: false,
       serverAuthConfirmed: false,
       serverConfirmFailed: false,
       challengeHints: const [],

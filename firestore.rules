@@ -39,6 +39,16 @@ service cloud.firestore {
         == resource.data.get('currentWorkingCaseId', null);
     }
 
+    function deletionFieldsUnchanged() {
+      return request.resource.data.get('accountStatus', null) == resource.data.get('accountStatus', null)
+        && request.resource.data.get('deletionRequestedAt', null) == resource.data.get('deletionRequestedAt', null)
+        && request.resource.data.get('purgeAfter', null) == resource.data.get('purgeAfter', null);
+    }
+
+    function accountOpen(uid) {
+      return get(/databases/$(database)/documents/users/$(uid)).data.get('accountStatus', 'active') != 'deletionScheduled';
+    }
+
     // Admin SDK writes this from confirmAuthState. A client must not set it.
     match /users/{uid}/security/{document} {
       allow read, write: if false;
@@ -48,12 +58,16 @@ service cloud.firestore {
       allow read: if veteranReady(uid);
       allow create: if veteranReady(uid)
         && onboardingFieldsOk()
-        && !request.resource.data.keys().hasAny(['currentWorkingCaseId'])
+        && !request.resource.data.keys().hasAny([
+          'currentWorkingCaseId', 'accountStatus', 'deletionRequestedAt', 'purgeAfter'
+        ])
         && request.resource.data.createdAt == request.time
         && request.resource.data.updatedAt == request.time;
       allow update: if veteranReady(uid)
         && onboardingFieldsOk()
         && sameCurrentWorkingCase()
+        && deletionFieldsUnchanged()
+        && resource.data.get('accountStatus', 'active') != 'deletionScheduled'
         && request.resource.data.updatedAt == request.time
         && request.resource.data.createdAt == resource.data.createdAt;
       allow delete: if false;
@@ -62,36 +76,41 @@ service cloud.firestore {
     match /users/{uid}/servicePeriods/{periodId} {
       allow read: if veteranReady(uid);
       allow create: if veteranReady(uid)
+        && accountOpen(uid)
         && request.resource.data.schemaVersion == 1
         && request.resource.data.sourceType == 'veteranReported'
         && request.resource.data.createdAt == request.time
         && request.resource.data.updatedAt == request.time;
       allow update: if veteranReady(uid)
+        && accountOpen(uid)
         && request.resource.data.schemaVersion == 1
         && request.resource.data.sourceType == 'veteranReported'
         && request.resource.data.updatedAt == request.time
         && request.resource.data.createdAt == resource.data.createdAt;
-      allow delete: if veteranReady(uid);
+      allow delete: if veteranReady(uid) && accountOpen(uid);
     }
 
     match /users/{uid}/deployments/{deploymentId} {
       allow read: if veteranReady(uid);
       allow create: if veteranReady(uid)
+        && accountOpen(uid)
         && request.resource.data.schemaVersion == 1
         && request.resource.data.sourceType == 'veteranReported'
         && request.resource.data.createdAt == request.time
         && request.resource.data.updatedAt == request.time;
       allow update: if veteranReady(uid)
+        && accountOpen(uid)
         && request.resource.data.schemaVersion == 1
         && request.resource.data.sourceType == 'veteranReported'
         && request.resource.data.updatedAt == request.time
         && request.resource.data.createdAt == resource.data.createdAt;
-      allow delete: if veteranReady(uid);
+      allow delete: if veteranReady(uid) && accountOpen(uid);
     }
 
     match /users/{uid}/exposures/{exposureId} {
       allow read: if veteranReady(uid);
       allow create: if veteranReady(uid)
+        && accountOpen(uid)
         && request.resource.data.schemaVersion == 1
         && request.resource.data.sourceType == 'veteranReported'
         && request.resource.data.status == 'reported'
@@ -99,11 +118,12 @@ service cloud.firestore {
         && request.resource.data.createdAt == request.time
         && request.resource.data.updatedAt == request.time;
       allow update: if veteranReady(uid)
+        && accountOpen(uid)
         && request.resource.data.schemaVersion == 1
         && request.resource.data.sourceType == 'veteranReported'
         && request.resource.data.updatedAt == request.time
         && request.resource.data.createdAt == resource.data.createdAt;
-      allow delete: if veteranReady(uid);
+      allow delete: if veteranReady(uid) && accountOpen(uid);
     }
 
     // startCase and setWorkingCase write these. A client can read, not write.

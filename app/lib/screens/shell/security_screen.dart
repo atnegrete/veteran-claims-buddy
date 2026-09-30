@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../app/app_theme.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/mfa_challenge.dart';
@@ -125,7 +126,9 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
               child: const Text('Cancel'),
             ),
             FilledButton(
-              style: FilledButton.styleFrom(minimumSize: const Size(0, 40)),
+              style: dangerFilledStyle().merge(
+                FilledButton.styleFrom(minimumSize: const Size(0, 40)),
+              ),
               onPressed: () => Navigator.pop(context, true),
               child: const Text('Remove'),
             ),
@@ -179,6 +182,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
               children: [
                 Expanded(child: Text(factor.label)),
                 TextButton(
+                  style: dangerTextStyle(),
                   onPressed: _busy
                       ? null
                       : () => _remove(factor, onlyFactor: factors.length == 1),

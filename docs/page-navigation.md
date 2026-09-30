@@ -208,7 +208,8 @@ Primary navigation after onboarding:
     /security                           Password, enrolled phone factors
     /notifications
     /delete                             Explicit warning, then the 30-day scheduled state
-  /legal                                Links out to the marketing legal pages
+    /legal                                Names the marketing legal pages. Public URLs open
+                                        after the marketing site is published.
 ```
 
 Push notifications open an existing page. Exam reminder opens that exam. A task reminder opens Home or that task. There is no notification inbox. Lock-screen text stays generic.

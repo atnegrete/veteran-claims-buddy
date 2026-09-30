@@ -16,6 +16,11 @@ abstract final class AuthRoutes {
   static const buddy = '/buddy';
   static const you = '/you';
   static const security = '/you/settings/security';
+  static const deleteAccount = '/you/settings/delete';
+  static const support = '/you/support';
+  static const billingPremium = '/you/billing/premium';
+  static const billingCases = '/you/billing/cases';
+  static const legal = '/you/legal';
   static const plans = '/plans';
   static const calculator = '/calculator';
 

@@ -172,6 +172,90 @@ void main() {
     expect(find.textContaining('Opening your case.'), findsOneWidget);
     expect(find.text('Onboarding'), findsNothing);
   });
+
+  testWidgets('Vet Buddy shows the safety footer and You opens support', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      VeteranClaimsBuddyApp(
+        environment: AppEnvironment.dev,
+        onboardingComplete: true,
+        authGateway: _IdleAuthGateway(
+          session: const AuthSession(
+            uid: 'user-1',
+            email: 'veteran@example.com',
+            emailVerified: true,
+            mfaEnrolled: true,
+            maskedPhone: 'Text message ending in 0100',
+          ),
+        ),
+      ),
+    );
+    await tester.pump(const Duration(seconds: 1));
+    await tester.tap(find.byIcon(Icons.chat_bubble_outline).hitTestable());
+    await tester.pump();
+    await tester.pump();
+
+    expect(
+      find.textContaining('Do not share sensitive identifiers'),
+      findsOneWidget,
+    );
+    expect(find.byType(TextField), findsNothing);
+
+    await tester.tap(find.byIcon(Icons.person_outline).hitTestable());
+    await tester.pump();
+    await tester.pump();
+    await tester.tap(find.text('Support'));
+    await tester.pump();
+    await tester.pump();
+
+    expect(find.text(supportEmail), findsOneWidget);
+    expect(find.textContaining('medical records'), findsOneWidget);
+  });
+
+  testWidgets('delete account explains the 30-day wait before scheduling', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      VeteranClaimsBuddyApp(
+        environment: AppEnvironment.dev,
+        onboardingComplete: true,
+        authGateway: _IdleAuthGateway(
+          session: const AuthSession(
+            uid: 'user-1',
+            email: 'veteran@example.com',
+            emailVerified: true,
+            mfaEnrolled: true,
+          ),
+        ),
+      ),
+    );
+    await tester.pump(const Duration(seconds: 1));
+    await tester.tap(find.byIcon(Icons.person_outline).hitTestable());
+    await tester.pump();
+    await tester.pump();
+    await tester.drag(find.byType(ListView).hitTestable(), const Offset(0, -500));
+    await tester.pump();
+    await tester.tap(find.text('Delete account').hitTestable());
+    await tester.pump();
+    await tester.pump();
+
+    expect(find.textContaining('permanently removed'), findsOneWidget);
+    expect(find.textContaining('does not cancel Premium'), findsOneWidget);
+    await tester.enterText(find.byType(TextField), 'password');
+    await tester.tap(find.byType(Checkbox));
+    await tester.pump();
+    await tester.drag(find.byType(ListView).hitTestable(), const Offset(0, -200));
+    await tester.pump();
+    await tester.tap(find.text('Schedule deletion').hitTestable());
+    await tester.pump();
+    await tester.pump();
+
+    expect(find.textContaining('did not finish'), findsNothing);
+    expect(find.textContaining('permanently removed'), findsOneWidget);
+  });
 }
 
 Future<void> _pumpApp(WidgetTester tester, Widget app) async {
