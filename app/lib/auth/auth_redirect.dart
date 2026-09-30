@@ -11,6 +11,10 @@ abstract final class AuthRoutes {
   static const reactivate = '/account/reactivate';
   static const recovery = '/account/recovery';
   static const onboarding = '/onboarding';
+  static const home = '/home';
+  static const cases = '/cases';
+  static const buddy = '/buddy';
+  static const you = '/you';
 }
 
 const signedOutRoutes = <String>{
@@ -22,9 +26,13 @@ const signedOutRoutes = <String>{
 };
 
 /// Returns the path to open, or null when [location] is already allowed.
+///
+/// [onboardingComplete] is false until the Veteran finishes onboarding.
+/// The shell stays closed until then.
 String? authRedirect({
   required AuthAccess access,
   required String location,
+  bool onboardingComplete = false,
 }) {
   switch (access) {
     case AuthAccess.signedOut:
@@ -46,6 +54,28 @@ String? authRedirect({
     case AuthAccess.deletionScheduled:
       return location == AuthRoutes.reactivate ? null : AuthRoutes.reactivate;
     case AuthAccess.authenticatedReady:
-      return location == AuthRoutes.onboarding ? null : AuthRoutes.onboarding;
+      if (!onboardingComplete) {
+        return isOnboardingLocation(location) ? null : AuthRoutes.onboarding;
+      }
+      if (isShellLocation(location)) return null;
+      return AuthRoutes.home;
   }
+}
+
+bool isOnboardingLocation(String location) {
+  return location == AuthRoutes.onboarding ||
+      location.startsWith('${AuthRoutes.onboarding}/');
+}
+
+bool isShellLocation(String location) {
+  const roots = <String>[
+    AuthRoutes.home,
+    AuthRoutes.cases,
+    AuthRoutes.buddy,
+    AuthRoutes.you,
+  ];
+  for (final root in roots) {
+    if (location == root || location.startsWith('$root/')) return true;
+  }
+  return false;
 }

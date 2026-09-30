@@ -7,6 +7,7 @@ import 'app/app_environment.dart';
 import 'app/app_theme.dart';
 import 'auth/auth_controller.dart';
 import 'auth/auth_gateway.dart';
+import 'onboarding/onboarding_progress.dart';
 import 'routing/app_router.dart';
 
 const authLoadingKey = Key('auth-loading');
@@ -35,11 +36,13 @@ class VeteranClaimsBuddyApp extends StatelessWidget {
     this.environment,
     this.projectId,
     this.authGateway,
+    this.onboardingComplete = false,
   });
 
   final AppEnvironment? environment;
   final String? projectId;
   final AuthGateway? authGateway;
+  final bool onboardingComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +52,10 @@ class VeteranClaimsBuddyApp extends StatelessWidget {
           environment ?? currentEnvironment,
         ),
         firebaseProjectIdProvider.overrideWithValue(projectId),
-        if (authGateway != null)
+        if (authGateway != null) ...[
           authGatewayProvider.overrideWithValue(authGateway!),
+          onboardingCompleteProvider.overrideWithValue(onboardingComplete),
+        ],
       ],
       child: const AuthApp(),
     );

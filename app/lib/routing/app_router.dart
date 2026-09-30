@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../auth/auth_controller.dart';
 import '../auth/auth_redirect.dart';
+import '../onboarding/onboarding_progress.dart';
 import '../screens/auth/gate_screens.dart';
 import '../screens/auth/mfa_challenge_screen.dart';
 import '../screens/auth/mfa_enroll_screen.dart';
@@ -11,6 +12,12 @@ import '../screens/auth/password_screens.dart';
 import '../screens/auth/register_screen.dart';
 import '../screens/auth/sign_in_screen.dart';
 import '../screens/auth/verify_email_screen.dart';
+import '../screens/onboarding/deployments_screen.dart';
+import '../screens/onboarding/remaining_screens.dart';
+import '../screens/onboarding/service_screen.dart';
+import '../screens/onboarding/welcome_screen.dart';
+import '../screens/shell/app_shell.dart';
+import '../screens/shell/shell_pages.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   final refresh = _AuthRefresh(ref);
@@ -20,7 +27,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
     redirect: (context, state) {
       final gate = ref.read(authControllerProvider);
       if (!gate.ready) return null;
-      return authRedirect(access: gate.access, location: state.uri.path);
+      return authRedirect(
+        access: gate.access,
+        location: state.uri.path,
+        onboardingComplete: ref.read(onboardingCompleteProvider),
+      );
     },
     routes: [
       GoRoute(
@@ -63,7 +74,56 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: AuthRoutes.onboarding,
-        builder: (context, state) => const OnboardingHoldScreen(),
+        builder: (context, state) => const OnboardingResumeScreen(),
+        routes: [
+          GoRoute(
+            path: 'welcome',
+            builder: (context, state) => const WelcomeScreen(),
+          ),
+          GoRoute(
+            path: 'service',
+            builder: (context, state) => const ServiceScreen(),
+          ),
+          GoRoute(
+            path: 'deployments',
+            builder: (context, state) => const DeploymentsScreen(),
+          ),
+          GoRoute(
+            path: 'exposures',
+            builder: (context, state) => const ExposuresScreen(),
+          ),
+          GoRoute(
+            path: 'discovery',
+            builder: (context, state) => const DiscoveryScreen(),
+          ),
+          GoRoute(
+            path: 'review',
+            builder: (context, state) => const ReviewScreen(),
+          ),
+        ],
+      ),
+      ShellRoute(
+        builder: (context, state, child) {
+          return AppShell(location: state.uri.path, child: child);
+        },
+        routes: [
+          GoRoute(
+            path: AuthRoutes.home,
+            builder: (context, state) => const HomeScreen(),
+          ),
+          GoRoute(
+            path: AuthRoutes.cases,
+            builder: (context, state) => const CasesScreen(),
+          ),
+          GoRoute(
+            path: AuthRoutes.buddy,
+            builder: (context, state) => const BuddyScreen(),
+          ),
+          GoRoute(
+            path: AuthRoutes.you,
+            builder: (context, state) => const YouScreen(),
+          ),
+        ],
       ),
     ],
   );
@@ -79,14 +139,22 @@ class _AuthRefresh extends ChangeNotifier {
     _subscription = _ref.listen(authControllerProvider, (previous, next) {
       notifyListeners();
     });
+    _onboardingSubscription = _ref.listen(onboardingCompleteProvider, (
+      previous,
+      next,
+    ) {
+      notifyListeners();
+    });
   }
 
   final Ref _ref;
   late final ProviderSubscription<AuthGateState> _subscription;
+  late final ProviderSubscription<bool> _onboardingSubscription;
 
   @override
   void dispose() {
     _subscription.close();
+    _onboardingSubscription.close();
     super.dispose();
   }
 }

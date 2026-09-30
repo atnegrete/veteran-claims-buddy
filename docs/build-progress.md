@@ -32,7 +32,11 @@ The iOS `GoogleService-Info.plist` files are copied into the app bundle for `Deb
 
 **SMS enrollment and the sign-in code step are in the app.** A verified account enters a phone number, agrees to the sign-in check, and confirms the 6-digit code. A later sign-in with an enrolled phone stops on `/mfa/challenge` and can choose among enrolled phone factors. The screen shows a masked label, not the raw number. The website uses the same enrollment screen. The dev flavor skips the live reCAPTCHA and accepts only a fictional number from the DEV console. Production keeps the live check. After the code succeeds, `confirmAuthState` records verified email and an enrolled factor at `users/{uid}/security/authState`. The client cannot write that document. Onboarding stays closed until that call succeeds.
 
-**Auth gates share one frame.** `AuthScaffold` centers a 400-point column on phone and wide web. Color, inputs, and buttons come from `appTheme()`. The logo and a short description in the wide-web side space wait for the brand package. The signed-in shell still waits for build step 6.
+**Auth gates share one frame.** `AuthScaffold` centers a 400-point column on phone and wide web. Color, inputs, and buttons come from `appTheme()`. The logo and a short description in the wide-web side space wait for the brand package.
+
+**Step 6 frame is in the app.** Home, Case, Vet Buddy, and You use `AdaptiveScaffold`: a bottom bar on a phone and a navigation rail on a wide window. Signed-in screens share an app bar: a logo placeholder, the app name, and an account menu with sign out. Page content sits on cards. A ready account stays in onboarding until review is finished, then opens `/home`. `/plans` is not a tab.
+
+**Onboarding is open through review.** Welcome, service, deployments, reported exposures, a discovery hold, and review. Finishing review opens Home. The symptom questionnaire is still step 10.
 
 ## Phase 2 — what the owner does next
 
@@ -42,7 +46,8 @@ Done on 2026-09-29. Ids are in `docs/environment-values.md`.
 
 - Flutter is FVM **3.47.5** (Dart 3.13.4). There is no `flutter` binary on PATH. Run `fvm flutter` from `/app`.
 - The FVM cache entry named `stable` is Flutter 3.0.5 and does not run on this Mac.
-- This Mac is Intel. Flutter 3.47.5 printed a deprecation warning that a future Flutter release will require Apple Silicon. Not a blocker for 3.47.5.
+- This Mac is Intel, with Intel UHD Graphics 630 and a Radeon Pro 560X. Chrome on that GPU cannot compile Flutter's web shaders, then recreates WebGL contexts until the console fills with "Too many active WebGL contexts." `app/web/index.html` draws with the CPU on those Mac GPUs. Apple Silicon stays on the GPU.
+- Flutter 3.47.5 printed a deprecation warning that a future Flutter release will require Apple Silicon. Not a blocker for 3.47.5.
 - Dart package name is `app`, because `fvm flutter create ... app` names the package after the directory. The handoff's `veteran_claims_buddy` package name was not passed to create. Keep `app` unless the owner wants a rename.
 - Application ids: prod `com.veteranclaimsbuddy.app`, dev `com.veteranclaimsbuddy.app.dev`.
 - `default-flavor` is `dev`, so local `fvm flutter run` and `fvm flutter test` use dev when no flavor is passed.
@@ -75,6 +80,11 @@ Done on 2026-09-29. Ids are in `docs/environment-values.md`.
 | 2026-09-30 | Orange DEV banner removed. Debug runs keep Flutter's Debug ribbon. |
 | 2026-09-30 | Brand package now includes the wide auth layout: logo and a short app description beside the form. Phone stays one column. Not started. |
 | 2026-09-30 | `confirmAuthState` writes the server enrollment marker after a verified email and an enrolled factor. Clients cannot write it. |
+| 2026-09-30 | Signed-in shell has Home, Case, Vet Buddy, and You. It stays closed until onboarding is finished. |
+| 2026-09-30 | Onboarding collects service, deployments, and reported exposures, then opens Home. Dev Firestore rules allow those paths only after the server enrollment marker. Symptom discovery is still a later questionnaire. |
+| 2026-09-30 | Chrome on this Mac's Intel and Radeon GPUs loops Flutter WebGL context warnings. The web app draws with the CPU on those GPUs. |
+| 2026-09-30 | Deployment onboarding asks for a description and a best-guess month and year, instead of a country and a full date. |
+| 2026-09-30 | Step forms use a shared stepper. Onboarding can go back to a step already reached. Later steps stay closed until Continue opens them. |
 
 ## Phase 0 — Owner workstation
 
@@ -136,12 +146,35 @@ Hosting targets (`marketing` and `app`) are initialized after the Firebase proje
 - [x] **5L** Sign-in catches the multi-factor exception, lists each enrolled phone factor, and completes with the text-message code.
 - [ ] **5M** Centralized authentication/access state machine. Client redirects cover sign-out, email verification, enrollment, the sign-in challenge, and deletion. Deletion scheduling is not wired yet. Shell routes stay closed until email is verified and SMS MFA is enrolled.
 - [x] **5N** `confirmAuthState` in `functions/index.js` reads the Auth user with the Admin SDK, requires a verified email and at least one enrolled factor, and writes `users/{uid}/security/authState`. The document stores no phone number. Firestore rules deny client reads and writes. Deployed to the dev project. Cloud Run invoker is `allUsers` so the callable can run; the function still rejects a caller who is not signed in.
-- [ ] **5O** The auth marker document is closed to clients. Every other document stays denied. Veteran-private collections do not exist yet, so their marker check is still open.
+- [x] **5O** Service history under `users/{uid}` can be read and written only by that verified user after `confirmAuthState`. Rules are released on dev. The auth marker document stays closed to clients. Other collections stay denied. Case files and Storage are still closed.
 - [ ] **5P** MFA recovery and factor-management UX. Lost phone goes to support contact. No self-serve bypass.
 - [ ] **5Q** Owner DEV end-to-end auth acceptance test.
 - [ ] **Definition of done — Phase 5.** Not complete until 5Q passes.
 
 Production Android fingerprints, production APNs, and the production auth release gate stay closed until a production release is actually being prepared.
+
+## Step 6 — Application shell
+
+Expanded from the page map. Nested Case, Vet Buddy, and You pages stay closed until their own steps.
+
+- [x] **6A** `AdaptiveScaffold` frame. A phone uses the bottom bar. A wide window uses the navigation rail. Destinations are Home, Case, Vet Buddy, and You. `/plans` is not a tab. Signed-in screens, including onboarding, share one app bar. Sign out is in that account menu.
+- [x] **6B** Routes `/home`, `/cases`, `/buddy`, and `/you`. Incomplete onboarding stays on `/onboarding`. Finished onboarding opens `/home`.
+- [ ] **6C** Home content: working Case, next action, deadlines, quick links, and the Premium widget. The page is an empty state.
+- [ ] **6D** Case list and the Case tree.
+- [ ] **6E** Vet Buddy chats.
+- [ ] **6F** You: calculator, symptoms, support, billing, settings, and legal links. Sign out is in the signed-in account menu. Security settings are still 5P.
+- [ ] **6G** `/plans` as the only sales page. No `purchases_flutter` until that owner gate.
+
+## Step 9 — Veteran onboarding
+
+Order is fixed. Skipping ahead is not allowed. Back, and any step already reached, can be opened again to edit. Finishing review opens Home. Legal name, date of birth, SSN, and VA file number are not collected.
+
+- [x] **9A** Welcome. One Veteran per account. Nothing on these screens is filed.
+- [x] **9B** Service periods saved to `users/{uid}/servicePeriods`. At least one is required.
+- [x] **9C** Deployments saved to `users/{uid}/deployments`. Optional. The Veteran describes the deployment in their own words. Start and end are a best-guess month and year, stored as the first day of that month.
+- [x] **9D** Exposures the Veteran reports are saved as `reported`. A system suggestion cannot become confirmed just by being suggested. There is no suggestion engine yet.
+- [ ] **9E** Symptom-oriented condition discovery. The screen is only a gate. The questionnaire is step 10.
+- [x] **9F** Review. No potential conditions yet. Nothing is filed. Finish opens Home.
 
 ## Phase 6 — App Check
 
@@ -156,10 +189,10 @@ Checklist not expanded beyond the handoff rollout. Do not start until Phase 5 is
 
 These follow handoff section 6. Expand each one into concrete tasks in this file before writing that code.
 
-- [ ] **6. Application shell and navigation.** From `docs/page-navigation.md`, not from the handoff feature-folder list.
+- [ ] **6. Application shell and navigation.** The frame and four destinations are in the step 6 section above. Home content, the Case tree, Vet Buddy, You, and `/plans` are still open.
 - [ ] **7. Firestore domain model and repositories.**
 - [ ] **8. Dev reset and seed tooling.** Reset must refuse to run against production.
-- [ ] **9. Veteran onboarding and service history.**
+- [ ] **9. Veteran onboarding and service history.** Expanded in the step 9 section. Discovery's symptom questionnaire is still step 10.
 - [ ] **10. Universal condition discovery and questionnaires.**
 - [ ] **11. Claim Issue model and evidence matrices.**
 - [ ] **12. File and document management.**

@@ -132,6 +132,37 @@ void main() {
     expect(find.textContaining('5555550100'), findsNothing);
     expect(find.textContaining('+15555550100'), findsNothing);
   });
+
+  testWidgets('finished onboarding opens Home and can switch to Cases', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      VeteranClaimsBuddyApp(
+        environment: AppEnvironment.dev,
+        onboardingComplete: true,
+        authGateway: _IdleAuthGateway(
+          session: const AuthSession(
+            uid: 'user-1',
+            email: 'veteran@example.com',
+            emailVerified: true,
+            mfaEnrolled: true,
+            maskedPhone: 'Text message ending in 0100',
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.textContaining('No case yet.'), findsOneWidget);
+    await tester.pump(const Duration(seconds: 1));
+    await tester.tap(find.byIcon(Icons.folder_outlined).hitTestable());
+    await tester.pump();
+    await tester.pump();
+
+    expect(find.textContaining('No cases yet.'), findsOneWidget);
+    expect(find.text('Onboarding'), findsNothing);
+  });
 }
 
 Future<void> _pumpApp(WidgetTester tester, Widget app) async {

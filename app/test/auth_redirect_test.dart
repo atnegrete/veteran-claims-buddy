@@ -86,13 +86,54 @@ void main() {
     );
   });
 
-  test('a ready account opens onboarding', () {
+  test('a ready account stays on onboarding until it is finished', () {
     expect(
       authRedirect(
         access: AuthAccess.authenticatedReady,
         location: AuthRoutes.signIn,
       ),
       AuthRoutes.onboarding,
+    );
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.home,
+      ),
+      AuthRoutes.onboarding,
+    );
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.onboarding,
+      ),
+      isNull,
+    );
+  });
+
+  test('a finished onboarding opens the shell', () {
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.onboarding,
+        onboardingComplete: true,
+      ),
+      AuthRoutes.home,
+    );
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.home,
+        onboardingComplete: true,
+      ),
+      isNull,
+    );
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.cases,
+        onboardingComplete: true,
+      ),
+      isNull,
     );
   });
 }

@@ -1,0 +1,10 @@
+---
+description: Mask text fields that only accept one format
+alwaysApply: true
+---
+
+# Formatted inputs
+
+When a field only accepts one shape, such as a date, phone number, or code, use a `TextInputFormatter` mask. The mask inserts separators and drops characters that do not belong. Do not leave the shape as helper text the user has to match, and do not open a calendar for a date.
+
+Full dates are `YYYY-MM-DD` through `IsoDateField`. A best-guess month is `YYYY-MM` through `YearMonthField`. Both live in `app/lib/forms/iso_date_field.dart`.

@@ -34,13 +34,37 @@
 </head>
 <body>
   <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
-
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
+    Chrome on an Intel Mac loses the WebGL context when Flutter's shaders fail
+    to compile, then creates another context, which loops the
+    "Too many active WebGL contexts" warning. Those GPUs draw with the CPU.
+    Apple Silicon stays on the GPU.
   -->
-  <script src="flutter_bootstrap.js" async></script>
+  <script>
+    {{flutter_js}}
+    {{flutter_build_config}}
+
+    function flutterWebShouldUseCpu() {
+      var canvas = document.createElement('canvas');
+      var gl = canvas.getContext('webgl2');
+      if (!gl) {
+        return true;
+      }
+      var info = gl.getExtension('WEBGL_debug_renderer_info');
+      var renderer = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : '';
+      var lose = gl.getExtension('WEBGL_lose_context');
+      if (lose) {
+        lose.loseContext();
+      }
+      var mac = /Mac/i.test(navigator.platform) || /Mac/i.test(navigator.userAgent);
+      var appleGpu = /Apple M/i.test(renderer);
+      return mac && !appleGpu && /Intel|AMD|Radeon/i.test(renderer);
+    }
+
+    _flutter.loader.load({
+      config: {
+        canvasKitForceCpuOnly: flutterWebShouldUseCpu(),
+      },
+    });
+  </script>
 </body>
 </html>

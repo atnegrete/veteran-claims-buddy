@@ -56,32 +56,3 @@ class AccountReactivateScreen extends ConsumerWidget {
     );
   }
 }
-
-class OnboardingHoldScreen extends ConsumerWidget {
-  const OnboardingHoldScreen({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final maskedPhone = ref.watch(authControllerProvider).session?.maskedPhone;
-    return AuthScaffold(
-      title: 'Onboarding',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Text(
-            'Phone enrollment is confirmed. Onboarding is the next step and is not open yet.',
-          ),
-          if (maskedPhone != null) ...[
-            const SizedBox(height: 12),
-            Text(maskedPhone),
-          ],
-          TextButton(
-            onPressed: () =>
-                ref.read(authControllerProvider.notifier).signOut(),
-            child: const Text('Sign out'),
-          ),
-        ],
-      ),
-    );
-  }
-}

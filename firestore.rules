@@ -2,10 +2,101 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function emailVerified() {
+      return signedIn() && request.auth.token.email_verified == true;
+    }
+
+    function mfaConfirmed() {
+      return signedIn()
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)/security/authState).data.mfaEnrollmentConfirmed == true;
+    }
+
+    function veteranReady(uid) {
+      return isOwner(uid) && emailVerified() && mfaConfirmed();
+    }
+
+    function onboardingFieldsOk() {
+      return request.resource.data.schemaVersion == 1
+        && request.resource.data.onboardingStatus in ['notStarted', 'inProgress', 'complete']
+        && request.resource.data.onboardingStep in [
+          'welcome', 'service', 'deployments', 'exposures', 'discovery', 'review'
+        ]
+        && !request.resource.data.keys().hasAny([
+          'mfaEnrollmentConfirmed', 'ssn', 'vaFileNumber'
+        ]);
+    }
+
     // Admin SDK writes this from confirmAuthState. A client must not set it.
-    // Later user rules must not use a recursive match that also covers this path.
     match /users/{uid}/security/{document} {
       allow read, write: if false;
+    }
+
+    match /users/{uid} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && onboardingFieldsOk()
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      allow update: if veteranReady(uid)
+        && onboardingFieldsOk()
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if false;
+    }
+
+    match /users/{uid}/servicePeriods/{periodId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      allow update: if veteranReady(uid)
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if veteranReady(uid);
+    }
+
+    match /users/{uid}/deployments/{deploymentId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      allow update: if veteranReady(uid)
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if veteranReady(uid);
+    }
+
+    match /users/{uid}/exposures/{exposureId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.status == 'reported'
+        && request.resource.data.needsUserConfirmation == false
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      allow update: if veteranReady(uid)
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if veteranReady(uid);
     }
 
     match /{document=**} {
