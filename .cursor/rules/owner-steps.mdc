@@ -1,0 +1,32 @@
+---
+description: Every finished turn says whether the owner must act, and does not stop when they do not
+alwaysApply: true
+---
+
+# Finish every turn
+
+End every turn that did work in two parts, in this order.
+
+1. What changed. A short explanation.
+2. Whether the owner has to act.
+
+If the next code cannot exist until the owner acts, the second part is a title and a numbered list. Each step is one plain sentence. A command step includes the command, the directory, and how to tell it worked. Nothing after the list.
+
+If the owner does not have to act, the second part is this sentence and nothing else after it:
+
+```text
+You do not need to do anything.
+```
+
+That sentence is not a stop. Do not wait for the owner to say continue. Keep building the next work that does not need them.
+
+A deploy, Hosting, a store step, a domain, a certificate, or a legal review goes under `Manual steps for the end` in `docs/build-progress.md`. Do not ask for it in that turn.
+
+A max-length ask is a real stop. That reply is only the numbered list of field name and suggested max.
+
+```text
+Dev rules deploy
+
+1. From the repo root, run the deploy command.
+2. Success is a completed deploy.
+```

@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Manual setup
 
-When a step creates or connects a project, the owner runs the command. Stop, print the exact command, directory, and success check, and wait.
+When a step creates or connects a project, the owner runs the command. Stop and wait. The message is a title and a numbered list, as in the owner-steps rule. A command step includes the command, the directory, and how to tell it worked.
 
 This includes `fvm flutter create`, `flutterfire configure`, `firebase init`, `firebase login`, and icon or splash generators.
 

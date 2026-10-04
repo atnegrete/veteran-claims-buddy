@@ -6,8 +6,7 @@ import '../../app/app_theme.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_redirect.dart';
 import '../../cases/cases_progress.dart';
-import '../../home/home_snapshot.dart';
-import '../auth/auth_scaffold.dart';
+import '../../cases/veteran_case.dart';
 import 'shell_pages.dart';
 import 'signed_in_bar.dart';
 
@@ -17,9 +16,16 @@ class YouScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final session = ref.watch(authControllerProvider).session;
-    final premium = ref.watch(homeSnapshotProvider).premiumActive;
+    final claimCount = activeCaseCount(
+      ref
+          .watch(casesProvider)
+          .maybeWhen(
+            data: (value) => value,
+            orElse: () => const <VeteranCase>[],
+          ),
+    );
     return ShellPage(
-      title: 'You',
+      title: 'Account',
       wrapInCard: false,
       child: Column(
         children: [
@@ -40,16 +46,6 @@ class YouScreen extends ConsumerWidget {
             child: Column(
               children: [
                 _YouLink(
-                  title: 'Calculator',
-                  onTap: () => context.go(AuthRoutes.calculator),
-                ),
-                _YouLink(
-                  title: 'Symptoms',
-                  onTap: () => context.go(
-                    symptomDestination(premiumActive: premium),
-                  ),
-                ),
-                _YouLink(
                   title: 'Support',
                   onTap: () => context.go(AuthRoutes.support),
                 ),
@@ -58,13 +54,26 @@ class YouScreen extends ConsumerWidget {
                   onTap: () => context.go(AuthRoutes.billingPremium),
                 ),
                 _YouLink(
+                  title: 'Profile',
+                  onTap: () => context.go(AuthRoutes.profile),
+                ),
+                _YouLink(
                   title: 'Security',
                   onTap: () => context.go(AuthRoutes.security),
+                ),
+                _YouLink(
+                  title: 'Notifications',
+                  onTap: () => context.go(AuthRoutes.notifications),
                 ),
                 _YouLink(
                   title: 'Legal',
                   onTap: () => context.go(AuthRoutes.legal),
                 ),
+                if (claimCount > 1)
+                  _YouLink(
+                    title: 'Claims',
+                    onTap: () => context.go(AuthRoutes.cases),
+                  ),
               ],
             ),
           ),
@@ -99,29 +108,6 @@ class _YouLink extends StatelessWidget {
   }
 }
 
-class SupportScreen extends StatelessWidget {
-  const SupportScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ShellPage(
-      title: 'Support',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text('Email'),
-          const SizedBox(height: 8),
-          SelectableText(supportEmail),
-          const SizedBox(height: 12),
-          const Text(
-            'Do not send a Social Security number or medical records.',
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class BillingPremiumScreen extends StatelessWidget {
   const BillingPremiumScreen({super.key});
 
@@ -139,7 +125,8 @@ class BillingPremiumScreen extends StatelessWidget {
                 const Text('Premium is not active.'),
                 const SizedBox(height: 16),
                 FilledButton(
-                  onPressed: () => context.go('${AuthRoutes.plans}?reason=home'),
+                  onPressed: () =>
+                      context.go('${AuthRoutes.plans}?reason=home'),
                   child: const Text('Compare plans'),
                 ),
               ],

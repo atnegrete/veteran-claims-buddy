@@ -1,0 +1,25 @@
+"use strict";
+
+const rules = {
+  id: "va-rules",
+  version: 1,
+  status: "active",
+  schemaVersion: 1,
+  effectiveFrom: "2019-02-19",
+  retrievedAt: "2026-10-04",
+  reviewDeadlineYears: 1,
+  reviews: [
+    { path: "supplemental", type: "supplementalClaim", formId: "20-0995" },
+    { path: "higherLevel", type: "higherLevelReview", formId: "20-0996" },
+    { path: "board", type: "boardAppeal", formId: "10182" },
+  ],
+  sources: [
+    {
+      id: "decision-reviews",
+      title: "VA decision reviews",
+      url: "https://www.va.gov/decision-reviews/",
+    },
+  ],
+};
+
+module.exports = { rules };

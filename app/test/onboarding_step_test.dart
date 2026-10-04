@@ -12,11 +12,8 @@ void main() {
       nextOnboardingStep(OnboardingStep.deployments),
       OnboardingStep.exposures,
     );
-    expect(
-      nextOnboardingStep(OnboardingStep.exposures),
-      OnboardingStep.discovery,
-    );
-    expect(nextOnboardingStep(OnboardingStep.discovery), OnboardingStep.review);
+    expect(nextOnboardingStep(OnboardingStep.exposures), OnboardingStep.review);
+    expect(onboardingStepOrder, isNot(contains(OnboardingStep.discovery)));
     expect(nextOnboardingStep(OnboardingStep.review), isNull);
   });
 

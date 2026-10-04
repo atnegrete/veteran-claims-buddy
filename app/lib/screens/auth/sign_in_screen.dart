@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/auth_redirect.dart';
+import '../../forms/text_input_chain.dart';
 import 'auth_scaffold.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
@@ -38,10 +39,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       _error = null;
     });
     try {
-      await ref.read(authControllerProvider.notifier).signIn(
-            email: _email.text,
-            password: _password.text,
-          );
+      await ref
+          .read(authControllerProvider.notifier)
+          .signIn(email: _email.text, password: _password.text);
     } on AuthFailure catch (failure) {
       setState(() => _error = failure.message);
     } finally {
@@ -59,43 +59,48 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   Widget build(BuildContext context) {
     return AuthScaffold(
       title: 'Sign in',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          TextField(
-            controller: _email,
-            keyboardType: TextInputType.emailAddress,
-            autofillHints: const [AutofillHints.email],
-            decoration: const InputDecoration(labelText: 'Email'),
-            textInputAction: TextInputAction.next,
-          ),
-          const SizedBox(height: 12),
-          TextField(
-            controller: _password,
-            obscureText: true,
-            autofillHints: const [AutofillHints.password],
-            decoration: const InputDecoration(labelText: 'Password'),
-            onSubmitted: (_) => _submit(),
-          ),
-          const SizedBox(height: 16),
-          AuthMessageText(_error),
-          FilledButton(
-            onPressed: _busy ? null : _submit,
-            child: Text(_busy ? 'Signing in…' : 'Sign in'),
-          ),
-          TextButton(
-            onPressed: () => context.go(AuthRoutes.forgotPassword),
-            child: const Text('Forgot password'),
-          ),
-          TextButton(
-            onPressed: () => context.go(AuthRoutes.register),
-            child: const Text('Create account'),
-          ),
-          TextButton(
-            onPressed: () => context.go(AuthRoutes.recovery),
-            child: const Text('Lost your phone?'),
-          ),
-        ],
+      child: TextInputChain(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ChainTextField(
+              controller: _email,
+              keyboardType: TextInputType.emailAddress,
+              autofillHints: const [AutofillHints.email],
+              decoration: const InputDecoration(labelText: 'Email'),
+              maxLength: 254,
+              countVisibleFrom: authCountVisibleFrom,
+            ),
+            const SizedBox(height: 12),
+            ChainTextField(
+              controller: _password,
+              obscureText: true,
+              autofillHints: const [AutofillHints.password],
+              decoration: const InputDecoration(labelText: 'Password'),
+              maxLength: 128,
+              countVisibleFrom: authCountVisibleFrom,
+              onSubmitted: (_) => _submit(),
+            ),
+            const SizedBox(height: 16),
+            AuthMessageText(_error),
+            FilledButton(
+              onPressed: _busy ? null : _submit,
+              child: Text(_busy ? 'Signing in…' : 'Sign in'),
+            ),
+            TextButton(
+              onPressed: () => context.go(AuthRoutes.forgotPassword),
+              child: const Text('Forgot password'),
+            ),
+            TextButton(
+              onPressed: () => context.go(AuthRoutes.register),
+              child: const Text('Create account'),
+            ),
+            TextButton(
+              onPressed: () => context.go(AuthRoutes.recovery),
+              child: const Text('Lost your phone?'),
+            ),
+          ],
+        ),
       ),
     );
   }

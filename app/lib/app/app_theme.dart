@@ -17,8 +17,25 @@ abstract final class AppColors {
 const _radius = 12.0;
 
 /// Text button that opens a dangerous step or removes one item.
+///
+/// Red fill, white label. The letters are not red.
 ButtonStyle dangerTextStyle() {
-  return TextButton.styleFrom(foregroundColor: AppColors.dangerText);
+  return TextButton.styleFrom(
+    foregroundColor: Colors.white,
+    backgroundColor: AppColors.dangerFill,
+  );
+}
+
+/// Filled button that adds one row to a list. Navy fill, white label.
+///
+/// The gray outline stays on Back, Close, and Cancel.
+ButtonStyle secondaryFilledStyle() {
+  return FilledButton.styleFrom(
+    backgroundColor: AppColors.navy,
+    foregroundColor: Colors.white,
+    disabledBackgroundColor: AppColors.navy.withValues(alpha: 0.38),
+    disabledForegroundColor: Colors.white.withValues(alpha: 0.38),
+  );
 }
 
 /// Filled button that commits a destructive action.
@@ -44,38 +61,41 @@ ThemeData appTheme() {
     borderRadius: BorderRadius.all(Radius.circular(_radius)),
     borderSide: BorderSide(color: AppColors.line),
   );
-  final scheme = ColorScheme.fromSeed(
-    seedColor: AppColors.navy,
-    brightness: Brightness.dark,
-  ).copyWith(
-    primary: AppColors.blue,
-    onPrimary: Colors.white,
-    secondary: AppColors.navy,
-    onSecondary: Colors.white,
-    surface: AppColors.canvas,
-    onSurface: AppColors.text,
-    onSurfaceVariant: AppColors.textMuted,
-    outline: AppColors.line,
-    outlineVariant: AppColors.line,
-    error: AppColors.dangerText,
-    onError: Colors.white,
-    errorContainer: AppColors.dangerFill,
-    onErrorContainer: Colors.white,
-    surfaceContainerLow: AppColors.card,
-    surfaceContainer: AppColors.card,
-    surfaceContainerHigh: AppColors.card,
-    surfaceContainerHighest: AppColors.line,
-    primaryContainer: AppColors.blue.withValues(alpha: 0.24),
-    onPrimaryContainer: AppColors.text,
-    surfaceTint: AppColors.canvas,
-  );
+  final scheme =
+      ColorScheme.fromSeed(
+        seedColor: AppColors.navy,
+        brightness: Brightness.dark,
+      ).copyWith(
+        primary: AppColors.blue,
+        onPrimary: Colors.white,
+        secondary: AppColors.navy,
+        onSecondary: Colors.white,
+        surface: AppColors.canvas,
+        onSurface: AppColors.text,
+        onSurfaceVariant: AppColors.textMuted,
+        outline: AppColors.line,
+        outlineVariant: AppColors.line,
+        error: AppColors.dangerText,
+        onError: Colors.white,
+        errorContainer: AppColors.dangerFill,
+        onErrorContainer: Colors.white,
+        surfaceContainerLow: AppColors.card,
+        surfaceContainer: AppColors.card,
+        surfaceContainerHigh: AppColors.card,
+        surfaceContainerHighest: AppColors.line,
+        primaryContainer: AppColors.blue.withValues(alpha: 0.24),
+        onPrimaryContainer: AppColors.text,
+        surfaceTint: AppColors.canvas,
+      );
 
   return ThemeData(
     colorScheme: scheme,
     scaffoldBackgroundColor: AppColors.canvas,
     dividerColor: AppColors.line,
     iconTheme: const IconThemeData(color: AppColors.text),
-    progressIndicatorTheme: const ProgressIndicatorThemeData(color: AppColors.blue),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: AppColors.blue,
+    ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.canvas,
       foregroundColor: AppColors.text,
@@ -110,6 +130,7 @@ ThemeData appTheme() {
     ),
     navigationRailTheme: const NavigationRailThemeData(
       backgroundColor: AppColors.rail,
+      labelType: NavigationRailLabelType.all,
     ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: AppColors.rail,
@@ -152,7 +173,7 @@ ThemeData appTheme() {
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: AppColors.blue,
+        foregroundColor: AppColors.text,
         textStyle: const TextStyle(fontWeight: FontWeight.w600),
       ),
     ),

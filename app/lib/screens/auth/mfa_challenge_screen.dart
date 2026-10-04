@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -6,6 +7,7 @@ import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/auth_redirect.dart';
 import '../../auth/mfa_challenge.dart';
+import '../../forms/text_input_chain.dart';
 import 'auth_scaffold.dart';
 
 class MfaChallengeScreen extends ConsumerStatefulWidget {
@@ -36,7 +38,9 @@ class _MfaChallengeScreenState extends ConsumerState<MfaChallengeScreen> {
       _selectedUid = hint.uid;
     });
     try {
-      await ref.read(authControllerProvider.notifier).sendChallengeCode(hint.uid);
+      await ref
+          .read(authControllerProvider.notifier)
+          .sendChallengeCode(hint.uid);
       setState(() {
         _codeSent = true;
         _messageIsError = false;
@@ -66,7 +70,9 @@ class _MfaChallengeScreenState extends ConsumerState<MfaChallengeScreen> {
       _message = null;
     });
     try {
-      await ref.read(authControllerProvider.notifier).confirmChallengeCode(code);
+      await ref
+          .read(authControllerProvider.notifier)
+          .confirmChallengeCode(code);
     } on AuthFailure catch (failure) {
       if (mounted) {
         setState(() {
@@ -110,10 +116,15 @@ class _MfaChallengeScreenState extends ConsumerState<MfaChallengeScreen> {
               ),
           if (_codeSent) ...[
             const SizedBox(height: 8),
-            TextField(
+            ChainTextField(
               controller: _code,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: '6-digit code'),
+              maxLength: 6,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              decoration: const InputDecoration(
+                labelText: '6-digit code',
+                counterText: '',
+              ),
               onSubmitted: (_) => _confirm(),
             ),
             const SizedBox(height: 16),

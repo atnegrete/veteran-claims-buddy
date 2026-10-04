@@ -256,6 +256,8 @@ The central question of the application is:
 
 > **What should I do next?**
 
+The signed-in app answers that with one step of the open claim on screen. Documents, exams, and the package sit under that claim. The Symptoms Tracker and the VA Ratings Calculator are their own sections. The screen does not open as a dashboard of every feature.
+
 Everything should lead toward answering that question accurately.
 
 The Veteran should never have to know which obscure VA form is required before beginning a workflow. The product asks natural-language questions, determines which workflow is applicable, explains it, and then guides the Veteran through it.
@@ -737,9 +739,9 @@ When Premium expires:
 
 Do not promise truly unlimited compute/AI in public copy. Apply reasonable anti-abuse controls across all plans.
 
-## 2A.9 Premium symptom and health tracking
+## 2A.9 Premium Symptoms Tracker
 
-Symptom/health tracking is Premium-only at MVP launch.
+The Symptoms Tracker is the Premium record of symptoms over time. It is not the claim questionnaire. It is Premium-only at MVP launch.
 
 The purpose is to help the Veteran maintain an accurate longitudinal record that can later support:
 
@@ -925,6 +927,8 @@ Users must be able to manually reclassify a document if classification is wrong.
 ## 2A.12 Vet Buddy behavior and safety UX
 
 The assistant is named **Vet Buddy**.
+
+Vet Buddy is a chat bubble on the claim, not a primary page and not a tab. Opening it stays on the current step. A prompt may ask if the Veteran has a question. Until the assistant can answer, the bubble does not invent a reply and does not change the claim. See 2A.28.
 
 Vet Buddy should proactively notice potentially relevant information, for example:
 
@@ -1382,16 +1386,16 @@ Veteran Claims Buddy
     +-- Flutter iOS / Android / Web app
             |
             +-- email/password + verified email + SMS MFA
-            +-- free guided disability-claims workspace
-            +-- Vet Buddy AI assistant
-            +-- one primary Working Case UX
+            +-- free guided disability-claims workspace, one step at a time
+            +-- Vet Buddy as a chat bubble, not a tab
+            +-- one claim on screen; Case remains the stored record and the purchase unit
             +-- full evidence/document workflow
             +-- manual C&P tracking + 2-hour push reminder
             +-- free VA rating/compensation calculator
             +-- $250 one-time Case digital-package unlock
             +-- $30/month Premium
             |       +-- active package generation
-            |       +-- symptom/health tracking
+            |       +-- Symptoms Tracker
             |       +-- monthly AI symptom summaries
             +-- third-party Print & Mail
             +-- support tickets
@@ -1399,6 +1403,24 @@ Veteran Claims Buddy
             +-- self-submission guidance; no direct VA filing required for MVP
 ```
 
+## 2A.28 Guided claim
+
+The signed-in app is one claim, shown one step at a time. This section wins over older shell, Home, and Vet Buddy navigation text in this document. `docs/page-navigation.md` still wins for the exact routes.
+
+Onboarding is service history: welcome, service, deployments, exposures, and review. The symptom questionnaire is not an onboarding step. Finishing review creates the claim and opens its current step. The Veteran is not asked to create, name, or pick a case.
+
+The first step asks whether this is their first VA disability claim.
+
+- First claim: do not ask them to upload paperwork from an earlier claim. Continue into the symptom questionnaire.
+- Not the first claim: ask for the forms or decision paperwork from the claim they want to pursue again, and let them add new conditions in this same claim. The upload is into the app. The app does not file with the VA.
+
+The symptom questionnaire is section 26. It is how intake learns the conditions. The question catalog for that step is `questionnaires/condition-discovery-v2.json`. The Symptoms Tracker stays a separate Premium section and is not this step.
+
+There is no separate Home page. The signed-in app opens the open claim. The claim name opens and closes. Eight sections sit indented under it: first claim or earlier claim, questions, issues, documents, exams, forms, package, and decisions. Any section can be opened. The Symptoms Tracker and the VA Ratings Calculator are their own sections. A wide window shows the list on the left. A phone keeps the same list in the navigation drawer. The screen does not open with status, deadlines, Premium, and chat stacked together. Account pages open from the account menu. `/plans` stays the only sales page and opens when a step needs a purchase.
+
+Claim screens say "your claim." The stored record is still a Case. The $250 unlock is still per Case. The open claim stays open after it is finished, so the Veteran can look through it and download what was already made. Starting another claim makes the new claim the open one. Earlier claims stay available to view and download, and opening one does not replace the open claim. Starting another claim is a later workflow.
+
+Do not copy another product's stage names, sidebar, or progress treatment. The current step uses the existing primary button. A finished step is quieter text in the same palette. Red stays limited to danger.
 
 ---
 
@@ -1604,8 +1626,8 @@ Use a monorepo.
         /cases
         /buddy
         /plans
-        /calculator
-        /symptoms
+        /calculator                 # VA Ratings Calculator
+        /symptoms                   # Symptoms Tracker. Not the claim questionnaire
         /support
         /billing
         /settings
@@ -3428,6 +3450,8 @@ Never treat an AI-parsed decision as final until the extraction has passed valid
 
 Questionnaire definitions are global/versioned. Questionnaire instances and responses are user-specific.
 
+The condition-discovery catalog is `questionnaires/condition-discovery-v2.json`, built from `questionnaires/catalog.js`. In development that id can be published again, and stored answers from an older shape are deleted. From the repo root, `npm run publish-questionnaire:dev` copies that file into `questionnaireDefinitions` on the dev project. `npm run publish-questionnaire:prod` does the same for production and refuses to run without `--confirm-prod`. Production also refuses to replace an id that is already `active`. Clients can read the catalog after a verified email and SMS enrollment. They cannot write it.
+
 ## `questionnaireDefinitions/{definitionId}`
 
 ```json
@@ -3502,6 +3526,8 @@ The UI questionnaire and conversational agent must write the same response model
 ---
 
 # 26. Universal condition discovery questionnaire
+
+This is the symptom intake inside the claim, after onboarding and after the first-claim question in section 2A.28. A first claim skips prior-claim paperwork and starts here. A Veteran who has filed before can upload that earlier paperwork and still add new conditions through this questionnaire. The versioned question list is `questionnaires/condition-discovery-v2.json`, described in `docs/questionnaires.md`. A yes on a body system does not itself create a condition. A checked diagnosis does. Nothing in this questionnaire is filed with the VA.
 
 The first major guided workflow after service history is a comprehensive but progressive symptom/condition discovery process.
 
@@ -5921,7 +5947,7 @@ Do not place Print & Mail ahead of digital entitlement in a way that implies Str
 Where Premium is promoted, the copy should emphasize ongoing utility:
 
 ```text
-Track symptoms over time
+Symptoms Tracker
 Build a record of flare-ups and daily-life impact
 Prepare for C&P exams using your actual history
 Generate digital claim packages while subscribed

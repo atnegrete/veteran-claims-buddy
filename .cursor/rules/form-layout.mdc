@@ -1,0 +1,18 @@
+---
+description: Shared form footer and side-by-side issue layout
+alwaysApply: true
+---
+
+# Form layout
+
+`FormActions` in `app/lib/forms/form_actions.dart` is the Back and primary pair. A divider sits above them. Back is on the left. The primary button is on the right. It is full width only when it is the only button. Under 320 points the two buttons stack, primary first.
+
+`NestedSplit` and `NestedForm` in `app/lib/forms/nested_split.dart` are a list with the form that opens from it. A wide pane shows both. A narrow pane shows the form and hides the list. Back closes the form.
+
+A single text field does not get a Remove button. Clearing the text and saving clears the saved note.
+
+A form with more than one text field is a `TextInputChain`. Those fields are `ChainTextField`, `IsoDateField`, or `YearMonthField`. The keyboard says Next while another text field follows, and Next skips dropdowns, checkboxes, and buttons. The last single-line field says Done. The last multiline field keeps Return. An explicit action, such as Send, wins.
+
+Before adding a `TextField`, `ChainTextField`, or any other free-text input, stop and ask what max length to use. The ask is only a numbered list: the field name and the suggested max. No other text. Wait for the answer. Then set `maxLength` and leave the count visible. Email and password on an auth screen keep that count hidden until the text reaches 90% of the max. When that value is stored, the Firestore rule uses the same max. A date, month, phone, or code mask keeps the shape already chosen and does not show a count. A new free-text field still waits for a number.
+
+Status uses `AppBadge` from `docs/ui.md`. A count such as "3 added" is `AppBadge.primary`: navy fill, white label. A finished part is a check in the same gray or white as the label. `AppBadge.notFiled` is the filing line, and it has no icon. Do not add a green done badge.

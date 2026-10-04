@@ -7,7 +7,21 @@ enum OnboardingStep {
   review,
 }
 
-const onboardingStepOrder = OnboardingStep.values;
+/// Discovery stays in the enum so an older saved step still parses.
+/// It is no longer a step the Veteran sees.
+const onboardingStepOrder = <OnboardingStep>[
+  OnboardingStep.welcome,
+  OnboardingStep.service,
+  OnboardingStep.deployments,
+  OnboardingStep.exposures,
+  OnboardingStep.review,
+];
+
+int visibleOnboardingIndex(OnboardingStep step) {
+  final index = onboardingStepOrder.indexOf(step);
+  if (index >= 0) return index;
+  return onboardingStepOrder.indexOf(OnboardingStep.review);
+}
 
 extension OnboardingStepLabel on OnboardingStep {
   String get label => switch (this) {
@@ -77,10 +91,7 @@ String? validateYearMonth(String value, {required String label}) {
   return null;
 }
 
-String? validateYearMonthRange({
-  required String start,
-  required String end,
-}) {
+String? validateYearMonthRange({required String start, required String end}) {
   final startError = validateYearMonth(start, label: 'the start');
   if (startError != null) return startError;
   final endError = validateYearMonth(end, label: 'the end');

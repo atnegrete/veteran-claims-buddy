@@ -23,6 +23,10 @@ service cloud.firestore {
       return isOwner(uid) && emailVerified() && mfaConfirmed();
     }
 
+    function catalogReader() {
+      return signedIn() && emailVerified() && mfaConfirmed();
+    }
+
     function onboardingFieldsOk() {
       return request.resource.data.schemaVersion == 1
         && request.resource.data.onboardingStatus in ['notStarted', 'inProgress', 'complete']
@@ -32,6 +36,103 @@ service cloud.firestore {
         && !request.resource.data.keys().hasAny([
           'mfaEnrollmentConfirmed', 'ssn', 'vaFileNumber'
         ]);
+    }
+
+    function profileFieldsOk() {
+      return (!('displayName' in request.resource.data)
+          || (request.resource.data.displayName is string
+            && request.resource.data.displayName.size() <= 80))
+        && (!('timezone' in request.resource.data)
+          || request.resource.data.timezone in [
+            'America/New_York',
+            'America/Chicago',
+            'America/Denver',
+            'America/Phoenix',
+            'America/Los_Angeles',
+            'America/Anchorage',
+            'Pacific/Honolulu',
+            'America/Puerto_Rico',
+            'Pacific/Guam',
+            'Pacific/Pago_Pago'
+          ])
+        && (!('preferredLanguage' in request.resource.data)
+          || request.resource.data.preferredLanguage == 'en')
+        && (!('firstVaDisabilityClaim' in request.resource.data)
+          || request.resource.data.firstVaDisabilityClaim is bool);
+    }
+
+    function notificationFieldsOk() {
+      return request.resource.data.keys().hasOnly([
+          'examReminders', 'taskReminders', 'schemaVersion', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.examReminders is bool
+        && request.resource.data.taskReminders is bool
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    function pushFieldsOk() {
+      return request.resource.data.keys().hasOnly([
+          'token', 'schemaVersion', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.token is string
+        && request.resource.data.token.size() > 0
+        && request.resource.data.token.size() <= 4096
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    function supportTicketCreateOk(uid) {
+      return request.resource.data.keys().hasOnly([
+          'uid', 'subject', 'category', 'status', 'priority',
+          'lastMessageAt', 'createdAt', 'updatedAt', 'schemaVersion'
+        ])
+        && request.resource.data.uid == uid
+        && request.resource.data.subject is string
+        && request.resource.data.subject.size() > 0
+        && request.resource.data.subject.size() <= 120
+        && request.resource.data.category in [
+          'account', 'billing', 'technical', 'printMail', 'claimWorkflow', 'other'
+        ]
+        && request.resource.data.status == 'open'
+        && request.resource.data.priority == 'normal'
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data.lastMessageAt == request.time;
+    }
+
+    function supportTicketUpdateOk() {
+      return request.resource.data.keys().hasOnly([
+          'uid', 'subject', 'category', 'status', 'priority',
+          'lastMessageAt', 'createdAt', 'updatedAt', 'schemaVersion'
+        ])
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.subject == resource.data.subject
+        && request.resource.data.category == resource.data.category
+        && request.resource.data.priority == resource.data.priority
+        && request.resource.data.schemaVersion == resource.data.schemaVersion
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.updatedAt == request.time
+        && (request.resource.data.lastMessageAt == request.time
+          || request.resource.data.lastMessageAt == resource.data.lastMessageAt)
+        && resource.data.status != 'closed'
+        && (request.resource.data.status == resource.data.status
+          || request.resource.data.status == 'closed'
+          || (resource.data.status in ['open', 'waitingOnUser', 'resolved']
+            && request.resource.data.status == 'waitingOnSupport'));
+    }
+
+    function supportMessageOk() {
+      return request.resource.data.keys().hasOnly([
+          'body', 'authorRole', 'createdAt', 'schemaVersion'
+        ])
+        && request.resource.data.body is string
+        && request.resource.data.body.size() > 0
+        && request.resource.data.body.size() <= 2000
+        && request.resource.data.authorRole == 'veteran'
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.createdAt == request.time;
     }
 
     function sameCurrentWorkingCase() {
@@ -49,6 +150,13 @@ service cloud.firestore {
       return get(/databases/$(database)/documents/users/$(uid)).data.get('accountStatus', 'active') != 'deletionScheduled';
     }
 
+    function occupationLengthOk() {
+      return !('primaryOccupationText' in request.resource.data)
+        || request.resource.data.primaryOccupationText == null
+        || (request.resource.data.primaryOccupationText is string
+          && request.resource.data.primaryOccupationText.size() <= 80);
+    }
+
     // Admin SDK writes this from confirmAuthState. A client must not set it.
     match /users/{uid}/security/{document} {
       allow read, write: if false;
@@ -58,6 +166,7 @@ service cloud.firestore {
       allow read: if veteranReady(uid);
       allow create: if veteranReady(uid)
         && onboardingFieldsOk()
+        && profileFieldsOk()
         && !request.resource.data.keys().hasAny([
           'currentWorkingCaseId', 'accountStatus', 'deletionRequestedAt', 'purgeAfter'
         ])
@@ -65,6 +174,7 @@ service cloud.firestore {
         && request.resource.data.updatedAt == request.time;
       allow update: if veteranReady(uid)
         && onboardingFieldsOk()
+        && profileFieldsOk()
         && sameCurrentWorkingCase()
         && deletionFieldsUnchanged()
         && resource.data.get('accountStatus', 'active') != 'deletionScheduled'
@@ -79,12 +189,14 @@ service cloud.firestore {
         && accountOpen(uid)
         && request.resource.data.schemaVersion == 1
         && request.resource.data.sourceType == 'veteranReported'
+        && occupationLengthOk()
         && request.resource.data.createdAt == request.time
         && request.resource.data.updatedAt == request.time;
       allow update: if veteranReady(uid)
         && accountOpen(uid)
         && request.resource.data.schemaVersion == 1
         && request.resource.data.sourceType == 'veteranReported'
+        && occupationLengthOk()
         && request.resource.data.updatedAt == request.time
         && request.resource.data.createdAt == resource.data.createdAt;
       allow delete: if veteranReady(uid) && accountOpen(uid);
@@ -96,12 +208,18 @@ service cloud.firestore {
         && accountOpen(uid)
         && request.resource.data.schemaVersion == 1
         && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.notes is string
+        && request.resource.data.notes.size() > 0
+        && request.resource.data.notes.size() <= 2000
         && request.resource.data.createdAt == request.time
         && request.resource.data.updatedAt == request.time;
       allow update: if veteranReady(uid)
         && accountOpen(uid)
         && request.resource.data.schemaVersion == 1
         && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.notes is string
+        && request.resource.data.notes.size() > 0
+        && request.resource.data.notes.size() <= 2000
         && request.resource.data.updatedAt == request.time
         && request.resource.data.createdAt == resource.data.createdAt;
       allow delete: if veteranReady(uid) && accountOpen(uid);
@@ -115,12 +233,18 @@ service cloud.firestore {
         && request.resource.data.sourceType == 'veteranReported'
         && request.resource.data.status == 'reported'
         && request.resource.data.needsUserConfirmation == false
+        && request.resource.data.description is string
+        && request.resource.data.description.size() > 0
+        && request.resource.data.description.size() <= 2000
         && request.resource.data.createdAt == request.time
         && request.resource.data.updatedAt == request.time;
       allow update: if veteranReady(uid)
         && accountOpen(uid)
         && request.resource.data.schemaVersion == 1
         && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.description is string
+        && request.resource.data.description.size() > 0
+        && request.resource.data.description.size() <= 2000
         && request.resource.data.updatedAt == request.time
         && request.resource.data.createdAt == resource.data.createdAt;
       allow delete: if veteranReady(uid) && accountOpen(uid);
@@ -129,6 +253,1064 @@ service cloud.firestore {
     // startCase and setWorkingCase write these. A client can read, not write.
     match /users/{uid}/cases/{caseId} {
       allow read: if veteranReady(uid);
+      allow write: if false;
+    }
+
+    match /users/{uid}/settings/{settingId} {
+      allow read: if veteranReady(uid)
+        && settingId in ['notifications', 'push'];
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && request.resource.data.createdAt == request.time
+        && (
+          (settingId == 'notifications' && notificationFieldsOk())
+          || (settingId == 'push' && pushFieldsOk())
+        );
+      allow update: if veteranReady(uid)
+        && accountOpen(uid)
+        && request.resource.data.createdAt == resource.data.createdAt
+        && (
+          (settingId == 'notifications' && notificationFieldsOk())
+          || (settingId == 'push' && pushFieldsOk())
+        );
+      allow delete: if false;
+    }
+
+    match /users/{uid}/supportTickets/{ticketId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && supportTicketCreateOk(uid);
+      allow update: if veteranReady(uid)
+        && accountOpen(uid)
+        && supportTicketUpdateOk();
+      allow delete: if false;
+
+      match /messages/{messageId} {
+        allow read: if veteranReady(uid);
+        allow create: if veteranReady(uid)
+          && accountOpen(uid)
+          && supportMessageOk()
+          && get(/databases/$(database)/documents/users/$(uid)/supportTickets/$(ticketId)).data.status != 'closed';
+        allow update, delete: if false;
+      }
+    }
+
+    function conditionFieldsOk() {
+      return request.resource.data.keys().hasOnly([
+          'displayName', 'bodySystem', 'status', 'current', 'diagnosed',
+          'discoverySource', 'sourceQuestionnaireId', 'sourceQuestionId',
+          'sourceType', 'schemaVersion', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() > 0
+        && request.resource.data.displayName.size() <= 120
+        && request.resource.data.bodySystem in [
+          'neurological', 'eyes', 'hearing', 'ent', 'respiratory', 'sleep',
+          'cardiovascular', 'gastrointestinal', 'genitourinary', 'endocrine',
+          'skin', 'musculoskeletal', 'peripheralNerves', 'mentalHealth',
+          'dental', 'reproductive', 'injury', 'other'
+        ]
+        && request.resource.data.status in ['potential', 'dismissed']
+        && request.resource.data.current is bool
+        && request.resource.data.diagnosed == false
+        && request.resource.data.discoverySource == 'questionnaire'
+        && request.resource.data.sourceQuestionnaireId == 'condition-discovery'
+        && request.resource.data.sourceQuestionId is string
+        && request.resource.data.sourceQuestionId.size() > 0
+        && request.resource.data.sourceQuestionId.size() <= 120
+        && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.schemaVersion == 1;
+    }
+
+    function questionnaireFieldsOk() {
+      return request.resource.data.keys().hasOnly([
+          'definitionId', 'definitionVersion', 'status', 'currentQuestionId',
+          'progressPercent', 'caseId', 'startedAt', 'completedAt',
+          'createdAt', 'updatedAt', 'schemaVersion'
+        ])
+        && request.resource.data.definitionId == 'condition-discovery-v2'
+        && request.resource.data.definitionVersion == 2
+        && request.resource.data.status in ['inProgress', 'complete']
+        && (request.resource.data.currentQuestionId == null
+          || (request.resource.data.currentQuestionId is string
+            && request.resource.data.currentQuestionId.size() <= 120))
+        && request.resource.data.progressPercent is int
+        && request.resource.data.progressPercent >= 0
+        && request.resource.data.progressPercent <= 100
+        && (request.resource.data.caseId == null
+          || (request.resource.data.caseId is string
+            && request.resource.data.caseId.size() <= 128))
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    function responseValueOk() {
+      return (request.resource.data.value is string
+          && request.resource.data.value.size() > 0
+          && request.resource.data.value.size() <= 2000)
+        || (request.resource.data.value is list
+          && request.resource.data.value.size() > 0
+          && request.resource.data.value.size() <= 40);
+    }
+
+    function responseFieldsOk() {
+      return request.resource.data.keys().hasOnly([
+          'questionId', 'value', 'displayValue', 'sourceType', 'answeredVia',
+          'answeredAt', 'updatedAt', 'schemaVersion'
+        ])
+        && request.resource.data.questionId is string
+        && request.resource.data.questionId.size() > 0
+        && request.resource.data.questionId.size() <= 120
+        && responseValueOk()
+        && request.resource.data.displayValue is string
+        && request.resource.data.displayValue.size() > 0
+        && request.resource.data.displayValue.size() <= 2000
+        && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.answeredVia == 'ui'
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    function claimIssueFieldsOk() {
+      return request.resource.data.keys().hasOnly([
+          'conditionId', 'displayName', 'caseIds', 'activeCaseId', 'status',
+          'claimPurpose', 'createdAt', 'updatedAt', 'schemaVersion'
+        ])
+        && request.resource.data.conditionId is string
+        && request.resource.data.conditionId.size() > 0
+        && request.resource.data.conditionId.size() <= 120
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() > 0
+        && request.resource.data.displayName.size() <= 120
+        && request.resource.data.caseIds is list
+        && request.resource.data.caseIds.size() == 1
+        && request.resource.data.caseIds[0] == request.resource.data.activeCaseId
+        && request.resource.data.activeCaseId is string
+        && request.resource.data.activeCaseId.size() > 0
+        && request.resource.data.activeCaseId.size() <= 128
+        && request.resource.data.status == 'potential'
+        && request.resource.data.claimPurpose == 'initial'
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    function conditionCanBeClaimed(uid) {
+      let conditionPath = /databases/$(database)/documents/users/$(uid)/conditions/$(request.resource.data.conditionId);
+      let casePath = /databases/$(database)/documents/users/$(uid)/cases/$(request.resource.data.activeCaseId);
+      return exists(conditionPath)
+        && exists(casePath)
+        && get(conditionPath).data.status == 'potential'
+        && get(conditionPath).data.displayName == request.resource.data.displayName;
+    }
+
+    match /users/{uid}/claimIssues/{claimIssueId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && claimIssueId == request.resource.data.conditionId
+        && claimIssueFieldsOk()
+        && conditionCanBeClaimed(uid)
+        && request.resource.data.createdAt == request.time;
+      allow update, delete: if false;
+    }
+
+    match /users/{uid}/conditions/{conditionId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && conditionFieldsOk()
+        && request.resource.data.status == 'potential'
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      allow update: if veteranReady(uid)
+        && accountOpen(uid)
+        && conditionFieldsOk()
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.bodySystem == resource.data.bodySystem
+        && request.resource.data.sourceQuestionId == resource.data.sourceQuestionId
+        && request.resource.data.discoverySource == resource.data.discoverySource
+        && request.resource.data.sourceQuestionnaireId == resource.data.sourceQuestionnaireId
+        && request.resource.data.sourceType == resource.data.sourceType
+        && request.resource.data.schemaVersion == resource.data.schemaVersion
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if false;
+    }
+
+    match /users/{uid}/questionnaires/{questionnaireId} {
+      allow read: if veteranReady(uid) && questionnaireId == 'condition-discovery';
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && questionnaireId == 'condition-discovery'
+        && questionnaireFieldsOk()
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.startedAt == request.time
+        && request.resource.data.completedAt == null
+        && request.resource.data.status == 'inProgress';
+      allow update: if veteranReady(uid)
+        && accountOpen(uid)
+        && questionnaireId == 'condition-discovery'
+        && questionnaireFieldsOk()
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.startedAt == resource.data.startedAt
+        && request.resource.data.definitionId == resource.data.definitionId
+        && request.resource.data.definitionVersion == resource.data.definitionVersion
+        && (
+          (request.resource.data.status == 'inProgress'
+            && request.resource.data.completedAt == null)
+          || (request.resource.data.status == 'complete'
+            && (request.resource.data.completedAt == request.time
+              || request.resource.data.completedAt == resource.data.completedAt))
+        );
+      allow delete: if false;
+
+      match /responses/{responseId} {
+        allow read: if veteranReady(uid);
+        allow create: if veteranReady(uid)
+          && accountOpen(uid)
+          && responseFieldsOk()
+          && request.resource.data.questionId == responseId
+          && request.resource.data.answeredAt == request.time;
+        allow update: if veteranReady(uid)
+          && accountOpen(uid)
+          && responseFieldsOk()
+          && request.resource.data.questionId == responseId
+          && request.resource.data.questionId == resource.data.questionId
+          && request.resource.data.answeredAt == resource.data.answeredAt
+          && request.resource.data.sourceType == resource.data.sourceType
+          && request.resource.data.answeredVia == resource.data.answeredVia
+          && request.resource.data.schemaVersion == resource.data.schemaVersion;
+        allow delete: if veteranReady(uid) && accountOpen(uid);
+      }
+    }
+
+    function claimIssuePath(uid, claimIssueId) {
+      return /databases/$(database)/documents/users/$(uid)/claimIssues/$(claimIssueId);
+    }
+
+    function claimIssueExists(uid, claimIssueId) {
+      return exists(claimIssuePath(uid, claimIssueId));
+    }
+
+    function theoryFieldsOk(uid, claimIssueId) {
+      return request.resource.data.keys().hasOnly([
+          'type', 'status', 'summary', 'sourceType', 'needsUserConfirmation',
+          'relatedClaimIssueId', 'presumptionRuleId', 'schemaVersion',
+          'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.type in [
+          'direct', 'secondary', 'aggravation', 'presumptive', 'increase'
+        ]
+        && request.resource.data.status == 'active'
+        && request.resource.data.summary is string
+        && request.resource.data.summary.size() > 0
+        && request.resource.data.summary.size() <= 500
+        && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.needsUserConfirmation == false
+        && request.resource.data.presumptionRuleId == null
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.updatedAt == request.time
+        && (
+          (request.resource.data.type == 'secondary'
+            && request.resource.data.relatedClaimIssueId is string
+            && request.resource.data.relatedClaimIssueId.size() > 0
+            && request.resource.data.relatedClaimIssueId.size() <= 120
+            && request.resource.data.relatedClaimIssueId != claimIssueId
+            && claimIssueExists(uid, request.resource.data.relatedClaimIssueId))
+          || (request.resource.data.type != 'secondary'
+            && request.resource.data.relatedClaimIssueId == null)
+        );
+    }
+
+    function statementFieldsOk(statementId) {
+      return statementId in ['lay', 'doctorDraft']
+        && request.resource.data.keys().hasOnly([
+          'kind', 'body', 'sourceType', 'schemaVersion', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.kind == statementId
+        && request.resource.data.body is string
+        && request.resource.data.body.size() > 0
+        && request.resource.data.body.size() <= 8000
+        && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    function evidenceLinkFieldsOk() {
+      return request.resource.data.keys().hasOnly([
+          'claimIssueId', 'documentId', 'factId', 'questionnaireId',
+          'responseId', 'evidenceType', 'relationship', 'summary',
+          'sourceType', 'userConfirmed', 'createdAt'
+        ])
+        && request.resource.data.claimIssueId is string
+        && request.resource.data.claimIssueId.size() > 0
+        && request.resource.data.claimIssueId.size() <= 120
+        && request.resource.data.documentId == null
+        && request.resource.data.factId == null
+        && request.resource.data.questionnaireId == null
+        && request.resource.data.responseId == null
+        && request.resource.data.evidenceType in [
+          'currentDiagnosis', 'inServiceEvent', 'nexus', 'severity',
+          'functionalImpact'
+        ]
+        && request.resource.data.relationship in ['supports', 'conflicts', 'neutral']
+        && request.resource.data.summary is string
+        && request.resource.data.summary.size() > 0
+        && request.resource.data.summary.size() <= 500
+        && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.userConfirmed == true;
+    }
+
+    function isoDateOk(value) {
+      return value is string && value.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
+    }
+
+    function decisionFieldsOk(uid) {
+      return request.resource.data.keys().hasOnly([
+          'caseId', 'decisionDate', 'sourceDocumentId', 'sourceType', 'status',
+          'schemaVersion', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.caseId is string
+        && request.resource.data.caseId.size() > 0
+        && request.resource.data.caseId.size() <= 128
+        && isoDateOk(request.resource.data.decisionDate)
+        && request.resource.data.sourceDocumentId == null
+        && request.resource.data.sourceType == 'manual'
+        && request.resource.data.status == 'confirmed'
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.updatedAt == request.time
+        && exists(/databases/$(database)/documents/users/$(uid)/cases/$(request.resource.data.caseId));
+    }
+
+    function ratingOk() {
+      return request.resource.data.ratingPercent == null
+        || (request.resource.data.ratingPercent is int
+          && request.resource.data.ratingPercent >= 0
+          && request.resource.data.ratingPercent <= 100
+          && request.resource.data.ratingPercent % 10 == 0);
+    }
+
+    function decisionIssueFieldsOk(uid) {
+      let decisionPath = /databases/$(database)/documents/users/$(uid)/decisions/$(request.resource.data.decisionId);
+      let issuePath = claimIssuePath(uid, request.resource.data.claimIssueId);
+      return request.resource.data.keys().hasOnly([
+          'decisionId', 'claimIssueId', 'displayName', 'outcome',
+          'ratingPercent', 'effectiveDate', 'schemaVersion', 'createdAt'
+        ])
+        && request.resource.data.decisionId is string
+        && request.resource.data.decisionId.size() > 0
+        && request.resource.data.claimIssueId is string
+        && request.resource.data.claimIssueId.size() > 0
+        && request.resource.data.claimIssueId.size() <= 120
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() > 0
+        && request.resource.data.displayName.size() <= 120
+        && request.resource.data.outcome in [
+          'granted', 'denied', 'deferred', 'increased', 'continued', 'reduced'
+        ]
+        && ratingOk()
+        && (request.resource.data.effectiveDate == null
+          || isoDateOk(request.resource.data.effectiveDate))
+        && request.resource.data.schemaVersion == 1
+        && exists(decisionPath)
+        && exists(issuePath)
+        && get(decisionPath).data.sourceType == 'manual'
+        && get(decisionPath).data.caseId == get(issuePath).data.activeCaseId
+        && get(issuePath).data.displayName == request.resource.data.displayName;
+    }
+
+    match /users/{uid}/claimIssues/{claimIssueId}/theories/{theoryId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && claimIssueExists(uid, claimIssueId)
+        && theoryFieldsOk(uid, claimIssueId)
+        && request.resource.data.createdAt == request.time;
+      allow update: if false;
+      allow delete: if veteranReady(uid) && accountOpen(uid);
+    }
+
+    match /users/{uid}/claimIssues/{claimIssueId}/statements/{statementId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && claimIssueExists(uid, claimIssueId)
+        && statementFieldsOk(statementId)
+        && request.resource.data.createdAt == request.time;
+      allow update: if veteranReady(uid)
+        && accountOpen(uid)
+        && statementFieldsOk(statementId)
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.kind == resource.data.kind;
+      allow delete: if veteranReady(uid) && accountOpen(uid);
+    }
+
+    match /users/{uid}/evidenceLinks/{linkId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && evidenceLinkFieldsOk()
+        && claimIssueExists(uid, request.resource.data.claimIssueId)
+        && request.resource.data.createdAt == request.time;
+      allow update: if false;
+      allow delete: if veteranReady(uid)
+        && accountOpen(uid)
+        && resource.data.sourceType == 'veteranReported';
+    }
+
+    function letterTextAt(items, index, max) {
+      return items[index] is string
+        && items[index].size() > 0
+        && items[index].size() <= max;
+    }
+
+    function letterTextListOk(items, max) {
+      return items is list
+        && items.size() <= 8
+        && (items.size() < 1 || letterTextAt(items, 0, max))
+        && (items.size() < 2 || letterTextAt(items, 1, max))
+        && (items.size() < 3 || letterTextAt(items, 2, max))
+        && (items.size() < 4 || letterTextAt(items, 3, max))
+        && (items.size() < 5 || letterTextAt(items, 4, max))
+        && (items.size() < 6 || letterTextAt(items, 5, max))
+        && (items.size() < 7 || letterTextAt(items, 6, max))
+        && (items.size() < 8 || letterTextAt(items, 7, max));
+    }
+
+    function letterFindingAt(items, index) {
+      return items[index].keys().hasOnly(['text', 'page', 'sourceDocumentId'])
+        && items[index].text is string
+        && items[index].text.size() > 0
+        && items[index].text.size() <= 2000
+        && (items[index].page == null
+          || (items[index].page is int
+            && items[index].page > 0
+            && items[index].page <= 2000))
+        && (items[index].sourceDocumentId == null
+          || (items[index].sourceDocumentId is string
+            && items[index].sourceDocumentId.size() <= 128));
+    }
+
+    function letterFindingsOk(items) {
+      return items is list
+        && items.size() <= 8
+        && (items.size() < 1 || letterFindingAt(items, 0))
+        && (items.size() < 2 || letterFindingAt(items, 1))
+        && (items.size() < 3 || letterFindingAt(items, 2))
+        && (items.size() < 4 || letterFindingAt(items, 3))
+        && (items.size() < 5 || letterFindingAt(items, 4))
+        && (items.size() < 6 || letterFindingAt(items, 5))
+        && (items.size() < 7 || letterFindingAt(items, 6))
+        && (items.size() < 8 || letterFindingAt(items, 7));
+    }
+
+    function letterReasonAt(items, index) {
+      return items[index].keys().hasOnly([
+          'text', 'category', 'page', 'sourceDocumentId'
+        ])
+        && items[index].text is string
+        && items[index].text.size() > 0
+        && items[index].text.size() <= 2000
+        && items[index].category in [
+          'nexus', 'diagnosis', 'inServiceEvent', 'severity', 'other'
+        ]
+        && (items[index].page == null
+          || (items[index].page is int
+            && items[index].page > 0
+            && items[index].page <= 2000))
+        && (items[index].sourceDocumentId == null
+          || (items[index].sourceDocumentId is string
+            && items[index].sourceDocumentId.size() <= 128));
+    }
+
+    function letterReasonsOk(items) {
+      return items is list
+        && items.size() <= 8
+        && (items.size() < 1 || letterReasonAt(items, 0))
+        && (items.size() < 2 || letterReasonAt(items, 1))
+        && (items.size() < 3 || letterReasonAt(items, 2))
+        && (items.size() < 4 || letterReasonAt(items, 3))
+        && (items.size() < 5 || letterReasonAt(items, 4))
+        && (items.size() < 6 || letterReasonAt(items, 5))
+        && (items.size() < 7 || letterReasonAt(items, 6))
+        && (items.size() < 8 || letterReasonAt(items, 7));
+    }
+
+    function letterDecisionUpdateOk(uid) {
+      return resource.data.sourceType == 'documentExtracted'
+        && resource.data.status == 'needsReview'
+        && request.resource.data.keys().hasOnly([
+          'caseId', 'decisionDate', 'receivedDate', 'sourceDocumentId',
+          'sourceType', 'status', 'benefitType', 'overallSummary',
+          'reviewDeadline', 'deadlineRuleVersionId', 'schemaVersion',
+          'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.caseId == resource.data.caseId
+        && isoDateOk(request.resource.data.decisionDate)
+        && (request.resource.data.receivedDate == null
+          || isoDateOk(request.resource.data.receivedDate))
+        && request.resource.data.sourceDocumentId == resource.data.sourceDocumentId
+        && request.resource.data.sourceType == 'documentExtracted'
+        && request.resource.data.status == 'confirmed'
+        && request.resource.data.benefitType == 'compensation'
+        && request.resource.data.overallSummary is string
+        && request.resource.data.overallSummary.size() <= 2000
+        && request.resource.data.deadlineRuleVersionId == resource.data.deadlineRuleVersionId
+        && request.resource.data.reviewDeadline == resource.data.reviewDeadline
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.updatedAt == request.time
+        && exists(/databases/$(database)/documents/users/$(uid)/cases/$(request.resource.data.caseId));
+    }
+
+    function letterIssueUpdateOk(uid) {
+      let decisionPath = /databases/$(database)/documents/users/$(uid)/decisions/$(resource.data.decisionId);
+      return exists(decisionPath)
+        && get(decisionPath).data.sourceType == 'documentExtracted'
+        && get(decisionPath).data.status == 'needsReview'
+        && request.resource.data.keys().hasOnly([
+          'decisionId', 'claimIssueId', 'displayName', 'outcome',
+          'ratingPercent', 'effectiveDate', 'favorableFindings', 'reasons',
+          'evidenceConsidered', 'extractionConfidence', 'userConfirmed',
+          'schemaVersion', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.decisionId == resource.data.decisionId
+        && (request.resource.data.claimIssueId == null
+          || (request.resource.data.claimIssueId is string
+            && request.resource.data.claimIssueId.size() > 0
+            && request.resource.data.claimIssueId.size() <= 120
+            && exists(claimIssuePath(uid, request.resource.data.claimIssueId))
+            && get(claimIssuePath(uid, request.resource.data.claimIssueId)).data.activeCaseId
+              == get(decisionPath).data.caseId))
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() > 0
+        && request.resource.data.displayName.size() <= 120
+        && request.resource.data.outcome in [
+          'granted', 'denied', 'deferred', 'increased', 'continued',
+          'reduced', 'other'
+        ]
+        && ratingOk()
+        && (request.resource.data.effectiveDate == null
+          || isoDateOk(request.resource.data.effectiveDate))
+        && letterFindingsOk(request.resource.data.favorableFindings)
+        && letterReasonsOk(request.resource.data.reasons)
+        && letterTextListOk(request.resource.data.evidenceConsidered, 200)
+        && (request.resource.data.extractionConfidence == null
+          || (request.resource.data.extractionConfidence is number
+            && request.resource.data.extractionConfidence >= 0
+            && request.resource.data.extractionConfidence <= 1))
+        && request.resource.data.userConfirmed == true
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    match /users/{uid}/decisions/{decisionId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && decisionFieldsOk(uid)
+        && request.resource.data.createdAt == request.time;
+      allow update: if veteranReady(uid)
+        && accountOpen(uid)
+        && letterDecisionUpdateOk(uid);
+      allow delete: if veteranReady(uid)
+        && accountOpen(uid)
+        && (
+          resource.data.sourceType == 'manual'
+          || (resource.data.sourceType == 'documentExtracted'
+            && resource.data.status == 'needsReview')
+        );
+    }
+
+    match /users/{uid}/decisionIssues/{decisionIssueId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && decisionIssueFieldsOk(uid)
+        && request.resource.data.createdAt == request.time;
+      allow update: if veteranReady(uid)
+        && accountOpen(uid)
+        && letterIssueUpdateOk(uid);
+      allow delete: if veteranReady(uid)
+        && accountOpen(uid)
+        && (
+          resource.data.decisionId == decisionIssueId
+          || (
+            exists(/databases/$(database)/documents/users/$(uid)/decisions/$(resource.data.decisionId))
+            && get(/databases/$(database)/documents/users/$(uid)/decisions/$(resource.data.decisionId)).data.sourceType == 'documentExtracted'
+            && get(/databases/$(database)/documents/users/$(uid)/decisions/$(resource.data.decisionId)).data.status == 'needsReview'
+          )
+        );
+    }
+
+    function documentFieldsOk(uid, documentId) {
+      return request.resource.data.keys().hasOnly([
+          'caseId', 'name', 'originalFileName', 'documentType', 'contentType',
+          'sizeBytes', 'storagePath', 'uploadStatus', 'processingStatus',
+          'documentDate', 'pageCount', 'providerName', 'facilityName', 'tags',
+          'sha256', 'schemaVersion', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.caseId is string
+        && request.resource.data.caseId.size() > 0
+        && request.resource.data.caseId.size() <= 128
+        && exists(/databases/$(database)/documents/users/$(uid)/cases/$(request.resource.data.caseId))
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 120
+        && request.resource.data.originalFileName is string
+        && request.resource.data.originalFileName.size() > 0
+        && request.resource.data.originalFileName.size() <= 200
+        && request.resource.data.documentType in [
+          'serviceTreatmentRecord', 'privateMedicalRecord', 'vaMedicalRecord',
+          'decisionLetter', 'dbq', 'cpExam', 'personalStatement',
+          'buddyStatement', 'dd214', 'personnelRecord', 'imaging', 'lab',
+          'nexusOpinion', 'vaCorrespondence', 'other'
+        ]
+        && request.resource.data.contentType in [
+          'application/pdf', 'image/jpeg', 'image/png'
+        ]
+        && request.resource.data.sizeBytes is int
+        && request.resource.data.sizeBytes > 0
+        && request.resource.data.sizeBytes <= 104857600
+        && request.resource.data.storagePath is string
+        && (
+          (request.resource.data.contentType == 'application/pdf'
+            && request.resource.data.storagePath == 'users/' + uid + '/documents/' + documentId + '/original.pdf')
+          || (request.resource.data.contentType == 'image/jpeg'
+            && request.resource.data.storagePath == 'users/' + uid + '/documents/' + documentId + '/original.jpg')
+          || (request.resource.data.contentType == 'image/png'
+            && request.resource.data.storagePath == 'users/' + uid + '/documents/' + documentId + '/original.png')
+        )
+        && request.resource.data.uploadStatus == 'uploaded'
+        && request.resource.data.processingStatus in [
+          'notStarted', 'queued', 'processing', 'needsReview', 'complete', 'failed'
+        ]
+        && (request.resource.data.documentDate == null
+          || isoDateOk(request.resource.data.documentDate))
+        && (request.resource.data.pageCount == null
+          || (request.resource.data.pageCount is int
+            && request.resource.data.pageCount > 0
+            && request.resource.data.pageCount <= 5000))
+        && request.resource.data.providerName == null
+        && request.resource.data.facilityName == null
+        && request.resource.data.tags is list
+        && request.resource.data.tags.size() == 0
+        && request.resource.data.sha256 == null
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    match /users/{uid}/documents/{documentId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && documentFieldsOk(uid, documentId)
+        && request.resource.data.uploadStatus == 'uploaded'
+        && request.resource.data.processingStatus == 'notStarted'
+        && request.resource.data.pageCount == null
+        && request.resource.data.createdAt == request.time;
+      allow update: if veteranReady(uid)
+        && accountOpen(uid)
+        && documentFieldsOk(uid, documentId)
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.caseId == resource.data.caseId
+        && request.resource.data.name == resource.data.name
+        && request.resource.data.originalFileName == resource.data.originalFileName
+        && request.resource.data.contentType == resource.data.contentType
+        && request.resource.data.sizeBytes == resource.data.sizeBytes
+        && request.resource.data.storagePath == resource.data.storagePath
+        && request.resource.data.processingStatus == resource.data.processingStatus
+        && request.resource.data.pageCount == resource.data.pageCount
+        && request.resource.data.uploadStatus == resource.data.uploadStatus
+        && request.resource.data.uploadStatus == 'uploaded';
+      allow delete: if veteranReady(uid) && accountOpen(uid);
+
+      match /facts/{factId} {
+        allow read: if veteranReady(uid);
+        allow create, delete: if false;
+        allow update: if veteranReady(uid)
+          && accountOpen(uid)
+          && request.resource.data.diff(resource.data).affectedKeys()
+            .hasOnly(['reviewStatus', 'correctedText', 'updatedAt'])
+          && request.resource.data.updatedAt == request.time
+          && request.resource.data.reviewStatus in [
+            'confirmed', 'corrected', 'rejected'
+          ]
+          && request.resource.data.factText == resource.data.factText
+          && (
+            (request.resource.data.reviewStatus == 'corrected'
+              && request.resource.data.correctedText is string
+              && request.resource.data.correctedText.size() > 0
+              && request.resource.data.correctedText.size() <= 2000)
+            || (request.resource.data.reviewStatus in ['confirmed', 'rejected']
+              && request.resource.data.correctedText == null)
+          );
+      }
+    }
+
+    function nextTaskOk() {
+      return request.resource.data.keys().hasOnly([
+          'schemaVersion', 'sourceType', 'status', 'type', 'title',
+          'description', 'caseId', 'route', 'kind', 'priority',
+          'claimIssueId', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.sourceType == 'systemCalculated'
+        && request.resource.data.status == 'open'
+        && request.resource.data.type in [
+          'uploadEvidence', 'completeQuestionnaire', 'other'
+        ]
+        && request.resource.data.title is string
+        && request.resource.data.title.size() > 0
+        && request.resource.data.title.size() <= 120
+        && request.resource.data.description is string
+        && request.resource.data.description.size() > 0
+        && request.resource.data.description.size() <= 500
+        && request.resource.data.caseId is string
+        && request.resource.data.caseId.size() > 0
+        && request.resource.data.caseId.size() <= 80
+        && request.resource.data.route is string
+        && request.resource.data.route.size() <= 200
+        && request.resource.data.kind in [
+          'firstClaim', 'earlierPaperwork', 'questions', 'addIssue',
+          'issueQuestions', 'reviewFile', 'decisionReview', 'selfSubmit',
+          'formsLater'
+        ]
+        && request.resource.data.priority == 'normal'
+        && (request.resource.data.claimIssueId == null
+          || (request.resource.data.claimIssueId is string
+            && request.resource.data.claimIssueId.size() <= 120))
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    function examClientKeys() {
+      return [
+        'caseId', 'examDate', 'examTime', 'timezone', 'examType',
+        'providerType', 'providerName', 'location', 'phone', 'telehealth',
+        'notes', 'status', 'sourceType', 'schemaVersion', 'createdAt', 'updatedAt'
+      ];
+    }
+
+    function examShapeOk() {
+      return request.resource.data.keys().hasAll(examClientKeys())
+        && request.resource.data.keys().hasOnly([
+          'caseId', 'examDate', 'examTime', 'timezone', 'examType',
+          'providerType', 'providerName', 'location', 'phone', 'telehealth',
+          'notes', 'status', 'sourceType', 'schemaVersion', 'createdAt',
+          'updatedAt', 'startsAt', 'reminderSentAt'
+        ])
+        && request.resource.data.status == 'active'
+        && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.schemaVersion == 1
+        && isoDateOk(request.resource.data.examDate)
+        && request.resource.data.examTime is string
+        && request.resource.data.examTime.matches('^[0-9]{2}:[0-9]{2}$')
+        && request.resource.data.timezone in [
+          'America/New_York', 'America/Chicago', 'America/Denver',
+          'America/Phoenix', 'America/Los_Angeles', 'America/Anchorage',
+          'Pacific/Honolulu', 'America/Puerto_Rico', 'Pacific/Guam',
+          'Pacific/Pago_Pago'
+        ]
+        && request.resource.data.examType is string
+        && request.resource.data.examType.size() > 0
+        && request.resource.data.examType.size() <= 200
+        && request.resource.data.providerType in ['va', 'contractor', 'unknown']
+        && request.resource.data.providerName is string
+        && request.resource.data.providerName.size() <= 80
+        && request.resource.data.location is string
+        && request.resource.data.location.size() <= 200
+        && request.resource.data.phone is string
+        && (
+          request.resource.data.phone == ''
+          || request.resource.data.phone.matches('^[+]1[0-9]{10}$')
+        )
+        && request.resource.data.telehealth is bool
+        && request.resource.data.notes is string
+        && request.resource.data.notes.size() <= 2000
+        && request.resource.data.caseId is string
+        && request.resource.data.caseId.size() > 0
+        && request.resource.data.caseId.size() <= 128
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    function examServerFieldsHeld() {
+      return (
+          !('startsAt' in resource.data)
+          || request.resource.data.startsAt == resource.data.startsAt
+        )
+        && (
+          !('reminderSentAt' in resource.data)
+          || request.resource.data.reminderSentAt == resource.data.reminderSentAt
+        );
+    }
+
+    function examArchiveOk() {
+      return resource.data.status == 'active'
+        && request.resource.data.status == 'archived'
+        && request.resource.data.archivedAt == request.time
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['status', 'archivedAt', 'updatedAt']);
+    }
+
+    match /users/{uid}/exams/{examId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && examShapeOk()
+        && request.resource.data.createdAt == request.time
+        && !('startsAt' in request.resource.data)
+        && !('reminderSentAt' in request.resource.data);
+      allow update: if veteranReady(uid)
+        && accountOpen(uid)
+        && (
+          (
+            examShapeOk()
+            && request.resource.data.createdAt == resource.data.createdAt
+            && examServerFieldsHeld()
+          )
+          || examArchiveOk()
+        );
+      allow delete: if false;
+    }
+
+    function reviewFormMatches(type, formId) {
+      return (type == 'supplementalClaim' && formId == '20-0995')
+        || (type == 'higherLevelReview' && formId == '20-0996')
+        || (type == 'boardAppeal' && formId == '10182');
+    }
+
+    function reviewDraftOk(uid) {
+      let decisionPath = /databases/$(database)/documents/users/$(uid)/decisions/$(request.resource.data.decisionId);
+      let issuePath = /databases/$(database)/documents/users/$(uid)/decisionIssues/$(request.resource.data.decisionIssueId);
+      return request.resource.data.keys().hasOnly([
+          'caseId', 'type', 'status', 'formIds', 'submissionMethod',
+          'preparedAt', 'submittedAt', 'vaClaimId', 'confirmationNumber',
+          'payloadSnapshotDocumentId', 'ruleVersionIds', 'decisionId',
+          'decisionIssueId', 'claimIssueId', 'displayName', 'boardDocket',
+          'informalConference', 'sourceType', 'schemaVersion', 'createdAt',
+          'updatedAt'
+        ])
+        && request.resource.data.caseId is string
+        && request.resource.data.caseId.size() > 0
+        && request.resource.data.caseId.size() <= 128
+        && request.resource.data.type in [
+          'supplementalClaim', 'higherLevelReview', 'boardAppeal'
+        ]
+        && request.resource.data.status == 'draft'
+        && request.resource.data.formIds is list
+        && request.resource.data.formIds.size() == 1
+        && reviewFormMatches(request.resource.data.type, request.resource.data.formIds[0])
+        && request.resource.data.submissionMethod == null
+        && request.resource.data.preparedAt == null
+        && request.resource.data.submittedAt == null
+        && request.resource.data.vaClaimId == null
+        && request.resource.data.confirmationNumber == null
+        && request.resource.data.payloadSnapshotDocumentId == null
+        && request.resource.data.ruleVersionIds is list
+        && request.resource.data.ruleVersionIds.size() == 0
+        && exists(decisionPath)
+        && get(decisionPath).data.status == 'confirmed'
+        && get(decisionPath).data.caseId == request.resource.data.caseId
+        && exists(issuePath)
+        && get(issuePath).data.decisionId == request.resource.data.decisionId
+        && get(issuePath).data.outcome in ['denied', 'deferred', 'reduced', 'other']
+        && request.resource.data.decisionIssueId is string
+        && request.resource.data.displayName == get(issuePath).data.displayName
+        && (request.resource.data.claimIssueId == get(issuePath).data.claimIssueId)
+        && (
+          (request.resource.data.type == 'boardAppeal'
+            && request.resource.data.boardDocket in ['direct', 'evidence', 'hearing']
+            && request.resource.data.informalConference == null)
+          || (request.resource.data.type == 'higherLevelReview'
+            && request.resource.data.boardDocket == null
+            && request.resource.data.informalConference is bool)
+          || (request.resource.data.type == 'supplementalClaim'
+            && request.resource.data.boardDocket == null
+            && request.resource.data.informalConference == null)
+        )
+        && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.updatedAt == request.time
+        && exists(/databases/$(database)/documents/users/$(uid)/cases/$(request.resource.data.caseId));
+    }
+
+    function submissionIssueOk(uid) {
+      let submissionPath = /databases/$(database)/documents/users/$(uid)/submissions/$(request.resource.data.submissionId);
+      return request.resource.data.keys().hasOnly([
+          'submissionId', 'claimIssueId', 'claimIssueDisplayName',
+          'requestedAction', 'status', 'decisionIssueId', 'schemaVersion',
+          'createdAt'
+        ])
+        && request.resource.data.submissionId is string
+        && request.resource.data.submissionId.size() > 0
+        && exists(submissionPath)
+        && get(submissionPath).data.status == 'draft'
+        && request.resource.data.claimIssueId == get(submissionPath).data.claimIssueId
+        && request.resource.data.claimIssueDisplayName == get(submissionPath).data.displayName
+        && request.resource.data.requestedAction == 'review'
+        && request.resource.data.status == 'included'
+        && request.resource.data.decisionIssueId == get(submissionPath).data.decisionIssueId
+        && request.resource.data.schemaVersion == 1;
+    }
+
+    match /users/{uid}/submissions/{submissionId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && reviewDraftOk(uid)
+        && request.resource.data.createdAt == request.time;
+      allow update: if false;
+      allow delete: if veteranReady(uid)
+        && accountOpen(uid)
+        && resource.data.status == 'draft'
+        && resource.data.sourceType == 'veteranReported';
+    }
+
+    match /users/{uid}/submissionIssues/{issueId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && submissionIssueOk(uid)
+        && request.resource.data.createdAt == request.time;
+      allow update: if false;
+      allow delete: if veteranReady(uid)
+        && accountOpen(uid)
+        && exists(/databases/$(database)/documents/users/$(uid)/submissions/$(resource.data.submissionId))
+        && get(/databases/$(database)/documents/users/$(uid)/submissions/$(resource.data.submissionId)).data.status == 'draft';
+    }
+
+    function caseDocPath(uid, caseId) {
+      return /databases/$(database)/documents/users/$(uid)/cases/$(caseId);
+    }
+
+    function packageCheckOk(uid, caseId) {
+      return request.resource.data.keys().hasOnly([
+          'caseId', 'openedVaPage', 'savedConfirmation', 'schemaVersion',
+          'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.caseId == caseId
+        && request.resource.data.openedVaPage is bool
+        && request.resource.data.savedConfirmation is bool
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.updatedAt == request.time
+        && exists(caseDocPath(uid, caseId));
+    }
+
+    match /users/{uid}/packageChecks/{caseId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && packageCheckOk(uid, caseId)
+        && request.resource.data.createdAt == request.time;
+      allow update: if veteranReady(uid)
+        && accountOpen(uid)
+        && packageCheckOk(uid, caseId)
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.caseId == resource.data.caseId;
+      allow delete: if false;
+    }
+
+    match /users/{uid}/tasks/{taskId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && taskId == 'next-' + request.resource.data.caseId
+        && nextTaskOk()
+        && request.resource.data.createdAt == request.time;
+      allow update: if veteranReady(uid)
+        && accountOpen(uid)
+        && taskId == 'next-' + request.resource.data.caseId
+        && resource.data.sourceType == 'systemCalculated'
+        && nextTaskOk()
+        && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if false;
+    }
+
+    match /users/{uid}/chats/{chatId} {
+      allow read: if veteranReady(uid);
+      allow write: if false;
+
+      match /messages/{messageId} {
+        allow read: if veteranReady(uid);
+        allow write: if false;
+      }
+
+      match /sessions/{sessionId} {
+        allow read: if veteranReady(uid);
+        allow write: if false;
+      }
+    }
+
+    match /users/{uid}/processingJobs/{jobId} {
+      allow read: if veteranReady(uid);
+      allow write: if false;
+    }
+
+    function symptomEntryOk() {
+      return request.resource.data.keys().hasOnly([
+          'entryType', 'occurredDate', 'occurredTime', 'severity', 'duration',
+          'affectedWork', 'limitedActivity', 'rested', 'tookTreatment',
+          'conditionId', 'conditionName', 'schemaVersion', 'createdAt',
+          'updatedAt'
+        ])
+        && request.resource.data.entryType in ['checkIn', 'event']
+        && isoDateOk(request.resource.data.occurredDate)
+        && request.resource.data.occurredTime is string
+        && (
+          (request.resource.data.entryType == 'checkIn'
+            && request.resource.data.occurredTime == '')
+          || (request.resource.data.entryType == 'event'
+            && request.resource.data.occurredTime.matches('^[0-9]{2}:[0-9]{2}$'))
+        )
+        && request.resource.data.severity is int
+        && request.resource.data.severity >= 0
+        && request.resource.data.severity <= 10
+        && request.resource.data.duration in [
+          'underOneHour', 'oneToFourHours', 'mostOfTheDay', 'allDay'
+        ]
+        && request.resource.data.affectedWork is bool
+        && request.resource.data.limitedActivity is bool
+        && request.resource.data.rested is bool
+        && request.resource.data.tookTreatment is bool
+        && request.resource.data.conditionId is string
+        && request.resource.data.conditionId.size() <= 120
+        && request.resource.data.conditionName is string
+        && request.resource.data.conditionName.size() <= 120
+        && (request.resource.data.conditionId == '')
+          == (request.resource.data.conditionName == '')
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    match /users/{uid}/symptomEntries/{entryId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && symptomEntryOk()
+        && request.resource.data.createdAt == request.time;
+      allow update: if false;
+      allow delete: if veteranReady(uid) && accountOpen(uid);
+    }
+
+    match /questionnaireDefinitions/{definitionId} {
+      allow read: if catalogReader();
+      allow write: if false;
+
+      match /questionDefinitions/{questionId} {
+        allow read: if catalogReader();
+        allow write: if false;
+      }
+    }
+
+    match /vaRuleVersions/{versionId} {
+      allow read: if catalogReader();
+      allow write: if false;
+    }
+
+    match /vaKnowledgeSources/{sourceId} {
+      allow read: if catalogReader();
       allow write: if false;
     }
 

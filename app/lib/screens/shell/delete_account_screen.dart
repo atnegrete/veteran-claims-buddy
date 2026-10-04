@@ -5,6 +5,7 @@ import '../../account/account_deletion.dart';
 import '../../app/app_theme.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
+import '../../forms/text_input_chain.dart';
 import 'shell_pages.dart';
 
 class DeleteAccountScreen extends ConsumerStatefulWidget {
@@ -61,10 +62,12 @@ class _DeleteAccountScreenState extends ConsumerState<DeleteAccountScreen> {
             'Deleting the account does not cancel Premium. Cancel it in the App Store, Google Play, or on the web billing page. A Print & Mail order already sent still prints and is non-refundable.',
           ),
           const SizedBox(height: 16),
-          TextField(
+          ChainTextField(
             controller: _password,
             obscureText: true,
             decoration: const InputDecoration(labelText: 'Password'),
+            maxLength: 128,
+            countVisibleFrom: authCountVisibleFrom,
             onChanged: (_) => setState(() {}),
           ),
           const SizedBox(height: 8),

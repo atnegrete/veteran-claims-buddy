@@ -43,20 +43,24 @@ class SurfaceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: child,
-      ),
+      child: Padding(padding: const EdgeInsets.all(20), child: child),
     );
   }
 }
 
 /// App bar for every screen after the account is ready to use.
 class SignedInAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const SignedInAppBar({super.key, this.showAccountLink = false});
+  const SignedInAppBar({
+    super.key,
+    this.showAccountLink = false,
+    this.showMenu = false,
+  });
 
-  /// Shell pages can open You from the account menu. Onboarding cannot.
+  /// Shell pages can open the account menu. Onboarding cannot.
   final bool showAccountLink;
+
+  /// Narrow windows open the same navigation list from here.
+  final bool showMenu;
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -66,13 +70,27 @@ class SignedInAppBar extends ConsumerWidget implements PreferredSizeWidget {
     final email = ref.watch(authControllerProvider).session?.email;
     return AppBar(
       automaticallyImplyLeading: false,
-      leading: const Padding(
-        padding: EdgeInsets.only(left: 12),
-        child: AppLogoMark(),
-      ),
-      leadingWidth: 48,
+      leading: showMenu
+          ? IconButton(
+              tooltip: 'Open navigation',
+              onPressed: () => Scaffold.of(context).openDrawer(),
+              icon: const Icon(Icons.menu),
+            )
+          : const Padding(
+              padding: EdgeInsets.only(left: 12),
+              child: AppLogoMark(),
+            ),
+      leadingWidth: showMenu ? 56 : 48,
       titleSpacing: 8,
-      title: const Text('Veteran Claims Buddy'),
+      title: showMenu
+          ? const Row(
+              children: [
+                AppLogoMark(),
+                SizedBox(width: 8),
+                Expanded(child: Text('Veteran Claims Buddy')),
+              ],
+            )
+          : const Text('Veteran Claims Buddy'),
       actions: [
         PopupMenuButton<String>(
           tooltip: 'Account',
@@ -89,15 +107,12 @@ class SignedInAppBar extends ConsumerWidget implements PreferredSizeWidget {
           },
           itemBuilder: (context) => [
             if (email != null)
-              PopupMenuItem<String>(
-                enabled: false,
-                child: Text(email),
-              ),
+              PopupMenuItem<String>(enabled: false, child: Text(email)),
             if (email != null) const PopupMenuDivider(),
             if (showAccountLink) ...[
               const PopupMenuItem<String>(
                 value: 'account',
-                child: Text('You'),
+                child: Text('Account'),
               ),
               const PopupMenuItem<String>(
                 value: 'security',
@@ -122,9 +137,6 @@ class SignedInScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const SignedInAppBar(),
-      body: body,
-    );
+    return Scaffold(appBar: const SignedInAppBar(), body: body);
   }
 }

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/auth_redirect.dart';
+import '../../forms/text_input_chain.dart';
 import 'auth_scaffold.dart';
 
 class ForgotPasswordScreen extends ConsumerStatefulWidget {
@@ -47,8 +48,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
       setState(() {
         _sent = true;
         _messageIsError = false;
-        _message =
-            'If an account exists for that email, a reset link is on the way. Resetting the password does not skip the text-message check.';
+        _message = 'If an account exists for that email, a reset link is on the way. Resetting the password does not skip the text-message check.';
       });
     } on AuthFailure catch (failure) {
       setState(() {
@@ -67,10 +67,12 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          TextField(
+          ChainTextField(
             controller: _email,
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(labelText: 'Email'),
+            maxLength: 254,
+            countVisibleFrom: authCountVisibleFrom,
             onSubmitted: (_) => _submit(),
           ),
           const SizedBox(height: 16),
@@ -136,10 +138,9 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
       _message = null;
     });
     try {
-      await ref.read(authControllerProvider.notifier).confirmPasswordReset(
-            code: code,
-            newPassword: _password.text,
-          );
+      await ref
+          .read(authControllerProvider.notifier)
+          .confirmPasswordReset(code: code, newPassword: _password.text);
       setState(() {
         _done = true;
         _messageIsError = false;
@@ -167,20 +168,34 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
             const Text(
               'Open the reset link from your email, or request a new one.',
             )
-          else ...[
-            TextField(
-              controller: _password,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'New password'),
+          else
+            TextInputChain(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  ChainTextField(
+                    controller: _password,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      labelText: 'New password',
+                    ),
+                    maxLength: 128,
+                    countVisibleFrom: authCountVisibleFrom,
+                  ),
+                  const SizedBox(height: 12),
+                  ChainTextField(
+                    controller: _confirm,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      labelText: 'Confirm password',
+                    ),
+                    maxLength: 128,
+                    countVisibleFrom: authCountVisibleFrom,
+                    onSubmitted: (_) => _submit(),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _confirm,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Confirm password'),
-              onSubmitted: (_) => _submit(),
-            ),
-          ],
           const SizedBox(height: 16),
           AuthMessageText(_message, isError: _messageIsError),
           if (!missingCode)

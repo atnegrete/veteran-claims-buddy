@@ -20,10 +20,10 @@ class BuddyScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Vet Buddy answers questions about your case. It does not file a claim, and it does not decide one for you.',
+              'Vet Buddy answers questions about this claim. It does not file a claim, decide one, or change it.',
             ),
             const SizedBox(height: 12),
-            const Text('There are no chats yet.'),
+            const Text('Ask from the chat bubble on this claim.'),
             const SizedBox(height: 16),
             Text(
               vetBuddyFooter,

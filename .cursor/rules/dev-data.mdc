@@ -1,0 +1,12 @@
+---
+description: In development, delete data that no longer matches the current schema
+alwaysApply: true
+---
+
+# Development data
+
+Nothing is deployed to real users. Do not keep a second schema, a compatibility reader, or a new version id so old development data still loads.
+
+When a change no longer matches stored documents, delete those development documents and write only the current shape. This includes questionnaire answers, conditions created from them, and claim issues that point at those conditions.
+
+The dev catalog may be published again over the current id. Production still refuses to replace an active catalog. After a shape change, delete the stored answers that used the old shape.

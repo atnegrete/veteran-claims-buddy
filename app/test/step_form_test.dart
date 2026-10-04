@@ -38,6 +38,11 @@ void main() {
     await tester.tap(find.text('Continue'));
     await tester.pump();
     expect(nextCount, 1);
+
+    final back = tester.getRect(find.widgetWithText(OutlinedButton, 'Back'));
+    final next = tester.getRect(find.widgetWithText(FilledButton, 'Continue'));
+    expect(next.left - back.right, greaterThanOrEqualTo(24));
+    expect(find.byType(Divider), findsOneWidget);
   });
 
   testWidgets('a step already reached can be opened again', (tester) async {

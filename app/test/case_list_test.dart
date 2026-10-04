@@ -47,7 +47,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          casesProvider.overrideWith((ref) => Stream.value(const <VeteranCase>[])),
+          casesProvider.overrideWith(
+            (ref) => Stream.value(const <VeteranCase>[]),
+          ),
           workingCaseIdProvider.overrideWithValue(null),
         ],
         child: const MaterialApp(home: CasesScreen()),
@@ -55,7 +57,7 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.textContaining('Opening your case.'), findsOneWidget);
+    expect(find.textContaining('Opening your claim.'), findsOneWidget);
     expect(find.text('Start a case'), findsNothing);
     expect(find.textContaining('12'), findsNothing);
   });

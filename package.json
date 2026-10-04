@@ -1,0 +1,22 @@
+{
+  "name": "veteran-claims-buddy",
+  "private": true,
+  "scripts": {
+    "dev:verify": "node scripts/verify.js",
+    "dev:reset-user": "node scripts/reset_user.js",
+    "dev:clear-questionnaire": "node scripts/clear_dev_questionnaire.js --confirm-dev-reset",
+    "test:scripts": "node --test scripts/dev_project.test.js scripts/publish_questionnaire.test.js scripts/publish_knowledge.test.js scripts/seed_scenarios.test.js marketing-site/calculator.test.js marketing-site/site.test.js",
+    "test": "npm run test:scripts && npm run dev:verify",
+    "dev:seed": "node scripts/seed.js",
+    "dev:reset-and-seed": "node scripts/seed.js --replace",
+    "build:marketing": "node marketing-site/build.js",
+    "build:marketing:dev": "SITE_URL=https://veteran-claims-buddy-dev.web.app APP_URL=https://veteran-claims-buddy-dev-app.web.app node marketing-site/build.js",
+    "publish-questionnaire:dev": "node scripts/publish_questionnaire.js --project dev --file questionnaires/condition-discovery-v2.json",
+    "publish-questionnaire:prod": "node scripts/publish_questionnaire.js --project prod --file questionnaires/condition-discovery-v2.json --confirm-prod",
+    "publish-knowledge:dev": "node scripts/publish_knowledge.js --project dev --file knowledge/va-rules.json",
+    "publish-knowledge:prod": "node scripts/publish_knowledge.js --project prod --file knowledge/va-rules.json --confirm-prod"
+  },
+  "dependencies": {
+    "firebase-admin": "^14.5.0"
+  }
+}

@@ -1,0 +1,15 @@
+---
+description: How screens collect more than one of the same thing
+alwaysApply: true
+---
+
+# Repeatable entries
+
+`docs/repeatable-entries.md` is the pattern. Use `RepeatableEntries` and `EntryCard` in `app/lib/forms/repeatable_entries.dart`.
+
+- No saved items: the form is open, so the first one can be added immediately.
+- One or more saved items: each is an `EntryCard`. Every fact is an `EntryField` with the form's label. A blank value is left off. Labels sit beside the value on a wide card and above it on a narrow card. The form is hidden.
+- **Add Another** is an `OutlinedButton` under the cards. It is the only way to open the form again.
+- **Cancel** closes that extra form without saving.
+- Removing the last item shows the form again.
+- Continue stays the primary button. Saving the form and Add Another use `secondaryFilledStyle()`. Remove is danger text on the card. The gray outline stays on Back, Close, and Cancel.

@@ -6,6 +6,7 @@ import '../../account/account_deletion.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/auth_redirect.dart';
+import '../../forms/text_input_chain.dart';
 import 'auth_scaffold.dart';
 
 class AccountRecoveryScreen extends StatelessWidget {
@@ -88,10 +89,12 @@ class _AccountReactivateScreenState
             'Other pages stay closed until you reactivate. Enter your password to keep the account.',
           ),
           const SizedBox(height: 16),
-          TextField(
+          ChainTextField(
             controller: _password,
             obscureText: true,
             decoration: const InputDecoration(labelText: 'Password'),
+            maxLength: 128,
+            countVisibleFrom: authCountVisibleFrom,
             onChanged: (_) => setState(() {}),
           ),
           if (_error != null) ...[

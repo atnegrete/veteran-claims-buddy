@@ -26,8 +26,16 @@ AppEnvironment resolveEnvironment(String? flavor, {required bool releaseMode}) {
   }
 }
 
-AppEnvironment get currentEnvironment =>
-    resolveEnvironment(appFlavor, releaseMode: kReleaseMode);
+/// Flutter web does not support `--flavor`, so the environment is passed with
+/// `--dart-define=APP_ENV=dev|prod` instead. Mobile keeps using `--flavor`,
+/// which populates [appFlavor]. When both are absent the existing rules apply:
+/// debug/test default to dev, a release build refuses to guess.
+const String _appEnvDefine = String.fromEnvironment('APP_ENV');
+
+AppEnvironment get currentEnvironment => resolveEnvironment(
+      _appEnvDefine.isNotEmpty ? _appEnvDefine : appFlavor,
+      releaseMode: kReleaseMode,
+    );
 
 bool get isDevelopment => currentEnvironment == AppEnvironment.dev;
 

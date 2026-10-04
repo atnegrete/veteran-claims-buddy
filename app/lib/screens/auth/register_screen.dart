@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/auth_redirect.dart';
+import '../../forms/text_input_chain.dart';
 import 'auth_scaffold.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
@@ -40,10 +41,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       _error = null;
     });
     try {
-      await ref.read(authControllerProvider.notifier).createAccount(
-            email: _email.text,
-            password: _password.text,
-          );
+      await ref
+          .read(authControllerProvider.notifier)
+          .createAccount(email: _email.text, password: _password.text);
     } on AuthFailure catch (failure) {
       setState(() => _error = failure.message);
     } finally {
@@ -62,43 +62,50 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   Widget build(BuildContext context) {
     return AuthScaffold(
       title: 'Create account',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Text(independentProductDisclaimer),
-          const SizedBox(height: 16),
-          TextField(
-            controller: _email,
-            keyboardType: TextInputType.emailAddress,
-            autofillHints: const [AutofillHints.email],
-            decoration: const InputDecoration(labelText: 'Email'),
-            textInputAction: TextInputAction.next,
-          ),
-          const SizedBox(height: 12),
-          TextField(
-            controller: _password,
-            obscureText: true,
-            autofillHints: const [AutofillHints.newPassword],
-            decoration: const InputDecoration(labelText: 'Password'),
-          ),
-          const SizedBox(height: 12),
-          TextField(
-            controller: _confirm,
-            obscureText: true,
-            decoration: const InputDecoration(labelText: 'Confirm password'),
-            onSubmitted: (_) => _submit(),
-          ),
-          const SizedBox(height: 16),
-          AuthMessageText(_error),
-          FilledButton(
-            onPressed: _busy ? null : _submit,
-            child: Text(_busy ? 'Creating account…' : 'Create account'),
-          ),
-          TextButton(
-            onPressed: () => context.go(AuthRoutes.signIn),
-            child: const Text('Already have an account? Sign in'),
-          ),
-        ],
+      child: TextInputChain(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Text(independentProductDisclaimer),
+            const SizedBox(height: 16),
+            ChainTextField(
+              controller: _email,
+              keyboardType: TextInputType.emailAddress,
+              autofillHints: const [AutofillHints.email],
+              decoration: const InputDecoration(labelText: 'Email'),
+              maxLength: 254,
+              countVisibleFrom: authCountVisibleFrom,
+            ),
+            const SizedBox(height: 12),
+            ChainTextField(
+              controller: _password,
+              obscureText: true,
+              autofillHints: const [AutofillHints.newPassword],
+              decoration: const InputDecoration(labelText: 'Password'),
+              maxLength: 128,
+              countVisibleFrom: authCountVisibleFrom,
+            ),
+            const SizedBox(height: 12),
+            ChainTextField(
+              controller: _confirm,
+              obscureText: true,
+              decoration: const InputDecoration(labelText: 'Confirm password'),
+              maxLength: 128,
+              countVisibleFrom: authCountVisibleFrom,
+              onSubmitted: (_) => _submit(),
+            ),
+            const SizedBox(height: 16),
+            AuthMessageText(_error),
+            FilledButton(
+              onPressed: _busy ? null : _submit,
+              child: Text(_busy ? 'Creating account…' : 'Create account'),
+            ),
+            TextButton(
+              onPressed: () => context.go(AuthRoutes.signIn),
+              child: const Text('Already have an account? Sign in'),
+            ),
+          ],
+        ),
       ),
     );
   }

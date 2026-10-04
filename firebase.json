@@ -21,5 +21,28 @@
   ],
   "storage": {
     "rules": "storage.rules"
-  }
+  },
+  "hosting": [
+    {
+      "target": "marketing",
+      "public": "marketing-site",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**",
+        "build.js",
+        "**/*.test.js"
+      ]
+    },
+    {
+      "target": "app",
+      "public": "app/build/web",
+      "ignore": [
+        "**/.*"
+      ],
+      "rewrites": [
+        { "source": "**", "destination": "/index.html" }
+      ]
+    }
+  ]
 }

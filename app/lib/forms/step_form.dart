@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'form_actions.dart';
+
 /// A stepped form with back, next, and a way to reopen a step already reached.
 ///
 /// Steps after [farthestIndex] stay closed so the form cannot be skipped ahead.
@@ -35,7 +37,7 @@ class StepForm extends StatelessWidget {
         Text(
           'Step ${currentIndex + 1} of ${labels.length}',
           style: theme.textTheme.labelLarge?.copyWith(
-            color: theme.colorScheme.primary,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 12),
@@ -47,33 +49,15 @@ class StepForm extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         child,
-        if (onNext != null || currentIndex > 0) ...[
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              if (currentIndex > 0) ...[
-                OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    minimumSize: const Size(96, 48),
-                  ),
-                  onPressed: busy ? null : () => onStepSelected(currentIndex - 1),
-                  child: const Text('Back'),
-                ),
-                const SizedBox(width: 12),
-              ],
-              if (onNext != null)
-                Expanded(
-                  child: FilledButton(
-                    style: FilledButton.styleFrom(
-                      minimumSize: const Size(0, 48),
-                    ),
-                    onPressed: busy ? null : onNext,
-                    child: Text(busy ? 'Saving…' : nextLabel),
-                  ),
-                ),
-            ],
+        if (onNext != null || currentIndex > 0)
+          FormActions(
+            onBack: currentIndex > 0
+                ? () => onStepSelected(currentIndex - 1)
+                : null,
+            onPrimary: onNext,
+            primaryLabel: nextLabel,
+            busy: busy,
           ),
-        ],
       ],
     );
   }
@@ -107,7 +91,10 @@ class _StepTrack extends StatelessWidget {
               open: index <= farthestIndex,
               showLine: index < labels.length - 1,
               lineComplete: index < currentIndex,
-              onTap: index <= farthestIndex && index != currentIndex && onStepSelected != null
+              onTap:
+                  index <= farthestIndex &&
+                      index != currentIndex &&
+                      onStepSelected != null
                   ? () => onStepSelected!(index)
                   : null,
             ),
@@ -141,9 +128,7 @@ class _StepDot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final primary = theme.colorScheme.primary;
-    final muted = theme.colorScheme.onSurface.withValues(alpha: 0.38);
-    final color = open ? primary : muted;
+    final scheme = theme.colorScheme;
     return Row(
       children: [
         InkWell(
@@ -158,16 +143,27 @@ class _StepDot extends StatelessWidget {
                   height: 28,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: current ? primary : Colors.transparent,
+                    color: current ? scheme.primary : Colors.transparent,
                     shape: BoxShape.circle,
-                    border: Border.all(color: color, width: current ? 0 : 1.5),
+                    border: Border.all(
+                      color: current ? scheme.primary : scheme.outline,
+                      width: current ? 0 : 1.5,
+                    ),
                   ),
                   child: complete
-                      ? Icon(Icons.check, size: 16, color: color)
+                      ? Icon(
+                          Icons.check,
+                          size: 16,
+                          color: scheme.onSurfaceVariant,
+                        )
                       : Text(
                           '${index + 1}',
                           style: theme.textTheme.labelMedium?.copyWith(
-                            color: current ? theme.colorScheme.onPrimary : color,
+                            color: current
+                                ? scheme.onPrimary
+                                : open
+                                ? scheme.onSurface
+                                : scheme.onSurfaceVariant,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -176,7 +172,7 @@ class _StepDot extends StatelessWidget {
                 Text(
                   label,
                   style: theme.textTheme.labelSmall?.copyWith(
-                    color: current ? theme.colorScheme.onSurface : color,
+                    color: current ? scheme.onSurface : scheme.onSurfaceVariant,
                     fontWeight: current ? FontWeight.w700 : FontWeight.w500,
                   ),
                 ),
@@ -189,7 +185,7 @@ class _StepDot extends StatelessWidget {
             width: 20,
             height: 2,
             margin: const EdgeInsets.only(bottom: 18),
-            color: lineComplete ? primary : theme.colorScheme.outlineVariant,
+            color: lineComplete ? scheme.onSurfaceVariant : scheme.outline,
           ),
       ],
     );

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app/app_theme.dart';
 import '../../auth/auth_controller.dart';
+import '../../forms/text_input_chain.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/mfa_challenge.dart';
 import '../../auth/phone_number.dart';
@@ -56,7 +57,9 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
     }
     setState(() => _busy = true);
     try {
-      await ref.read(authControllerProvider.notifier).reauthenticate(_password.text);
+      await ref
+          .read(authControllerProvider.notifier)
+          .reauthenticate(_password.text);
       await ref.read(authControllerProvider.notifier).sendEnrollmentCode(e164);
       setState(() {
         _codeSent = true;
@@ -78,7 +81,9 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
     }
     setState(() => _busy = true);
     try {
-      await ref.read(authControllerProvider.notifier).confirmEnrollmentCode(code);
+      await ref
+          .read(authControllerProvider.notifier)
+          .confirmEnrollmentCode(code);
       _password.clear();
       _phone.clear();
       _code.clear();
@@ -95,7 +100,10 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
     }
   }
 
-  Future<void> _remove(PhoneFactorHint factor, {required bool onlyFactor}) async {
+  Future<void> _remove(
+    PhoneFactorHint factor, {
+    required bool onlyFactor,
+  }) async {
     final password = TextEditingController();
     final confirmed = await showDialog<bool>(
       context: context,
@@ -113,10 +121,12 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                   'This is the only text-message check. Removing it closes the app until you add a phone again. There is no way to skip that check, and resetting your password does not skip it.',
                 ),
               if (onlyFactor) const SizedBox(height: 12),
-              TextField(
+              ChainTextField(
                 controller: password,
                 obscureText: true,
                 decoration: const InputDecoration(labelText: 'Password'),
+                maxLength: 128,
+                countVisibleFrom: authCountVisibleFrom,
               ),
             ],
           ),
@@ -145,10 +155,9 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
     }
     setState(() => _busy = true);
     try {
-      await ref.read(authControllerProvider.notifier).removePhoneFactor(
-            password: entered,
-            factorUid: factor.uid,
-          );
+      await ref
+          .read(authControllerProvider.notifier)
+          .removePhoneFactor(password: entered, factorUid: factor.uid);
     } on AuthFailure catch (failure) {
       _show(failure.message, error: true);
     } finally {
@@ -166,7 +175,8 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final factors = ref.watch(authControllerProvider).session?.factors ?? const [];
+    final factors =
+        ref.watch(authControllerProvider).session?.factors ?? const [];
     final theme = Theme.of(context);
     return ShellPage(
       title: 'Security',
@@ -197,70 +207,72 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
               onPressed: _busy ? null : () => setState(() => _adding = true),
               child: const Text('Add a phone'),
             )
-          else ...[
-            TextField(
-              controller: _password,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Password'),
-            ),
-            const SizedBox(height: 12),
-            if (!_codeSent) ...[
-              TextField(
-                controller: _phone,
-                keyboardType: TextInputType.phone,
-                decoration: const InputDecoration(
-                  labelText: 'Mobile number',
-                  helperText: 'U.S. number, or a full number starting with +',
-                ),
-              ),
-              CheckboxListTile(
-                contentPadding: EdgeInsets.zero,
-                value: _agreed,
-                onChanged: _busy
-                    ? null
-                    : (value) => setState(() => _agreed = value ?? false),
-                title: const Text(
-                  'I agree to use this mobile number as a second sign-in check.',
-                ),
-                controlAffinity: ListTileControlAffinity.leading,
-              ),
-              const Text(
-                'Firebase and Google store this number and use it to prevent abuse.',
-              ),
-              const SizedBox(height: 12),
-              FilledButton(
-                onPressed: _busy ? null : _sendCode,
-                child: Text(_busy ? 'Sending…' : 'Send code'),
-              ),
-            ] else ...[
-              Text('Code sent for $_sentLabel.'),
-              const SizedBox(height: 12),
-              TextField(
-                controller: _code,
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                  LengthLimitingTextInputFormatter(6),
+          else
+            TextInputChain(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  ChainTextField(
+                    controller: _password,
+                    obscureText: true,
+                    decoration: const InputDecoration(labelText: 'Password'),
+                    maxLength: 128,
+                    countVisibleFrom: authCountVisibleFrom,
+                  ),
+                  const SizedBox(height: 12),
+                  if (!_codeSent) ...[
+                    MobileNumberField(controller: _phone),
+                    CheckboxListTile(
+                      contentPadding: EdgeInsets.zero,
+                      value: _agreed,
+                      onChanged: _busy
+                          ? null
+                          : (value) => setState(() => _agreed = value ?? false),
+                      title: const Text(
+                        'I agree to use this mobile number as a second sign-in check.',
+                      ),
+                      controlAffinity: ListTileControlAffinity.leading,
+                    ),
+                    const Text(
+                      'Firebase and Google store this number and use it to prevent abuse.',
+                    ),
+                    const SizedBox(height: 12),
+                    FilledButton(
+                      onPressed: _busy ? null : _sendCode,
+                      child: Text(_busy ? 'Sending…' : 'Send code'),
+                    ),
+                  ] else ...[
+                    Text('Code sent for $_sentLabel.'),
+                    const SizedBox(height: 12),
+                    ChainTextField(
+                      controller: _code,
+                      keyboardType: TextInputType.number,
+                      maxLength: 6,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      decoration: const InputDecoration(
+                        labelText: '6-digit code',
+                        counterText: '',
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    FilledButton(
+                      onPressed: _busy ? null : _confirmCode,
+                      child: Text(_busy ? 'Checking…' : 'Confirm phone'),
+                    ),
+                  ],
+                  TextButton(
+                    onPressed: _busy
+                        ? null
+                        : () => setState(() {
+                            _adding = false;
+                            _codeSent = false;
+                            _message = null;
+                          }),
+                    child: const Text('Cancel'),
+                  ),
                 ],
-                decoration: const InputDecoration(labelText: '6-digit code'),
               ),
-              const SizedBox(height: 12),
-              FilledButton(
-                onPressed: _busy ? null : _confirmCode,
-                child: Text(_busy ? 'Checking…' : 'Confirm phone'),
-              ),
-            ],
-            TextButton(
-              onPressed: _busy
-                  ? null
-                  : () => setState(() {
-                        _adding = false;
-                        _codeSent = false;
-                        _message = null;
-                      }),
-              child: const Text('Cancel'),
             ),
-          ],
           if (_message != null) ...[
             const SizedBox(height: 12),
             Text(

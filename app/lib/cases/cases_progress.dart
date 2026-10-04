@@ -24,15 +24,19 @@ final casesProvider = StreamProvider<List<VeteranCase>>((ref) {
 });
 
 final workingCaseIdProvider = Provider<String?>((ref) {
-  final id = ref.watch(onboardingDocProvider).maybeWhen(
-    data: (data) => data?['currentWorkingCaseId'] as String?,
-    orElse: () => null,
-  );
+  final id = ref
+      .watch(onboardingDocProvider)
+      .maybeWhen(
+        data: (data) => data?['currentWorkingCaseId'] as String?,
+        orElse: () => null,
+      );
   if (id == null || id.isEmpty) return null;
   return id;
 });
 
-final ensureWorkingCaseCallerProvider = Provider<Future<String> Function()>((ref) {
+final ensureWorkingCaseCallerProvider = Provider<Future<String> Function()>((
+  ref,
+) {
   return () => ref.read(casesRepositoryProvider).ensureWorkingCase();
 });
 
@@ -69,15 +73,20 @@ class CaseEnsure extends Notifier<String?> {
   }
 }
 
-final caseEnsureProvider = NotifierProvider<CaseEnsure, String?>(CaseEnsure.new);
+final caseEnsureProvider = NotifierProvider<CaseEnsure, String?>(
+  CaseEnsure.new,
+);
+
+/// Buying is not open, so this stays false until an entitlement exists.
+final premiumActiveProvider = Provider<bool>((ref) => false);
 
 final homeSnapshotProvider = Provider<HomeSnapshot>((ref) {
-  final cases = ref.watch(casesProvider).maybeWhen(
-    data: (value) => value,
-    orElse: () => const <VeteranCase>[],
-  );
+  final cases = ref
+      .watch(casesProvider)
+      .maybeWhen(data: (value) => value, orElse: () => const <VeteranCase>[]);
   return homeSnapshotFrom(
     cases: cases,
     workingCaseId: ref.watch(workingCaseIdProvider),
+    premiumActive: ref.watch(premiumActiveProvider),
   );
 });

@@ -36,12 +36,11 @@ class OnboardingFrame extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentIndex = onboardingStepOrder.indexOf(step);
-    final saved = ref.watch(onboardingDocProvider).maybeWhen(
-      data: savedOnboardingStep,
-      orElse: () => step,
-    );
-    final savedIndex = onboardingStepOrder.indexOf(saved);
+    final currentIndex = visibleOnboardingIndex(step);
+    final saved = ref
+        .watch(onboardingDocProvider)
+        .maybeWhen(data: savedOnboardingStep, orElse: () => step);
+    final savedIndex = visibleOnboardingIndex(saved);
     final farthestIndex = savedIndex > currentIndex ? savedIndex : currentIndex;
     return SignedInScaffold(
       body: SafeArea(

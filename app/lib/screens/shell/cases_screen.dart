@@ -21,11 +21,11 @@ class CasesScreen extends ConsumerWidget {
       orElse: () => const <VeteranCase>[],
     );
     return ShellPage(
-      title: 'Cases',
+      title: 'Claims',
       wrapInCard: false,
       child: SurfaceCard(
         child: cases.isLoading && items.isEmpty
-            ? const Text('Opening your case.')
+            ? const Text('Opening your claim.')
             : items.isEmpty
             ? _EmptyCases(error: error)
             : Column(
@@ -36,11 +36,11 @@ class CasesScreen extends ConsumerWidget {
                       title: Text(caseDisplayName(item.displayName)),
                       subtitle: Text(
                         item.id == workingId
-                            ? '${caseStatusLabel(item.status)} · Working'
+                            ? '${caseStatusLabel(item.status)} · Open'
                             : caseStatusLabel(item.status),
                       ),
                       trailing: const Icon(Icons.chevron_right),
-                      onTap: () => context.go(AuthRoutes.caseOverview(item.id)),
+                      onTap: () => context.go(AuthRoutes.caseStep(item.id)),
                     ),
                 ],
               ),
@@ -56,7 +56,7 @@ class _EmptyCases extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (error == null) return const Text('Opening your case.');
+    if (error == null) return const Text('Opening your claim.');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

@@ -27,7 +27,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     final unrounded = unroundedCombinedRating(_ratings);
     final rounded = roundedCombinedRating(unrounded);
     return ShellPage(
-      title: 'Calculator',
+      title: 'VA Ratings Calculator',
       wrapInCard: false,
       child: Column(
         children: [

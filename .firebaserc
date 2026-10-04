@@ -3,5 +3,27 @@
     "default": "veteran-claims-buddy-dev",
     "dev": "veteran-claims-buddy-dev",
     "prod": "veteran-claims-buddy-prod"
+  },
+  "targets": {
+    "veteran-claims-buddy-dev": {
+      "hosting": {
+        "marketing": [
+          "veteran-claims-buddy-dev"
+        ],
+        "app": [
+          "veteran-claims-buddy-dev-app"
+        ]
+      }
+    },
+    "veteran-claims-buddy-prod": {
+      "hosting": {
+        "marketing": [
+          "veteran-claims-buddy-prod"
+        ],
+        "app": [
+          "veteran-claims-buddy-prod-app"
+        ]
+      }
+    }
   }
 }

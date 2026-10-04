@@ -1,5 +1,6 @@
 const { setGlobalOptions } = require("firebase-functions");
 const { onCall, HttpsError } = require("firebase-functions/v2/https");
+const { onObjectFinalized } = require("firebase-functions/v2/storage");
 const { initializeApp } = require("firebase-admin/app");
 const { getAuth } = require("firebase-admin/auth");
 const { getFirestore, FieldValue } = require("firebase-admin/firestore");
@@ -17,6 +18,11 @@ const {
   scheduleAccountDeletion,
   cancelAccountDeletion,
 } = require("./account_deletion");
+const { readUploadedDocument } = require("./document_read");
+const { askVetBuddy } = require("./vet_buddy");
+const { syncExamStart, remindUpcomingExams } = require("./exam_reminder");
+const { purgeDueAccounts } = require("./account_purge");
+const { remindOpenTasks } = require("./task_reminder");
 
 exports.confirmAuthState = onCall(async (request) => {
   if (!request.auth) {
@@ -71,3 +77,16 @@ exports.setWorkingCase = setWorkingCase;
 exports.ensureWorkingCase = ensureWorkingCase;
 exports.scheduleAccountDeletion = scheduleAccountDeletion;
 exports.cancelAccountDeletion = cancelAccountDeletion;
+
+exports.askVetBuddy = askVetBuddy;
+exports.syncExamStart = syncExamStart;
+exports.remindUpcomingExams = remindUpcomingExams;
+exports.purgeDueAccounts = purgeDueAccounts;
+exports.remindOpenTasks = remindOpenTasks;
+
+exports.countDocumentPages = onObjectFinalized(
+  { timeoutSeconds: 300, memory: "1GiB" },
+  async (event) => {
+    await readUploadedDocument(event.data);
+  },
+);

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/phone_number.dart';
+import '../../forms/text_input_chain.dart';
 import 'auth_scaffold.dart';
 
 class MfaEnrollScreen extends ConsumerStatefulWidget {
@@ -41,7 +43,8 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
     }
     if (!_agreed) {
       setState(() {
-        _message = 'Agree to use this number for sign-in before sending a code.';
+        _message =
+            'Agree to use this number for sign-in before sending a code.';
         _messageIsError = true;
       });
       return;
@@ -82,7 +85,9 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
       _message = null;
     });
     try {
-      await ref.read(authControllerProvider.notifier).confirmEnrollmentCode(code);
+      await ref
+          .read(authControllerProvider.notifier)
+          .confirmEnrollmentCode(code);
     } on AuthFailure catch (failure) {
       if (mounted) {
         setState(() {
@@ -112,7 +117,9 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
             const AuthMessageText('Security setup did not finish. Try again.'),
             FilledButton(
               onPressed: () {
-                ref.read(authControllerProvider.notifier).clearServerAuthState();
+                ref
+                    .read(authControllerProvider.notifier)
+                    .clearServerAuthState();
               },
               child: const Text('Try again'),
             ),
@@ -139,7 +146,9 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
             if (!gate.serverConfirmFailed)
               const Center(child: CircularProgressIndicator())
             else ...[
-              const AuthMessageText('Security setup did not finish. Try again.'),
+              const AuthMessageText(
+                'Security setup did not finish. Try again.',
+              ),
               FilledButton(
                 onPressed: () {
                   ref
@@ -173,14 +182,7 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
           ),
           const SizedBox(height: 16),
           if (!_codeSent) ...[
-            TextField(
-              controller: _phone,
-              keyboardType: TextInputType.phone,
-              decoration: const InputDecoration(
-                labelText: 'Mobile number',
-                helperText: 'U.S. number, or a full number starting with +',
-              ),
-            ),
+            MobileNumberField(controller: _phone),
             CheckboxListTile(
               contentPadding: EdgeInsets.zero,
               value: _agreed,
@@ -200,10 +202,15 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
           ] else ...[
             Text('Code sent for $_sentLabel.'),
             const SizedBox(height: 12),
-            TextField(
+            ChainTextField(
               controller: _code,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: '6-digit code'),
+              maxLength: 6,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              decoration: const InputDecoration(
+                labelText: '6-digit code',
+                counterText: '',
+              ),
               onSubmitted: (_) => _confirm(),
             ),
             const SizedBox(height: 16),
@@ -216,10 +223,10 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
               onPressed: _busy
                   ? null
                   : () => setState(() {
-                        _codeSent = false;
-                        _code.clear();
-                        _message = null;
-                      }),
+                      _codeSent = false;
+                      _code.clear();
+                      _message = null;
+                    }),
               child: const Text('Use a different number'),
             ),
           ],

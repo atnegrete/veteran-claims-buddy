@@ -1,0 +1,12 @@
+---
+description: Very important. Shared badges, buttons, and layout widgets.
+alwaysApply: true
+---
+
+# UI components
+
+**Very important.** `docs/ui.md` is the list. Use those widgets. Do not invent a second badge, button row, or split layout.
+
+**Very important.** Text on a badge, a button, or a navigation row is white or gray (`onSurface` or `onSurfaceVariant`). Color sits on the fill. Do not paint the letters blue, red, or green.
+
+`AppBadge` is the only badge. `AppBadge.notFiled` is the filing line, and it has no icon. `FormActions` is the Back and primary pair. `NestedSplit` is the list with the form beside it on a wide pane.

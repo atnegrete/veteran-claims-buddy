@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/app_theme.dart';
 import '../../auth/auth_controller.dart';
+import '../../app/app_theme.dart';
+import '../../forms/repeatable_entries.dart';
+import '../../forms/text_input_chain.dart';
 import '../../auth/auth_redirect.dart';
 import '../../onboarding/onboarding_progress.dart';
 import '../../onboarding/onboarding_repository.dart';
@@ -20,6 +22,7 @@ class ExposuresScreen extends ConsumerStatefulWidget {
 class _ExposuresScreenState extends ConsumerState<ExposuresScreen> {
   final _description = TextEditingController();
   String? _type;
+  var _addingAnother = false;
   var _loading = true;
   var _busy = false;
   String? _error;
@@ -37,16 +40,24 @@ class _ExposuresScreenState extends ConsumerState<ExposuresScreen> {
     super.dispose();
   }
 
-  Future<void> _load() async {
+  Future<void> _load({bool added = false}) async {
     final uid = ref.read(authControllerProvider).session?.uid;
     if (uid == null) return;
-    final exposures = await ref.read(onboardingRepositoryProvider).exposures(uid);
-    if (mounted) {
-      setState(() {
-        _exposures = exposures;
-        _loading = false;
-      });
+    final exposures = await ref
+        .read(onboardingRepositoryProvider)
+        .exposures(uid);
+    if (!mounted) return;
+    if (added) {
+      _description.clear();
     }
+    setState(() {
+      _exposures = exposures;
+      _loading = false;
+      if (added) {
+        _type = null;
+        _addingAnother = false;
+      }
+    });
   }
 
   Future<void> _add() async {
@@ -65,19 +76,32 @@ class _ExposuresScreenState extends ConsumerState<ExposuresScreen> {
       _error = null;
     });
     try {
-      await ref.read(onboardingRepositoryProvider).saveExposure(
+      await ref
+          .read(onboardingRepositoryProvider)
+          .saveExposure(
             uid: uid,
             type: _type!,
             description: _description.text.trim(),
           );
-      _description.clear();
-      _type = null;
-      await _load();
+      await _load(added: true);
     } catch (error) {
       if (mounted) setState(() => _error = onboardingSaveMessage(error));
     } finally {
       if (mounted) setState(() => _busy = false);
     }
+  }
+
+  void _clearForm() {
+    _description.clear();
+    setState(() => _type = null);
+  }
+
+  void _cancelAdd() {
+    _clearForm();
+    setState(() {
+      _addingAnother = false;
+      _error = null;
+    });
   }
 
   Future<void> _remove(String id) async {
@@ -88,10 +112,9 @@ class _ExposuresScreenState extends ConsumerState<ExposuresScreen> {
       _error = null;
     });
     try {
-      await ref.read(onboardingRepositoryProvider).deleteExposure(
-            uid: uid,
-            id: id,
-          );
+      await ref
+          .read(onboardingRepositoryProvider)
+          .deleteExposure(uid: uid, id: id);
       await _load();
     } catch (error) {
       if (mounted) setState(() => _error = onboardingSaveMessage(error));
@@ -108,13 +131,15 @@ class _ExposuresScreenState extends ConsumerState<ExposuresScreen> {
       _error = null;
     });
     try {
-      await ref.read(onboardingRepositoryProvider).saveStep(
+      await ref
+          .read(onboardingRepositoryProvider)
+          .saveStep(
             uid: session!.uid,
             email: session.email!,
-            step: OnboardingStep.discovery,
+            step: OnboardingStep.review,
             complete: false,
           );
-      if (mounted) context.go('${AuthRoutes.onboarding}/discovery');
+      if (mounted) context.go('${AuthRoutes.onboarding}/review');
     } catch (error) {
       if (mounted) setState(() => _error = onboardingSaveMessage(error));
     } finally {
@@ -138,105 +163,76 @@ class _ExposuresScreenState extends ConsumerState<ExposuresScreen> {
                   'Add exposures you know about. A suggestion from the app would stay unconfirmed until you accept it. You can continue without one.',
                 ),
                 const SizedBox(height: 12),
-                for (final exposure in _exposures) ...[
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          '${exposureTypes[exposure.type] ?? exposure.type}: ${exposure.description}',
-                        ),
+                RepeatableEntries(
+                  entries: [
+                    for (final exposure in _exposures)
+                      EntryCard(
+                        fields: [
+                          EntryField(
+                            label: 'Type',
+                            value:
+                                exposureTypes[exposure.type] ?? exposure.type,
+                          ),
+                          EntryField(
+                            label: 'What happened',
+                            value: exposure.description,
+                          ),
+                        ],
+                        onRemove: _busy ? null : () => _remove(exposure.id),
                       ),
-                      TextButton(
-                        style: dangerTextStyle(),
-                        onPressed: _busy ? null : () => _remove(exposure.id),
-                        child: const Text('Remove'),
-                      ),
-                    ],
-                  ),
-                ],
-                DropdownButtonFormField<String>(
-                  initialValue: _type,
-                  decoration: const InputDecoration(labelText: 'Type'),
-                  items: [
-                    for (final entry in exposureTypes.entries)
-                      DropdownMenuItem(value: entry.key, child: Text(entry.value)),
                   ],
-                  onChanged: _busy ? null : (value) => setState(() => _type = value),
+                  addingAnother: _addingAnother,
+                  onAddAnother: _busy
+                      ? null
+                      : () => setState(() {
+                          _error = null;
+                          _addingAnother = true;
+                        }),
+                  onCancel: _busy ? null : _cancelAdd,
+                  form: _exposureForm(),
                 ),
-                const SizedBox(height: 12),
-                TextField(
-                  controller: _description,
-                  decoration: const InputDecoration(labelText: 'What happened'),
-                ),
-                const SizedBox(height: 16),
                 if (_error != null) ...[
+                  const SizedBox(height: 12),
                   Text(
                     _error!,
-                    style: TextStyle(color: Theme.of(context).colorScheme.error),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
                   ),
-                  const SizedBox(height: 12),
                 ],
-                OutlinedButton(
-                  onPressed: _busy ? null : _add,
-                  child: const Text('Add this exposure'),
-                ),
               ],
             ),
     );
   }
-}
 
-class DiscoveryScreen extends ConsumerStatefulWidget {
-  const DiscoveryScreen({super.key});
-
-  @override
-  ConsumerState<DiscoveryScreen> createState() => _DiscoveryScreenState();
-}
-
-class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
-  var _busy = false;
-  String? _error;
-
-  Future<void> _continue() async {
-    final session = ref.read(authControllerProvider).session;
-    if (session?.email == null) return;
-    setState(() {
-      _busy = true;
-      _error = null;
-    });
-    try {
-      await ref.read(onboardingRepositoryProvider).saveStep(
-            uid: session!.uid,
-            email: session.email!,
-            step: OnboardingStep.review,
-            complete: false,
-          );
-      if (mounted) context.go('${AuthRoutes.onboarding}/review');
-    } catch (error) {
-      if (mounted) setState(() => _error = onboardingSaveMessage(error));
-    } finally {
-      if (mounted) setState(() => _busy = false);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return OnboardingFrame(
-      step: OnboardingStep.discovery,
-      title: 'What bothers you',
-      busy: _busy,
-      onNext: _continue,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Text(
-            'Condition discovery starts from symptoms, not from a list of claimable disabilities. That questionnaire is not open yet. Nothing is filed from this step.',
-          ),
-          const SizedBox(height: 16),
-          if (_error != null)
-            Text(_error!, style: TextStyle(color: Theme.of(context).colorScheme.error)),
-        ],
-      ),
+  Widget _exposureForm() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        DropdownButtonFormField<String>(
+          initialValue: _type,
+          decoration: const InputDecoration(labelText: 'Type'),
+          items: [
+            for (final entry in exposureTypes.entries)
+              DropdownMenuItem(value: entry.key, child: Text(entry.value)),
+          ],
+          onChanged: _busy ? null : (value) => setState(() => _type = value),
+        ),
+        const SizedBox(height: 12),
+        ChainTextField(
+          controller: _description,
+          minLines: 3,
+          maxLines: 6,
+          maxLength: 2000,
+          decoration: const InputDecoration(labelText: 'What happened'),
+        ),
+        const SizedBox(height: 16),
+        FilledButton(
+          style: secondaryFilledStyle(),
+          onPressed: _busy ? null : _add,
+          child: const Text('Add this exposure'),
+        ),
+      ],
     );
   }
 }
@@ -260,7 +256,9 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
       _error = null;
     });
     try {
-      await ref.read(onboardingRepositoryProvider).saveStep(
+      await ref
+          .read(onboardingRepositoryProvider)
+          .saveStep(
             uid: session!.uid,
             email: session.email!,
             step: OnboardingStep.review,
@@ -285,11 +283,14 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const Text(
-            'No potential conditions yet. Nothing is filed from here. Home opens when you finish.',
+            'Nothing is filed from here. Your claim opens when you finish.',
           ),
           const SizedBox(height: 16),
           if (_error != null)
-            Text(_error!, style: TextStyle(color: Theme.of(context).colorScheme.error)),
+            Text(
+              _error!,
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
+            ),
         ],
       ),
     );

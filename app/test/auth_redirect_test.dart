@@ -170,6 +170,14 @@ void main() {
     expect(
       authRedirect(
         access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.caseDocuments('case-1'),
+        onboardingComplete: true,
+      ),
+      isNull,
+    );
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
         location: AuthRoutes.plans,
         onboardingComplete: false,
       ),
@@ -179,6 +187,30 @@ void main() {
       authRedirect(
         access: AuthAccess.authenticatedReady,
         location: AuthRoutes.support,
+        onboardingComplete: true,
+      ),
+      isNull,
+    );
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.profile,
+        onboardingComplete: true,
+      ),
+      isNull,
+    );
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.supportNew,
+        onboardingComplete: true,
+      ),
+      isNull,
+    );
+    expect(
+      authRedirect(
+        access: AuthAccess.authenticatedReady,
+        location: AuthRoutes.supportTicket('ticket-1'),
         onboardingComplete: true,
       ),
       isNull,

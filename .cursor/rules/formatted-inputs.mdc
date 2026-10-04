@@ -7,4 +7,4 @@ alwaysApply: true
 
 When a field only accepts one shape, such as a date, phone number, or code, use a `TextInputFormatter` mask. The mask inserts separators and drops characters that do not belong. Do not leave the shape as helper text the user has to match, and do not open a calendar for a date.
 
-Full dates are `YYYY-MM-DD` through `IsoDateField`. A best-guess month is `YYYY-MM` through `YearMonthField`. Both live in `app/lib/forms/iso_date_field.dart`.
+Full dates are `YYYY-MM-DD` through `IsoDateField`. A best-guess month is `YYYY-MM` through `YearMonthField`. A time of day is `HH:MM` through `TimeField`. All three live in `app/lib/forms/iso_date_field.dart`. A U.S. mobile number is `+1` plus ten digits through `MobileNumberField` in `app/lib/auth/phone_number.dart`. The `+1` is part of the mask. A 6-digit code accepts digits only. A mask does not show a character count.

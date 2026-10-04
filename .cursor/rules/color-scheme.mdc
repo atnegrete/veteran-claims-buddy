@@ -8,10 +8,13 @@ alwaysApply: true
 `docs/color-scheme.md` is the palette. `app/lib/app/app_theme.dart` is the only place colors are defined. Screens use `appTheme()`, `AppColors`, `dangerTextStyle()`, and `dangerFilledStyle()`.
 
 - Primary `FilledButton` continues the task.
-- Secondary `OutlinedButton` is a real choice that is not the main one.
-- Quiet `TextButton` leaves, cancels, or opens a side path.
-- Danger text is `dangerTextStyle()`. It opens a dangerous step or removes one item. Center it when it is the only control in that block.
+- Secondary `OutlinedButton` is a real choice that is not the main one. Gray outline. Back, Close, and Cancel.
+- Adding a row uses `FilledButton` with `secondaryFilledStyle()`. Navy fill, white label.
+- Quiet `TextButton` leaves, cancels, or opens a side path. The label is white.
+- Danger text is `dangerTextStyle()`. It opens a dangerous step or removes one item. White label on red. Center it when it is the only control in that block.
 - Danger fill is `dangerFilledStyle()`. It commits the harm. White label on `#B91C1C`.
-- Error text uses `colorScheme.error` (`#F87171`).
+- Error text uses `colorScheme.error` (`#F87171`). That is a sentence, not a label on a control.
 
-Red is only for danger and errors. Do not add a hex color on a widget. Warning and success wait until a screen needs them.
+**Very important.** Text on a badge, a button, or a navigation row is white or gray. Color sits on the fill. `docs/ui.md` lists the shared widgets. `AppBadge` is the only badge.
+
+Red is only for danger and errors. The current claim step uses the primary button. A finished step uses secondary text. Do not add a hex color on a widget. Warning and success wait until a screen needs them. A button beside another button sets a finite `minimumSize`. The theme height is full width.

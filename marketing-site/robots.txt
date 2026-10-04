@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://veteran-claims-buddy-dev.web.app/sitemap.xml

@@ -15,16 +15,77 @@ abstract final class AuthRoutes {
   static const cases = '/cases';
   static const buddy = '/buddy';
   static const you = '/you';
+  static const profile = '/you/settings/profile';
   static const security = '/you/settings/security';
+  static const notifications = '/you/settings/notifications';
   static const deleteAccount = '/you/settings/delete';
   static const support = '/you/support';
+  static const supportNew = '/you/support/new';
+
+  static String supportTicket(String ticketId) => '/you/support/$ticketId';
   static const billingPremium = '/you/billing/premium';
   static const billingCases = '/you/billing/cases';
   static const legal = '/you/legal';
   static const plans = '/plans';
   static const calculator = '/calculator';
+  static const symptoms = '/symptoms';
+  static const symptomCheckIn = '/symptoms/check-in';
+  static const symptomEventNew = '/symptoms/events/new';
+  static String symptomEntry(String entryId) => '/symptoms/$entryId';
+  static String symptomSummary(String summaryId) =>
+      '/symptoms/summaries/$summaryId';
 
+  static String caseStep(String caseId) => '/cases/$caseId';
+  static String caseDocuments(String caseId) => '/cases/$caseId/evidence';
+  static String caseDocumentUpload(String caseId) =>
+      '/cases/$caseId/evidence/upload';
+  static String caseDocument(String caseId, String documentId) =>
+      '/cases/$caseId/evidence/$documentId/details';
+  static String caseDocumentFacts(String caseId, String documentId) =>
+      '/cases/$caseId/evidence/$documentId/facts';
+  static String caseExams(String caseId) => '/cases/$caseId/exams';
+  static String caseExamNew(String caseId) => '/cases/$caseId/exams/new';
+  static String caseExam(String caseId, String examId) =>
+      '/cases/$caseId/exams/$examId/details';
+  static String caseExamPrep(String caseId, String examId) =>
+      '/cases/$caseId/exams/$examId/prep';
+  static String caseExamTravel(String caseId, String examId) =>
+      '/cases/$caseId/exams/$examId/travel';
+  static String casePackage(String caseId) => '/cases/$caseId/package';
+  static String casePackageGenerate(String caseId) =>
+      '/cases/$caseId/package/generate';
+  static String casePackageSubmit(String caseId) =>
+      '/cases/$caseId/package/submit';
+  static String caseQuestions(String caseId) => '/cases/$caseId/questions';
+  static String caseIssues(String caseId) => '/cases/$caseId/issues';
+  static String casePrepare(String caseId) => '/cases/$caseId/prepare';
+  static String caseSupplemental(String caseId) =>
+      '/cases/$caseId/prepare/supplemental';
+  static String caseHigherLevelReview(String caseId) =>
+      '/cases/$caseId/prepare/higher-level-review';
+  static String caseBoard(String caseId) => '/cases/$caseId/prepare/board';
+  static String caseDecisions(String caseId) => '/cases/$caseId/decisions';
+  static String caseDecisionUpload(String caseId) =>
+      '/cases/$caseId/decisions/upload';
+  static String caseDecision(String caseId, String decisionId) =>
+      '/cases/$caseId/decisions/$decisionId';
+  static String caseIssue(String caseId, String issueId) =>
+      '/cases/$caseId/issues/$issueId';
+  static String caseIssueQuestions(String caseId, String issueId) =>
+      '/cases/$caseId/issues/$issueId/questions';
+  static String caseIssueEvidence(String caseId, String issueId) =>
+      '/cases/$caseId/issues/$issueId/evidence';
+  static String caseIssueConnection(String caseId, String issueId) =>
+      '/cases/$caseId/issues/$issueId/connection';
+  static String caseIssueLay(String caseId, String issueId) =>
+      '/cases/$caseId/issues/$issueId/statements/lay';
+  static String caseIssueDoctorDraft(String caseId, String issueId) =>
+      '/cases/$caseId/issues/$issueId/statements/doctor-draft';
+  static String caseIssueDecisions(String caseId, String issueId) =>
+      '/cases/$caseId/issues/$issueId/decisions';
   static String caseOverview(String caseId) => '/cases/$caseId/overview';
+  static String caseTasks(String caseId) => '/cases/$caseId/tasks';
+  static String caseTimeline(String caseId) => '/cases/$caseId/timeline';
 }
 
 const signedOutRoutes = <String>{
@@ -55,7 +116,8 @@ String? authRedirect({
       }
       return AuthRoutes.mfaEnroll;
     case AuthAccess.mfaChallengeInProgress:
-      if (location == AuthRoutes.mfaChallenge || location == AuthRoutes.recovery) {
+      if (location == AuthRoutes.mfaChallenge ||
+          location == AuthRoutes.recovery) {
         return null;
       }
       return AuthRoutes.mfaChallenge;
@@ -85,6 +147,7 @@ bool isShellLocation(String location) {
     AuthRoutes.you,
     AuthRoutes.plans,
     AuthRoutes.calculator,
+    AuthRoutes.symptoms,
   ];
   for (final root in roots) {
     if (location == root || location.startsWith('$root/')) return true;

@@ -71,7 +71,7 @@ class HomeDeadline {
   final String path;
 }
 
-/// Premium opens the new symptom form. Otherwise Home opens the plans page.
+/// Premium opens a new Symptoms Tracker entry. Otherwise the tracker opens plans.
 String symptomDestination({required bool premiumActive}) {
   if (premiumActive) return '/symptoms/events/new';
   return '${AuthRoutes.plans}?reason=symptoms';

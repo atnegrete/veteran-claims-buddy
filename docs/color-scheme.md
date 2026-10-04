@@ -2,6 +2,8 @@
 
 Dark theme only. One blue family for the product. Red is only for danger and errors. Tokens live in `app/lib/app/app_theme.dart` as `AppColors`. Screens take color from `appTheme()`. Do not put a new hex color on a widget.
 
+**Very important.** A label on a badge, a button, or a navigation row is white or gray. The fill carries blue or red. Do not paint those letters with `primary` or `error`. See `docs/ui.md`.
+
 ## Blue
 
 | Token | Color | Where |
@@ -40,11 +42,24 @@ Same blue, darker.
 | Role | Widget | When |
 | --- | --- | --- |
 | Primary | `FilledButton` | The action that continues |
-| Secondary | `OutlinedButton` | A real choice that is not the main one |
-| Quiet | `TextButton` | Leave, cancel, or a side path |
-| Danger text | `TextButton` with `dangerTextStyle()` | Opens a dangerous step, or removes one item. Center it when it is the only control in that block. |
-| Danger fill | `FilledButton` with `dangerFilledStyle()` | Commits the harm |
+| Secondary | `OutlinedButton` | A real choice that is not the main one. Gray outline. Back, Close, and Cancel. |
+| Add a row | `FilledButton` with `secondaryFilledStyle()` | Adds one item to a list. Navy fill, white label. |
+| Quiet | `TextButton` | Leave, cancel, or a side path. White label. |
+| Danger text | `TextButton` with `dangerTextStyle()` | Opens a dangerous step, or removes one item. White label on red. Center it when it is the only control in that block. |
+| Danger fill | `FilledButton` with `dangerFilledStyle()` | Commits the harm. White label on red. |
 
-Form buttons stay the full width of the card. Dialog buttons override `minimumSize` with a finite width so the row does not overflow.
+A button that is alone stays the full width of the card. A button beside another button, including in a dialog, overrides `minimumSize` with a finite width. The theme height is full width, and that width has no size inside a row.
 
-Warning and success wait until a screen needs them.
+The current step of a claim uses the primary blue button. A finished step is secondary text, `#94A3B8`. Do not add a separate progress color. Warning and success wait until a screen needs them.
+
+## Badges
+
+**Very important.** `AppBadge` in `app/lib/app/app_badge.dart` is the only badge. The label is white or gray. See `docs/ui.md`.
+
+| Widget | Fill | Label |
+| --- | --- | --- |
+| `AppBadge.primary` | Navy | White. In progress, or a count such as "3 added" |
+| `AppBadge.secondary` | Dark surface, outline | White. A neutral notice |
+| `AppBadge.quiet` | Dark surface, outline | Gray |
+| `AppBadge.danger` | Red | White |
+| `AppBadge.notFiled` | Same as secondary | "Nothing is filed with the VA at this step." No icon. |
