@@ -7,7 +7,7 @@ How to build from your phone and get a live web preview of every change, without
 ## The loop
 
 1. From **Slack on your phone**, mention `@cursor <what you want>`. A Cursor **Cloud Agent** runs in Cursor's cloud (your Mac can be off), writes code on a branch, and opens a pull request.
-2. The **Preview** GitHub Action ([.github/workflows/preview.yml](../.github/workflows/preview.yml)) builds the Flutter web app for dev and deploys it to a **Firebase Hosting preview channel** on the `app` site, then comments the ephemeral preview URL on the PR. Slack also links the PR.
+2. The **Preview** GitHub Action ([.github/workflows/preview.yml](../.github/workflows/preview.yml)) builds the Flutter web app for dev and deploys it to a **Firebase Hosting preview channel** on the `app` site, then comments the ephemeral preview URL on the PR. When the `SLACK_WEBHOOK_URL` secret is set, the same job posts that URL to the Slack channel the webhook belongs to. That post does not wait on the agent, and it does not reply inside the Cursor thread. Slack also links the PR.
 3. Open the preview URL on your phone. To iterate, reply in the same Slack thread; the agent pushes more commits and the preview updates.
 4. **Merge the PR from your phone.** The **Deploy dev** Action ([.github/workflows/deploy-dev.yml](../.github/workflows/deploy-dev.yml)) then publishes the merged build to the live dev app site, `https://veteran-claims-buddy-dev-app.web.app`.
 
@@ -17,6 +17,7 @@ flowchart TD
     agent -->|"opens PR"| gh["GitHub: atnegrete/veteran-claims-buddy"]
     gh -->|"on pull_request"| preview["preview.yml: build web + preview channel"]
     preview -->|"comments preview URL"| gh
+    preview -->|"posts preview URL when webhook is set"| slackChannel["Slack channel"]
     gh -->|"merge PR from phone"| main["main"]
     main -->|"on push"| deploy["deploy-dev.yml: live dev app site"]
 ```
@@ -28,9 +29,11 @@ flowchart TD
 - **Prod is never touched** by either workflow. Both target `veteran-claims-buddy-dev`.
 - Preview channels auto-expire after 7 days (`expires: 7d`).
 
-## The one secret
+## Secrets
 
-Both workflows authenticate with a single GitHub Actions secret, `FIREBASE_SERVICE_ACCOUNT_DEV` (a Firebase CI service-account JSON for the dev project). It is referenced as `${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}`. The web build itself needs no secret (dev Firebase config is committed in `app/lib/firebase_options_dev.dart`). Setup is **M14** in [build-progress.md](build-progress.md).
+Both workflows authenticate with the GitHub Actions secret `FIREBASE_SERVICE_ACCOUNT_VETERAN_CLAIMS_BUDDY_DEV` (a Firebase CI service-account JSON for the dev project). The web build itself needs no secret (dev Firebase config is committed in `app/lib/firebase_options_dev.dart`). Setup is **M14** in [build-progress.md](build-progress.md).
+
+`SLACK_WEBHOOK_URL` is optional. It is a Slack incoming webhook. The Preview job posts the `.web.app` URL there when the secret is set, and skips the post when it is not. The webhook chooses the channel. The message is a new channel post, not a reply in the Cursor thread. A failed Slack post does not fail the preview.
 
 ## The Cloud Agent environment
 
