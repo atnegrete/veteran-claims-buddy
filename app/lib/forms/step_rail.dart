@@ -32,7 +32,9 @@ class StepRailItem {
 /// the ends appear only when there is more to see.
 ///
 /// [compact] is the phone rail: smaller circles, no label under them, and the
-/// short name on a tooltip so the row stays one line tall.
+/// short name on a tooltip. The circles keep their size and the lines between
+/// them grow so the row fills the width. When the circles cannot fit, the row
+/// scrolls.
 class StepRail extends StatefulWidget {
   const StepRail({super.key, required this.steps, this.compact = false});
 
@@ -177,6 +179,56 @@ class _StepRailState extends State<StepRail> {
   @override
   Widget build(BuildContext context) {
     _syncKeys();
+    if (!widget.compact) return _scrollRail();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        final count = widget.steps.length;
+        final gaps = count > 1 ? count - 1 : 0;
+        final needed =
+            count * _RailNode.compactCircle + gaps * _RailNode.compactMinGap;
+        if (!width.isFinite || width < needed) return _scrollRail();
+        return _stretchedRail();
+      },
+    );
+  }
+
+  /// Circles at the two ends, and a line between each pair that takes the
+  /// leftover width.
+  Widget _stretchedRail() {
+    final scheme = Theme.of(context).colorScheme;
+    final steps = widget.steps;
+    return Row(
+      children: [
+        for (var i = 0; i < steps.length; i++) ...[
+          KeyedSubtree(
+            key: _keys[i],
+            child: _RailNode(
+              number: i + 1,
+              step: steps[i],
+              compact: true,
+              circleOnly: true,
+              showLineBefore: false,
+              showLineAfter: false,
+              lineBeforeComplete: false,
+              lineAfterComplete: false,
+            ),
+          ),
+          if (i < steps.length - 1)
+            Expanded(
+              child: Container(
+                height: 2,
+                color: steps[i].state == StepRailState.done
+                    ? AppColors.success
+                    : scheme.outline,
+              ),
+            ),
+        ],
+      ],
+    );
+  }
+
+  Widget _scrollRail() {
     return Row(
       children: [
         if (_overflow) ...[
@@ -298,18 +350,24 @@ class _RailNode extends StatelessWidget {
     required this.showLineAfter,
     required this.lineBeforeComplete,
     required this.lineAfterComplete,
+    this.circleOnly = false,
   });
 
   final int number;
   final StepRailItem step;
   final bool compact;
+
+  /// The circle alone, with no line inside the node. The stretched phone rail
+  /// draws the lines between nodes.
+  final bool circleOnly;
   final bool showLineBefore;
   final bool showLineAfter;
   final bool lineBeforeComplete;
   final bool lineAfterComplete;
 
   static const _circle = 28.0;
-  static const _compactCircle = 22.0;
+  static const compactCircle = 22.0;
+  static const compactMinGap = 8.0;
   static const _labelWidth = 96.0;
   static const _compactWidth = 44.0;
 
@@ -327,8 +385,7 @@ class _RailNode extends StatelessWidget {
         : locked
         ? scheme.onSurfaceVariant
         : scheme.onSurface;
-    final circleSize = compact ? _compactCircle : _circle;
-    final nodeWidth = compact ? _compactWidth : _labelWidth;
+    final circleSize = compact ? compactCircle : _circle;
     final circle = Container(
       width: circleSize,
       height: circleSize,
@@ -360,12 +417,42 @@ class _RailNode extends StatelessWidget {
             ),
     );
 
+    final node = Padding(
+      padding: EdgeInsets.symmetric(vertical: compact ? 0 : 4),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: step.onTap,
+          borderRadius: BorderRadius.circular(12),
+          child: circleOnly
+              ? circle
+              : Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 2,
+                    vertical: compact ? 2 : 4,
+                  ),
+                  child: _labeledCircle(theme, scheme, circle, current),
+                ),
+        ),
+      ),
+    );
+    if (!compact) return node;
+    return Tooltip(message: step.label, child: node);
+  }
+
+  Widget _labeledCircle(
+    ThemeData theme,
+    ColorScheme scheme,
+    Widget circle,
+    bool current,
+  ) {
+    final nodeWidth = compact ? _compactWidth : _labelWidth;
     Color lineColor(bool show, bool complete) {
       if (!show) return Colors.transparent;
       return complete ? AppColors.success : scheme.outline;
     }
 
-    final column = Column(
+    return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
@@ -404,25 +491,5 @@ class _RailNode extends StatelessWidget {
         ],
       ],
     );
-
-    final node = Padding(
-      padding: EdgeInsets.symmetric(vertical: compact ? 0 : 4),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: step.onTap,
-          borderRadius: BorderRadius.circular(12),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 2,
-              vertical: compact ? 2 : 4,
-            ),
-            child: column,
-          ),
-        ),
-      ),
-    );
-    if (!compact) return node;
-    return Tooltip(message: step.label, child: node);
   }
 }

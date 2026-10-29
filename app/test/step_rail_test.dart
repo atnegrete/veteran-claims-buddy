@@ -125,4 +125,71 @@ void main() {
     expect(find.byTooltip('Connection'), findsOneWidget);
     expect(find.byIcon(Icons.check), findsOneWidget);
   });
+
+  testWidgets('a compact rail stretches the lines across the width', (
+    tester,
+  ) async {
+    Future<double> lineGap(double width) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: width,
+                child: const StepRail(
+                  compact: true,
+                  steps: [
+                    StepRailItem(label: 'One', state: StepRailState.done),
+                    StepRailItem(label: 'Two', state: StepRailState.current),
+                    StepRailItem(label: 'Three', state: StepRailState.open),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+      final rail = tester.getRect(find.byType(StepRail));
+      final first = tester.getRect(find.byTooltip('One'));
+      final last = tester.getRect(find.byTooltip('Three'));
+      expect(first.left, closeTo(rail.left, 1));
+      expect(last.right, closeTo(rail.right, 1));
+      return tester.getRect(find.byTooltip('Two')).left - first.right;
+    }
+
+    final narrow = await lineGap(220);
+    final wide = await lineGap(420);
+    expect(wide, greaterThan(narrow + 40));
+  });
+
+  testWidgets('a compact rail scrolls when the circles do not fit', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: SizedBox(
+              width: 120,
+              child: StepRail(
+                compact: true,
+                steps: [
+                  for (var i = 0; i < 12; i++)
+                    StepRailItem(
+                      label: 'Step $i',
+                      state: i == 0
+                          ? StepRailState.current
+                          : StepRailState.open,
+                    ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byIcon(Icons.chevron_right), findsOneWidget);
+  });
 }
