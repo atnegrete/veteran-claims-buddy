@@ -2,7 +2,8 @@ name: Preview
 
 # On every pull request: build the Flutter web app for dev and publish it to a
 # Firebase Hosting preview channel on the `app` site. The ephemeral preview URL
-# is posted back as a comment on the PR. Scoped to the `app` target only, so
+# is posted back as a comment on the PR, and to Slack when SLACK_WEBHOOK_URL is
+# set. Scoped to the `app` target only, so
 # Functions, Firestore, rules, Storage, and the marketing site are untouched.
 on:
   pull_request:
@@ -32,6 +33,7 @@ jobs:
         run: flutter build web --dart-define=APP_ENV=dev
         working-directory: app
       - name: Deploy to Firebase Hosting preview channel
+        id: hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
@@ -39,3 +41,28 @@ jobs:
           projectId: veteran-claims-buddy-dev
           target: app
           expires: 7d
+      - name: Post preview URL to Slack
+        if: success()
+        continue-on-error: true
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          PREVIEW_URL: ${{ steps.hosting.outputs.details_url }}
+          PREVIEW_URLS: ${{ steps.hosting.outputs.urls }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          if [ -z "$SLACK_WEBHOOK_URL" ]; then
+            echo "SLACK_WEBHOOK_URL is unset. The preview URL stays on the PR comment."
+            exit 0
+          fi
+          url="$PREVIEW_URL"
+          if [ -z "$url" ]; then
+            url=$(printf '%s\n' "$PREVIEW_URLS" | tr ',' '\n' | head -n 1)
+          fi
+          if [ -z "$url" ]; then
+            echo "Firebase did not return a preview URL."
+            exit 1
+          fi
+          text=$(printf 'Preview for PR #%s is ready.\n%s\n%s\n' "$PR_NUMBER" "$url" "$PR_URL")
+          payload=$(jq -n --arg text "$text" '{text:$text}')
+          curl -fsS -X POST -H 'Content-type: application/json' --data "$payload" "$SLACK_WEBHOOK_URL"
