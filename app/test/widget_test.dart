@@ -19,6 +19,7 @@ void main() {
 
     expect(find.text('DEV · veteran-claims-buddy-dev'), findsNothing);
     expect(find.text('Sign in'), findsWidgets);
+    expect(find.text('Preview check'), findsOneWidget);
     expect(find.text('Create account'), findsOneWidget);
   });
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/app_badge.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/auth_redirect.dart';
@@ -63,6 +64,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const AppBadge.primary(label: 'Preview check'),
+            const SizedBox(height: 16),
             ChainTextField(
               controller: _email,
               keyboardType: TextInputType.emailAddress,
