@@ -41,6 +41,8 @@ class SignedInAppBar extends ConsumerWidget implements PreferredSizeWidget {
     super.key,
     this.showAccountLink = false,
     this.showMenu = false,
+    this.dense = false,
+    this.onVetBuddy,
   });
 
   /// Shell pages can open the account menu. Onboarding cannot.
@@ -49,13 +51,23 @@ class SignedInAppBar extends ConsumerWidget implements PreferredSizeWidget {
   /// Narrow windows open the same navigation list from here.
   final bool showMenu;
 
+  /// A shorter bar on a phone, so the page keeps the height.
+  final bool dense;
+
+  /// Opens Vet Buddy from the bar. A phone uses this instead of a floating button.
+  final VoidCallback? onVetBuddy;
+
+  static const denseHeight = 48.0;
+
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize =>
+      Size.fromHeight(dense ? denseHeight : kToolbarHeight);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final email = ref.watch(authControllerProvider).session?.email;
     return AppBar(
+      toolbarHeight: dense ? denseHeight : null,
       automaticallyImplyLeading: false,
       leading: showMenu
           ? IconButton(
@@ -79,6 +91,12 @@ class SignedInAppBar extends ConsumerWidget implements PreferredSizeWidget {
             )
           : const Text('Veteran Claims Buddy'),
       actions: [
+        if (onVetBuddy != null)
+          IconButton(
+            tooltip: 'Vet Buddy',
+            onPressed: onVetBuddy,
+            icon: const Icon(Icons.chat_bubble_outline),
+          ),
         PopupMenuButton<String>(
           tooltip: 'Account',
           icon: const Icon(Icons.account_circle_outlined),

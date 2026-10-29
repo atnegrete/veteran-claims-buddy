@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/app_layout.dart';
 import '../../auth/auth_redirect.dart';
 import '../../forms/step_form.dart';
 import '../../onboarding/onboarding_progress.dart';
@@ -42,6 +43,21 @@ class OnboardingFrame extends ConsumerWidget {
         .maybeWhen(data: savedOnboardingStep, orElse: () => step);
     final savedIndex = visibleOnboardingIndex(saved);
     final farthestIndex = savedIndex > currentIndex ? savedIndex : currentIndex;
+    final phone = isPhoneLayout(context);
+    final form = StepForm(
+      labels: [for (final item in onboardingStepOrder) item.label],
+      currentIndex: currentIndex,
+      farthestIndex: farthestIndex,
+      busy: busy,
+      onNext: onNext,
+      nextLabel: nextLabel,
+      onStepSelected: (index) {
+        context.go(
+          '${AuthRoutes.onboarding}/${onboardingStepOrder[index].name}',
+        );
+      },
+      child: child,
+    );
     return SignedInScaffold(
       body: SafeArea(
         top: false,
@@ -50,28 +66,18 @@ class OnboardingFrame extends ConsumerWidget {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 720),
             child: ListView(
-              padding: const EdgeInsets.all(24),
+              padding: phone
+                  ? const EdgeInsets.fromLTRB(16, 8, 16, 16)
+                  : const EdgeInsets.all(24),
               children: [
-                Text(title, style: Theme.of(context).textTheme.headlineMedium),
-                const SizedBox(height: 16),
-                SurfaceCard(
-                  child: StepForm(
-                    labels: [
-                      for (final item in onboardingStepOrder) item.label,
-                    ],
-                    currentIndex: currentIndex,
-                    farthestIndex: farthestIndex,
-                    busy: busy,
-                    onNext: onNext,
-                    nextLabel: nextLabel,
-                    onStepSelected: (index) {
-                      context.go(
-                        '${AuthRoutes.onboarding}/${onboardingStepOrder[index].name}',
-                      );
-                    },
-                    child: child,
-                  ),
+                Text(
+                  title,
+                  style: phone
+                      ? Theme.of(context).textTheme.titleLarge
+                      : Theme.of(context).textTheme.headlineMedium,
                 ),
+                SizedBox(height: phone ? 8 : 16),
+                if (phone) form else SurfaceCard(child: form),
               ],
             ),
           ),

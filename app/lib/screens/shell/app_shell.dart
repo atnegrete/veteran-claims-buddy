@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/app_badge.dart';
+import '../../app/app_layout.dart';
 import '../../app/app_theme.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_redirect.dart';
@@ -47,10 +48,21 @@ class AppShell extends ConsumerWidget {
     }
     return LayoutBuilder(
       builder: (context, constraints) {
-        final narrow = constraints.maxWidth < 600;
+        final narrow = constraints.maxWidth < shellDrawerWidth;
+        final phone = isPhoneLayout(context);
+        final showBuddy = _showBubble(location);
+        final buddyCaseId =
+            caseIdFromLocation(location) ?? ref.watch(workingCaseIdProvider);
         final nav = _ShellNav(location: location);
         return Scaffold(
-          appBar: SignedInAppBar(showAccountLink: true, showMenu: narrow),
+          appBar: SignedInAppBar(
+            showAccountLink: true,
+            showMenu: narrow,
+            dense: phone,
+            onVetBuddy: phone && showBuddy && (buddyCaseId ?? '').isNotEmpty
+                ? () => openVetBuddy(context, buddyCaseId!)
+                : null,
+          ),
           drawer: narrow ? Drawer(child: nav) : null,
           body: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -64,7 +76,7 @@ class AppShell extends ConsumerWidget {
                 child: SafeArea(
                   top: false,
                   child: _ClaimBody(
-                    showBubble: _showBubble(location),
+                    showBubble: showBuddy && !phone,
                     caseId:
                         caseIdFromLocation(location) ??
                         ref.watch(workingCaseIdProvider),

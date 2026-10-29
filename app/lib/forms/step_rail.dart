@@ -30,10 +30,15 @@ class StepRailItem {
 /// scrolls when the steps do not fit: it centers the current step, a mouse or
 /// trackpad can drag it, the wheel moves it sideways, and outlined chevrons at
 /// the ends appear only when there is more to see.
+///
+/// [compact] is the phone rail: smaller circles, no label under them, and the
+/// short name on a tooltip so the row stays one line tall.
 class StepRail extends StatefulWidget {
-  const StepRail({super.key, required this.steps});
+  const StepRail({super.key, required this.steps, this.compact = false});
 
   final List<StepRailItem> steps;
+
+  final bool compact;
 
   @override
   State<StepRail> createState() => _StepRailState();
@@ -178,6 +183,7 @@ class _StepRailState extends State<StepRail> {
           _RailArrow(
             tooltip: 'Earlier steps',
             icon: Icons.chevron_left,
+            compact: widget.compact,
             onPressed: _canBack ? () => _nudge(-1) : null,
           ),
           const SizedBox(width: 8),
@@ -205,6 +211,7 @@ class _StepRailState extends State<StepRail> {
                           child: _RailNode(
                             number: i + 1,
                             step: widget.steps[i],
+                            compact: widget.compact,
                             showLineBefore: i > 0,
                             showLineAfter: i < widget.steps.length - 1,
                             lineBeforeComplete:
@@ -226,6 +233,7 @@ class _StepRailState extends State<StepRail> {
           _RailArrow(
             tooltip: 'Later steps',
             icon: Icons.chevron_right,
+            compact: widget.compact,
             onPressed: _canForward ? () => _nudge(1) : null,
           ),
         ],
@@ -253,18 +261,21 @@ class _RailArrow extends StatelessWidget {
   const _RailArrow({
     required this.tooltip,
     required this.icon,
+    required this.compact,
     required this.onPressed,
   });
 
   final String tooltip;
   final IconData icon;
+  final bool compact;
   final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
+    final side = compact ? 36.0 : 44.0;
     final button = OutlinedButton(
       style: OutlinedButton.styleFrom(
-        minimumSize: const Size(44, 44),
+        minimumSize: Size(side, side),
         padding: EdgeInsets.zero,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
@@ -282,6 +293,7 @@ class _RailNode extends StatelessWidget {
   const _RailNode({
     required this.number,
     required this.step,
+    required this.compact,
     required this.showLineBefore,
     required this.showLineAfter,
     required this.lineBeforeComplete,
@@ -290,13 +302,16 @@ class _RailNode extends StatelessWidget {
 
   final int number;
   final StepRailItem step;
+  final bool compact;
   final bool showLineBefore;
   final bool showLineAfter;
   final bool lineBeforeComplete;
   final bool lineAfterComplete;
 
   static const _circle = 28.0;
+  static const _compactCircle = 22.0;
   static const _labelWidth = 96.0;
+  static const _compactWidth = 44.0;
 
   @override
   Widget build(BuildContext context) {
@@ -312,9 +327,11 @@ class _RailNode extends StatelessWidget {
         : locked
         ? scheme.onSurfaceVariant
         : scheme.onSurface;
+    final circleSize = compact ? _compactCircle : _circle;
+    final nodeWidth = compact ? _compactWidth : _labelWidth;
     final circle = Container(
-      width: _circle,
-      height: _circle,
+      width: circleSize,
+      height: circleSize,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: done
@@ -333,7 +350,7 @@ class _RailNode extends StatelessWidget {
         ),
       ),
       child: done
-          ? const Icon(Icons.check, size: 16, color: Colors.white)
+          ? Icon(Icons.check, size: compact ? 14 : 16, color: Colors.white)
           : Text(
               '$number',
               style: theme.textTheme.labelMedium?.copyWith(
@@ -352,7 +369,7 @@ class _RailNode extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
-          width: _labelWidth,
+          width: nodeWidth,
           child: Row(
             children: [
               Expanded(
@@ -371,34 +388,41 @@ class _RailNode extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 6),
-        SizedBox(
-          width: _labelWidth,
-          child: Text(
-            step.label,
-            textAlign: TextAlign.center,
-            style: theme.textTheme.labelSmall?.copyWith(
-              color: current ? scheme.onSurface : scheme.onSurfaceVariant,
-              fontWeight: current ? FontWeight.w700 : FontWeight.w500,
+        if (!compact) ...[
+          const SizedBox(height: 6),
+          SizedBox(
+            width: nodeWidth,
+            child: Text(
+              step.label,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: current ? scheme.onSurface : scheme.onSurfaceVariant,
+                fontWeight: current ? FontWeight.w700 : FontWeight.w500,
+              ),
             ),
           ),
-        ),
+        ],
       ],
     );
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+    final node = Padding(
+      padding: EdgeInsets.symmetric(vertical: compact ? 0 : 4),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           onTap: step.onTap,
           borderRadius: BorderRadius.circular(12),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
+            padding: EdgeInsets.symmetric(
+              horizontal: 2,
+              vertical: compact ? 2 : 4,
+            ),
             child: column,
           ),
         ),
       ),
     );
+    if (!compact) return node;
+    return Tooltip(message: step.label, child: node);
   }
 }

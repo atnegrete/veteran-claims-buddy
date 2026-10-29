@@ -103,4 +103,26 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byIcon(Icons.chevron_right), findsOneWidget);
   });
+
+  testWidgets('a compact rail keeps the name on the circle', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: StepRail(
+            compact: true,
+            steps: const [
+              StepRailItem(label: 'Decision', state: StepRailState.done),
+              StepRailItem(label: 'Connection', state: StepRailState.current),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text('Decision'), findsNothing);
+    expect(find.text('Connection'), findsNothing);
+    expect(find.byTooltip('Decision'), findsOneWidget);
+    expect(find.byTooltip('Connection'), findsOneWidget);
+    expect(find.byIcon(Icons.check), findsOneWidget);
+  });
 }
