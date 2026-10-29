@@ -1,3 +1,4 @@
+import 'package:app/app/app_theme.dart';
 import 'package:app/forms/step_rail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -30,8 +31,18 @@ void main() {
     expect(find.text('First'), findsOneWidget);
     expect(find.text('Second'), findsOneWidget);
     expect(find.text('Third'), findsOneWidget);
-    // The done step shows a check in place of its number.
+    // The done step shows a white check on a green circle.
     expect(find.byIcon(Icons.check), findsOneWidget);
+    expect(tester.widget<Icon>(find.byIcon(Icons.check)).color, Colors.white);
+    final circle = tester.widget<Container>(
+      find
+          .ancestor(
+            of: find.byIcon(Icons.check),
+            matching: find.byType(Container),
+          )
+          .first,
+    );
+    expect((circle.decoration as BoxDecoration).color, AppColors.success);
     expect(find.text('1'), findsNothing);
     expect(find.text('2'), findsOneWidget);
     expect(find.text('3'), findsOneWidget);

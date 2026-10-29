@@ -14,6 +14,7 @@ import '../../claim/discovery_questions.dart';
 import '../../claim/form_recommendations.dart';
 import '../../claim/issue_lane.dart';
 import '../../claim/issue_progress.dart';
+import '../../claim/issue_record_repository.dart';
 import '../../claim/questionnaire_catalog.dart';
 import '../../claim/questionnaire_repository.dart';
 import '../../forms/nested_split.dart';

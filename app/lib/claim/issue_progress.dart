@@ -232,9 +232,7 @@ ConditionProgress conditionPartProgress({
     questions,
     decisions,
     if (!laterClosed) ...[
-      connectionSaved
-          ? ClaimSectionStatus.done
-          : ClaimSectionStatus.notStarted,
+      connectionSaved ? ClaimSectionStatus.done : ClaimSectionStatus.notStarted,
       laySaved ? ClaimSectionStatus.done : ClaimSectionStatus.notStarted,
       doctorComplete ? ClaimSectionStatus.done : ClaimSectionStatus.notStarted,
     ],

@@ -113,7 +113,7 @@ void main() {
     expect(find.text('Back'), findsOneWidget);
     expect(find.text('Continue'), findsOneWidget);
     expect(find.text('Has a doctor diagnosed this condition?'), findsOneWidget);
-    expect(find.text('0 of 4 answered'), findsOneWidget);
+    expect(find.text('0 of 4 completed'), findsOneWidget);
     // The old single-draft affordances are gone.
     expect(find.text('Draft with AI'), findsNothing);
     expect(find.text('Evidence and law brief'), findsNothing);

@@ -1,7 +1,7 @@
 # Theme
 
 **Status:** Shared styling for the Flutter app and the static site.
-**Updated:** 2026-10-05
+**Updated:** 2026-10-29
 
 This file is the palette, type, and control rules for both surfaces. [ui.md](ui.md) is the widget list. Screens take color from `appTheme()` in `app/lib/app/app_theme.dart`. The static site takes color from `marketing-site/styles/input.css`. Do not put a new hex color on a widget or in a page.
 
@@ -27,13 +27,14 @@ Dark theme only. One blue family, sand as a highlight, red only for danger and e
 | Sand | `#E8C39E` | `AppColors.sand` | `--color-sand` | Eyebrows, prices, step numbers, a link in a paragraph, the `InfoNote` edge |
 | Danger fill | `#B91C1C` | `AppColors.dangerFill` | Not used | The button that commits the harm. White label. |
 | Danger text | `#F87171` | `AppColors.dangerText` | Not used | Error sentences. The button that opens a dangerous step uses the fill, not this color, for its letters. |
-| Money | `#34D399` | `AppColors.money` | Not used | The estimated dollar amount on the VA Ratings Calculator only. Not a general success color. |
+| Success | `#047857` | `AppColors.success` | Not used | A finished part. Green fill, white label, white check. |
+| Money | `#34D399` | `AppColors.money` | Not used | The estimated dollar amount on the VA Ratings Calculator, and the success edge on an InfoNote. |
 
 Sand is a highlight. It is not a button fill. A primary button stays blue with a white label. Do not paint a button label, a badge label, or a navigation-row label sand, blue, or red. Color sits on the fill behind those words.
 
 A link inside a paragraph may be sand and underlined. Hover returns it to text white. That is not a button.
 
-Warning and success are not status colors for a claim step. The current step uses the primary button. A finished step is muted text. Money `#34D399` is the estimated dollar amount on the calculator. On a condition, Pursue disability compensation keeps a quiet money wash and Not on this claim keeps a quiet sand wash. Both use the gray outline until one is chosen. The chosen card takes a 2px edge in that color and a white check on a filled mark. The letters stay white or gray.
+Warning is not a status color. Success `#047857` is the fill behind a finished part: a section that is fully done, and a check that marks a part done. The label and the check stay white. A step's words stay gray. Money `#34D399` is the estimated dollar amount on the calculator, and the success edge on an InfoNote. On a condition, Pursue disability compensation keeps a quiet money wash and Not on this claim keeps a quiet sand wash. Both use the gray outline until one is chosen. The chosen card takes a 2px edge in that color and a white check on a filled mark. The letters stay white or gray.
 
 ### Washes
 
@@ -124,10 +125,11 @@ A form field is canvas fill, line border, 12px radius, 48px tall, and text white
 
 | Widget | Fill | Label |
 | --- | --- | --- |
-| `AppBadge.primary` | Navy | White. In progress, or a count such as "3 added" |
+| `AppBadge.primary` | Navy | White. In progress, or a count such as "3 added". A partial count reads "2 of 5 completed". |
 | `AppBadge.secondary` | Dark surface, outline | White. A neutral notice |
-| `AppBadge.quiet` | Dark surface, outline | Gray |
+| `AppBadge.quiet` | Dark surface, outline | Gray. Not started, including "0 of 5 completed" |
 | `AppBadge.danger` | Red | White |
+| `AppBadge.success` | Green `#047857` | White. Every part is done, or a check that a part is done |
 | `AppBadge.notFiled` | Same as secondary | "Nothing is automatically filed with the VA at any point." |
 
 ## Imagery

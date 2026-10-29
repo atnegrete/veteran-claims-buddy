@@ -16,8 +16,9 @@ The shared theme for the app and the static site is [docs/theme.md](../docs/them
 | Muted text | `#94A3B8` | Secondary copy |
 | Danger fill | `#B91C1C` | A button that commits harm |
 | Danger text | `#F87171` | Errors |
+| Success | `#047857` | A finished part. Green fill, white label and check |
 
-Warning and success are not defined yet.
+Warning is not defined yet.
 
 Type is the platform sans. The SVG wordmark names `ui-sans-serif, system-ui, sans-serif` so it can be replaced without a licensed font file. The app draws the name with the Flutter theme, not the SVG text.
 

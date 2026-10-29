@@ -18,4 +18,4 @@ alwaysApply: true
 
 **Very important.** Text on a badge, a button, or a navigation row is white or gray. Color sits on the fill. `docs/ui.md` lists the shared widgets. `AppBadge` is the only badge.
 
-Red is only for danger and errors. The current claim step uses the primary button. A finished step uses secondary text. Do not add a hex color on a widget. Warning and success wait until a screen needs them. A button beside another button sets a finite `minimumSize`. The theme height is full width.
+Red is only for danger and errors. Green `AppColors.success` is only the finished-part fill: white label, white check. A step's words stay gray. The current claim step uses the primary button. Do not add a hex color on a widget. Warning waits until a screen needs it. A button beside another button sets a finite `minimumSize`. The theme height is full width.

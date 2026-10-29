@@ -23,7 +23,7 @@ void main() {
               Row(
                 children: [
                   Expanded(child: Text('Questions')),
-                  AppBadge.quiet(icon: Icons.check),
+                  AppBadge.success(icon: Icons.check),
                 ],
               ),
             ],
@@ -38,6 +38,18 @@ void main() {
     final scheme = Theme.of(tester.element(find.text('3 added'))).colorScheme;
     final count = tester.widget<Text>(find.text('3 added'));
     expect(count.style?.color, scheme.onSecondary);
+    for (final icon in tester.widgetList<Icon>(find.byIcon(Icons.check))) {
+      expect(icon.color, Colors.white);
+    }
+    final done = tester.widget<DecoratedBox>(
+      find
+          .descendant(
+            of: find.byType(ProgressMark).at(1),
+            matching: find.byType(DecoratedBox),
+          )
+          .first,
+    );
+    expect((done.decoration as BoxDecoration).color, AppColors.success);
     expect(tester.takeException(), isNull);
   });
 }

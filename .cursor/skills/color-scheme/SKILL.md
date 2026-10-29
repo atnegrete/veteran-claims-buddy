@@ -15,7 +15,7 @@ Read `docs/theme.md` and implement through `app/lib/app/app_theme.dart`.
 - Opens a dangerous step or removes one item: `TextButton` with `dangerTextStyle()`. White label on red. Center it when it is the only control in that block.
 - Commits the harm: `FilledButton` with `dangerFilledStyle()`. White label on red.
 - Error copy: `ErrorText` from `app/lib/app/app_ui.dart`, the one way to show `colorScheme.error`. That is a sentence, not a label on a control.
-- The current claim step uses the primary button. A finished step uses secondary text. Do not add a progress color.
+- The current claim step uses the primary button. A finished part is `AppBadge.success`: green fill, white label, white check. The words under a step stay gray.
 
 Do not add a hex color on a screen. A button beside another button needs a finite `minimumSize`. The theme height is full width, and that width has no size inside a row.
 

@@ -133,20 +133,63 @@ void main() {
     expect(addedLabel(3), '3 added');
   });
 
-  test('an issue counts the parts that have something', () {
-    expect(
-      filledPartCount(
-        questions: ClaimSectionStatus.done,
-        evidenceNotes: 2,
-        connections: 0,
-        lay: true,
-        doctorDraft: false,
-        decisions: 0,
-      ),
-      3,
+  test('a condition counts finished parts out of the ones still open', () {
+    const open = ClaimSectionStatus.notStarted;
+    const underway = ClaimSectionStatus.inProgress;
+    const done = ClaimSectionStatus.done;
+    final partial = conditionPartProgress(
+      questions: done,
+      decisions: underway,
+      connectionSaved: true,
+      laySaved: false,
+      doctorComplete: false,
+      laterClosed: false,
     );
-    expect(issueFilledLabel(0), 'Nothing filled in yet');
-    expect(issueFilledLabel(3), '3 parts filled in');
+    expect(partial.completed, 2);
+    expect(partial.total, 5);
+    expect(partial.status, ClaimSectionStatus.inProgress);
+    expect(completionLabel(0, 5), '0 of 5 completed');
+    expect(
+      completionLabel(partial.completed, partial.total),
+      '2 of 5 completed',
+    );
+
+    final untouched = conditionPartProgress(
+      questions: open,
+      decisions: open,
+      connectionSaved: false,
+      laySaved: false,
+      doctorComplete: false,
+      laterClosed: false,
+    );
+    expect(untouched.completed, 0);
+    expect(untouched.status, ClaimSectionStatus.notStarted);
+
+    final closed = conditionPartProgress(
+      questions: done,
+      decisions: done,
+      connectionSaved: false,
+      laySaved: false,
+      doctorComplete: false,
+      laterClosed: true,
+    );
+    expect(closed.completed, 2);
+    expect(closed.total, 2);
+    expect(closed.status, ClaimSectionStatus.done);
+
+    final finished = conditionPartProgress(
+      questions: done,
+      decisions: done,
+      connectionSaved: true,
+      laySaved: true,
+      doctorComplete: true,
+      laterClosed: false,
+    );
+    expect(finished.status, ClaimSectionStatus.done);
+    expect(
+      completionLabel(finished.completed, finished.total),
+      '5 of 5 completed',
+    );
   });
 
   test('topic questions are done when that page is answered', () {

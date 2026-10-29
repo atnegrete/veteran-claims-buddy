@@ -45,12 +45,13 @@ A mouse hover shows it. Set `triggerMode` to `TooltipTriggerMode.tap` when a pho
 
 | Widget | Fill | Label | Use |
 | --- | --- | --- | --- |
-| `AppBadge.primary` | Navy | White | In progress, or a count such as "3 added" |
+| `AppBadge.primary` | Navy | White | In progress, or a count such as "3 added". A partial section reads "2 of 5 completed" |
 | `AppBadge.secondary` | Dark surface, outline | White | A neutral notice |
-| `AppBadge.quiet` | Dark surface, outline | Gray | Not started, or a small check with no words |
+| `AppBadge.quiet` | Dark surface, outline | Gray | Not started, including "0 of 5 completed" |
 | `AppBadge.danger` | Red | White | Something is wrong |
+| `AppBadge.success` | Green | White | Every part is done, or a white check on a finished part |
 
-The filing line is not a badge. It is `FilingNote` in `app/lib/app/app_ui.dart`, and it appears on Forms and Package only. Do not add a decorative icon to a badge. A check is allowed only on a finished status, and the check uses the same neutral color as the label.
+The filing line is not a badge. It is `FilingNote` in `app/lib/app/app_ui.dart`, and it appears on Forms and Package only. Do not add a decorative icon to a badge. A check is allowed only on a finished status. The check is white, on the success fill.
 
 `ProgressMark` is the status badge for a claim part. It calls `AppBadge`. Do not draw a separate check or count.
 
@@ -77,7 +78,7 @@ Back, Close, and Cancel are outlined buttons. The edge shows they can be pressed
 | `AppNavRow` | `app/lib/app/app_ui.dart` | A tappable navigation or list row. Title, optional subtitle, leading widget, a trailing mark or chevron, a selection wash, an optional left edge, and an optional note inside the card. Replaces one-off `ListTile` chevron rows and private row widgets. |
 | `AppTabs` | `app/lib/app/app_tabs.dart` | The one tabbed view. A row of equal-width tabs over a divider; the active tab is washed in the selection blue and underlined in blue, its label white, the rest gray. Renders only the strip; place the selected panel directly under it and swap it on `selected`. Use this anywhere two or more views share one space. Do not hand-build a row of buttons as tabs. |
 | `NestedSplit` | `app/lib/forms/nested_split.dart` | List and the form that opens from it. Wide pane shows both. Narrow pane hides the list. A condition passes `steps` and shows `NestedStepBar` above the form. A form leaves `steps` empty and shows only the form. |
-| `StepRail` | `app/lib/forms/step_rail.dart` | The one step indicator. Numbered circles joined by a line. A finished step has a check. The current step is a filled circle. A locked step is muted and does not open. The rail scrolls, centers the current step, and shows outlined chevrons only when more steps sit past the edge. |
+| `StepRail` | `app/lib/forms/step_rail.dart` | The one step indicator. Numbered circles joined by a line. A finished step is a white check on a green circle, and the line up to it is green. The current step is a blue circle. A locked step is muted and does not open. The rail scrolls, centers the current step, and shows outlined chevrons only when more steps sit past the edge. |
 | `NestedStepBar` | `app/lib/forms/nested_split.dart` | A condition's narrow header. A "Step n of m" caption and the full current part name sit above a `StepRail`. The rail uses a short label under each circle. The form under it drops its own title so the part is named once. |
 | `NestedCloseButton` | same file | Outlined close icon with a Close tooltip. Top right of a `NestedForm` when the form list is hidden. |
 | `NestedForm` | same file | The card. Title stays put. Body scrolls. Optional notice, header action, and footer. |

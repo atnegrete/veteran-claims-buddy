@@ -9,7 +9,7 @@ alwaysApply: true
 
 **Very important.** Text on a badge, a button, or a navigation row is white or gray (`onSurface` or `onSurfaceVariant`). Color sits on the fill. Do not paint the letters blue, red, or green.
 
-`AppBadge` is the only badge. `AppBadge.notFiled` is the filing line, and it has no icon. `FormActions` is the Back and primary pair. Back, Close, and Cancel are outlined buttons. An icon-only close is `NestedCloseButton`, not a text button or a bare icon button. `NestedSplit` is the list with the form beside it on a wide pane. A narrow condition shows `NestedStepBar`. A narrow form shows the form name and that close button. `StepRail` is the one stepper. Do not build another.
+`AppBadge` is the only badge. A finished part is `AppBadge.success`: green fill, white label, white check. `AppBadge.notFiled` is the filing line, and it has no icon. `FormActions` is the Back and primary pair. Back, Close, and Cancel are outlined buttons. An icon-only close is `NestedCloseButton`, not a text button or a bare icon button. `NestedSplit` is the list with the form beside it on a wide pane. A narrow condition shows `NestedStepBar`. A narrow form shows the form name and that close button. `StepRail` is the one stepper. Do not build another.
 
 `AppTabs` in `app/lib/app/app_tabs.dart` is the one tabbed view. Any place two or more views share one space uses it, with the selected panel directly under it. Do not stand a row of `FilledButton`s or `OutlinedButton`s up as tabs. The active tab carries the selection blue wash and a blue underline; the label stays white or gray.
 
