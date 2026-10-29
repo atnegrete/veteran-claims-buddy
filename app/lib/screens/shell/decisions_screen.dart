@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/app_badge.dart';
 import '../../app/app_theme.dart';
+import '../../app/app_ui.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_redirect.dart';
 import '../../claim/claim_decision.dart';
@@ -17,11 +17,17 @@ import '../../claim/va_rules.dart';
 import '../../claim/claim_issue_repository.dart';
 import '../../claim/decision_repository.dart';
 import '../../claim/document_repository.dart';
+import '../../cases/case_outcome.dart';
+import '../../cases/cases_progress.dart';
+import '../../cases/cases_repository.dart';
 import '../../forms/file_upload.dart';
 import '../../forms/form_actions.dart';
 import '../../forms/iso_date_field.dart';
 import '../../forms/text_input_chain.dart';
 import 'shell_pages.dart';
+
+/// The choice offered after a decision letter is confirmed.
+enum _NextStep { later, appeal, complete }
 
 class DecisionsScreen extends ConsumerWidget {
   const DecisionsScreen({super.key, required this.caseId, this.adding = false});
@@ -59,11 +65,9 @@ class DecisionsScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               EarlierClaimNote(caseId: caseId),
-              const Text(
-                'Upload the VA decision letter. It stays off this claim until you confirm what it says.',
+              const LeadText(
+                'Upload the VA decision letter. It stays off the claim until you confirm what it says.',
               ),
-              const SizedBox(height: 12),
-              const AppBadge.notFiled(),
               const SizedBox(height: 16),
               for (final letter in pending) ...[
                 _PendingLetter(letter: letter),
@@ -215,9 +219,7 @@ class _ConfirmedDecision extends StatelessWidget {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: 8),
-        const Text(
-          'This reading is on the claim. Nothing is filed with the VA.',
-        ),
+        const LeadText('This reading is on the claim.'),
         if (decision.overallSummary.isNotEmpty) ...[
           const SizedBox(height: 12),
           Text(decision.overallSummary),
@@ -301,16 +303,10 @@ class _LetterUploadState extends ConsumerState<_LetterUpload> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text('Choose the decision letter. A PDF, JPEG, or PNG.'),
+        const LeadText('Choose the decision letter. A PDF, JPEG, or PNG.'),
         const SizedBox(height: 12),
         OutlinedButton(onPressed: _pick, child: const Text('Choose a file')),
-        if (_error != null) ...[
-          const SizedBox(height: 12),
-          Text(
-            _error!,
-            style: TextStyle(color: Theme.of(context).colorScheme.error),
-          ),
-        ],
+        if (_error != null) ...[const SizedBox(height: 12), ErrorText(_error!)],
       ],
     );
   }
@@ -339,14 +335,14 @@ class _IssueEditors {
           ? issue.outcome
           : 'other',
       rating = issue.ratingPercent ?? -1,
-      claimIssueId = issue.claimIssueId ?? '';
+      conditionId = issue.conditionId ?? '';
 
   final ClaimDecisionIssue issue;
   final TextEditingController name;
   final TextEditingController effective;
   String outcome;
   int rating;
-  String claimIssueId;
+  String conditionId;
   late final List<TextEditingController> findings = [
     for (final finding in issue.findings)
       TextEditingController(text: finding.text),
@@ -412,7 +408,7 @@ class _ReviewFormState extends ConsumerState<_ReviewForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
+          const LeadText(
             'Check this against the letter. It is not on the claim until you confirm it.',
           ),
           const SizedBox(height: 16),
@@ -456,10 +452,14 @@ class _ReviewFormState extends ConsumerState<_ReviewForm> {
             DropdownButtonFormField<String>(
               key: ValueKey('${issue.issue.id}-outcome-${issue.outcome}'),
               initialValue: issue.outcome,
+              isExpanded: true,
               decoration: const InputDecoration(labelText: 'Outcome'),
               items: [
                 for (final entry in letterOutcomes.entries)
-                  DropdownMenuItem(value: entry.key, child: Text(entry.value)),
+                  DropdownMenuItem(
+                    value: entry.key,
+                    child: Text(entry.value, overflow: TextOverflow.ellipsis),
+                  ),
               ],
               onChanged: _busy
                   ? null
@@ -472,13 +472,17 @@ class _ReviewFormState extends ConsumerState<_ReviewForm> {
             DropdownButtonFormField<int>(
               key: ValueKey('${issue.issue.id}-rating-${issue.rating}'),
               initialValue: issue.rating,
+              isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'Rating on that decision',
               ),
               items: [
                 const DropdownMenuItem(
                   value: -1,
-                  child: Text('No rating stated'),
+                  child: Text(
+                    'No rating stated',
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 for (var rating = 0; rating <= 100; rating += 10)
                   DropdownMenuItem(value: rating, child: Text('$rating')),
@@ -496,29 +500,36 @@ class _ReviewFormState extends ConsumerState<_ReviewForm> {
             const SizedBox(height: 12),
             DropdownButtonFormField<String>(
               key: ValueKey(
-                '${issue.issue.id}-link-${issue.claimIssueId}-${claimIssues.length}',
+                '${issue.issue.id}-link-${issue.conditionId}-${claimIssues.length}',
               ),
               initialValue:
-                  claimIssues.any((item) => item.id == issue.claimIssueId)
-                  ? issue.claimIssueId
+                  claimIssues.any((item) => item.id == issue.conditionId)
+                  ? issue.conditionId
                   : '',
+              isExpanded: true,
               decoration: const InputDecoration(
-                labelText: 'Issue on this claim',
+                labelText: 'Condition on this claim',
               ),
               items: [
                 const DropdownMenuItem(
                   value: '',
-                  child: Text('Not on this claim'),
+                  child: Text(
+                    'Not on this claim',
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 for (final item in claimIssues)
                   DropdownMenuItem(
                     value: item.id,
-                    child: Text(item.displayName),
+                    child: Text(
+                      item.displayName,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
               ],
               onChanged: _busy
                   ? null
-                  : (value) => setState(() => issue.claimIssueId = value ?? ''),
+                  : (value) => setState(() => issue.conditionId = value ?? ''),
             ),
             for (var i = 0; i < issue.findings.length; i++) ...[
               const SizedBox(height: 12),
@@ -561,10 +572,7 @@ class _ReviewFormState extends ConsumerState<_ReviewForm> {
           ],
           if (_error != null) ...[
             const SizedBox(height: 12),
-            Text(
-              _error!,
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
-            ),
+            ErrorText(_error!),
           ],
           FormActions(
             onBack: _busy
@@ -609,9 +617,9 @@ class _ReviewFormState extends ConsumerState<_ReviewForm> {
               for (final issue in _issues)
                 ConfirmDecisionIssue(
                   id: issue.issue.id,
-                  claimIssueId: issue.claimIssueId.isEmpty
+                  conditionId: issue.conditionId.isEmpty
                       ? null
-                      : issue.claimIssueId,
+                      : issue.conditionId,
                   displayName: issue.name.text,
                   outcome: issue.outcome,
                   ratingPercent: issue.rating < 0 ? null : issue.rating,
@@ -638,7 +646,7 @@ class _ReviewFormState extends ConsumerState<_ReviewForm> {
             ],
           );
       if (!mounted) return;
-      context.go(AuthRoutes.caseDecisions(widget.caseId));
+      await _promptNext(classifyCaseOutcomes(_issues.map((i) => i.outcome)));
     } on ClaimGuideFailure catch (error) {
       if (!mounted) return;
       setState(() => _error = error.message);
@@ -647,6 +655,70 @@ class _ReviewFormState extends ConsumerState<_ReviewForm> {
       setState(() => _error = 'That decision could not be confirmed.');
     } finally {
       if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _promptNext(CaseOutcomeClass verdict) async {
+    if (verdict.pending) {
+      context.go(AuthRoutes.caseDecisions(widget.caseId));
+      return;
+    }
+    final action = await showDialog<_NextStep>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('What happens with this claim?'),
+        content: Text(
+          verdict.appealEligible
+              ? 'You can appeal this decision and keep the claim open, or mark it complete. A completed claim stays available to view and download.'
+              : 'You can mark this claim complete. It stays available to view and download.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, _NextStep.later),
+            child: const Text('Later'),
+          ),
+          if (verdict.appealEligible)
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext, _NextStep.appeal),
+              child: const Text('Appeal'),
+            ),
+          FilledButton(
+            onPressed: () => Navigator.pop(dialogContext, _NextStep.complete),
+            child: const Text('Mark complete'),
+          ),
+        ],
+      ),
+    );
+    if (!mounted) return;
+    switch (action) {
+      case _NextStep.appeal:
+        await _runLifecycle(
+          ref.read(appealCaseProvider),
+          AuthRoutes.casePrepare(widget.caseId),
+        );
+      case _NextStep.complete:
+        await _runLifecycle(
+          ref.read(completeCaseProvider),
+          AuthRoutes.caseStep(widget.caseId),
+        );
+      case _NextStep.later:
+      case null:
+        context.go(AuthRoutes.caseDecisions(widget.caseId));
+    }
+  }
+
+  Future<void> _runLifecycle(
+    Future<void> Function(String) action,
+    String destination,
+  ) async {
+    try {
+      await action(widget.caseId);
+      if (!mounted) return;
+      context.go(destination);
+    } on CaseFailure catch (error) {
+      if (!mounted) return;
+      setState(() => _error = error.message);
+      context.go(AuthRoutes.caseDecisions(widget.caseId));
     }
   }
 

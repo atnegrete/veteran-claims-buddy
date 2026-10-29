@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../app/app_ui.dart';
+import '../../account/profile.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/phone_number.dart';
+import '../../claim/identifiers_repository.dart';
+import '../../onboarding/onboarding_progress.dart';
 import '../../forms/text_input_chain.dart';
 import 'auth_scaffold.dart';
 
@@ -88,6 +92,30 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
       await ref
           .read(authControllerProvider.notifier)
           .confirmEnrollmentCode(code);
+      final session = ref.read(authControllerProvider).session;
+      final phone = toE164(_phone.text);
+      if (session != null && phone != null) {
+        try {
+          await ref.read(onboardingRepositoryProvider).ensureUserDocument(
+                uid: session.uid,
+                email: session.email ?? '',
+                timezone: profileTimezoneOrDefault(null),
+              );
+          await ref.read(identifiersRepositoryProvider).seedFormContact(
+                uid: session.uid,
+                phone: phone,
+                email: session.email,
+              );
+        } catch (_) {
+          if (mounted) {
+            setState(() {
+              _message =
+                  'Your phone is enrolled. The number for your forms could not be saved. You can add it on your profile.';
+              _messageIsError = true;
+            });
+          }
+        }
+      }
     } on AuthFailure catch (failure) {
       if (mounted) {
         setState(() {
@@ -110,7 +138,7 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
+            const LeadText(
               'The phone was removed, and security setup did not finish.',
             ),
             const SizedBox(height: 16),
@@ -139,7 +167,7 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
+            const LeadText(
               'Your phone number is enrolled. Finishing security setup.',
             ),
             const SizedBox(height: 16),
@@ -173,12 +201,8 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            'Your email is verified. A phone number is required before any claim information. Veteran Claims Buddy uses it only as a second sign-in check.',
-          ),
-          const SizedBox(height: 12),
-          const Text(
-            'Firebase and Google store this number and use it to prevent abuse.',
+          const LeadText(
+            'A phone number is required before any claim information. It is only a second sign-in check.',
           ),
           const SizedBox(height: 16),
           if (!_codeSent) ...[

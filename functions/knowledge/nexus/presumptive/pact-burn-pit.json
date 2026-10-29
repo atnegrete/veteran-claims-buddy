@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "pactBurnPit",
+  "label": "Burn pit and airborne hazards (PACT Act)",
+  "authority": "PACT Act (Pub. L. 117-168); 38 CFR 3.320",
+  "citation": "38 U.S.C. 1119-1120; 38 CFR 3.320",
+  "sourceAsOf": "2026-10-22",
+  "qualifyingService": {
+    "locations": [
+      "Iraq", "Afghanistan", "Kuwait", "Qatar", "Bahrain", "United Arab Emirates",
+      "Saudi Arabia", "Oman", "Jordan", "Syria", "Djibouti", "Egypt", "Yemen",
+      "Lebanon", "Somalia", "Southwest Asia", "Gulf War theater"
+    ],
+    "dateRanges": [
+      { "start": "1990-08-02", "end": "", "label": "Gulf War era to present (Southwest Asia and related)" },
+      { "start": "2001-09-11", "end": "", "label": "Post-9/11 (Afghanistan and related)" }
+    ],
+    "branches": []
+  },
+  "exposures": ["burnPit", "other"],
+  "presumptiveConditions": [
+    "Asthma (diagnosed after service)",
+    "Chronic bronchitis",
+    "Chronic obstructive pulmonary disease (COPD)",
+    "Chronic rhinitis",
+    "Chronic sinusitis",
+    "Constrictive or obliterative bronchiolitis",
+    "Emphysema",
+    "Granulomatous disease",
+    "Interstitial lung disease",
+    "Pleuritis",
+    "Pulmonary fibrosis",
+    "Sarcoidosis",
+    "Head cancer of any type",
+    "Neck cancer of any type",
+    "Respiratory cancer of any type",
+    "Gastrointestinal cancer of any type",
+    "Reproductive cancer of any type",
+    "Lymphoma of any type",
+    "Kidney cancer",
+    "Brain cancer",
+    "Melanoma",
+    "Pancreatic cancer",
+    "Glioblastoma"
+  ],
+  "notes": "The PACT Act presumes these conditions for Veterans who served in covered locations during the covered periods and were exposed to burn pits or other airborne hazards. A presumptive condition usually does not need a paid nexus letter."
+}

@@ -1,0 +1,1236 @@
+{
+  "formNumber": "20-0995",
+  "revision": "2022-09-27",
+  "fields": [
+    {
+      "pdfField": "form1[0].#subform[16].ClaimantsDOBDay[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Claimants DOBDay",
+      "group": "vet.dateOfBirth",
+      "source": "auto",
+      "canonicalKey": "vet.dobDay"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].ClaimantsDOBMonth[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Claimants DOBMonth",
+      "group": "vet.dateOfBirth",
+      "source": "auto",
+      "canonicalKey": "vet.dobMonth"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].ClaimantsDOBYear[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Claimants DOBYear",
+      "group": "vet.dateOfBirth",
+      "source": "auto",
+      "canonicalKey": "vet.dobYear"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].ClaimantsFirstName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 12,
+      "label": "Legal first name",
+      "group": "vet.legalFirstName",
+      "source": "auto",
+      "canonicalKey": "vet.legalFirstName"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].ClaimantsFirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Claimants First Three Numbers",
+      "group": "ask:claimantsfirstthreenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].ClaimantsInsurancePolicyNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Claimants Insurance Policy Number",
+      "group": "ask:claimantsinsurancepolicynumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].ClaimantsLastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Claimants Last Four Numbers",
+      "group": "ask:claimantslastfournumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].ClaimantsLastName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Legal last name",
+      "group": "vet.legalLastName",
+      "source": "auto",
+      "canonicalKey": "vet.legalLastName"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].ClaimantsMiddleInitial1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 1,
+      "label": "Claimants Middle Initial1",
+      "group": "vet.legalMiddleName",
+      "source": "auto",
+      "canonicalKey": "vet.legalMiddleInitial"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].ClaimantsSecondTwoNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Claimants Second Two Numbers",
+      "group": "ask:claimantssecondtwonumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].ClaimantsVAFileNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "VA file number",
+      "group": "vet.vaFileNumber",
+      "source": "auto",
+      "canonicalKey": "vet.vaFileNumber"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_ApartmentOrUnitNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Current Mailing Address Apartment Or Unit Number",
+      "group": "ask:currentmailingaddressapartmentorunitnumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_ApartmentOrUnitNumber[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Current Mailing Address Apartment Or Unit Number",
+      "group": "ask:currentmailingaddressapartmentorunitnumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_City[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Current Mailing Address City",
+      "group": "ask:currentmailingaddresscity",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_City[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Current Mailing Address City",
+      "group": "ask:currentmailingaddresscity",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_Country[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Current Mailing Address Country",
+      "group": "ask:currentmailingaddresscountry",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_Country[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Current Mailing Address Country",
+      "group": "ask:currentmailingaddresscountry",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_NumberAndStreet[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 30,
+      "label": "Current Mailing Address Number And Street",
+      "group": "ask:currentmailingaddressnumberandstreet",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_NumberAndStreet[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 30,
+      "label": "Current Mailing Address Number And Street",
+      "group": "ask:currentmailingaddressnumberandstreet",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_StateOrProvince[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Current Mailing Address State Or Province",
+      "group": "ask:currentmailingaddressstateorprovince",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_StateOrProvince[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Current Mailing Address State Or Province",
+      "group": "ask:currentmailingaddressstateorprovince",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Current Mailing Address ZIPOr Postal Code First Five Numbers",
+      "group": "ask:currentmailingaddressziporpostalcodefirstfivenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_ZIPOrPostalCode_FirstFiveNumbers[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Current Mailing Address ZIPOr Postal Code First Five Numbers",
+      "group": "ask:currentmailingaddressziporpostalcodefirstfivenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_ZIPOrPostalCode_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Current Mailing Address ZIPOr Postal Code Last Four Numbers",
+      "group": "ask:currentmailingaddressziporpostalcodelastfournumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_ZIPOrPostalCode_LastFourNumbers[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Current Mailing Address ZIPOr Postal Code Last Four Numbers",
+      "group": "ask:currentmailingaddressziporpostalcodelastfournumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].Email[0]",
+      "type": "text",
+      "required": false,
+      "label": "Email address",
+      "group": "vet.email",
+      "source": "auto",
+      "canonicalKey": "vet.email"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].FirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "First Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].InsurancePolicyNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Insurance Policy Number",
+      "group": "ask:insurancepolicynumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Last Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].Other1[0]",
+      "type": "text",
+      "required": false,
+      "label": "Other1",
+      "group": "ask:other1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].RadioButtonList[0]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "COMPENSATION",
+        "PENSION/DIC/SURVIVORS BENEFITS ",
+        "FIDUCIARY ",
+        "EDUCATION ",
+        "LOAN GUARANTY ",
+        "LIFE INSURANCE ",
+        "VETERAN READINESS AND EMPLOYMENT ",
+        "NATIONAL CEMETERY ADMINISTRATION ",
+        "VETERANS HEALTH ADMINISTRATION"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].RadioButtonList[1]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "SPOUSE",
+        "CHILD",
+        "FIDUCIARY",
+        "PARENT ",
+        "OTHER (Specify):"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].SecondTwoNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Second Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VAFileNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "VA file number",
+      "group": "vet.vaFileNumber",
+      "source": "auto",
+      "canonicalKey": "vet.vaFileNumber"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VeteranDOBDay[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Veteran DOBDay",
+      "group": "vet.dateOfBirth",
+      "source": "auto",
+      "canonicalKey": "vet.dobDay"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VeteranDOBMonth[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Veteran DOBMonth",
+      "group": "vet.dateOfBirth",
+      "source": "auto",
+      "canonicalKey": "vet.dobMonth"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VeteranDOBYear[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Veteran DOBYear",
+      "group": "vet.dateOfBirth",
+      "source": "auto",
+      "canonicalKey": "vet.dobYear"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VeteransFirstName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 12,
+      "label": "Legal first name",
+      "group": "vet.legalFirstName",
+      "source": "auto",
+      "canonicalKey": "vet.legalFirstName"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VeteransLastName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Legal last name",
+      "group": "vet.legalLastName",
+      "source": "auto",
+      "canonicalKey": "vet.legalLastName"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VeteransMiddleInitial1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 1,
+      "label": "Veterans Middle Initial1",
+      "group": "vet.legalMiddleName",
+      "source": "auto",
+      "canonicalKey": "vet.legalMiddleInitial"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VeteransPhoneAreaCode[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Veterans Phone Area Code",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneAreaCode"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VeteransPhoneFirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Veterans Phone First Three Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phonePrefix"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VeteransPhoneInternational_Telephone_Number_If_Applicable[0]",
+      "type": "text",
+      "required": false,
+      "label": "Veterans Phone International Telephone Number If Applicable",
+      "group": "ask:veteransphoneinternationaltelephonenumberifapplicable",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VeteransPhoneLastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Veterans Phone Last Four Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneLine"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VeteransServiceNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "Veterans Service Number",
+      "group": "ask:veteransservicenumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VHASpecify[0]",
+      "type": "text",
+      "required": false,
+      "label": "VHASpecify",
+      "group": "ask:vhaspecify",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Email[1]",
+      "type": "text",
+      "required": false,
+      "label": "Email address",
+      "group": "vet.email",
+      "source": "auto",
+      "canonicalKey": "vet.email"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].NO4[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "NO4",
+      "group": "ask:no4",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].NO4[1]",
+      "type": "checkbox",
+      "required": false,
+      "label": "NO4",
+      "group": "ask:no4",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].NO4[2]",
+      "type": "checkbox",
+      "required": false,
+      "label": "NO4",
+      "group": "ask:no4",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].NO4[3]",
+      "type": "checkbox",
+      "required": false,
+      "label": "NO4",
+      "group": "ask:no4",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].NO4[4]",
+      "type": "checkbox",
+      "required": false,
+      "label": "NO4",
+      "group": "ask:no4",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].NO4[5]",
+      "type": "checkbox",
+      "required": false,
+      "label": "NO4",
+      "group": "ask:no4",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].NO4[6]",
+      "type": "checkbox",
+      "required": false,
+      "label": "NO4",
+      "group": "ask:no4",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Other2[0]",
+      "type": "text",
+      "required": false,
+      "label": "Other2",
+      "group": "ask:other2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].poc[0]",
+      "type": "text",
+      "required": false,
+      "label": "Poc",
+      "group": "ask:poc",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].POCInternational_Telephone_Number_If_Applicable[0]",
+      "type": "text",
+      "required": false,
+      "label": "POCInternational Telephone Number If Applicable",
+      "group": "ask:pocinternationaltelephonenumberifapplicable",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].POCPhoneNumberAreaCode[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "POCPhone Number Area Code",
+      "group": "ask:pocphonenumberareacode",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].POCPhoneNumberFirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "POCPhone Number First Three Numbers",
+      "group": "ask:pocphonenumberfirstthreenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].POCPhoneNumberLastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "POCPhone Number Last Four Numbers",
+      "group": "ask:pocphonenumberlastfournumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].RadioButtonList[2]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "NO (If \"No,\" skip to Item 21)",
+        "1"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row1[0].#subform[0].#subform[1].Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row1[0].#subform[0].#subform[1].Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row1[0].#subform[0].#subform[1].Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row1[0].SPECIFICISSUE1[0]",
+      "type": "text",
+      "required": false,
+      "label": "SPECIFICISSUE1",
+      "group": "ask:specificissue1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row2[0].#subform[0].Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row2[0].#subform[0].Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row2[0].#subform[0].Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row2[0].SPECIFICISSUE2[0]",
+      "type": "text",
+      "required": false,
+      "label": "SPECIFICISSUE2",
+      "group": "ask:specificissue2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row3[0].#subform[0].Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row3[0].#subform[0].Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row3[0].#subform[0].Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row3[0].SPECIFICISSUE2[0]",
+      "type": "text",
+      "required": false,
+      "label": "SPECIFICISSUE2",
+      "group": "ask:specificissue2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row4[0].#subform[0].Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row4[0].#subform[0].Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row4[0].#subform[0].Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row4[0].SPECIFICISSUE2[0]",
+      "type": "text",
+      "required": false,
+      "label": "SPECIFICISSUE2",
+      "group": "ask:specificissue2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row5[0].#subform[0].Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row5[0].#subform[0].Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row5[0].#subform[0].Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row5[0].SPECIFICISSUE2[0]",
+      "type": "text",
+      "required": false,
+      "label": "SPECIFICISSUE2",
+      "group": "ask:specificissue2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row6[0].#subform[0].Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row6[0].#subform[0].Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row6[0].#subform[0].Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row6[0].SPECIFICISSUE2[0]",
+      "type": "text",
+      "required": false,
+      "label": "SPECIFICISSUE2",
+      "group": "ask:specificissue2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row7[0].#subform[0].Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row7[0].#subform[0].Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row7[0].#subform[0].Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row7[0].SPECIFICISSUE2[0]",
+      "type": "text",
+      "required": false,
+      "label": "SPECIFICISSUE2",
+      "group": "ask:specificissue2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].VeteransPhoneAreaCode[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Veterans Phone Area Code",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneAreaCode"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].VeteransPhoneFirstThreeNumbers[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Veterans Phone First Three Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phonePrefix"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].VeteransPhoneInternational_Telephone_Number_If_Applicable[1]",
+      "type": "text",
+      "required": false,
+      "label": "Veterans Phone International Telephone Number If Applicable",
+      "group": "ask:veteransphoneinternationaltelephonenumberifapplicable",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].VeteransPhoneLastFourNumbers[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Veterans Phone Last Four Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneLine"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].other2[0]",
+      "type": "text",
+      "required": false,
+      "label": "Other2",
+      "group": "ask:other2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].RadioButtonList[3]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "YES ",
+        "NO (If you check \"No,\" VA will send the 5103 notice to you via mail.) "
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].RadioButtonList[4]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "A. I CONSENT TO HAVE VBA NOTIFY VHA ABOUT CERTAIN UPCOMING EVENT(S) RELATED TO MY CLAIM AND/OR APPEAL\n(Note: I understand that an indicator for these event(s) will appear in my VHA medical record.) ",
+        "B. I DO NOT CONSENT TO HAVE VBA NOTIFY VHA ABOUT CERTAIN UPCOMING EVENT(S) RELATED TO MY CLAIM AND/OR APPEAL\n(Note: I understand that an indicator for these event(s) will not appear in my VHA medical record.) ",
+        "C. I REVOKE PRIOR CONSENT TO HAVE VBA NOTIFY VHA ABOUT CERTAIN UPCOMING EVENT(S) RELATED TO MY CLAIM AND/OR APPEAL\n(Note: I understand that in the future, notice of these event(s) will no longer appear in my VHA medical record.)",
+        "D. NOT APPLICABLE AND/OR NOT ENROLLED OR REGISTERED IN VHA HEALTH CARE "
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].ReceivedTreatment[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Received Treatment",
+      "group": "ask:receivedtreatment",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].ReceivedTreatment[1]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Received Treatment",
+      "group": "ask:receivedtreatment",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].ReceivedTreatment[2]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Received Treatment",
+      "group": "ask:receivedtreatment",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].ReceivedTreatment[3]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Received Treatment",
+      "group": "ask:receivedtreatment",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].ReceivedTreatment[4]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Received Treatment",
+      "group": "ask:receivedtreatment",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].ReceivedTreatment[5]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Received Treatment",
+      "group": "ask:receivedtreatment",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row1[0].#subform[0].Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row1[0].#subform[0].Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row1[0].ReceivedTreatment[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Received Treatment",
+      "group": "ask:receivedtreatment",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row1[0].TextField1[0]",
+      "type": "text",
+      "required": false,
+      "label": "Text Field1",
+      "group": "ask:textfield1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row2[0].#subform[0].Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row2[0].#subform[0].Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row2[0].ReceivedTreatment[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Received Treatment",
+      "group": "ask:receivedtreatment",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row2[0].TextField1[0]",
+      "type": "text",
+      "required": false,
+      "label": "Text Field1",
+      "group": "ask:textfield1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row3[0].#subform[0].Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row3[0].#subform[0].Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row3[0].ReceivedTreatment[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Received Treatment",
+      "group": "ask:receivedtreatment",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row3[0].TextField1[0]",
+      "type": "text",
+      "required": false,
+      "label": "Text Field1",
+      "group": "ask:textfield1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].ACCREDITATIONNUMBER[0]",
+      "type": "text",
+      "required": false,
+      "label": "ACCREDITATIONNUMBER",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedDay[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Day",
+      "group": "ask:datesignedday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedDay[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Day",
+      "group": "ask:datesignedday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedDay[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Day",
+      "group": "ask:datesignedday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedMonth[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Month",
+      "group": "ask:datesignedmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedMonth[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Month",
+      "group": "ask:datesignedmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedMonth[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Month",
+      "group": "ask:datesignedmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedYear[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Signed Year",
+      "group": "ask:datesignedyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedYear[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Signed Year",
+      "group": "ask:datesignedyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedYear[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Signed Year",
+      "group": "ask:datesignedyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSubmittedDay[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Submitted Day",
+      "group": "ask:datesubmittedday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSubmittedMonth[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Submitted Month",
+      "group": "ask:datesubmittedmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSubmittedYear[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Submitted Year",
+      "group": "ask:datesubmittedyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].FirstWitnessAddress[0]",
+      "type": "text",
+      "required": false,
+      "label": "First Witness Address",
+      "group": "ask:firstwitnessaddress",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].FirstWitnessName[0]",
+      "type": "text",
+      "required": false,
+      "label": "First Witness Name",
+      "group": "ask:firstwitnessname",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].SecondWitnessAddress[0]",
+      "type": "text",
+      "required": false,
+      "label": "Second Witness Address",
+      "group": "ask:secondwitnessaddress",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].SecondWitnessName[0]",
+      "type": "text",
+      "required": false,
+      "label": "Second Witness Name",
+      "group": "ask:secondwitnessname",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].SignatureField11[0]",
+      "type": "text",
+      "required": false,
+      "label": "Signature Field11",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].SignatureField11[1]",
+      "type": "text",
+      "required": false,
+      "label": "Signature Field11",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].SignatureField11[2]",
+      "type": "text",
+      "required": false,
+      "label": "Signature Field11",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].SignatureField11[3]",
+      "type": "text",
+      "required": false,
+      "label": "Signature Field11",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].SignatureField11[4]",
+      "type": "text",
+      "required": false,
+      "label": "Signature Field11",
+      "group": null,
+      "source": "dev"
+    }
+  ]
+}

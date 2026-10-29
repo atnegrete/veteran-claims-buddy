@@ -5,58 +5,123 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Veteran Claims Buddy</title>
   <meta name="description" content="An AI-powered guided workspace that helps Veterans organize a disability claim and see what to do next.">
-  <link rel="canonical" href="https://veteran-claims-buddy-dev.web.app/">
-  
+  <link rel="canonical" href="https://veteranclaimsbuddy.com/">
   <meta property="og:title" content="Veteran Claims Buddy">
   <meta property="og:description" content="An AI-powered guided workspace that helps Veterans organize a disability claim and see what to do next.">
-  <meta property="og:url" content="https://veteran-claims-buddy-dev.web.app/">
+  <meta property="og:url" content="https://veteranclaimsbuddy.com/">
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://veteranclaimsbuddy.com/assets/og.jpg">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="720">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://veteranclaimsbuddy.com/assets/og.jpg">
+  <link rel="preload" href="/assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
   <meta name="theme-color" content="#10151C">
 </head>
-<body>
+<body class="home">
+  <a class="skip" href="#content">Skip to content</a>
   <p class="banner">Draft. A lawyer has not reviewed this site.</p>
-  <header>
-    <div class="wrap">
-      <a class="brand" href="/"><img src="/assets/logo-mark.svg" width="40" height="40" alt="">Veteran Claims Buddy</a>
-      <nav aria-label="Site"><a href="/how-it-works/">How it works</a>
-        <a href="/pricing/">Pricing</a>
-        <a href="/va-disability-calculator/">Calculator</a>
-        <a href="/faq/">FAQ</a>
-        <a href="/support/">Support</a>
-        <a href="/sign-in/">Sign in</a>
-        <a href="/get-started/" class="button">Get started</a></nav>
+  <header class="site-header">
+    <div class="wrap header-bar">
+      <a class="brand" href="/"><img src="/assets/logo-mark.svg" width="40" height="40" alt=""><span>Veteran Claims Buddy</span></a>
+      <div class="header-actions">
+        <nav class="desktop-nav" aria-label="Site">
+            <a href="/how-it-works/">How it works</a>
+            <a href="/pricing/">Pricing</a>
+            <a href="/va-disability-calculator/">Calculator</a>
+            <a href="/faq/">FAQ</a>
+            <a href="/support/">Support</a>
+            <a href="/sign-in/">Sign in</a>
+        </nav>
+        <a class="btn header-cta" href="/get-started/">Get started</a>
+        <details class="mobile-nav">
+          <summary>Menu</summary>
+          <nav aria-label="Site">
+            <a href="/how-it-works/">How it works</a>
+            <a href="/pricing/">Pricing</a>
+            <a href="/va-disability-calculator/">Calculator</a>
+            <a href="/faq/">FAQ</a>
+            <a href="/support/">Support</a>
+            <a href="/sign-in/">Sign in</a>
+          </nav>
+        </details>
+      </div>
     </div>
   </header>
-  <main>
-    <div class="wrap">
-      <h1>Veteran Claims Buddy</h1>
+  <main id="content">
+    <div class="wrap page-wrap">
       
-      <p>Veteran Claims Buddy is an AI-powered guided workspace that helps Veterans understand disability claims, organize evidence, prepare VA forms, and know what to do next.</p>
-      <p>Veteran Claims Buddy is an independent service and is not affiliated with or endorsed by the U.S. Department of Veterans Affairs.</p>
-      <p>You submit the claim yourself on VA.gov or by mail. This service does not file it.</p>
-      <div class="actions">
-        <a class="button" href="/get-started/">Get started</a>
-        <a href="/how-it-works/">How it works</a>
-      </div>
-      <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Veteran Claims Buddy LLC","url":"https://veteran-claims-buddy-dev.web.app","email":"support@veteranclaimsbuddy.com"}</script>
+      
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Independent claim workspace</p>
+          <h1 class="display">Organize the claim. See the next step.</h1>
+          <p class="lede">Veteran Claims Buddy is an AI-powered guided workspace that helps Veterans understand disability claims, organize evidence, prepare VA forms, and know what to do next.</p>
+          <p class="disclaimer">Veteran Claims Buddy is an independent service and is not affiliated with or endorsed by the U.S. Department of Veterans Affairs.</p>
+          <p>You submit the claim yourself on VA.gov or by mail. This service does not file it.</p>
+          <div class="actions">
+            <a class="btn" href="/get-started/">Get started</a>
+            <a class="btn-quiet" href="/how-it-works/">How it works</a>
+          </div>
+        </div>
+        <img class="hero-art" src="/assets/hero.jpg" width="1152" height="864" alt="A lamp lighting a stack of papers and a checklist on a desk.">
+      </section>
+      <section class="feature-grid" aria-label="What the workspace does">
+        <article class="card">
+          <p class="eyebrow">01</p>
+          <h2>One step at a time</h2>
+          <p>The claim opens on the current step, then the next. You are not handed every form at once.</p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">02</p>
+          <h2>You confirm the record</h2>
+          <p>Upload a PDF, JPEG, or PNG. Each statement stays unreviewed until you confirm, correct, or set it aside.</p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">03</p>
+          <h2>You submit it yourself</h2>
+          <p>You send the claim on VA.gov or by mail. This service does not file it.</p>
+        </article>
+      </section>
+      <section class="card price-strip">
+        <div>
+          <p class="eyebrow">Pricing</p>
+          <h2>The workspace stays open</h2>
+          <p>A $250 Case unlock and Premium from $29.99 a month are separate from organizing the claim. Buying is not open in the app yet.</p>
+        </div>
+        <a class="btn-quiet" href="/pricing/">See pricing</a>
+      </section>
+      <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Veteran Claims Buddy LLC","url":"https://veteranclaimsbuddy.com","email":"support@veteranclaimsbuddy.com"}</script>
     
     </div>
   </main>
-  <footer>
-    <div class="wrap">
-      <nav class="links" aria-label="Legal">
-        <a href="/privacy/">Privacy</a>
-        <a href="/terms/">Terms</a>
-        <a href="/terms/subscription/">Subscription</a>
-        <a href="/terms/refunds/">Refunds</a>
-        <a href="/terms/print-and-mail/">Print and mail</a>
-        <a href="/ai-disclosure/">AI disclosure</a>
-        <a href="/account-deletion/">Account deletion</a>
-        <a href="/support/">Support</a>
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <a class="brand" href="/"><img src="/assets/logo-mark.svg" width="40" height="40" alt=""><span>Veteran Claims Buddy</span></a>
+        <p class="disclaimer">Veteran Claims Buddy is an independent service and is not affiliated with or endorsed by the U.S. Department of Veterans Affairs.</p>
+      </div>
+      <nav aria-label="Product">
+        <p class="footer-label">Product</p>
+        <a href="/how-it-works/">How it works</a>
+            <a href="/pricing/">Pricing</a>
+            <a href="/va-disability-calculator/">Calculator</a>
+            <a href="/faq/">FAQ</a>
+            <a href="/support/">Support</a>
       </nav>
-      <p>Veteran Claims Buddy is an independent service and is not affiliated with or endorsed by the U.S. Department of Veterans Affairs.</p>
+      <nav aria-label="Legal">
+        <p class="footer-label">Legal</p>
+        <a href="/privacy/">Privacy</a>
+            <a href="/terms/">Terms</a>
+            <a href="/terms/subscription/">Subscription</a>
+            <a href="/terms/refunds/">Refunds</a>
+            <a href="/terms/print-and-mail/">Print and mail</a>
+            <a href="/ai-disclosure/">AI disclosure</a>
+            <a href="/account-deletion/">Account deletion</a>
+            <a href="/support/">Support</a>
+      </nav>
     </div>
   </footer>
 </body>

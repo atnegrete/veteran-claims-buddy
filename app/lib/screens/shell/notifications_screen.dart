@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../account/notification_preferences.dart';
+import '../../app/app_ui.dart';
 import 'shell_pages.dart';
 
 class NotificationsScreen extends ConsumerWidget {
@@ -74,8 +75,8 @@ class _NotificationFormState extends ConsumerState<_NotificationForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            'Reminders arrive as a push notification. The lock screen stays general and does not name a condition or a claim. An exam reminder opens that exam. A task reminder opens Home or that task. There is no notification inbox.',
+          const LeadText(
+            'Reminders arrive as push notifications. The lock screen stays general and never names a condition or claim.',
           ),
           const SizedBox(height: 8),
           SwitchListTile(
@@ -92,10 +93,7 @@ class _NotificationFormState extends ConsumerState<_NotificationForm> {
           ),
           if (_error != null) ...[
             const SizedBox(height: 8),
-            Text(
-              _error!,
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
-            ),
+            ErrorText(_error!),
           ],
         ],
       ),

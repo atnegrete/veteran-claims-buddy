@@ -1,0 +1,211 @@
+{
+  "formNumber": "21-0966",
+  "revision": "2023-02-28",
+  "review": [
+    {
+      "pdfField": "F[0].#subform[1].#field[2]",
+      "label": "#field",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].DATE_SIGNED_Day[0]",
+      "label": "DATE SIGNED Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].DATE_SIGNED_Month[0]",
+      "label": "DATE SIGNED Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].DATE_SIGNED_Year[0]",
+      "label": "DATE SIGNED Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].NAME_OF_ATTORNEY_AGENT_OR_VETERANS_SERVICE_ORGANIZATION_VSO[0]",
+      "label": "NAME OF ATTORNEY AGENT OR VETERANS SERVICE ORGANIZATION VSO",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].Pension[0]",
+      "label": "Pension",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].SignatureField1[0]",
+      "label": "Signature Field1",
+      "type": "text",
+      "source": "dev"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Address_Of_Parent_1[0]",
+      "label": "Address Of Parent 1",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Address_Of_Parent_1[1]",
+      "label": "Address Of Parent 1",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].CheckBox1[0]",
+      "label": "Check Box1",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].CheckBox1[1]",
+      "label": "Check Box1",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_DOB_Day[0]",
+      "label": "Claimants DOB Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_DOB_Month[0]",
+      "label": "Claimants DOB Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_DOB_Year[0]",
+      "label": "Claimants DOB Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_EMAIL_ADDRESS[0]",
+      "label": "Claimants EMAIL ADDRESS",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_EMAIL_ADDRESS[1]",
+      "label": "Claimants EMAIL ADDRESS",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_International_Phone_Number[0]",
+      "label": "Claimants International Phone Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_Telephone_Number_FirstThreeNumbers[0]",
+      "label": "Claimants Telephone Number First Three Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_Telephone_Number_LastFourNumbers[0]",
+      "label": "Claimants Telephone Number Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_Telephone_Number_SecondThreeNumbers[0]",
+      "label": "Claimants Telephone Number Second Three Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ClaimantsFirstName[0]",
+      "label": "Claimants First Name",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ClaimantsLastName[0]",
+      "label": "Claimants Last Name",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ClaimantsMiddleInitial1[0]",
+      "label": "Claimants Middle Initial1",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ClaimantsSocialSecurityNumber_FirstThreeNumbers[0]",
+      "label": "Claimants Social Security Number First Three Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ClaimantsSocialSecurityNumber_LastFourNumbers[0]",
+      "label": "Claimants Social Security Number Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ClaimantsSocialSecurityNumber_SecondTwoNumbers[0]",
+      "label": "Claimants Social Security Number Second Two Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].International_Phone_Number[0]",
+      "label": "International Phone Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].RadioButtonList[0]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].Page_1[0].RadioButtonList[1]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "pdfField": "F[0].Page_1[0].RelationshipToVeteranOther_Specify[0]",
+      "label": "Relationship To Veteran Other Specify",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].VA_File_Number[1]",
+      "label": "VA File Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Veterans_Service_Number[0]",
+      "label": "Veterans Service Number",
+      "type": "text",
+      "source": "ask"
+    }
+  ]
+}

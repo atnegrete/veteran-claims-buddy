@@ -37,11 +37,7 @@ void main() {
 
   test('verified email with a factor waits for the server marker', () {
     expect(
-      resolveAuthAccess(
-        signedIn: true,
-        emailVerified: true,
-        mfaEnrolled: true,
-      ),
+      resolveAuthAccess(signedIn: true, emailVerified: true, mfaEnrolled: true),
       AuthAccess.mfaEnrollmentRequired,
     );
   });

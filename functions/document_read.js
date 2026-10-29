@@ -216,7 +216,7 @@ async function readUploadedDocument(object, deps = {}) {
         factType: fact.factType,
         normalizedConditionId: null,
         conditionText: fact.conditionText,
-        claimIssueIds: [],
+        conditionIds: [],
         factText: fact.factText,
         correctedText: null,
         eventDate: fact.eventDate,

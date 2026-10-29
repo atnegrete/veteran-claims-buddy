@@ -80,8 +80,7 @@ class AuthController extends Notifier<AuthGateState> {
     final gateway = ref.watch(authGatewayProvider);
     final subscription = gateway.watchSession().listen(
       (session) {
-        final sameUser =
-            session != null && session.uid == state.session?.uid;
+        final sameUser = session != null && session.uid == state.session?.uid;
         state = state.copyWith(
           ready: true,
           session: session,
@@ -115,22 +114,17 @@ class AuthController extends Notifier<AuthGateState> {
     required String password,
   }) {
     return _refreshAfter(
-      () => ref.read(authGatewayProvider).createAccount(
-            email: email,
-            password: password,
-          ),
+      () => ref
+          .read(authGatewayProvider)
+          .createAccount(email: email, password: password),
     );
   }
 
-  Future<void> signIn({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> signIn({required String email, required String password}) async {
     try {
-      await ref.read(authGatewayProvider).signIn(
-            email: email,
-            password: password,
-          );
+      await ref
+          .read(authGatewayProvider)
+          .signIn(email: email, password: password);
     } on MfaChallengeRequired catch (required) {
       state = state.copyWith(
         ready: true,
@@ -275,10 +269,9 @@ class AuthController extends Notifier<AuthGateState> {
     required String code,
     required String newPassword,
   }) {
-    return ref.read(authGatewayProvider).confirmPasswordReset(
-          code: code,
-          newPassword: newPassword,
-        );
+    return ref
+        .read(authGatewayProvider)
+        .confirmPasswordReset(code: code, newPassword: newPassword);
   }
 
   Future<void> signOut() async {
@@ -303,5 +296,6 @@ class AuthController extends Notifier<AuthGateState> {
   }
 }
 
-final authControllerProvider =
-    NotifierProvider<AuthController, AuthGateState>(AuthController.new);
+final authControllerProvider = NotifierProvider<AuthController, AuthGateState>(
+  AuthController.new,
+);

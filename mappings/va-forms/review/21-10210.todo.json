@@ -1,0 +1,348 @@
+{
+  "formNumber": "21-10210",
+  "revision": "2021-06-18",
+  "review": [
+    {
+      "pdfField": "vba210304[0].#subform[0].AreaCode[0]",
+      "label": "Area Code",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].AreaCode[1]",
+      "label": "Area Code",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CheckBox1[0]",
+      "label": "Check Box1",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CheckBox1[1]",
+      "label": "Check Box1",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CurrentMailingAddress_ApartmentOrUnitNumber[0]",
+      "label": "Current Mailing Address Apartment Or Unit Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CurrentMailingAddress_ApartmentOrUnitNumber[1]",
+      "label": "Current Mailing Address Apartment Or Unit Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CurrentMailingAddress_City[0]",
+      "label": "Current Mailing Address City",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CurrentMailingAddress_City[1]",
+      "label": "Current Mailing Address City",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CurrentMailingAddress_Country[0]",
+      "label": "Current Mailing Address Country",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CurrentMailingAddress_Country[1]",
+      "label": "Current Mailing Address Country",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CurrentMailingAddress_NumberAndStreet[0]",
+      "label": "Current Mailing Address Number And Street",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CurrentMailingAddress_NumberAndStreet[1]",
+      "label": "Current Mailing Address Number And Street",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CurrentMailingAddress_StateOrProvince[0]",
+      "label": "Current Mailing Address State Or Province",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CurrentMailingAddress_StateOrProvince[1]",
+      "label": "Current Mailing Address State Or Province",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CurrentMailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0]",
+      "label": "Current Mailing Address ZIPOr Postal Code First Five Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CurrentMailingAddress_ZIPOrPostalCode_FirstFiveNumbers[1]",
+      "label": "Current Mailing Address ZIPOr Postal Code First Five Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CurrentMailingAddress_ZIPOrPostalCode_LastFourNumbers[0]",
+      "label": "Current Mailing Address ZIPOr Postal Code Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].CurrentMailingAddress_ZIPOrPostalCode_LastFourNumbers[1]",
+      "label": "Current Mailing Address ZIPOr Postal Code Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].Day[1]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].Day[3]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].FirstThreeNumbers[0]",
+      "label": "First Three Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].FirstThreeNumbers[1]",
+      "label": "First Three Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].FirstThreeNumbers[2]",
+      "label": "First Three Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].International_Phone_Number[0]",
+      "label": "International Phone Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].International_Phone_Number[1]",
+      "label": "International Phone Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].LastFourNumbers[0]",
+      "label": "Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].LastFourNumbers[1]",
+      "label": "Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].LastFourNumbers[2]",
+      "label": "Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].Month[1]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].Month[3]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].SecondTwoNumbers[0]",
+      "label": "Second Two Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].VA_INSURANCE_FILE_NUMBER[0]",
+      "label": "VA INSURANCE FILE NUMBER",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].VA_INSURANCE_FILE_NUMBER[1]",
+      "label": "VA INSURANCE FILE NUMBER",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].Year[1]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[0].Year[3]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].AreaCode[2]",
+      "label": "Area Code",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].COWORKER_OR_SUPERVISOR_OF_CLAIMANT[0]",
+      "label": "COWORKER OR SUPERVISOR OF CLAIMANT",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].Day[5]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].Digital_Signature[0]",
+      "label": "Digital Signature",
+      "type": "text",
+      "source": "dev"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].EMAIL_ADDRESS[4]",
+      "label": "EMAIL ADDRESS",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].EMAIL_ADDRESS[5]",
+      "label": "EMAIL ADDRESS",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].FAMILY_OR_FRIEND_OF_CLAIMANT[0]",
+      "label": "FAMILY OR FRIEND OF CLAIMANT",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].FirstThreeNumbers[3]",
+      "label": "First Three Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].International_Phone_Number[2]",
+      "label": "International Phone Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].Last_Name[2]",
+      "label": "Last Name",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].LastFourNumbers[3]",
+      "label": "Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].Middle_Initial1[2]",
+      "label": "Middle Initial1",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].Month[5]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].OTHER_Specify[0]",
+      "label": "OTHER Specify",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].OTHER_Specify[1]",
+      "label": "OTHER Specify",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].SERVED_WITH_CLAIMANT[0]",
+      "label": "SERVED WITH CLAIMANT",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].SSN1[2]",
+      "label": "SSN1",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].SSN2[2]",
+      "label": "SSN2",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].SSN3[2]",
+      "label": "SSN3",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].TextField1[1]",
+      "label": "Text Field1",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].WITNESS_FIRST_NAME[0]",
+      "label": "WITNESS FIRST NAME",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "vba210304[0].#subform[2].Year[5]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    }
+  ]
+}

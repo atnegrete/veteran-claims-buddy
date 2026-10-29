@@ -1,0 +1,3049 @@
+{
+  "formNumber": "21-526EZ",
+  "revision": "2022-11-27",
+  "fields": [
+    {
+      "pdfField": "F[0].#subform[10].Check_Box_Do_Not_Have_Date_s[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Check Box Do Not Have Date s",
+      "group": "ask:checkboxdonothavedates",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Check_Box_Do_Not_Have_Date_s[1]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Check Box Do Not Have Date s",
+      "group": "ask:checkboxdonothavedates",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Check_Box_Do_Not_Have_Date_s[2]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Check Box Do Not Have Date s",
+      "group": "ask:checkboxdonothavedates",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[0]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[1]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[10]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[11]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[12]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[13]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[14]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[2]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[3]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[4]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[5]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[6]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[7]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[8]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[9]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date_Disability_Began_Or_Worsened[0]",
+      "type": "text",
+      "required": false,
+      "label": "Date Disability Began Or Worsened",
+      "group": "ask:datedisabilitybeganorworsened",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date_Of_Treatment_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Of Treatment Month",
+      "group": "ask:dateoftreatmentmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date_Of_Treatment_Month[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Of Treatment Month",
+      "group": "ask:dateoftreatmentmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date_Of_Treatment_Month[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Of Treatment Month",
+      "group": "ask:dateoftreatmentmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date_Of_Treatment_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Of Treatment Year",
+      "group": "ask:dateoftreatmentyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date_Of_Treatment_Year[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Of Treatment Year",
+      "group": "ask:dateoftreatmentyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date_Of_Treatment_Year[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Of Treatment Year",
+      "group": "ask:dateoftreatmentyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[0]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[1]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[10]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[11]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[12]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[13]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[2]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[3]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[4]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[5]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[6]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[7]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[8]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[9]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Enter_Disability_Treated_And_Name_And_Location_Of_Treatment_Facility[0]",
+      "type": "text",
+      "required": false,
+      "label": "Enter Disability Treated And Name And Location Of Treatment Facility",
+      "group": "ask:enterdisabilitytreatedandnameandlocationoftreatmentfacility",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Enter_Disability_Treated_And_Name_And_Location_Of_Treatment_Facility[1]",
+      "type": "text",
+      "required": false,
+      "label": "Enter Disability Treated And Name And Location Of Treatment Facility",
+      "group": "ask:enterdisabilitytreatedandnameandlocationoftreatmentfacility",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Enter_Disability_Treated_And_Name_And_Location_Of_Treatment_Facility[2]",
+      "type": "text",
+      "required": false,
+      "label": "Enter Disability Treated And Name And Location Of Treatment Facility",
+      "group": "ask:enterdisabilitytreatedandnameandlocationoftreatmentfacility",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[0]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[1]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[10]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[11]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[12]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[13]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[14]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[2]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[3]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[4]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[5]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[6]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[7]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[8]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[9]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].SocialSecurityNumber_FirstThreeNumbers[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Social Security Number First Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].#subform[10].SocialSecurityNumber_LastFourNumbers[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Social Security Number Last Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].#subform[10].SocialSecurityNumber_SecondTwoNumbers[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Social Security Number Second Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[0]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[1]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[10]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[11]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[12]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[13]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[14]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[2]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[3]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[4]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[5]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[6]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[7]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[8]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[9]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AdditionalPeriodsOfService_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Additional Periods Of Service Day",
+      "group": "ask:additionalperiodsofserviceday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AdditionalPeriodsOfService_Day[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Additional Periods Of Service Day",
+      "group": "ask:additionalperiodsofserviceday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AdditionalPeriodsOfService_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Additional Periods Of Service Month",
+      "group": "ask:additionalperiodsofservicemonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AdditionalPeriodsOfService_Month[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Additional Periods Of Service Month",
+      "group": "ask:additionalperiodsofservicemonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AdditionalPeriodsOfService_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Additional Periods Of Service Year",
+      "group": "ask:additionalperiodsofserviceyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AdditionalPeriodsOfService_Year[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Additional Periods Of Service Year",
+      "group": "ask:additionalperiodsofserviceyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AnticipatedSeparationDate_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Anticipated Separation Date Day",
+      "group": "ask:anticipatedseparationdateday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AnticipatedSeparationDate_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Anticipated Separation Date Month",
+      "group": "ask:anticipatedseparationdatemonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AnticipatedSeparationDate_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Anticipated Separation Date Year",
+      "group": "ask:anticipatedseparationdateyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].Current_Or_Assigned_Phone_Number_Of_Unit_Include_Area_Code[0]",
+      "type": "text",
+      "required": false,
+      "label": "Current Or Assigned Phone Number Of Unit Include Area Code",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneAreaCode"
+    },
+    {
+      "pdfField": "F[0].#subform[11].CURRENT_OR_LAST_ASSIGNED_NAME_AND_ADDRESS_OF_UNIT[0]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENT OR LAST ASSIGNED NAME AND ADDRESS OF UNIT",
+      "group": "ask:currentorlastassignednameandaddressofunit",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DateOfActivation_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Of Activation Day",
+      "group": "ask:dateofactivationday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DateOfActivation_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Of Activation Month",
+      "group": "ask:dateofactivationmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DateOfActivation_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Of Activation Year",
+      "group": "ask:dateofactivationyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Dates Of Confinement Day",
+      "group": "ask:datesofconfinementday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Day[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Dates Of Confinement Day",
+      "group": "ask:datesofconfinementday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Day[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Dates Of Confinement Day",
+      "group": "ask:datesofconfinementday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Day[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Dates Of Confinement Day",
+      "group": "ask:datesofconfinementday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Dates Of Confinement Month",
+      "group": "ask:datesofconfinementmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Month[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Dates Of Confinement Month",
+      "group": "ask:datesofconfinementmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Month[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Dates Of Confinement Month",
+      "group": "ask:datesofconfinementmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Month[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Dates Of Confinement Month",
+      "group": "ask:datesofconfinementmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Dates Of Confinement Year",
+      "group": "ask:datesofconfinementyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Year[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Dates Of Confinement Year",
+      "group": "ask:datesofconfinementyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Year[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Dates Of Confinement Year",
+      "group": "ask:datesofconfinementyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Year[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Dates Of Confinement Year",
+      "group": "ask:datesofconfinementyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].Do_Not_Pay_Me_VA_Compensation_I_Do_Not_Want_To_Receive-VA_Compensation_In_Lieu_Of_Retired_Pay[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Do Not Pay Me VA Compensation I Do Not Want To Receive-VA Compensation In Lieu Of Retired Pay",
+      "group": "ask:donotpaymevacompensationidonotwanttoreceivevacompensationinlieuofretiredpay",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].EntryDate_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Entry Date Month",
+      "group": "ask:entrydatemonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].EntryDate_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Entry Date Year",
+      "group": "ask:entrydateyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ExitDate_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Exit Date Day",
+      "group": "ask:exitdateday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ExitDate_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Exit Date Month",
+      "group": "ask:exitdatemonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ExitDate_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Exit Date Year",
+      "group": "ask:exitdateyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].EXPLAIN[0]",
+      "type": "text",
+      "required": false,
+      "label": "EXPLAIN",
+      "group": "ask:explain",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].List_Other_Name_You_Served_Under[0]",
+      "type": "text",
+      "required": false,
+      "label": "List Other Name You Served Under",
+      "group": "ask:listothernameyouservedunder",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].Monthly_Amount[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Monthly Amount",
+      "group": "ask:monthlyamount",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].Monthly_Amount[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Monthly Amount",
+      "group": "ask:monthlyamount",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].MostRecentActiveServiceEntryDate_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Most Recent Active Service Entry Date Day",
+      "group": "ask:mostrecentactiveserviceentrydateday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ObligationTermOfService_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Obligation Term Of Service Day",
+      "group": "ask:obligationtermofserviceday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ObligationTermOfService_Day[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Obligation Term Of Service Day",
+      "group": "ask:obligationtermofserviceday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ObligationTermOfService_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Obligation Term Of Service Month",
+      "group": "ask:obligationtermofservicemonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ObligationTermOfService_Month[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Obligation Term Of Service Month",
+      "group": "ask:obligationtermofservicemonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ObligationTermOfService_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Obligation Term Of Service Year",
+      "group": "ask:obligationtermofserviceyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ObligationTermOfService_Year[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Obligation Term Of Service Year",
+      "group": "ask:obligationtermofserviceyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].PlaceOfLastOrAnticipatedSeparation[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 15,
+      "label": "Place Of Last Or Anticipated Separation",
+      "group": "ask:placeoflastoranticipatedseparation",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].PlaceOfLastOrAnticipatedSeparation[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 15,
+      "label": "Place Of Last Or Anticipated Separation",
+      "group": "ask:placeoflastoranticipatedseparation",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[0]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[1]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[10]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[11]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "4",
+        "7",
+        "2",
+        "5",
+        "8",
+        "3",
+        "6"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[12]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[2]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[3]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[4]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[5]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[6]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[7]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[8]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[9]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].SocialSecurityNumber_FirstThreeNumbers[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Social Security Number First Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].#subform[11].SocialSecurityNumber_LastFourNumbers[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Social Security Number Last Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].#subform[11].SocialSecurityNumber_SecondTwoNumbers[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Social Security Number Second Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Account_Number[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 15,
+      "label": "Account Number",
+      "group": "ask:accountnumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Amount_Received_First_Three_Digits[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Amount Received First Three Digits",
+      "group": "ask:amountreceivedfirstthreedigits",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Amount_Received_Last_Three_Digits[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Amount Received Last Three Digits",
+      "group": "ask:amountreceivedlastthreedigits",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Date_Signed_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Day",
+      "group": "ask:datesignedday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Date_Signed_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Month",
+      "group": "ask:datesignedmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Date_Signed_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Signed Year",
+      "group": "ask:datesignedyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].DatePaymentReceived_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Payment Received Day",
+      "group": "ask:datepaymentreceivedday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].DatePaymentReceived_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Payment Received Month",
+      "group": "ask:datepaymentreceivedmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].DatePaymentReceived_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Payment Received Year",
+      "group": "ask:datepaymentreceivedyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Digital_Signature[0]",
+      "type": "text",
+      "required": false,
+      "label": "Digital Signature",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Do_NOT_Pay_Me_VA_Compensation_I_Do_Not_Want_To_Receive_VA_Compensation_In_Lieu_Of_Training_Pay[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Do NOT Pay Me VA Compensation I Do Not Want To Receive VA Compensation In Lieu Of Training Pay",
+      "group": "ask:donotpaymevacompensationidonotwanttoreceivevacompensationinlieuoftrainingpay",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].ICertifyThatIDoNotHaveAnAccountWithAFinancialInstitutionOrCertifiedPaymentAgent[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "ICertify That IDo Not Have An Account With AFinancial Institution Or Certified Payment Agent",
+      "group": "ask:icertifythatidonothaveanaccountwithafinancialinstitutionorcertifiedpaymentagent",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].NAME_OF_FINANCIAL_INSTITUTION[0]",
+      "type": "text",
+      "required": false,
+      "label": "NAME OF FINANCIAL INSTITUTION",
+      "group": "ask:nameoffinancialinstitution",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Print_Name_And_Address_Of_Witness[0]",
+      "type": "text",
+      "required": false,
+      "label": "Print Name And Address Of Witness",
+      "group": "ask:printnameandaddressofwitness",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Print_Name_And_Address_Of_Witness[1]",
+      "type": "text",
+      "required": false,
+      "label": "Print Name And Address Of Witness",
+      "group": "ask:printnameandaddressofwitness",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].RadioButtonList[13]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].RadioButtonList[14]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].RadioButtonList[15]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "4",
+        "7",
+        "2",
+        "5",
+        "8",
+        "3",
+        "6"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Routing_Or_Transit_Number[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "Routing Or Transit Number",
+      "group": "ask:routingortransitnumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].SocialSecurityNumber_FirstThreeNumbers[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Social Security Number First Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].#subform[12].SocialSecurityNumber_LastFourNumbers[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Social Security Number Last Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].#subform[12].SocialSecurityNumber_SecondTwoNumbers[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Social Security Number Second Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Date_Signed_Day[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Day",
+      "group": "ask:datesignedday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Date_Signed_Day[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Day",
+      "group": "ask:datesignedday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Date_Signed_Month[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Month",
+      "group": "ask:datesignedmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Date_Signed_Month[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Month",
+      "group": "ask:datesignedmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Date_Signed_Year[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Signed Year",
+      "group": "ask:datesignedyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Date_Signed_Year[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Signed Year",
+      "group": "ask:datesignedyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Digital_Signature[1]",
+      "type": "text",
+      "required": false,
+      "label": "Digital Signature",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Digital_Signature[2]",
+      "type": "text",
+      "required": false,
+      "label": "Digital Signature",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "F[0].#subform[13].SocialSecurityNumber_FirstThreeNumbers[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Social Security Number First Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].#subform[13].SocialSecurityNumber_LastFourNumbers[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Social Security Number Last Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].#subform[13].SocialSecurityNumber_SecondTwoNumbers[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Social Security Number Second Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[15]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[16]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[17]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[18]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[19]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[20]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[21]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[22]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[23]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[24]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[25]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[26]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[27]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[28]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[29]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[30]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[31]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[32]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[33]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[34]",
+      "type": "text",
+      "required": false,
+      "label": "CURRENTDISABILITY",
+      "group": "ask:currentdisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date_Disability_Began_Or_Worsened[1]",
+      "type": "text",
+      "required": false,
+      "label": "Date Disability Began Or Worsened",
+      "group": "ask:datedisabilitybeganorworsened",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[14]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[15]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[16]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[17]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[18]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[19]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[20]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[21]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[22]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[23]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[24]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[25]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[26]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[27]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[28]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[29]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[30]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[31]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[32]",
+      "type": "text",
+      "required": false,
+      "label": "Date12",
+      "group": "ask:date12",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[15]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[16]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[17]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[18]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[19]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[20]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[21]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[22]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[23]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[24]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[25]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[26]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[27]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[28]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[29]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[30]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[31]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[32]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[33]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[34]",
+      "type": "text",
+      "required": false,
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "group": "ask:explainhowdisabilityrelatestoeventexposureinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].SocialSecurityNumber_FirstThreeNumbers[5]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Social Security Number First Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].#subform[14].SocialSecurityNumber_LastFourNumbers[5]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Social Security Number Last Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].#subform[14].SocialSecurityNumber_SecondTwoNumbers[5]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Social Security Number Second Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[15]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[16]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[17]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[18]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[19]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[20]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[21]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[22]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[23]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[24]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[25]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[26]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[27]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[28]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[29]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[30]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[31]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[32]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[33]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[34]",
+      "type": "text",
+      "required": false,
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "group": "ask:specifytypeofexposureeventorinjury",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].ASBESTOS[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "ASBESTOS",
+      "group": "ask:asbestos",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Contaminated_Water_At_Camp_Lejeune[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Contaminated Water At Camp Lejeune",
+      "group": "ask:contaminatedwateratcamplejeune",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Fleeing_Current_Residence[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Fleeing Current Residence",
+      "group": "ask:fleeingcurrentresidence",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].From_Date_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "From Date Month",
+      "group": "ask:fromdatemonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].From_Date_Month[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "From Date Month",
+      "group": "ask:fromdatemonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].From_Date_Month[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "From Date Month",
+      "group": "ask:fromdatemonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].From_Date_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "From Date Year",
+      "group": "ask:fromdateyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].From_Date_Year[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "From Date Year",
+      "group": "ask:fromdateyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].From_Date_Year[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "From Date Year",
+      "group": "ask:fromdateyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Housing_Will_Be_Lost_In_30_Days[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Housing Will Be Lost In 30 Days",
+      "group": "ask:housingwillbelostin30days",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].International_Telephone_Number_If_Applicable[0]",
+      "type": "text",
+      "required": false,
+      "label": "International Telephone Number If Applicable",
+      "group": "ask:internationaltelephonenumberifapplicable",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Leaving_Publicly_Funded_System_Of_Care_e\\.g\\._Homeless_Shelter[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Homeless Shelter",
+      "group": "ask:homelessshelter",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].List_Other_Locations_Where_You_Served[0]",
+      "type": "text",
+      "required": false,
+      "label": "List Other Locations Where You Served",
+      "group": "ask:listotherlocationswhereyouserved",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Living_In_A_Homeless_Shelter[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Living In A Homeless Shelter",
+      "group": "ask:livinginahomelessshelter",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Military_Occupational_Specialty_MOS_Related_Toxin[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Military Occupational Specialty MOS Related Toxin",
+      "group": "ask:militaryoccupationalspecialtymosrelatedtoxin",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Mustard_Gas[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Mustard Gas",
+      "group": "ask:mustardgas",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Not_Currently_In_A_Sheltered_Environment_e\\.g\\._Living_In_A_Car_Or_Tent[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Living In A Car Or Tent",
+      "group": "ask:livinginacarortent",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Other_Specify[0]",
+      "type": "text",
+      "required": false,
+      "label": "Other Specify",
+      "group": "ask:otherspecify",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].OTHER_Specify[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "OTHER Specify",
+      "group": "ask:otherspecify",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].OTHER_SPECIFY[0]",
+      "type": "text",
+      "required": false,
+      "label": "OTHER SPECIFY",
+      "group": "ask:otherspecify",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].OTHER_Specify[1]",
+      "type": "checkbox",
+      "required": false,
+      "label": "OTHER Specify",
+      "group": "ask:otherspecify",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].OTHER_SPECIFY[1]",
+      "type": "text",
+      "required": false,
+      "label": "OTHER SPECIFY",
+      "group": "ask:otherspecify",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].OTHER_Specify[2]",
+      "type": "checkbox",
+      "required": false,
+      "label": "OTHER Specify",
+      "group": "ask:otherspecify",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].POINT_OF_CONTACT[0]",
+      "type": "text",
+      "required": false,
+      "label": "POINT OF CONTACT",
+      "group": "ask:pointofcontact",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Provide_Additional_Dates_And_Locations_Of_Potential_Exposure[0]",
+      "type": "text",
+      "required": false,
+      "label": "Provide Additional Dates And Locations Of Potential Exposure",
+      "group": "ask:provideadditionaldatesandlocationsofpotentialexposure",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Radiation[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Radiation",
+      "group": "ask:radiation",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].RadioButtonList2[0]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List2",
+      "group": "ask:radiobuttonlist2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].RadioButtonList2[1]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List2",
+      "group": "ask:radiobuttonlist2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].RadioButtonList2[2]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List2",
+      "group": "ask:radiobuttonlist2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].RadioButtonList2[3]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List2",
+      "group": "ask:radiobuttonlist2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].RadioButtonList2[4]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List2",
+      "group": "ask:radiobuttonlist2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].SHAD_Shipboard_Hazard_And_Defense[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "SHAD Shipboard Hazard And Defense",
+      "group": "ask:shadshipboardhazardanddefense",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].SocialSecurityNumber_FirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Social Security Number First Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].#subform[9].SocialSecurityNumber_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Social Security Number Last Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].#subform[9].SocialSecurityNumber_SecondTwoNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Social Security Number Second Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Staying_With_Another_Person[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Staying With Another Person",
+      "group": "ask:stayingwithanotherperson",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Telephone_Last_Four_Numbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Telephone Last Four Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneLine"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Telephone_Middle_Three_Numbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Telephone Middle Three Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phonePrefix"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Telephone_Number_Area_Code[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Telephone Number Area Code",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneAreaCode"
+    },
+    {
+      "pdfField": "F[0].#subform[9].To_Date_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "To Date Month",
+      "group": "ask:todatemonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].To_Date_Month[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "To Date Month",
+      "group": "ask:todatemonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].To_Date_Month[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "To Date Month",
+      "group": "ask:todatemonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].To_Date_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "To Date Year",
+      "group": "ask:todateyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].To_Date_Year[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "To Date Year",
+      "group": "ask:todateyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].To_Date_Year[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "To Date Year",
+      "group": "ask:todateyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].BDD_Claims_Only__Provide_The_Date_Or_Anticipated_Date_Of_Release_From_Active_Duty_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "BDD Claims Only Provide The Date Or Anticipated Date Of Release From Active Duty Day",
+      "group": "ask:bddclaimsonlyprovidethedateoranticipateddateofreleasefromactivedutyday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].BDD_Claims_Only__Provide_The_Date_Or_Anticipated_Date_Of_Release_From_Active_Duty_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "BDD Claims Only Provide The Date Or Anticipated Date Of Release From Active Duty Month",
+      "group": "ask:bddclaimsonlyprovidethedateoranticipateddateofreleasefromactivedutymonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].BDD_Claims_Only_Provide_The_Date_Or_Anticipated_Date_Of_Release_From_Active_Duty_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "BDD Claims Only Provide The Date Or Anticipated Date Of Release From Active Duty Year",
+      "group": "ask:bddclaimsonlyprovidethedateoranticipateddateofreleasefromactivedutyyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].BDD_Program_Claim[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "BDD Program Claim",
+      "group": "ask:bddprogramclaim",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Beginning_Date_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Beginning Date Day",
+      "group": "ask:beginningdateday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Beginning_Date_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Beginning Date Month",
+      "group": "ask:beginningdatemonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Beginning_Date_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Beginning Date Year",
+      "group": "ask:beginningdateyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CheckBox1[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Check Box1",
+      "group": "ask:checkbox1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Current_VA_Employee_Check_Box[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Current VA Employee Check Box",
+      "group": "ask:currentvaemployeecheckbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CurrentMailingAddress_ApartmentOrUnitNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Current Mailing Address Apartment Or Unit Number",
+      "group": "ask:currentmailingaddressapartmentorunitnumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CurrentMailingAddress_City[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Current Mailing Address City",
+      "group": "ask:currentmailingaddresscity",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CurrentMailingAddress_Country[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Current Mailing Address Country",
+      "group": "ask:currentmailingaddresscountry",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CurrentMailingAddress_NumberAndStreet[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 30,
+      "label": "Current Mailing Address Number And Street",
+      "group": "ask:currentmailingaddressnumberandstreet",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CurrentMailingAddress_StateOrProvince[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Current Mailing Address State Or Province",
+      "group": "ask:currentmailingaddressstateorprovince",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CurrentMailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Current Mailing Address ZIPOr Postal Code First Five Numbers",
+      "group": "ask:currentmailingaddressziporpostalcodefirstfivenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CurrentMailingAddress_ZIPOrPostalCode_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Current Mailing Address ZIPOr Postal Code Last Four Numbers",
+      "group": "ask:currentmailingaddressziporpostalcodelastfournumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Date_Of_Birth_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Of Birth Day",
+      "group": "vet.dateOfBirth",
+      "source": "auto",
+      "canonicalKey": "vet.dobDay"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Date_Of_Birth_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Of Birth Month",
+      "group": "vet.dateOfBirth",
+      "source": "auto",
+      "canonicalKey": "vet.dobMonth"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Date_Of_Birth_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Of Birth Year",
+      "group": "vet.dateOfBirth",
+      "source": "auto",
+      "canonicalKey": "vet.dobYear"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Daytime_Phone_Number_Area_Code[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Daytime Phone Number Area Code",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneAreaCode"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Email_Address_Optional[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 25,
+      "label": "Email address",
+      "group": "vet.email",
+      "source": "auto",
+      "canonicalKey": "vet.email"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Email_Address_Optional[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 25,
+      "label": "Email address",
+      "group": "vet.email",
+      "source": "auto",
+      "canonicalKey": "vet.email"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Ending_Date_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Ending Date Day",
+      "group": "ask:endingdateday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Ending_Date_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Ending Date Month",
+      "group": "ask:endingdatemonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Ending_Date_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Ending Date Year",
+      "group": "ask:endingdateyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].FULLY_DEVELOPED_CLAIM_FDC_PROGRAM[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "FULLY DEVELOPED CLAIM FDC PROGRAM",
+      "group": "ask:fullydevelopedclaimfdcprogram",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].IDES[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "IDES",
+      "group": "ask:ides",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].International_Telephone_Number_If_Applicable[0]",
+      "type": "text",
+      "required": false,
+      "label": "International Telephone Number If Applicable",
+      "group": "ask:internationaltelephonenumberifapplicable",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].New_Address_ApartmentOrUnitNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "New Address Apartment Or Unit Number",
+      "group": "ask:newaddressapartmentorunitnumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].New_Address_City[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "New Address City",
+      "group": "ask:newaddresscity",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].New_Address_Country[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "New Address Country",
+      "group": "ask:newaddresscountry",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].New_Address_NumberAndStreet[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 30,
+      "label": "New Address Number And Street",
+      "group": "ask:newaddressnumberandstreet",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].New_Address_StateOrProvince[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "New Address State Or Province",
+      "group": "ask:newaddressstateorprovince",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].New_Address_ZIPOrPostalCode_FirstFiveNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "New Address ZIPOr Postal Code First Five Numbers",
+      "group": "ask:newaddressziporpostalcodefirstfivenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].New_Address_ZIPOrPostalCode_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "New Address ZIPOr Postal Code Last Four Numbers",
+      "group": "ask:newaddressziporpostalcodelastfournumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].RadioButtonList2[0]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List2",
+      "group": "ask:radiobuttonlist2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].RadioButtonList6[0]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List6",
+      "group": "ask:radiobuttonlist6",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].SocialSecurityNumber_FirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Social Security Number First Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].SocialSecurityNumber_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Social Security Number Last Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].SocialSecurityNumber_SecondTwoNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Social Security Number Second Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Standard_Claim_Process[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Standard Claim Process",
+      "group": "ask:standardclaimprocess",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Telephone_Last_Four_Numbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Telephone Last Four Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneLine"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Telephone_Middle_Three_Numbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Telephone Middle Three Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phonePrefix"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].VA_File_Number[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "VA file number",
+      "group": "vet.vaFileNumber",
+      "source": "auto",
+      "canonicalKey": "vet.vaFileNumber"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Veteran_Service_Member_First_Name[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 12,
+      "label": "Legal first name",
+      "group": "vet.legalFirstName",
+      "source": "auto",
+      "canonicalKey": "vet.legalFirstName"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Veteran_Service_Member_Last_Name[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Legal last name",
+      "group": "vet.legalLastName",
+      "source": "auto",
+      "canonicalKey": "vet.legalLastName"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Veteran_Service_Member_Middle_Initial[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 1,
+      "label": "Veteran Service Member Middle Initial",
+      "group": "vet.legalMiddleName",
+      "source": "auto",
+      "canonicalKey": "vet.legalMiddleInitial"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Veterans_Service_Number_If_Applicable[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 10,
+      "label": "Veterans Service Number If Applicable",
+      "group": "ask:veteransservicenumberifapplicable",
+      "source": "ask"
+    }
+  ]
+}

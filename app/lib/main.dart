@@ -9,9 +9,12 @@ import 'support/support_repository.dart';
 import 'support/support_ticket.dart';
 import 'app/app_bootstrap.dart';
 import 'app/app_environment.dart';
+import 'app/app_scroll.dart';
 import 'app/app_theme.dart';
 import 'auth/auth_controller.dart';
 import 'auth/auth_gateway.dart';
+import 'billing/entitlement_service.dart';
+import 'billing/revenuecat_service.dart';
 import 'cases/cases_progress.dart';
 import 'claim/claim_decision.dart';
 import 'claim/claim_document.dart';
@@ -101,6 +104,12 @@ class VeteranClaimsBuddyApp extends StatelessWidget {
           onboardingDocProvider.overrideWith((ref) => Stream.value(null)),
           casesProvider.overrideWith(
             (ref) => Stream.value(const <VeteranCase>[]),
+          ),
+          premiumStatusProvider.overrideWith(
+            (ref) => Stream.value(PremiumStatus.inactive),
+          ),
+          caseUnlocksProvider.overrideWith(
+            (ref) => Stream.value(const <String>{}),
           ),
           ensureWorkingCaseCallerProvider.overrideWith(
             (ref) =>
@@ -207,6 +216,19 @@ class AuthApp extends ConsumerWidget {
     ref.listen(onboardingDocProvider, (_, next) {
       _applyDeletionSchedule(ref, next);
     });
+    // Keep the RevenueCat app user id in step with the Firebase sign-in. No-op
+    // on web and when no SDK key is passed, so it never blocks startup.
+    ref.listen(authControllerProvider.select((state) => state.session?.uid), (
+      _,
+      uid,
+    ) {
+      final revenueCat = ref.read(revenueCatServiceProvider);
+      if (uid != null) {
+        revenueCat.configureAndLogIn(uid);
+      } else {
+        revenueCat.logOut();
+      }
+    });
     final accountDoc = ref.watch(onboardingDocProvider);
     Future.microtask(() => _applyDeletionSchedule(ref, accountDoc));
 
@@ -216,6 +238,7 @@ class AuthApp extends ConsumerWidget {
       return MaterialApp(
         title: 'Veteran Claims Buddy',
         theme: appTheme(),
+        scrollBehavior: const AppScrollBehavior(),
         home: const Scaffold(
           body: Center(child: CircularProgressIndicator(key: authLoadingKey)),
         ),
@@ -226,6 +249,7 @@ class AuthApp extends ConsumerWidget {
     return MaterialApp.router(
       title: 'Veteran Claims Buddy',
       theme: appTheme(),
+      scrollBehavior: const AppScrollBehavior(),
       routerConfig: router,
     );
   }

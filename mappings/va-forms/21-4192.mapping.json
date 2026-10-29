@@ -1,0 +1,561 @@
+{
+  "formNumber": "21-4192",
+  "revision": "2021-07-06",
+  "fields": [
+    {
+      "pdfField": "F[0].Page_1[0].Amount[0]",
+      "type": "text",
+      "required": false,
+      "label": "Amount",
+      "group": "ask:amount",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Amount[1]",
+      "type": "text",
+      "required": false,
+      "label": "Amount",
+      "group": "ask:amount",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].CentsAmount[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Cents Amount",
+      "group": "ask:centsamount",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].completeaddress[0]",
+      "type": "text",
+      "required": false,
+      "label": "Completeaddress",
+      "group": "ask:completeaddress",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Concessions[0]",
+      "type": "text",
+      "required": false,
+      "label": "Concessions",
+      "group": "ask:concessions",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBday[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBday",
+      "group": "ask:dobday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBday[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBday",
+      "group": "ask:dobday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBday[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBday",
+      "group": "ask:dobday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBday[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBday",
+      "group": "ask:dobday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBday[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBday",
+      "group": "ask:dobday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBday[5]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBday",
+      "group": "ask:dobday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBmonth[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBmonth",
+      "group": "ask:dobmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBmonth[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBmonth",
+      "group": "ask:dobmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBmonth[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBmonth",
+      "group": "ask:dobmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBmonth[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBmonth",
+      "group": "ask:dobmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBmonth[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBmonth",
+      "group": "ask:dobmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBmonth[5]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBmonth",
+      "group": "ask:dobmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOByear[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DOByear",
+      "group": "ask:dobyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOByear[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DOByear",
+      "group": "ask:dobyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOByear[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DOByear",
+      "group": "ask:dobyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOByear[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DOByear",
+      "group": "ask:dobyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOByear[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DOByear",
+      "group": "ask:dobyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOByear[5]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DOByear",
+      "group": "ask:dobyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].HundredsDollarAmount[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Hundreds Dollar Amount",
+      "group": "ask:hundredsdollaramount",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Last_Name[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Legal last name",
+      "group": "vet.legalLastName",
+      "source": "auto",
+      "canonicalKey": "vet.legalLastName"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Middle_Initial1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 1,
+      "label": "Middle Initial1",
+      "group": "vet.legalMiddleName",
+      "source": "auto",
+      "canonicalKey": "vet.legalMiddleInitial"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].nameandaddress[0]",
+      "type": "text",
+      "required": false,
+      "label": "Nameandaddress",
+      "group": "ask:nameandaddress",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].NumberHoursWorkedDaily[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Number Hours Worked Daily",
+      "group": "ask:numberhoursworkeddaily",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].NumberHoursWorkedWeekly[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Number Hours Worked Weekly",
+      "group": "ask:numberhoursworkedweekly",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].RadioButtonList[0]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "YES",
+        "NO"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].RadioButtonList[1]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "YES",
+        "NO"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ReasonVeteranNotWorking[0]",
+      "type": "text",
+      "required": false,
+      "label": "Reason Veteran Not Working",
+      "group": "ask:reasonveterannotworking",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].SocialSecurityNumber_FirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Social Security Number First Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].SocialSecurityNumber_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Social Security Number Last Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].SocialSecurityNumber_SecondTwoNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Social Security Number Second Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ThousandsDollarAmount[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Thousands Dollar Amount",
+      "group": "ask:thousandsdollaramount",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].timelost[0]",
+      "type": "text",
+      "required": false,
+      "label": "Timelost",
+      "group": "ask:timelost",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].TypeOfWork[0]",
+      "type": "text",
+      "required": false,
+      "label": "Type Of Work",
+      "group": "ask:typeofwork",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].VA_File_Number_If_Applicable[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "VA file number",
+      "group": "vet.vaFileNumber",
+      "source": "auto",
+      "canonicalKey": "vet.vaFileNumber"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Veterans_First_Name[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 12,
+      "label": "Legal first name",
+      "group": "vet.legalFirstName",
+      "source": "auto",
+      "canonicalKey": "vet.legalFirstName"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].VeteransCurrentDutyStatus[0]",
+      "type": "text",
+      "required": false,
+      "label": "Veterans Current Duty Status",
+      "group": "ask:veteranscurrentdutystatus",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].CentsAmount[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Cents Amount",
+      "group": "ask:centsamount",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].Date[0]",
+      "type": "text",
+      "required": false,
+      "label": "Date",
+      "group": "ask:date",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].Digital_Signature[0]",
+      "type": "text",
+      "required": false,
+      "label": "Digital Signature",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOBday[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBday",
+      "group": "ask:dobday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOBday[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBday",
+      "group": "ask:dobday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOBday[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBday",
+      "group": "ask:dobday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOBmonth[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBmonth",
+      "group": "ask:dobmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOBmonth[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBmonth",
+      "group": "ask:dobmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOBmonth[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBmonth",
+      "group": "ask:dobmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOByear[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DOByear",
+      "group": "ask:dobyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOByear[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DOByear",
+      "group": "ask:dobyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOByear[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DOByear",
+      "group": "ask:dobyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].HundredsDollarAmount[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Hundreds Dollar Amount",
+      "group": "ask:hundredsdollaramount",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].RadioButtonList[0]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "YES",
+        "NO"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].Remarks[0]",
+      "type": "text",
+      "required": false,
+      "label": "Remarks",
+      "group": "ask:remarks",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].SocialSecurityNumber_FirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Social Security Number First Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].SocialSecurityNumber_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Social Security Number Last Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].SocialSecurityNumber_SecondTwoNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Social Security Number Second Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].ThousandsDollarAmount[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Thousands Dollar Amount",
+      "group": "ask:thousandsdollaramount",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].TYPEOFBENEFIT[0]",
+      "type": "text",
+      "required": false,
+      "label": "TYPEOFBENEFIT",
+      "group": "ask:typeofbenefit",
+      "source": "ask"
+    }
+  ]
+}

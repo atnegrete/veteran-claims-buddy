@@ -6,17 +6,112 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('a path names the open part of an issue', () {
-    expect(issuePanelFromPath('/cases/c1/issues/headache', 'headache'), isNull);
+    expect(
+      issuePanelFromPath('/cases/c1/conditions/headache', 'headache'),
+      isNull,
+    );
     expect(
       issuePanelFromPath(
-        '/cases/c1/issues/headache/statements/doctor-draft',
+        '/cases/c1/conditions/headache/statements/doctor-draft',
         'headache',
       ),
       'doctor',
     );
     expect(
-      issuePanelFromPath('/cases/c1/issues/headache/evidence', 'headache'),
+      issuePanelFromPath('/cases/c1/conditions/headache/evidence', 'headache'),
       'evidence',
+    );
+  });
+
+  test('continue opens the next condition card and skips closed ones', () {
+    expect(nextConditionPanel('questions', laterClosed: false), 'decisions');
+    expect(nextConditionPanel('decisions', laterClosed: false), 'connection');
+    expect(nextConditionPanel('connection', laterClosed: false), 'lay');
+    expect(nextConditionPanel('lay', laterClosed: false), 'doctor');
+    expect(nextConditionPanel('doctor', laterClosed: false), isNull);
+    expect(nextConditionPanel('decisions', laterClosed: true), isNull);
+    expect(nextConditionPanel('questions', laterClosed: true), 'decisions');
+    expect(previousConditionPanel('questions', laterClosed: false), isNull);
+    expect(
+      previousConditionPanel('decisions', laterClosed: false),
+      'questions',
+    );
+    expect(
+      previousConditionPanel('connection', laterClosed: false),
+      'decisions',
+    );
+    expect(previousConditionPanel('lay', laterClosed: true), 'decisions');
+    expect(previousConditionPanel('doctor', laterClosed: false), 'lay');
+  });
+
+  test('a condition opens on the first part that is not filled in', () {
+    const open = ClaimSectionStatus.notStarted;
+    const done = ClaimSectionStatus.done;
+    expect(
+      firstUnfinishedConditionPanel(
+        laterClosed: false,
+        status: {
+          'questions': open,
+          'decisions': open,
+          'connection': open,
+          'lay': open,
+          'doctor': open,
+        },
+      ),
+      'questions',
+    );
+    expect(
+      firstUnfinishedConditionPanel(
+        laterClosed: false,
+        status: {
+          'questions': done,
+          'decisions': ClaimSectionStatus.inProgress,
+          'connection': open,
+          'lay': open,
+          'doctor': open,
+        },
+      ),
+      'decisions',
+    );
+    expect(
+      firstUnfinishedConditionPanel(
+        laterClosed: false,
+        status: {
+          'questions': done,
+          'decisions': done,
+          'connection': open,
+          'lay': open,
+          'doctor': open,
+        },
+      ),
+      'connection',
+    );
+    expect(
+      firstUnfinishedConditionPanel(
+        laterClosed: true,
+        status: {
+          'questions': done,
+          'decisions': done,
+          'connection': open,
+          'lay': open,
+          'doctor': open,
+        },
+      ),
+      'decisions',
+    );
+    expect(
+      firstUnfinishedConditionPanel(
+        laterClosed: false,
+        skipDoctor: true,
+        status: {
+          'questions': done,
+          'decisions': done,
+          'connection': done,
+          'lay': done,
+          'doctor': open,
+        },
+      ),
+      'lay',
     );
   });
 
@@ -24,7 +119,7 @@ void main() {
     final progress = evidenceProgress(const [
       EvidenceLink(
         id: 'note',
-        claimIssueId: 'back',
+        conditionId: 'back',
         evidenceType: 'nexus',
         relationship: 'supports',
         summary: 'A lifting injury in service',

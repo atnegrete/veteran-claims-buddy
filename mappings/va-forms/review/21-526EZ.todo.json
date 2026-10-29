@@ -1,0 +1,1966 @@
+{
+  "formNumber": "21-526EZ",
+  "revision": "2022-11-27",
+  "review": [
+    {
+      "pdfField": "F[0].#subform[10].Check_Box_Do_Not_Have_Date_s[0]",
+      "label": "Check Box Do Not Have Date s",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Check_Box_Do_Not_Have_Date_s[1]",
+      "label": "Check Box Do Not Have Date s",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Check_Box_Do_Not_Have_Date_s[2]",
+      "label": "Check Box Do Not Have Date s",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[0]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[1]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[10]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[11]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[12]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[13]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[14]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[2]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[3]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[4]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[5]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[6]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[7]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[8]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].CURRENTDISABILITY[9]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date_Disability_Began_Or_Worsened[0]",
+      "label": "Date Disability Began Or Worsened",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date_Of_Treatment_Month[0]",
+      "label": "Date Of Treatment Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date_Of_Treatment_Month[1]",
+      "label": "Date Of Treatment Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date_Of_Treatment_Month[2]",
+      "label": "Date Of Treatment Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date_Of_Treatment_Year[0]",
+      "label": "Date Of Treatment Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date_Of_Treatment_Year[1]",
+      "label": "Date Of Treatment Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date_Of_Treatment_Year[2]",
+      "label": "Date Of Treatment Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[0]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[1]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[10]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[11]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[12]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[13]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[2]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[3]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[4]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[5]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[6]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[7]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[8]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Date12[9]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Enter_Disability_Treated_And_Name_And_Location_Of_Treatment_Facility[0]",
+      "label": "Enter Disability Treated And Name And Location Of Treatment Facility",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Enter_Disability_Treated_And_Name_And_Location_Of_Treatment_Facility[1]",
+      "label": "Enter Disability Treated And Name And Location Of Treatment Facility",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Enter_Disability_Treated_And_Name_And_Location_Of_Treatment_Facility[2]",
+      "label": "Enter Disability Treated And Name And Location Of Treatment Facility",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[0]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[1]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[10]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[11]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[12]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[13]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[14]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[2]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[3]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[4]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[5]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[6]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[7]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[8]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[9]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[0]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[1]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[10]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[11]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[12]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[13]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[14]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[2]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[3]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[4]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[5]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[6]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[7]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[8]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[10].Specify_Type_Of_Exposure_Event_Or_Injury[9]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AdditionalPeriodsOfService_Day[0]",
+      "label": "Additional Periods Of Service Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AdditionalPeriodsOfService_Day[1]",
+      "label": "Additional Periods Of Service Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AdditionalPeriodsOfService_Month[0]",
+      "label": "Additional Periods Of Service Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AdditionalPeriodsOfService_Month[1]",
+      "label": "Additional Periods Of Service Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AdditionalPeriodsOfService_Year[0]",
+      "label": "Additional Periods Of Service Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AdditionalPeriodsOfService_Year[1]",
+      "label": "Additional Periods Of Service Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AnticipatedSeparationDate_Day[0]",
+      "label": "Anticipated Separation Date Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AnticipatedSeparationDate_Month[0]",
+      "label": "Anticipated Separation Date Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].AnticipatedSeparationDate_Year[0]",
+      "label": "Anticipated Separation Date Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].CURRENT_OR_LAST_ASSIGNED_NAME_AND_ADDRESS_OF_UNIT[0]",
+      "label": "CURRENT OR LAST ASSIGNED NAME AND ADDRESS OF UNIT",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DateOfActivation_Day[0]",
+      "label": "Date Of Activation Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DateOfActivation_Month[0]",
+      "label": "Date Of Activation Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DateOfActivation_Year[0]",
+      "label": "Date Of Activation Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Day[0]",
+      "label": "Dates Of Confinement Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Day[1]",
+      "label": "Dates Of Confinement Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Day[2]",
+      "label": "Dates Of Confinement Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Day[3]",
+      "label": "Dates Of Confinement Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Month[0]",
+      "label": "Dates Of Confinement Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Month[1]",
+      "label": "Dates Of Confinement Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Month[2]",
+      "label": "Dates Of Confinement Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Month[3]",
+      "label": "Dates Of Confinement Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Year[0]",
+      "label": "Dates Of Confinement Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Year[1]",
+      "label": "Dates Of Confinement Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Year[2]",
+      "label": "Dates Of Confinement Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].DatesOfConfinement_Year[3]",
+      "label": "Dates Of Confinement Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].Do_Not_Pay_Me_VA_Compensation_I_Do_Not_Want_To_Receive-VA_Compensation_In_Lieu_Of_Retired_Pay[0]",
+      "label": "Do Not Pay Me VA Compensation I Do Not Want To Receive-VA Compensation In Lieu Of Retired Pay",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].EntryDate_Month[0]",
+      "label": "Entry Date Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].EntryDate_Year[0]",
+      "label": "Entry Date Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ExitDate_Day[0]",
+      "label": "Exit Date Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ExitDate_Month[0]",
+      "label": "Exit Date Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ExitDate_Year[0]",
+      "label": "Exit Date Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].EXPLAIN[0]",
+      "label": "EXPLAIN",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].List_Other_Name_You_Served_Under[0]",
+      "label": "List Other Name You Served Under",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].Monthly_Amount[0]",
+      "label": "Monthly Amount",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].Monthly_Amount[1]",
+      "label": "Monthly Amount",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].MostRecentActiveServiceEntryDate_Day[0]",
+      "label": "Most Recent Active Service Entry Date Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ObligationTermOfService_Day[0]",
+      "label": "Obligation Term Of Service Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ObligationTermOfService_Day[1]",
+      "label": "Obligation Term Of Service Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ObligationTermOfService_Month[0]",
+      "label": "Obligation Term Of Service Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ObligationTermOfService_Month[1]",
+      "label": "Obligation Term Of Service Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ObligationTermOfService_Year[0]",
+      "label": "Obligation Term Of Service Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].ObligationTermOfService_Year[1]",
+      "label": "Obligation Term Of Service Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].PlaceOfLastOrAnticipatedSeparation[0]",
+      "label": "Place Of Last Or Anticipated Separation",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].PlaceOfLastOrAnticipatedSeparation[1]",
+      "label": "Place Of Last Or Anticipated Separation",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[0]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[1]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[10]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[11]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "4",
+        "7",
+        "2",
+        "5",
+        "8",
+        "3",
+        "6"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[12]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[2]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[3]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[4]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[5]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[6]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[7]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[8]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[11].RadioButtonList[9]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[12].Account_Number[0]",
+      "label": "Account Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Amount_Received_First_Three_Digits[0]",
+      "label": "Amount Received First Three Digits",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Amount_Received_Last_Three_Digits[0]",
+      "label": "Amount Received Last Three Digits",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Date_Signed_Day[0]",
+      "label": "Date Signed Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Date_Signed_Month[0]",
+      "label": "Date Signed Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Date_Signed_Year[0]",
+      "label": "Date Signed Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].DatePaymentReceived_Day[0]",
+      "label": "Date Payment Received Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].DatePaymentReceived_Month[0]",
+      "label": "Date Payment Received Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].DatePaymentReceived_Year[0]",
+      "label": "Date Payment Received Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Digital_Signature[0]",
+      "label": "Digital Signature",
+      "type": "text",
+      "source": "dev"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Do_NOT_Pay_Me_VA_Compensation_I_Do_Not_Want_To_Receive_VA_Compensation_In_Lieu_Of_Training_Pay[0]",
+      "label": "Do NOT Pay Me VA Compensation I Do Not Want To Receive VA Compensation In Lieu Of Training Pay",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].ICertifyThatIDoNotHaveAnAccountWithAFinancialInstitutionOrCertifiedPaymentAgent[0]",
+      "label": "ICertify That IDo Not Have An Account With AFinancial Institution Or Certified Payment Agent",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].NAME_OF_FINANCIAL_INSTITUTION[0]",
+      "label": "NAME OF FINANCIAL INSTITUTION",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Print_Name_And_Address_Of_Witness[0]",
+      "label": "Print Name And Address Of Witness",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].Print_Name_And_Address_Of_Witness[1]",
+      "label": "Print Name And Address Of Witness",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[12].RadioButtonList[13]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[12].RadioButtonList[14]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[12].RadioButtonList[15]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "4",
+        "7",
+        "2",
+        "5",
+        "8",
+        "3",
+        "6"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[12].Routing_Or_Transit_Number[0]",
+      "label": "Routing Or Transit Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Date_Signed_Day[1]",
+      "label": "Date Signed Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Date_Signed_Day[2]",
+      "label": "Date Signed Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Date_Signed_Month[1]",
+      "label": "Date Signed Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Date_Signed_Month[2]",
+      "label": "Date Signed Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Date_Signed_Year[1]",
+      "label": "Date Signed Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Date_Signed_Year[2]",
+      "label": "Date Signed Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Digital_Signature[1]",
+      "label": "Digital Signature",
+      "type": "text",
+      "source": "dev"
+    },
+    {
+      "pdfField": "F[0].#subform[13].Digital_Signature[2]",
+      "label": "Digital Signature",
+      "type": "text",
+      "source": "dev"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[15]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[16]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[17]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[18]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[19]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[20]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[21]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[22]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[23]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[24]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[25]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[26]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[27]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[28]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[29]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[30]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[31]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[32]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[33]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].CURRENTDISABILITY[34]",
+      "label": "CURRENTDISABILITY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date_Disability_Began_Or_Worsened[1]",
+      "label": "Date Disability Began Or Worsened",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[14]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[15]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[16]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[17]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[18]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[19]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[20]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[21]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[22]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[23]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[24]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[25]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[26]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[27]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[28]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[29]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[30]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[31]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Date12[32]",
+      "label": "Date12",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[15]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[16]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[17]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[18]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[19]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[20]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[21]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[22]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[23]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[24]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[25]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[26]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[27]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[28]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[29]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[30]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[31]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[32]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[33]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].ExplainHowDisabilityRelatesToEvent_Exposure_Injury[34]",
+      "label": "Explain How Disability Relates To Event Exposure Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[15]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[16]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[17]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[18]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[19]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[20]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[21]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[22]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[23]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[24]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[25]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[26]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[27]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[28]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[29]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[30]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[31]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[32]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[33]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Specify_Type_Of_Exposure_Event_Or_Injury[34]",
+      "label": "Specify Type Of Exposure Event Or Injury",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].ASBESTOS[0]",
+      "label": "ASBESTOS",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Contaminated_Water_At_Camp_Lejeune[0]",
+      "label": "Contaminated Water At Camp Lejeune",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Fleeing_Current_Residence[0]",
+      "label": "Fleeing Current Residence",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].From_Date_Month[0]",
+      "label": "From Date Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].From_Date_Month[1]",
+      "label": "From Date Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].From_Date_Month[2]",
+      "label": "From Date Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].From_Date_Year[0]",
+      "label": "From Date Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].From_Date_Year[1]",
+      "label": "From Date Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].From_Date_Year[2]",
+      "label": "From Date Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Housing_Will_Be_Lost_In_30_Days[0]",
+      "label": "Housing Will Be Lost In 30 Days",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].International_Telephone_Number_If_Applicable[0]",
+      "label": "International Telephone Number If Applicable",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Leaving_Publicly_Funded_System_Of_Care_e\\.g\\._Homeless_Shelter[0]",
+      "label": "Homeless Shelter",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].List_Other_Locations_Where_You_Served[0]",
+      "label": "List Other Locations Where You Served",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Living_In_A_Homeless_Shelter[0]",
+      "label": "Living In A Homeless Shelter",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Military_Occupational_Specialty_MOS_Related_Toxin[0]",
+      "label": "Military Occupational Specialty MOS Related Toxin",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Mustard_Gas[0]",
+      "label": "Mustard Gas",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Not_Currently_In_A_Sheltered_Environment_e\\.g\\._Living_In_A_Car_Or_Tent[0]",
+      "label": "Living In A Car Or Tent",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Other_Specify[0]",
+      "label": "Other Specify",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].OTHER_Specify[0]",
+      "label": "OTHER Specify",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].OTHER_SPECIFY[0]",
+      "label": "OTHER SPECIFY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].OTHER_Specify[1]",
+      "label": "OTHER Specify",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].OTHER_SPECIFY[1]",
+      "label": "OTHER SPECIFY",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].OTHER_Specify[2]",
+      "label": "OTHER Specify",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].POINT_OF_CONTACT[0]",
+      "label": "POINT OF CONTACT",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Provide_Additional_Dates_And_Locations_Of_Potential_Exposure[0]",
+      "label": "Provide Additional Dates And Locations Of Potential Exposure",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Radiation[0]",
+      "label": "Radiation",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].RadioButtonList2[0]",
+      "label": "Radio Button List2",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[9].RadioButtonList2[1]",
+      "label": "Radio Button List2",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[9].RadioButtonList2[2]",
+      "label": "Radio Button List2",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[9].RadioButtonList2[3]",
+      "label": "Radio Button List2",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[9].RadioButtonList2[4]",
+      "label": "Radio Button List2",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].#subform[9].SHAD_Shipboard_Hazard_And_Defense[0]",
+      "label": "SHAD Shipboard Hazard And Defense",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].Staying_With_Another_Person[0]",
+      "label": "Staying With Another Person",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].To_Date_Month[0]",
+      "label": "To Date Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].To_Date_Month[1]",
+      "label": "To Date Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].To_Date_Month[2]",
+      "label": "To Date Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].To_Date_Year[0]",
+      "label": "To Date Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].To_Date_Year[1]",
+      "label": "To Date Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[9].To_Date_Year[2]",
+      "label": "To Date Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].BDD_Claims_Only__Provide_The_Date_Or_Anticipated_Date_Of_Release_From_Active_Duty_Day[0]",
+      "label": "BDD Claims Only Provide The Date Or Anticipated Date Of Release From Active Duty Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].BDD_Claims_Only__Provide_The_Date_Or_Anticipated_Date_Of_Release_From_Active_Duty_Month[0]",
+      "label": "BDD Claims Only Provide The Date Or Anticipated Date Of Release From Active Duty Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].BDD_Claims_Only_Provide_The_Date_Or_Anticipated_Date_Of_Release_From_Active_Duty_Year[0]",
+      "label": "BDD Claims Only Provide The Date Or Anticipated Date Of Release From Active Duty Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].BDD_Program_Claim[0]",
+      "label": "BDD Program Claim",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Beginning_Date_Day[0]",
+      "label": "Beginning Date Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Beginning_Date_Month[0]",
+      "label": "Beginning Date Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Beginning_Date_Year[0]",
+      "label": "Beginning Date Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CheckBox1[0]",
+      "label": "Check Box1",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Current_VA_Employee_Check_Box[0]",
+      "label": "Current VA Employee Check Box",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CurrentMailingAddress_ApartmentOrUnitNumber[0]",
+      "label": "Current Mailing Address Apartment Or Unit Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CurrentMailingAddress_City[0]",
+      "label": "Current Mailing Address City",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CurrentMailingAddress_Country[0]",
+      "label": "Current Mailing Address Country",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CurrentMailingAddress_NumberAndStreet[0]",
+      "label": "Current Mailing Address Number And Street",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CurrentMailingAddress_StateOrProvince[0]",
+      "label": "Current Mailing Address State Or Province",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CurrentMailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0]",
+      "label": "Current Mailing Address ZIPOr Postal Code First Five Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].CurrentMailingAddress_ZIPOrPostalCode_LastFourNumbers[0]",
+      "label": "Current Mailing Address ZIPOr Postal Code Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Ending_Date_Day[0]",
+      "label": "Ending Date Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Ending_Date_Month[0]",
+      "label": "Ending Date Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Ending_Date_Year[0]",
+      "label": "Ending Date Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].FULLY_DEVELOPED_CLAIM_FDC_PROGRAM[0]",
+      "label": "FULLY DEVELOPED CLAIM FDC PROGRAM",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].IDES[0]",
+      "label": "IDES",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].International_Telephone_Number_If_Applicable[0]",
+      "label": "International Telephone Number If Applicable",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].New_Address_ApartmentOrUnitNumber[0]",
+      "label": "New Address Apartment Or Unit Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].New_Address_City[0]",
+      "label": "New Address City",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].New_Address_Country[0]",
+      "label": "New Address Country",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].New_Address_NumberAndStreet[0]",
+      "label": "New Address Number And Street",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].New_Address_StateOrProvince[0]",
+      "label": "New Address State Or Province",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].New_Address_ZIPOrPostalCode_FirstFiveNumbers[0]",
+      "label": "New Address ZIPOr Postal Code First Five Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].New_Address_ZIPOrPostalCode_LastFourNumbers[0]",
+      "label": "New Address ZIPOr Postal Code Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].RadioButtonList2[0]",
+      "label": "Radio Button List2",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].Page_10[0].RadioButtonList6[0]",
+      "label": "Radio Button List6",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Standard_Claim_Process[0]",
+      "label": "Standard Claim Process",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_10[0].Veterans_Service_Number_If_Applicable[0]",
+      "label": "Veterans Service Number If Applicable",
+      "type": "text",
+      "source": "ask"
+    }
+  ]
+}

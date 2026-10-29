@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app/app_theme.dart';
+import '../../app/app_ui.dart';
 import '../../auth/auth_controller.dart';
 import '../../forms/text_input_chain.dart';
 import '../../auth/auth_failure.dart';
@@ -118,7 +119,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
               const SizedBox(height: 12),
               if (onlyFactor)
                 const Text(
-                  'This is the only text-message check. Removing it closes the app until you add a phone again. There is no way to skip that check, and resetting your password does not skip it.',
+                  'This is the only text-message check. Removing it closes the app until you add a phone again.',
                 ),
               if (onlyFactor) const SizedBox(height: 12),
               ChainTextField(
@@ -233,9 +234,6 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                       ),
                       controlAffinity: ListTileControlAffinity.leading,
                     ),
-                    const Text(
-                      'Firebase and Google store this number and use it to prevent abuse.',
-                    ),
                     const SizedBox(height: 12),
                     FilledButton(
                       onPressed: _busy ? null : _sendCode,
@@ -275,20 +273,17 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
             ),
           if (_message != null) ...[
             const SizedBox(height: 12),
-            Text(
-              _message!,
-              style: TextStyle(
-                color: _messageIsError
-                    ? theme.colorScheme.error
-                    : theme.colorScheme.onSurface,
-              ),
+            InfoNote(
+              text: _message!,
+              tone: _messageIsError ? InfoNoteTone.danger : InfoNoteTone.info,
             ),
           ],
           const SizedBox(height: 24),
           Text('Lost phone', style: theme.textTheme.titleMedium),
           const SizedBox(height: 8),
-          const Text(
-            'There is no self-serve way to skip the text-message check. Resetting your password does not skip it. Email $supportEmail and we will verify it is you before anyone changes the phone on the account. Do not send a Social Security number or medical records in that email.',
+          const InfoNote(
+            text:
+                'The text-message check cannot be skipped. Email $supportEmail and we will verify it is you before changing the phone. Do not send a Social Security number or medical records.',
           ),
         ],
       ),

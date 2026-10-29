@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../auth/auth_controller.dart';
 import '../../app/app_theme.dart';
+import '../../app/app_ui.dart';
 import '../../forms/iso_date_field.dart';
 import '../../forms/repeatable_entries.dart';
 import '../../forms/text_input_chain.dart';
@@ -190,10 +191,10 @@ class _ServiceScreenState extends ConsumerState<ServiceScreen> {
           : Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
+                const LeadText(
                   'Add each period of service. You can still be serving.',
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 16),
                 RepeatableEntries(
                   entries: [
                     for (final period in _periods)
@@ -214,12 +215,7 @@ class _ServiceScreenState extends ConsumerState<ServiceScreen> {
                 ),
                 if (_error != null) ...[
                   const SizedBox(height: 12),
-                  Text(
-                    _error!,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                  ),
+                  ErrorText(_error!),
                 ],
               ],
             ),
@@ -250,10 +246,14 @@ class _ServiceScreenState extends ConsumerState<ServiceScreen> {
         children: [
           DropdownButtonFormField<String>(
             initialValue: _branch,
+            isExpanded: true,
             decoration: const InputDecoration(labelText: 'Branch'),
             items: [
               for (final entry in serviceBranches.entries)
-                DropdownMenuItem(value: entry.key, child: Text(entry.value)),
+                DropdownMenuItem(
+                  value: entry.key,
+                  child: Text(entry.value, overflow: TextOverflow.ellipsis),
+                ),
             ],
             onChanged: _busy
                 ? null
@@ -262,10 +262,14 @@ class _ServiceScreenState extends ConsumerState<ServiceScreen> {
           const SizedBox(height: 12),
           DropdownButtonFormField<String>(
             initialValue: _component,
+            isExpanded: true,
             decoration: const InputDecoration(labelText: 'Component'),
             items: [
               for (final entry in serviceComponents.entries)
-                DropdownMenuItem(value: entry.key, child: Text(entry.value)),
+                DropdownMenuItem(
+                  value: entry.key,
+                  child: Text(entry.value, overflow: TextOverflow.ellipsis),
+                ),
             ],
             onChanged: _busy
                 ? null

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "radiation",
+  "label": "Ionizing radiation (radiation-exposed Veterans)",
+  "authority": "Radiation-Exposed Veterans Compensation Act",
+  "citation": "38 CFR 3.309(d), 3.311",
+  "sourceAsOf": "2026-10-22",
+  "qualifyingService": {
+    "locations": [
+      "Hiroshima", "Nagasaki", "Nevada Test Site", "Bikini Atoll", "Enewetak Atoll",
+      "Pacific Proving Grounds", "Amchitka Island", "Palomares Spain", "Thule Greenland"
+    ],
+    "dateRanges": [
+      { "start": "1945-07-16", "end": "1962-12-31", "label": "Atmospheric nuclear testing and occupation era" }
+    ],
+    "branches": []
+  },
+  "exposures": ["radiation"],
+  "presumptiveConditions": [
+    "Leukemia (other than chronic lymphocytic leukemia)",
+    "Thyroid cancer",
+    "Breast cancer",
+    "Pharynx cancer",
+    "Esophagus cancer",
+    "Stomach cancer",
+    "Small intestine cancer",
+    "Pancreas cancer",
+    "Bile duct cancer",
+    "Gall bladder cancer",
+    "Liver cancer (primary, non-cirrhotic)",
+    "Salivary gland cancer",
+    "Urinary tract cancer",
+    "Bronchiolo-alveolar carcinoma",
+    "Bone cancer",
+    "Brain cancer",
+    "Colon cancer",
+    "Lung cancer",
+    "Ovarian cancer"
+  ],
+  "notes": "Radiation-risk activity (such as atmospheric nuclear testing or the occupation of Hiroshima or Nagasaki) presumes exposure for the listed cancers. Some other conditions are handled case by case under 38 CFR 3.311 and may still need a nexus opinion."
+}

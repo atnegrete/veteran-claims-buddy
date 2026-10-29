@@ -10,7 +10,8 @@ import 'mfa_challenge.dart';
 import 'phone_number.dart';
 
 class FirebaseAuthGateway implements AuthGateway {
-  FirebaseAuthGateway({FirebaseAuth? auth}) : _auth = auth ?? FirebaseAuth.instance;
+  FirebaseAuthGateway({FirebaseAuth? auth})
+    : _auth = auth ?? FirebaseAuth.instance;
 
   final FirebaseAuth _auth;
   String? _verificationId;
@@ -40,10 +41,7 @@ class FirebaseAuthGateway implements AuthGateway {
   }
 
   @override
-  Future<void> signIn({
-    required String email,
-    required String password,
-  }) {
+  Future<void> signIn({required String email, required String password}) {
     return _guard(
       () => _auth.signInWithEmailAndPassword(
         email: email.trim(),

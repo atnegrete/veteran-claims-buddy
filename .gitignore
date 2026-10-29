@@ -4,3 +4,10 @@ node_modules/
 # Machine-local FVM symlink. Commit the version pin, not the SDK path.
 .fvm/flutter_sdk
 app/.fvm/flutter_sdk
+
+# Local secrets for the va:forms tooling (VA Forms API key). Never commit these.
+# The committed .env.example documents the format.
+.env
+.env.*
+!.env.example
+.va-forms-cache/

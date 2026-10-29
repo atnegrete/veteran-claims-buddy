@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "version": "1.2.0",
+  "reviewedOn": "2026-10-27",
+  "changelog": [
+    {
+      "version": "1.2.0",
+      "date": "2026-10-27",
+      "note": "Added a curated per-condition citation layer under conditions/*.json (vetted legal + medical citations, injected by the server, never written by the model). Seeded hearing-loss-tinnitus. Additional conditions require SME-verified medical literature before they are added."
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-10-23",
+      "note": "Added per-kind interview slots that drive the Nexus Letters gap interview. The engine now produces two PDFs (a doctor scaffold letter with an optional suggested-draft page, and a veteran-signable legal statement) instead of a letter plus a text brief."
+    },
+    {
+      "version": "1.0.0",
+      "date": "2026-10-22",
+      "note": "Initial nexus knowledge pack: medical/legal standards, per-kind letter patterns, and presumptive pathways (PACT burn pit, Agent Orange, Gulf War, Camp Lejeune, radiation)."
+    }
+  ]
+}

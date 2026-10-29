@@ -1,0 +1,38 @@
+{
+  "id": "hearing-loss-tinnitus",
+  "label": "Hearing loss and tinnitus",
+  "matchTerms": [
+    "tinnitus",
+    "hearing loss",
+    "hearing impairment",
+    "ringing in the ears",
+    "ringing in my ears",
+    "hard of hearing",
+    "sensorineural hearing",
+    "hearing"
+  ],
+  "legalCitations": [
+    {
+      "citation": "38 C.F.R. § 3.385",
+      "description": "Sets the audiometric thresholds at which impaired hearing is a disability for VA purposes."
+    }
+  ],
+  "medicalCitations": [
+    {
+      "citation": "Yankaskas, K. (2013). Prelude: Noise-induced tinnitus and hearing loss in the military. Hearing Research, 295, 3-8.",
+      "description": "Links military noise exposure to tinnitus and sensorineural hearing loss.",
+      "lastVerified": "2026-10-27"
+    },
+    {
+      "citation": "Mrena, R., Savolainen, S., Kuokkanen, J. T., & Ylikoski, J. (2004). The effect of tinnitus and hearing loss on quality of life after acute acoustic trauma. International Journal of Audiology, 43(3), 165-169.",
+      "description": "Documents persistent tinnitus and hearing loss following acute acoustic trauma.",
+      "lastVerified": "2026-10-27"
+    },
+    {
+      "citation": "Wells, T. S., Seelig, A. D., Ryan, M. A. K., Jones, J. M., Hooper, T. I., Jacobson, I. G., & Boyko, E. J. (2015). Hearing loss associated with US military combat deployment. Noise & Health, 17(74), 34-42.",
+      "description": "Associates combat deployment noise exposure with new-onset hearing loss.",
+      "lastVerified": "2026-10-27"
+    }
+  ],
+  "lastReviewed": "2026-10-27"
+}

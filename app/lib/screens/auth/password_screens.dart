@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/app_ui.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/auth_redirect.dart';
@@ -48,7 +49,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
       setState(() {
         _sent = true;
         _messageIsError = false;
-        _message = 'If an account exists for that email, a reset link is on the way. Resetting the password does not skip the text-message check.';
+        _message = 'If an account exists, a reset link is on the way. This does not skip the text-message check.';
       });
     } on AuthFailure catch (failure) {
       setState(() {
@@ -165,7 +166,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           if (missingCode)
-            const Text(
+            const LeadText(
               'Open the reset link from your email, or request a new one.',
             )
           else

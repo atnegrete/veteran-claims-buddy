@@ -4,12 +4,14 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test(
-    'a profile name collapses extra spaces and stays within 80 characters',
+    'a profile name collapses extra spaces and stays within 102 characters',
     () {
       expect(normalizeProfileName('  Alex   Rivera '), 'Alex Rivera');
+      expect(joinLegalName(first: 'Ada', middle: 'Augusta', last: 'King'), 'Ada Augusta King');
       expect(profileNameOk('Alex'), isTrue);
       expect(profileNameOk(''), isTrue);
-      expect(profileNameOk('a' * 81), isFalse);
+      expect(profileNameOk('a' * 102), isTrue);
+      expect(profileNameOk('a' * 103), isFalse);
       expect(profileTimezoneOrDefault('Mars/Base'), defaultProfileTimezone);
       expect(profileTimezoneOrDefault('America/Phoenix'), 'America/Phoenix');
     },

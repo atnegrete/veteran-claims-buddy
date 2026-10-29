@@ -23,6 +23,27 @@ const nav = [
   ['/get-started/', 'Get started'],
 ];
 
+const legalLinks = [
+  ['/privacy/', 'Privacy'],
+  ['/terms/', 'Terms'],
+  ['/terms/subscription/', 'Subscription'],
+  ['/terms/refunds/', 'Refunds'],
+  ['/terms/print-and-mail/', 'Print and mail'],
+  ['/ai-disclosure/', 'AI disclosure'],
+  ['/account-deletion/', 'Account deletion'],
+  ['/support/', 'Support'],
+];
+
+const steps = [
+  'Say whether this is your first VA disability claim.',
+  'Answer the symptom questions. A yes can save a possible condition.',
+  'Add the conditions you want on this claim.',
+  'Upload a PDF, JPEG, or PNG. You confirm, correct, or set aside each statement.',
+  'Add an exam yourself if you have one. The reminder does not name the condition.',
+  'A denied, deferred, or reduced issue can start a draft review. The official form is not filled here.',
+  'Submit on VA.gov or by mail. Nothing in this product is filed for you.',
+];
+
 function escapeHtml(value) {
   return value
     .replaceAll('&', '&amp;')
@@ -31,7 +52,12 @@ function escapeHtml(value) {
 }
 
 function inline(value) {
-  return escapeHtml(value).replaceAll(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  return escapeHtml(value)
+    .replaceAll(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replaceAll(
+      'support@veteranclaimsbuddy.com',
+      '<a href="mailto:support@veteranclaimsbuddy.com">support@veteranclaimsbuddy.com</a>',
+    );
 }
 
 function markdownBody(markdown) {
@@ -68,20 +94,38 @@ function legalPage(file, route, description) {
     route,
     title,
     description,
+    prose: true,
     main: markdownBody(markdown),
   };
 }
 
-function page({ route, title, description, main, robots }) {
-  const canonical = site + (route === '/' ? '/' : route);
-  const links = nav
+function linkList(links, route) {
+  return links
     .map(([href, label]) => {
       const current = href === route ? ' aria-current="page"' : '';
-      const className = label === 'Get started' ? ' class="button"' : '';
-      return `<a href="${href}"${className}${current}>${label}</a>`;
+      return `<a href="${href}"${current}>${label}</a>`;
     })
-    .join('\n        ');
-  const robotTag = robots ? `<meta name="robots" content="${robots}">` : '';
+    .join('\n            ');
+}
+
+function headAssets() {
+  return `<link rel="preload" href="/assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/site.css">
+  <meta name="theme-color" content="#10151C">`;
+}
+
+function page({ route, title, description, main, robots, heading, bodyClass, prose, card }) {
+  const canonical = site + (route === '/' ? '/' : route);
+  const textLinks = nav.filter(([, label]) => label !== 'Get started');
+  const robotTag = robots ? `\n  <meta name="robots" content="${robots}">` : '';
+  const bodyName = bodyClass ? ` class="${bodyClass}"` : '';
+  const headingHtml =
+    heading === false ? '' : `<h1 class="display">${escapeHtml(heading || title)}</h1>`;
+  const articleClass = [prose ? 'prose' : '', card ? 'card contact-card' : '']
+    .filter(Boolean)
+    .join(' ');
+  const body = prose ? `<article class="${articleClass}">\n${main}\n</article>` : main;
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,43 +133,58 @@ function page({ route, title, description, main, robots }) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
-  <link rel="canonical" href="${canonical}">
-  ${robotTag}
+  <link rel="canonical" href="${canonical}">${robotTag}
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:url" content="${canonical}">
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/css/site.css">
-  <meta name="theme-color" content="#10151C">
+  <meta property="og:image" content="${site}/assets/og.jpg">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="720">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="${site}/assets/og.jpg">
+  ${headAssets()}
 </head>
-<body>
+<body${bodyName}>
+  <a class="skip" href="#content">Skip to content</a>
   <p class="banner">Draft. A lawyer has not reviewed this site.</p>
-  <header>
-    <div class="wrap">
-      <a class="brand" href="/"><img src="/assets/logo-mark.svg" width="40" height="40" alt="">Veteran Claims Buddy</a>
-      <nav aria-label="Site">${links}</nav>
+  <header class="site-header">
+    <div class="wrap header-bar">
+      <a class="brand" href="/"><img src="/assets/logo-mark.svg" width="40" height="40" alt=""><span>Veteran Claims Buddy</span></a>
+      <div class="header-actions">
+        <nav class="desktop-nav" aria-label="Site">
+            ${linkList(textLinks, route)}
+        </nav>
+        <a class="btn header-cta" href="/get-started/">Get started</a>
+        <details class="mobile-nav">
+          <summary>Menu</summary>
+          <nav aria-label="Site">
+            ${linkList(textLinks, route)}
+          </nav>
+        </details>
+      </div>
     </div>
   </header>
-  <main>
-    <div class="wrap">
-      <h1>${escapeHtml(title)}</h1>
-      ${main}
+  <main id="content">
+    <div class="wrap page-wrap">
+      ${headingHtml}
+      ${body}
     </div>
   </main>
-  <footer>
-    <div class="wrap">
-      <nav class="links" aria-label="Legal">
-        <a href="/privacy/">Privacy</a>
-        <a href="/terms/">Terms</a>
-        <a href="/terms/subscription/">Subscription</a>
-        <a href="/terms/refunds/">Refunds</a>
-        <a href="/terms/print-and-mail/">Print and mail</a>
-        <a href="/ai-disclosure/">AI disclosure</a>
-        <a href="/account-deletion/">Account deletion</a>
-        <a href="/support/">Support</a>
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <a class="brand" href="/"><img src="/assets/logo-mark.svg" width="40" height="40" alt=""><span>Veteran Claims Buddy</span></a>
+        <p class="disclaimer">${disclaimer}</p>
+      </div>
+      <nav aria-label="Product">
+        <p class="footer-label">Product</p>
+        ${linkList(nav.filter(([, label]) => label !== 'Sign in' && label !== 'Get started'), route)}
       </nav>
-      <p>${disclaimer}</p>
+      <nav aria-label="Legal">
+        <p class="footer-label">Legal</p>
+        ${linkList(legalLinks, route)}
+      </nav>
     </div>
   </footer>
 </body>
@@ -141,20 +200,61 @@ function writePage(spec) {
   fs.writeFileSync(file, html);
 }
 
+const support = legalPage(
+  'support.md',
+  '/support/',
+  'Email support@veteranclaimsbuddy.com. Veteran Claims Buddy LLC is not the VA.',
+);
+support.card = true;
+
 const pages = [
   {
     route: '/',
     title: 'Veteran Claims Buddy',
     description:
       'An AI-powered guided workspace that helps Veterans organize a disability claim and see what to do next.',
+    heading: false,
+    bodyClass: 'home',
     main: `
-      <p>Veteran Claims Buddy is an AI-powered guided workspace that helps Veterans understand disability claims, organize evidence, prepare VA forms, and know what to do next.</p>
-      <p>${disclaimer}</p>
-      <p>You submit the claim yourself on VA.gov or by mail. This service does not file it.</p>
-      <div class="actions">
-        <a class="button" href="/get-started/">Get started</a>
-        <a href="/how-it-works/">How it works</a>
-      </div>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Independent claim workspace</p>
+          <h1 class="display">Organize the claim. See the next step.</h1>
+          <p class="lede">Veteran Claims Buddy is an AI-powered guided workspace that helps Veterans understand disability claims, organize evidence, prepare VA forms, and know what to do next.</p>
+          <p class="disclaimer">${disclaimer}</p>
+          <p>You submit the claim yourself on VA.gov or by mail. This service does not file it.</p>
+          <div class="actions">
+            <a class="btn" href="/get-started/">Get started</a>
+            <a class="btn-quiet" href="/how-it-works/">How it works</a>
+          </div>
+        </div>
+        <img class="hero-art" src="/assets/hero.jpg" width="1152" height="864" alt="A lamp lighting a stack of papers and a checklist on a desk.">
+      </section>
+      <section class="feature-grid" aria-label="What the workspace does">
+        <article class="card">
+          <p class="eyebrow">01</p>
+          <h2>One step at a time</h2>
+          <p>The claim opens on the current step, then the next. You are not handed every form at once.</p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">02</p>
+          <h2>You confirm the record</h2>
+          <p>Upload a PDF, JPEG, or PNG. Each statement stays unreviewed until you confirm, correct, or set it aside.</p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">03</p>
+          <h2>You submit it yourself</h2>
+          <p>You send the claim on VA.gov or by mail. This service does not file it.</p>
+        </article>
+      </section>
+      <section class="card price-strip">
+        <div>
+          <p class="eyebrow">Pricing</p>
+          <h2>The workspace stays open</h2>
+          <p>A $250 Case unlock and Premium from $29.99 a month are separate from organizing the claim. Buying is not open in the app yet.</p>
+        </div>
+        <a class="btn-quiet" href="/pricing/">See pricing</a>
+      </section>
       <script type="application/ld+json">${JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'Organization',
@@ -169,42 +269,48 @@ const pages = [
     title: 'How it works',
     description: 'One claim, one step at a time. You review the record and submit it yourself.',
     main: `
-      <ol>
-        <li>Say whether this is your first VA disability claim.</li>
-        <li>Answer the symptom questions. A yes can save a possible condition.</li>
-        <li>Add the conditions you want on this claim.</li>
-        <li>Upload a PDF, JPEG, or PNG. You confirm, correct, or set aside each statement.</li>
-        <li>Add an exam yourself if you have one. The reminder does not name the condition.</li>
-        <li>A denied, deferred, or reduced issue can start a draft review. The official form is not filled here.</li>
-        <li>Submit on VA.gov or by mail. Nothing in this product is filed for you.</li>
+      <p class="lede">One claim, one step at a time. You review the record and submit it yourself.</p>
+      <ol class="timeline">
+        ${steps
+          .map(
+            (step, index) =>
+              `<li><span class="step-num">${index + 1}</span><p>${step}</p></li>`,
+          )
+          .join('\n        ')}
       </ol>
-      <p>Vet Buddy can explain what is saved. It can be wrong, and it cannot file the claim or change it.</p>
+      <p class="note">Vet Buddy can explain what is saved. It can be wrong, and it cannot file the claim or change it.</p>
     `,
   },
   {
     route: '/pricing/',
     title: 'Pricing',
-    description: 'A $250 Case unlock, $30 a month Premium, and Print and Mail as a separate payment.',
+    description: 'A $250 Case unlock, $29.99 a month or $234.99 a year Premium, and Print and Mail as a separate payment.',
     main: `
       <section class="card">
         <h2>The workspace</h2>
         <p>Organizing the claim, questions, documents, exams, and the rating calculator stay available without a purchase. Buying is not open in the app yet.</p>
       </section>
-      <section class="card">
-        <h2>Digital Claim Package</h2>
-        <p>A one-time purchase unlocks digital package generation for one Case. The business target price is $250. The store may show the closest allowed price, such as $249.99.</p>
-        <p>That purchase stays with that Case. A different Case needs its own purchase, or an active Premium subscription.</p>
-      </section>
-      <section class="card">
-        <h2>Premium</h2>
-        <p>Premium is $30 a month. While it is active, it includes digital package generation for eligible Cases, symptom tracking, and monthly symptom summaries.</p>
-        <p>When Premium ends, generation stops on Cases that were never purchased. Files already generated stay downloadable. New symptom entries stop until Premium is active again.</p>
-      </section>
+      <div class="price-grid">
+        <section class="card price-focus">
+          <p class="eyebrow">One Case</p>
+          <h2>Digital Claim Package</h2>
+          <p class="price" aria-hidden="true">$250</p>
+          <p>A one-time purchase gives one Case a full year of Premium, limited to that single active case. The business target price is $250. The store may show the closest allowed price, such as $249.99.</p>
+          <p>You keep one active case at a time. Complete it to unlock another, or switch to Premium for every case. Completed cases stay viewable and downloadable.</p>
+        </section>
+        <section class="card price-focus">
+          <p class="eyebrow">Monthly or yearly</p>
+          <h2>Premium</h2>
+          <p class="price" aria-hidden="true">$29.99</p>
+          <p>Premium is $29.99 a month, or $234.99 a year (save 34%). While it is active, it includes digital package generation for every Case, symptom tracking, and monthly symptom summaries.</p>
+          <p>When Premium ends, generation stops on Cases that were never purchased. Files already generated stay downloadable. New symptom entries stop until Premium is active again.</p>
+        </section>
+      </div>
       <section class="card">
         <h2>Print and Mail</h2>
         <p>Print and Mail is optional and separate. You see one amount before you pay. That amount includes the provider's quote, a $9.95 service fee, and card processing. Those parts are not listed as separate charges. The charge is non-refundable once paid. It does not file the claim.</p>
       </section>
-      <p>We do not promise a rating, an approval, or any other VA outcome. Refunds for the Case unlock and Premium follow the store where you paid.</p>
+      <p class="note">We do not promise a rating, an approval, or any other VA outcome. Refunds for the Case unlock and Premium follow the store where you paid.</p>
     `,
   },
   {
@@ -212,35 +318,42 @@ const pages = [
     title: 'VA disability calculator',
     description: 'Estimate a combined disability rating and a monthly payment from the current VA rate table.',
     main: `
-      <p>This estimates a combined rating and a monthly payment. It does not apply the bilateral factor. It does not change a claim. Actual compensation depends on VA rules and an official decision.</p>
+      <p class="lede">This estimates a combined rating and a monthly payment. It does not apply the bilateral factor. It does not change a claim. Actual compensation depends on VA rules and an official decision.</p>
       <p>Rates are the VA table effective December 1, 2025, retrieved October 4, 2026, from <a href="https://www.va.gov/disability/compensation-rates/veteran-rates/">VA compensation rates</a>.</p>
-      <form class="card">
-        <div class="add-row">
-          <label>Rating
-            <select id="rating-select">
-              <option>10</option><option>20</option><option>30</option><option>40</option><option>50</option>
-              <option>60</option><option>70</option><option>80</option><option>90</option><option>100</option>
-            </select>
+      <div class="calc-grid">
+        <form class="card calc-form">
+          <div class="add-row">
+            <label>Rating
+              <select id="rating-select">
+                <option>10</option><option>20</option><option>30</option><option>40</option><option>50</option>
+                <option>60</option><option>70</option><option>80</option><option>90</option><option>100</option>
+              </select>
+            </label>
+            <button class="btn" id="add-rating" type="button">Add</button>
+          </div>
+          <div id="rating-list"></div>
+          <label class="check"><input id="spouse" type="checkbox"> Spouse</label>
+          <label class="check"><input id="spouse-aid" type="checkbox"> Spouse receives Aid and Attendance</label>
+          <label>Dependent parents
+            <select id="parents"><option value="0">0</option><option value="1">1</option><option value="2">2</option></select>
           </label>
-          <button class="button" id="add-rating" type="button">Add</button>
-        </div>
-        <div id="rating-list"></div>
-        <p id="combined-value"></p>
-        <p id="rounded-rating"></p>
-        <label class="check"><input id="spouse" type="checkbox"> Spouse</label>
-        <label class="check"><input id="spouse-aid" type="checkbox"> Spouse receives Aid and Attendance</label>
-        <label>Dependent parents
-          <select id="parents"><option value="0">0</option><option value="1">1</option><option value="2">2</option></select>
-        </label>
-        <label>Children under 18
-          <input id="children-under" inputmode="numeric" min="0" type="number" value="0">
-        </label>
-        <label>Children over 18 in a qualifying school program
-          <input id="children-school" inputmode="numeric" min="0" type="number" value="0">
-        </label>
-        <p id="monthly"></p>
-        <p id="dependent-note" hidden>A 10% or 20% rating does not increase for dependents.</p>
-      </form>
+          <label>Children under 18
+            <input id="children-under" inputmode="numeric" min="0" type="number" value="0">
+          </label>
+          <label>Children over 18 in a qualifying school program
+            <input id="children-school" inputmode="numeric" min="0" type="number" value="0">
+          </label>
+        </form>
+        <aside class="card result-panel" aria-live="polite">
+          <p class="eyebrow">Estimate</p>
+          <h2>Combined rating</h2>
+          <p id="combined-value" class="result-line"></p>
+          <p id="rounded-rating" class="result-line"></p>
+          <p id="monthly" class="price"></p>
+          <p id="dependent-note" hidden>A 10% or 20% rating does not increase for dependents.</p>
+          <p class="hint">Add a rating to see a combined result. This does not change a claim.</p>
+        </aside>
+      </div>
       <script src="/js/calculator.js"></script>
       <script src="/js/calculator-page.js"></script>
     `,
@@ -250,23 +363,36 @@ const pages = [
     title: 'FAQ',
     description: 'What Veteran Claims Buddy does, and what it does not file.',
     main: `
-      <h2>Do you file the claim with the VA?</h2>
-      <p>No. You submit it on VA.gov or by mail.</p>
-      <h2>Are you part of the VA?</h2>
-      <p>${disclaimer}</p>
-      <h2>What does the $250 purchase cover?</h2>
-      <p>Digital package generation for one Case. The store may show $249.99. It does not include Print and Mail.</p>
-      <h2>What does Premium cover?</h2>
-      <p>While the $30 monthly subscription is active, it covers package generation for eligible Cases, symptom tracking, and monthly symptom summaries.</p>
-      <h2>Is the calculator an official VA decision?</h2>
-      <p>No. It is an estimate from the published rate table. It does not apply the bilateral factor.</p>
+      <p class="lede">What Veteran Claims Buddy does, and what it does not file.</p>
+      <div class="faq">
+        <details class="faq-item">
+          <summary>Do you file the claim with the VA?</summary>
+          <p>No. You submit it on VA.gov or by mail.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can a spouse or survivor use this?</summary>
+          <p>No. The account and the forms are for the Veteran whose disability claim this is. Someone filing for a Veteran is not supported.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Are you part of the VA?</summary>
+          <p>${disclaimer}</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the $250 purchase cover?</summary>
+          <p>A full year of Premium for one active Case. The store may show $249.99. It does not include Print and Mail.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does Premium cover?</summary>
+          <p>While Premium is active ($29.99 a month or $234.99 a year), it covers package generation for every Case, symptom tracking, and monthly symptom summaries.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is the calculator an official VA decision?</summary>
+          <p>No. It is an estimate from the published rate table. It does not apply the bilateral factor.</p>
+        </details>
+      </div>
     `,
   },
-  legalPage(
-    'support.md',
-    '/support/',
-    'Email support@veteranclaimsbuddy.com. Veteran Claims Buddy LLC is not the VA.',
-  ),
+  support,
   legalPage(
     'privacy.md',
     '/privacy/',
@@ -276,7 +402,7 @@ const pages = [
   legalPage(
     'subscription.md',
     '/terms/subscription/',
-    'Draft terms for the $250 Case unlock and $30 monthly Premium.',
+    'Draft terms for the $250 Case unlock and Premium from $29.99 a month.',
   ),
   legalPage(
     'refunds.md',
@@ -316,14 +442,13 @@ function redirectPage(route, target, title) {
   <meta name="robots" content="noindex">
   <link rel="canonical" href="${site}${route}">
   <meta http-equiv="refresh" content="0; url=${target}">
-  <link rel="stylesheet" href="/css/site.css">
+  ${headAssets()}
 </head>
-<body>
-  <main>
-    <div class="wrap">
-      <h1>${title}</h1>
-      <p><a href="${target}">Continue</a></p>
-    </div>
+<body class="redirect">
+  <main class="redirect-main" id="content">
+    <img src="/assets/logo-mark.svg" width="64" height="64" alt="">
+    <h1 class="display">${title}</h1>
+    <p><a class="btn" href="${target}">Continue</a></p>
   </main>
 </body>
 </html>

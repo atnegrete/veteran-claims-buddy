@@ -6,15 +6,9 @@ abstract class AuthGateway {
 
   Future<AuthSession?> currentSession();
 
-  Future<void> createAccount({
-    required String email,
-    required String password,
-  });
+  Future<void> createAccount({required String email, required String password});
 
-  Future<void> signIn({
-    required String email,
-    required String password,
-  });
+  Future<void> signIn({required String email, required String password});
 
   /// Sends an enrollment text. [phoneNumber] is E.164.
   Future<void> sendEnrollmentCode(String phoneNumber);

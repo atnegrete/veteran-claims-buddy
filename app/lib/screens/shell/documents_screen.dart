@@ -1,72 +1,66 @@
-import 'dart:typed_data';
-
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/app_badge.dart';
 import '../../app/app_theme.dart';
+import '../../app/app_ui.dart';
 import '../../auth/auth_redirect.dart';
 import '../../claim/claim_document.dart';
+import '../../claim/claim_file_sections.dart';
 import '../../claim/claim_guide.dart';
 import '../../claim/document_repository.dart';
-import '../../forms/file_upload.dart';
+import '../../claim/form_recommendations.dart';
+import '../../claim/issue_lane.dart';
+import '../../forms/claim_file_section.dart';
 import '../../forms/form_actions.dart';
 import '../../forms/iso_date_field.dart';
+import '../../onboarding/onboarding_progress.dart';
 import 'shell_pages.dart';
 
 class DocumentsScreen extends ConsumerWidget {
-  const DocumentsScreen({super.key, required this.caseId, this.adding = false});
+  const DocumentsScreen({super.key, required this.caseId});
 
   final String caseId;
-  final bool adding;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final documents = ref.watch(claimDocumentsProvider(caseId));
+    final earlierClaim = ref
+        .watch(onboardingDocProvider)
+        .maybeWhen(
+          data: (value) => firstClaimAnswer(value) == false,
+          orElse: () => false,
+        );
     return ShellPage(
-      title: 'Documents',
+      title: 'My Uploads',
       child: documents.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, _) => const Text('These documents could not be opened.'),
+        error: (_, _) => const Text('These files could not be opened.'),
         data: (all) {
           final saved = [
             for (final document in all)
               if (document.caseId == caseId) document,
           ];
-          final showForm = adding || saved.isEmpty;
+          final lanes = ref.watch(claimLanesProvider(caseId));
+          final sections = claimFileSections(
+            earlierClaim: earlierClaim,
+            lanes: lanes,
+            documents: saved,
+          );
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               EarlierClaimNote(caseId: caseId),
-              const Text('Files for this claim stay here.'),
-              const SizedBox(height: 12),
-              const AppBadge.notFiled(),
+              const LeadText('Files you add for this claim stay here.'),
               const SizedBox(height: 16),
-              if (!showForm)
-                for (var i = 0; i < saved.length; i++) ...[
-                  if (i > 0) const SizedBox(height: 12),
-                  _DocumentCard(caseId: caseId, document: saved[i]),
-                ],
-              if (showForm) ...[
-                if (saved.isNotEmpty) ...[
-                  for (var i = 0; i < saved.length; i++) ...[
-                    if (i > 0) const SizedBox(height: 12),
-                    _DocumentCard(caseId: caseId, document: saved[i]),
-                  ],
-                  const SizedBox(height: 16),
-                ],
-                _UploadForm(caseId: caseId),
-              ] else ...[
-                const SizedBox(height: 12),
-                FilledButton(
-                  style: secondaryFilledStyle(),
-                  onPressed: () =>
-                      context.go(AuthRoutes.caseDocumentUpload(caseId)),
-                  child: const Text('Add Another'),
+              for (final section in sections)
+                ClaimFileSection(
+                  caseId: caseId,
+                  packet: section.packet,
+                  note: section.note,
+                  showDropTarget: section.showDropTarget,
+                  sectionAcceptsEvidence: _sectionAccepts(section, lanes),
                 ),
-              ],
             ],
           );
         },
@@ -108,158 +102,18 @@ class DocumentDetailsScreen extends ConsumerWidget {
   }
 }
 
-class _DocumentCard extends StatelessWidget {
-  const _DocumentCard({required this.caseId, required this.document});
-
-  final String caseId;
-  final ClaimDocument document;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Card(
-      color: theme.colorScheme.surfaceContainerHighest,
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: () => context.go(
-          document.processingStatus == 'needsReview'
-              ? AuthRoutes.caseDocumentFacts(caseId, document.id)
-              : AuthRoutes.caseDocument(caseId, document.id),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(document.name, style: theme.textTheme.titleMedium),
-              const SizedBox(height: 4),
-              Text(
-                documentTypes[document.documentType] ?? document.documentType,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-              ),
-              if (document.documentDate != null) ...[
-                const SizedBox(height: 2),
-                Text(document.documentDate!, style: theme.textTheme.bodyMedium),
-              ],
-              if (document.pageCount != null) ...[
-                const SizedBox(height: 2),
-                Text(
-                  document.pageCount == 1
-                      ? '1 page'
-                      : '${document.pageCount} pages',
-                  style: theme.textTheme.bodyMedium,
-                ),
-              ],
-              if (documentReadingLabel(
-                    document.uploadStatus,
-                    document.processingStatus,
-                  )
-                  case final reading?) ...[
-                const SizedBox(height: 2),
-                Text(
-                  reading,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: document.processingStatus == 'failed'
-                        ? theme.colorScheme.error
-                        : theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
-              ],
-            ],
-          ),
-        ),
-      ),
-    );
+bool _sectionAccepts(
+  ClaimFileSectionSpec section,
+  List<IssueLaneResult> lanes,
+) {
+  final accepts = lanes.any(
+    (lane) => lane.packet == section.packet && lane.acceptsEvidence,
+  );
+  if (section.packet == ClaimPacket.newClaim ||
+      section.packet == ClaimPacket.supplemental) {
+    return section.showDropTarget || accepts;
   }
-}
-
-class _UploadForm extends ConsumerStatefulWidget {
-  const _UploadForm({required this.caseId});
-
-  final String caseId;
-
-  @override
-  ConsumerState<_UploadForm> createState() => _UploadFormState();
-}
-
-class _UploadFormState extends ConsumerState<_UploadForm> {
-  String? _error;
-
-  Future<void> _pick() async {
-    final List<PlatformFile> picked;
-    try {
-      picked = await FilePicker.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: const ['pdf', 'jpg', 'jpeg', 'png'],
-      );
-    } catch (_) {
-      if (mounted) {
-        setState(() => _error = 'That file could not be opened.');
-      }
-      return;
-    }
-    if (!mounted || picked.isEmpty) return;
-    final file = picked.first;
-    final known = file.lengthSync();
-    if (known != null && known > maxDocumentBytes) {
-      setState(() => _error = 'That file must be under 100 MB.');
-      return;
-    }
-    if (documentContentType(file.name) == null) {
-      setState(() => _error = 'Use a PDF, JPEG, or PNG.');
-      return;
-    }
-    final Uint8List bytes;
-    try {
-      bytes = await file.readAsBytes();
-    } catch (_) {
-      if (mounted) {
-        setState(() => _error = 'That file could not be opened.');
-      }
-      return;
-    }
-    if (!mounted) return;
-    if (bytes.isEmpty || bytes.length > maxDocumentBytes) {
-      setState(() => _error = 'That file must be under 100 MB.');
-      return;
-    }
-    setState(() => _error = null);
-    final saved = await showFileUpload(
-      context: context,
-      fileName: file.name,
-      upload: (onProgress) {
-        return ref.read(uploadDocumentProvider)(
-          caseId: widget.caseId,
-          fileName: file.name,
-          bytes: bytes,
-          documentType: 'other',
-          documentDate: null,
-          onProgress: onProgress,
-        );
-      },
-    );
-    if (!mounted || !saved) return;
-    context.go(AuthRoutes.caseDocuments(widget.caseId));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        OutlinedButton(onPressed: _pick, child: const Text('Choose a file')),
-        if (_error != null) ...[
-          const SizedBox(height: 12),
-          Text(
-            _error!,
-            style: TextStyle(color: Theme.of(context).colorScheme.error),
-          ),
-        ],
-      ],
-    );
-  }
+  return accepts;
 }
 
 class _DetailsForm extends ConsumerStatefulWidget {
@@ -275,6 +129,7 @@ class _DetailsForm extends ConsumerStatefulWidget {
 class _DetailsFormState extends ConsumerState<_DetailsForm> {
   late final TextEditingController _date;
   late String _type;
+  late String _packet;
   var _busy = false;
   String? _error;
 
@@ -282,6 +137,7 @@ class _DetailsFormState extends ConsumerState<_DetailsForm> {
   void initState() {
     super.initState();
     _type = widget.document.documentType;
+    _packet = widget.document.packet;
     _date = TextEditingController(text: widget.document.documentDate ?? '');
   }
 
@@ -306,6 +162,9 @@ class _DetailsFormState extends ConsumerState<_DetailsForm> {
         documentId: widget.document.id,
         documentType: _type,
         documentDate: date.isEmpty ? null : date,
+        packet: _type == 'decisionLetter' || _type == 'dd214'
+            ? 'record'
+            : _packet,
       );
       if (!mounted) return;
       context.go(AuthRoutes.caseDocuments(widget.caseId));
@@ -342,7 +201,10 @@ class _DetailsFormState extends ConsumerState<_DetailsForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(widget.document.name),
+        Text(
+          widget.document.name,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
         if (documentReadingLabel(
               widget.document.uploadStatus,
               widget.document.processingStatus,
@@ -370,10 +232,14 @@ class _DetailsFormState extends ConsumerState<_DetailsForm> {
         const SizedBox(height: 16),
         DropdownButtonFormField<String>(
           initialValue: _type,
+          isExpanded: true,
           decoration: const InputDecoration(labelText: 'Kind of file'),
           items: [
             for (final entry in documentTypes.entries)
-              DropdownMenuItem(value: entry.key, child: Text(entry.value)),
+              DropdownMenuItem(
+                value: entry.key,
+                child: Text(entry.value, overflow: TextOverflow.ellipsis),
+              ),
           ],
           onChanged: _busy
               ? null
@@ -382,19 +248,20 @@ class _DetailsFormState extends ConsumerState<_DetailsForm> {
                   setState(() => _type = value);
                 },
         ),
+        if (_type != 'decisionLetter' && _type != 'dd214')
+          _PacketChoice(
+            caseId: widget.caseId,
+            value: _packet,
+            enabled: !_busy,
+            onChanged: (value) => setState(() => _packet = value),
+          ),
         const SizedBox(height: 12),
         IsoDateField(
           controller: _date,
           label: 'Document date',
           enabled: !_busy,
         ),
-        if (_error != null) ...[
-          const SizedBox(height: 12),
-          Text(
-            _error!,
-            style: TextStyle(color: Theme.of(context).colorScheme.error),
-          ),
-        ],
+        if (_error != null) ...[const SizedBox(height: 12), ErrorText(_error!)],
         FormActions(
           onBack: () => context.go(AuthRoutes.caseDocuments(widget.caseId)),
           onPrimary: _save,
@@ -411,6 +278,61 @@ class _DetailsFormState extends ConsumerState<_DetailsForm> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _PacketChoice extends ConsumerWidget {
+  const _PacketChoice({
+    required this.caseId,
+    required this.value,
+    required this.enabled,
+    required this.onChanged,
+  });
+
+  final String caseId;
+  final String value;
+  final bool enabled;
+  final ValueChanged<String> onChanged;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final accepting = evidencePackets(ref.watch(claimLanesProvider(caseId)));
+    if (accepting.length < 2) return const SizedBox.shrink();
+    final names = {
+      for (final packet in accepting) claimPacketNames[packet]!,
+      'shared',
+    };
+    final current = names.contains(value)
+        ? value
+        : claimPacketNames[accepting.first]!;
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: DropdownButtonFormField<String>(
+        key: ValueKey(current),
+        initialValue: current,
+        isExpanded: true,
+        decoration: const InputDecoration(labelText: 'Which filing'),
+        items: [
+          for (final packet in accepting)
+            DropdownMenuItem(
+              value: claimPacketNames[packet],
+              child: Text(
+                claimPacketLabels[packet]!,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          const DropdownMenuItem(
+            value: 'shared',
+            child: Text('Both', overflow: TextOverflow.ellipsis),
+          ),
+        ],
+        onChanged: enabled
+            ? (next) {
+                if (next != null) onChanged(next);
+              }
+            : null,
+      ),
     );
   }
 }

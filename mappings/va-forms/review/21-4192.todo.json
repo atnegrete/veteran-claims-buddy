@@ -1,0 +1,324 @@
+{
+  "formNumber": "21-4192",
+  "revision": "2021-07-06",
+  "review": [
+    {
+      "pdfField": "F[0].Page_1[0].Amount[0]",
+      "label": "Amount",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Amount[1]",
+      "label": "Amount",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].CentsAmount[0]",
+      "label": "Cents Amount",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].completeaddress[0]",
+      "label": "Completeaddress",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Concessions[0]",
+      "label": "Concessions",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBday[0]",
+      "label": "DOBday",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBday[1]",
+      "label": "DOBday",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBday[2]",
+      "label": "DOBday",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBday[3]",
+      "label": "DOBday",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBday[4]",
+      "label": "DOBday",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBday[5]",
+      "label": "DOBday",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBmonth[0]",
+      "label": "DOBmonth",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBmonth[1]",
+      "label": "DOBmonth",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBmonth[2]",
+      "label": "DOBmonth",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBmonth[3]",
+      "label": "DOBmonth",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBmonth[4]",
+      "label": "DOBmonth",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBmonth[5]",
+      "label": "DOBmonth",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOByear[0]",
+      "label": "DOByear",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOByear[1]",
+      "label": "DOByear",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOByear[2]",
+      "label": "DOByear",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOByear[3]",
+      "label": "DOByear",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOByear[4]",
+      "label": "DOByear",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOByear[5]",
+      "label": "DOByear",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].HundredsDollarAmount[0]",
+      "label": "Hundreds Dollar Amount",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].nameandaddress[0]",
+      "label": "Nameandaddress",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].NumberHoursWorkedDaily[0]",
+      "label": "Number Hours Worked Daily",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].NumberHoursWorkedWeekly[0]",
+      "label": "Number Hours Worked Weekly",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].RadioButtonList[0]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "YES",
+        "NO"
+      ]
+    },
+    {
+      "pdfField": "F[0].Page_1[0].RadioButtonList[1]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "YES",
+        "NO"
+      ]
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ReasonVeteranNotWorking[0]",
+      "label": "Reason Veteran Not Working",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ThousandsDollarAmount[0]",
+      "label": "Thousands Dollar Amount",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].timelost[0]",
+      "label": "Timelost",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].TypeOfWork[0]",
+      "label": "Type Of Work",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].VeteransCurrentDutyStatus[0]",
+      "label": "Veterans Current Duty Status",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].CentsAmount[0]",
+      "label": "Cents Amount",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].Date[0]",
+      "label": "Date",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].Digital_Signature[0]",
+      "label": "Digital Signature",
+      "type": "text",
+      "source": "dev"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOBday[0]",
+      "label": "DOBday",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOBday[1]",
+      "label": "DOBday",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOBday[2]",
+      "label": "DOBday",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOBmonth[0]",
+      "label": "DOBmonth",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOBmonth[1]",
+      "label": "DOBmonth",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOBmonth[2]",
+      "label": "DOBmonth",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOByear[0]",
+      "label": "DOByear",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOByear[1]",
+      "label": "DOByear",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].DOByear[2]",
+      "label": "DOByear",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].HundredsDollarAmount[0]",
+      "label": "Hundreds Dollar Amount",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].RadioButtonList[0]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "YES",
+        "NO"
+      ]
+    },
+    {
+      "pdfField": "F[0].Page_2[0].Remarks[0]",
+      "label": "Remarks",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].ThousandsDollarAmount[0]",
+      "label": "Thousands Dollar Amount",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_2[0].TYPEOFBENEFIT[0]",
+      "label": "TYPEOFBENEFIT",
+      "type": "text",
+      "source": "ask"
+    }
+  ]
+}

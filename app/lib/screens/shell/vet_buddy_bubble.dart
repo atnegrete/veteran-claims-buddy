@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/app_ui.dart';
 import '../../claim/claim_guide.dart';
 import '../../claim/vet_buddy.dart';
 import '../../claim/vet_buddy_repository.dart';
@@ -249,7 +250,7 @@ class _VetBuddySheetState extends ConsumerState<_VetBuddySheet> {
           ),
           if (_error != null) ...[
             const SizedBox(height: 8),
-            Text(_error!, style: TextStyle(color: theme.colorScheme.error)),
+            ErrorText(_error!),
           ],
           const SizedBox(height: 8),
           Row(

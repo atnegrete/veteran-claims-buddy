@@ -21,12 +21,54 @@ function normalizeCaseName(value) {
 }
 
 function countsTowardCaseLimit(status) {
-  return status !== "archived";
+  return status !== "archived" && status !== "completed";
 }
 
 function canStartCase(cases) {
   const active = cases.filter((item) => countsTowardCaseLimit(item.status));
   return active.length < CASE_LIMIT;
+}
+
+// A case is "open" until it is completed or archived.
+function caseIsOpen(status) {
+  return status !== "completed" && status !== "archived";
+}
+
+/**
+ * Whether the single-active-case limit blocks starting another case.
+ *
+ * The limit applies only when Premium is sourced from a Case unlock (not a
+ * subscription) and the Veteran already has an open case. A subscription lifts
+ * the limit; the standing 12-case cap still applies via canStartCase.
+ */
+function caseUnlockLimitReached(premium, cases) {
+  if (!premium) return false;
+  if (premium.source === "subscription" && premium.isActive === true) {
+    return false;
+  }
+  if (premium.source !== "caseUnlock") return false;
+  return cases.some((item) => caseIsOpen(item.status));
+}
+
+/**
+ * Classifies a case's confirmed decision for the complete-vs-appeal prompt.
+ *
+ * A full denial or a reduction may be appealed. A deferral leaves the case
+ * pending (neither complete nor appeal). A grant or increase is complete-only.
+ */
+function classifyCaseDecision(issues) {
+  const outcomes = (issues || []).map((issue) => issue.outcome);
+  if (outcomes.length === 0) return { appealEligible: false, pending: true };
+  if (outcomes.every((outcome) => outcome === "deferred")) {
+    return { appealEligible: false, pending: true };
+  }
+  const hasGrant = outcomes.some((outcome) =>
+    ["granted", "increased", "continued"].includes(outcome),
+  );
+  const hasReduced = outcomes.some((outcome) => outcome === "reduced");
+  const hasDenied = outcomes.some((outcome) => outcome === "denied");
+  const appealEligible = hasReduced || (hasDenied && !hasGrant);
+  return { appealEligible, pending: false };
 }
 
 async function requireReadyVeteran(request) {
@@ -49,6 +91,12 @@ function throwCaseOutcome(outcome) {
   }
   if (outcome.error === "limit") {
     throw new HttpsError("resource-exhausted", "You can keep up to 12 cases.");
+  }
+  if (outcome.error === "singleCase") {
+    throw new HttpsError(
+      "failed-precondition",
+      "A Case unlock covers one case at a time. Complete your current case or switch to Premium to start another.",
+    );
   }
   if (outcome.error === "onboarding") {
     throw new HttpsError(
@@ -97,7 +145,7 @@ function newCaseData(caseRef, displayName) {
     status: "draft",
     isCurrentWorkingCase: true,
     initialClaimType: "disabilityClaim",
-    claimIssueIds: [],
+    conditionIds: [],
     latestSubmissionId: null,
     latestDecisionId: null,
     openedAt: now,
@@ -117,9 +165,11 @@ const ensureWorkingCase = onCall(async (request) => {
   const userRef = db.doc(`users/${uid}`);
   const casesRef = userRef.collection("cases");
   const caseRef = casesRef.doc();
+  const premiumRef = userRef.collection("billing").doc("premium");
   const outcome = await db.runTransaction(async (tx) => {
     const userSnap = await tx.get(userRef);
     const casesSnap = await tx.get(casesRef);
+    const premiumSnap = await tx.get(premiumRef);
     if (!userSnap.exists || userSnap.get("onboardingStatus") !== "complete") {
       return { error: "onboarding" };
     }
@@ -136,6 +186,8 @@ const ensureWorkingCase = onCall(async (request) => {
       return { caseId: decision.caseId };
     }
     if (!canStartCase(cases)) return { error: "limit" };
+    const premium = premiumSnap.exists ? premiumSnap.data() : null;
+    if (caseUnlockLimitReached(premium, cases)) return { error: "singleCase" };
     for (const doc of casesSnap.docs) {
       if (doc.get("isCurrentWorkingCase") === true) {
         tx.update(doc.ref, {
@@ -163,10 +215,12 @@ const startCase = onCall(async (request) => {
   const db = getFirestore();
   const userRef = db.doc(`users/${uid}`);
   const casesRef = userRef.collection("cases");
+  const premiumRef = userRef.collection("billing").doc("premium");
   const caseRef = casesRef.doc();
   const outcome = await db.runTransaction(async (tx) => {
     const userSnap = await tx.get(userRef);
     const casesSnap = await tx.get(casesRef);
+    const premiumSnap = await tx.get(premiumRef);
     if (!userSnap.exists || userSnap.get("onboardingStatus") !== "complete") {
       return { error: "onboarding" };
     }
@@ -175,6 +229,8 @@ const startCase = onCall(async (request) => {
     }
     const cases = casesSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     if (!canStartCase(cases)) return { error: "limit" };
+    const premium = premiumSnap.exists ? premiumSnap.data() : null;
+    if (caseUnlockLimitReached(premium, cases)) return { error: "singleCase" };
 
     for (const doc of casesSnap.docs) {
       if (doc.get("isCurrentWorkingCase") === true) {
@@ -225,14 +281,103 @@ const setWorkingCase = onCall(async (request) => {
   return { caseId: outcome.caseId };
 });
 
+async function loadConfirmedIssues(db, uid, caseId) {
+  const decisionsSnap = await db
+    .collection(`users/${uid}/decisions`)
+    .where("caseId", "==", caseId)
+    .get();
+  const decisionIds = decisionsSnap.docs
+    .filter((doc) => doc.get("status") === "confirmed")
+    .map((doc) => doc.id);
+  if (decisionIds.length === 0) return [];
+  const issuesSnap = await db.collection(`users/${uid}/decisionIssues`).get();
+  return issuesSnap.docs
+    .filter((doc) => decisionIds.includes(doc.get("decisionId")))
+    .map((doc) => ({ outcome: doc.get("outcome") }));
+}
+
+const completeCase = onCall(async (request) => {
+  const uid = await requireReadyVeteran(request);
+  const caseId = request.data?.caseId;
+  if (typeof caseId !== "string" || caseId.trim() === "") {
+    throw new HttpsError("invalid-argument", "Choose a case.");
+  }
+  const db = getFirestore();
+  const caseRef = db.doc(`users/${uid}/cases/${caseId}`);
+  const snap = await caseRef.get();
+  if (!snap.exists) {
+    throw new HttpsError("not-found", "That case is not on this account.");
+  }
+  if (!caseIsOpen(snap.get("status"))) {
+    throw new HttpsError("failed-precondition", "That case is already closed.");
+  }
+  await caseRef.set(
+    {
+      status: "completed",
+      completedByVeteran: true,
+      appealing: false,
+      completedAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp(),
+    },
+    { merge: true },
+  );
+  return { caseId, status: "completed" };
+});
+
+const appealCase = onCall(async (request) => {
+  const uid = await requireReadyVeteran(request);
+  const caseId = request.data?.caseId;
+  if (typeof caseId !== "string" || caseId.trim() === "") {
+    throw new HttpsError("invalid-argument", "Choose a case.");
+  }
+  const db = getFirestore();
+  const caseRef = db.doc(`users/${uid}/cases/${caseId}`);
+  const snap = await caseRef.get();
+  if (!snap.exists) {
+    throw new HttpsError("not-found", "That case is not on this account.");
+  }
+  if (!caseIsOpen(snap.get("status"))) {
+    throw new HttpsError("failed-precondition", "That case is already closed.");
+  }
+  const issues = await loadConfirmedIssues(db, uid, caseId);
+  const { appealEligible, pending } = classifyCaseDecision(issues);
+  if (pending) {
+    throw new HttpsError(
+      "failed-precondition",
+      "This decision is still pending. Wait for the VA's decision before appealing.",
+    );
+  }
+  if (!appealEligible) {
+    throw new HttpsError(
+      "failed-precondition",
+      "Only a full denial or a reduction can be appealed from here.",
+    );
+  }
+  await caseRef.set(
+    {
+      status: "reviewPreparing",
+      appealing: true,
+      appealEligible: true,
+      updatedAt: FieldValue.serverTimestamp(),
+    },
+    { merge: true },
+  );
+  return { caseId, status: "reviewPreparing" };
+});
+
 module.exports = {
   CASE_LIMIT,
   normalizeCaseName,
   canStartCase,
   countsTowardCaseLimit,
+  caseIsOpen,
+  caseUnlockLimitReached,
+  classifyCaseDecision,
   OPEN_CASE_NAME,
   resolveWorkingCase,
   startCase,
   setWorkingCase,
   ensureWorkingCase,
+  completeCase,
+  appealCase,
 };

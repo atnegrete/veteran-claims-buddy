@@ -1,0 +1,108 @@
+{
+  "formNumber": "21-4138",
+  "revision": "2021-06-16",
+  "review": [
+    {
+      "pdfField": "form1[0].#subform[0].CurrentMailingAddress_ApartmentOrUnitNumber[0]",
+      "label": "Current Mailing Address Apartment Or Unit Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].CurrentMailingAddress_City[0]",
+      "label": "Current Mailing Address City",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].CurrentMailingAddress_Country[0]",
+      "label": "Current Mailing Address Country",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].CurrentMailingAddress_NumberAndStreet[0]",
+      "label": "Current Mailing Address Number And Street",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].CurrentMailingAddress_StateOrProvince[0]",
+      "label": "Current Mailing Address State Or Province",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].CurrentMailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0]",
+      "label": "Current Mailing Address ZIPOr Postal Code First Five Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].CurrentMailingAddress_ZIPOrPostalCode_LastFourNumbers[0]",
+      "label": "Current Mailing Address ZIPOr Postal Code Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Day[0]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].International_Phone_Number[0]",
+      "label": "International Phone Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Month[0]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Veterans_Service_Number_If_Applicable[0]",
+      "label": "Veterans Service Number If Applicable",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Year[0]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Day[1]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Digital_Signature[0]",
+      "label": "Digital Signature",
+      "type": "text",
+      "source": "dev"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Month[1]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].REMARKS[1]",
+      "label": "REMARKS",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Year[1]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    }
+  ]
+}

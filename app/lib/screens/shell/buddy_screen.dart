@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../app/app_ui.dart';
 import 'shell_pages.dart';
 import 'signed_in_bar.dart';
 
@@ -11,7 +12,6 @@ class BuddyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return ShellPage(
       title: 'Vet Buddy',
       wrapInCard: false,
@@ -19,18 +19,13 @@ class BuddyScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Vet Buddy answers questions about this claim. It does not file a claim, decide one, or change it.',
+            const LeadText(
+              'Vet Buddy answers questions about this claim. It does not file, decide, or change it.',
             ),
             const SizedBox(height: 12),
-            const Text('Ask from the chat bubble on this claim.'),
+            const LeadText('Ask from the chat bubble on this claim.'),
             const SizedBox(height: 16),
-            Text(
-              vetBuddyFooter,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+            const InfoNote(text: vetBuddyFooter),
           ],
         ),
       ),

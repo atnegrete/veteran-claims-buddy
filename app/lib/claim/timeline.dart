@@ -38,7 +38,7 @@ List<TimelineRow> timelineRows({
       TimelineRow(
         date: decisionDates[review.decisionId] ?? '',
         title: '${_reviewName(review.type)} draft',
-        detail: 'Form ${review.formId}. Nothing is filed.',
+        detail: 'Form ${review.formId}.',
       ),
   ];
   rows.sort((a, b) {

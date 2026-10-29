@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/app_ui.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/auth_redirect.dart';
@@ -93,12 +94,12 @@ class _MfaChallengeScreenState extends ConsumerState<MfaChallengeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            'Finish signing in with the code sent to a phone already on this account. A password reset does not skip this check.',
+          const LeadText(
+            'Finish signing in with the code sent to a phone on this account.',
           ),
           const SizedBox(height: 16),
           if (hints.isEmpty)
-            const Text(
+            const LeadText(
               'No phone is available for this sign-in. If you lost the phone, contact support.',
             )
           else

@@ -1,0 +1,10 @@
+---
+description: Case work is a linear step flow. Ask before guessing what finished means.
+alwaysApply: true
+---
+
+# Case flow
+
+Work inside a claim moves in order, like a tax interview. A step opens on the first part that is not filled in. Continue moves to the next open part. A finished run opens on its last open part.
+
+When a plan or a change needs to decide what "filled in" means, and the screen does not already mark that part done, ask before implementing. Do not invent a second definition of finished.

@@ -150,6 +150,32 @@ class OnboardingRepository {
     return snapshot.docs.map(ExposureEntry.fromDoc).toList();
   }
 
+  /// Creates the account document when it is still missing.
+  ///
+  /// Identifier writes require this document. A brand-new account does not
+  /// have one until onboarding saves, so the name and the form phone have to
+  /// wait until this create succeeds.
+  Future<void> ensureUserDocument({
+    required String uid,
+    required String email,
+    required String timezone,
+  }) async {
+    await _refreshToken();
+    final ref = _user(uid);
+    final existing = await ref.get();
+    if (existing.exists) return;
+    await ref.set({
+      'email': email,
+      'emailVerified': true,
+      'onboardingStatus': 'inProgress',
+      'onboardingStep': OnboardingStep.welcome.name,
+      'timezone': timezone,
+      'schemaVersion': 1,
+      'createdAt': FieldValue.serverTimestamp(),
+      'updatedAt': FieldValue.serverTimestamp(),
+    });
+  }
+
   Future<void> saveStep({
     required String uid,
     required String email,
@@ -204,10 +230,7 @@ class OnboardingRepository {
     await ref.set(data, SetOptions(merge: true));
   }
 
-  Future<void> deleteServicePeriod({
-    required String uid,
-    required String id,
-  }) {
+  Future<void> deleteServicePeriod({required String uid, required String id}) {
     return _user(uid).collection('servicePeriods').doc(id).delete();
   }
 

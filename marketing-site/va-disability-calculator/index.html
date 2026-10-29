@@ -5,81 +5,121 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VA disability calculator</title>
   <meta name="description" content="Estimate a combined disability rating and a monthly payment from the current VA rate table.">
-  <link rel="canonical" href="https://veteran-claims-buddy-dev.web.app/va-disability-calculator/">
-  
+  <link rel="canonical" href="https://veteranclaimsbuddy.com/va-disability-calculator/">
   <meta property="og:title" content="VA disability calculator">
   <meta property="og:description" content="Estimate a combined disability rating and a monthly payment from the current VA rate table.">
-  <meta property="og:url" content="https://veteran-claims-buddy-dev.web.app/va-disability-calculator/">
+  <meta property="og:url" content="https://veteranclaimsbuddy.com/va-disability-calculator/">
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://veteranclaimsbuddy.com/assets/og.jpg">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="720">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://veteranclaimsbuddy.com/assets/og.jpg">
+  <link rel="preload" href="/assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
   <meta name="theme-color" content="#10151C">
 </head>
 <body>
+  <a class="skip" href="#content">Skip to content</a>
   <p class="banner">Draft. A lawyer has not reviewed this site.</p>
-  <header>
-    <div class="wrap">
-      <a class="brand" href="/"><img src="/assets/logo-mark.svg" width="40" height="40" alt="">Veteran Claims Buddy</a>
-      <nav aria-label="Site"><a href="/how-it-works/">How it works</a>
-        <a href="/pricing/">Pricing</a>
-        <a href="/va-disability-calculator/" aria-current="page">Calculator</a>
-        <a href="/faq/">FAQ</a>
-        <a href="/support/">Support</a>
-        <a href="/sign-in/">Sign in</a>
-        <a href="/get-started/" class="button">Get started</a></nav>
+  <header class="site-header">
+    <div class="wrap header-bar">
+      <a class="brand" href="/"><img src="/assets/logo-mark.svg" width="40" height="40" alt=""><span>Veteran Claims Buddy</span></a>
+      <div class="header-actions">
+        <nav class="desktop-nav" aria-label="Site">
+            <a href="/how-it-works/">How it works</a>
+            <a href="/pricing/">Pricing</a>
+            <a href="/va-disability-calculator/" aria-current="page">Calculator</a>
+            <a href="/faq/">FAQ</a>
+            <a href="/support/">Support</a>
+            <a href="/sign-in/">Sign in</a>
+        </nav>
+        <a class="btn header-cta" href="/get-started/">Get started</a>
+        <details class="mobile-nav">
+          <summary>Menu</summary>
+          <nav aria-label="Site">
+            <a href="/how-it-works/">How it works</a>
+            <a href="/pricing/">Pricing</a>
+            <a href="/va-disability-calculator/" aria-current="page">Calculator</a>
+            <a href="/faq/">FAQ</a>
+            <a href="/support/">Support</a>
+            <a href="/sign-in/">Sign in</a>
+          </nav>
+        </details>
+      </div>
     </div>
   </header>
-  <main>
-    <div class="wrap">
-      <h1>VA disability calculator</h1>
+  <main id="content">
+    <div class="wrap page-wrap">
+      <h1 class="display">VA disability calculator</h1>
       
-      <p>This estimates a combined rating and a monthly payment. It does not apply the bilateral factor. It does not change a claim. Actual compensation depends on VA rules and an official decision.</p>
+      <p class="lede">This estimates a combined rating and a monthly payment. It does not apply the bilateral factor. It does not change a claim. Actual compensation depends on VA rules and an official decision.</p>
       <p>Rates are the VA table effective December 1, 2025, retrieved October 4, 2026, from <a href="https://www.va.gov/disability/compensation-rates/veteran-rates/">VA compensation rates</a>.</p>
-      <form class="card">
-        <div class="add-row">
-          <label>Rating
-            <select id="rating-select">
-              <option>10</option><option>20</option><option>30</option><option>40</option><option>50</option>
-              <option>60</option><option>70</option><option>80</option><option>90</option><option>100</option>
-            </select>
+      <div class="calc-grid">
+        <form class="card calc-form">
+          <div class="add-row">
+            <label>Rating
+              <select id="rating-select">
+                <option>10</option><option>20</option><option>30</option><option>40</option><option>50</option>
+                <option>60</option><option>70</option><option>80</option><option>90</option><option>100</option>
+              </select>
+            </label>
+            <button class="btn" id="add-rating" type="button">Add</button>
+          </div>
+          <div id="rating-list"></div>
+          <label class="check"><input id="spouse" type="checkbox"> Spouse</label>
+          <label class="check"><input id="spouse-aid" type="checkbox"> Spouse receives Aid and Attendance</label>
+          <label>Dependent parents
+            <select id="parents"><option value="0">0</option><option value="1">1</option><option value="2">2</option></select>
           </label>
-          <button class="button" id="add-rating" type="button">Add</button>
-        </div>
-        <div id="rating-list"></div>
-        <p id="combined-value"></p>
-        <p id="rounded-rating"></p>
-        <label class="check"><input id="spouse" type="checkbox"> Spouse</label>
-        <label class="check"><input id="spouse-aid" type="checkbox"> Spouse receives Aid and Attendance</label>
-        <label>Dependent parents
-          <select id="parents"><option value="0">0</option><option value="1">1</option><option value="2">2</option></select>
-        </label>
-        <label>Children under 18
-          <input id="children-under" inputmode="numeric" min="0" type="number" value="0">
-        </label>
-        <label>Children over 18 in a qualifying school program
-          <input id="children-school" inputmode="numeric" min="0" type="number" value="0">
-        </label>
-        <p id="monthly"></p>
-        <p id="dependent-note" hidden>A 10% or 20% rating does not increase for dependents.</p>
-      </form>
+          <label>Children under 18
+            <input id="children-under" inputmode="numeric" min="0" type="number" value="0">
+          </label>
+          <label>Children over 18 in a qualifying school program
+            <input id="children-school" inputmode="numeric" min="0" type="number" value="0">
+          </label>
+        </form>
+        <aside class="card result-panel" aria-live="polite">
+          <p class="eyebrow">Estimate</p>
+          <h2>Combined rating</h2>
+          <p id="combined-value" class="result-line"></p>
+          <p id="rounded-rating" class="result-line"></p>
+          <p id="monthly" class="price"></p>
+          <p id="dependent-note" hidden>A 10% or 20% rating does not increase for dependents.</p>
+          <p class="hint">Add a rating to see a combined result. This does not change a claim.</p>
+        </aside>
+      </div>
       <script src="/js/calculator.js"></script>
       <script src="/js/calculator-page.js"></script>
     
     </div>
   </main>
-  <footer>
-    <div class="wrap">
-      <nav class="links" aria-label="Legal">
-        <a href="/privacy/">Privacy</a>
-        <a href="/terms/">Terms</a>
-        <a href="/terms/subscription/">Subscription</a>
-        <a href="/terms/refunds/">Refunds</a>
-        <a href="/terms/print-and-mail/">Print and mail</a>
-        <a href="/ai-disclosure/">AI disclosure</a>
-        <a href="/account-deletion/">Account deletion</a>
-        <a href="/support/">Support</a>
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <a class="brand" href="/"><img src="/assets/logo-mark.svg" width="40" height="40" alt=""><span>Veteran Claims Buddy</span></a>
+        <p class="disclaimer">Veteran Claims Buddy is an independent service and is not affiliated with or endorsed by the U.S. Department of Veterans Affairs.</p>
+      </div>
+      <nav aria-label="Product">
+        <p class="footer-label">Product</p>
+        <a href="/how-it-works/">How it works</a>
+            <a href="/pricing/">Pricing</a>
+            <a href="/va-disability-calculator/" aria-current="page">Calculator</a>
+            <a href="/faq/">FAQ</a>
+            <a href="/support/">Support</a>
       </nav>
-      <p>Veteran Claims Buddy is an independent service and is not affiliated with or endorsed by the U.S. Department of Veterans Affairs.</p>
+      <nav aria-label="Legal">
+        <p class="footer-label">Legal</p>
+        <a href="/privacy/">Privacy</a>
+            <a href="/terms/">Terms</a>
+            <a href="/terms/subscription/">Subscription</a>
+            <a href="/terms/refunds/">Refunds</a>
+            <a href="/terms/print-and-mail/">Print and mail</a>
+            <a href="/ai-disclosure/">AI disclosure</a>
+            <a href="/account-deletion/">Account deletion</a>
+            <a href="/support/">Support</a>
+      </nav>
     </div>
   </footer>
 </body>

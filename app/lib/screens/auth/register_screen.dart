@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/app_ui.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/auth_redirect.dart';
@@ -66,7 +67,12 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(independentProductDisclaimer),
+            const InfoNote(text: independentProductDisclaimer),
+            const SizedBox(height: 12),
+            const InfoNote(
+              text:
+                  'Create this account only if you are the Veteran. A spouse, survivor, or other claimant is not supported.',
+            ),
             const SizedBox(height: 16),
             ChainTextField(
               controller: _email,

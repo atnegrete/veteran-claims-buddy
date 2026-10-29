@@ -24,13 +24,6 @@ class AppBadge extends StatelessWidget {
   const AppBadge.danger({required String label, IconData? icon})
     : this._(role: AppBadgeRole.danger, label: label, icon: icon);
 
-  /// The repeated line on a claim step. No icon.
-  const AppBadge.notFiled()
-    : this._(
-        role: AppBadgeRole.secondary,
-        label: 'Nothing is filed with the VA at this step.',
-      );
-
   final AppBadgeRole role;
   final String? label;
   final IconData? icon;

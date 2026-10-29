@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'form_actions.dart';
+import 'step_rail.dart';
 
 /// A stepped form with back, next, and a way to reopen a step already reached.
 ///
@@ -78,114 +79,24 @@ class _StepTrack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          for (var index = 0; index < labels.length; index++)
-            _StepDot(
-              label: labels[index],
-              index: index,
-              current: index == currentIndex,
-              complete: index < currentIndex,
-              open: index <= farthestIndex,
-              showLine: index < labels.length - 1,
-              lineComplete: index < currentIndex,
-              onTap:
-                  index <= farthestIndex &&
-                      index != currentIndex &&
-                      onStepSelected != null
-                  ? () => onStepSelected!(index)
-                  : null,
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-class _StepDot extends StatelessWidget {
-  const _StepDot({
-    required this.label,
-    required this.index,
-    required this.current,
-    required this.complete,
-    required this.open,
-    required this.showLine,
-    required this.lineComplete,
-    required this.onTap,
-  });
-
-  final String label;
-  final int index;
-  final bool current;
-  final bool complete;
-  final bool open;
-  final bool showLine;
-  final bool lineComplete;
-  final VoidCallback? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-    return Row(
-      children: [
-        InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(12),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-            child: Column(
-              children: [
-                Container(
-                  width: 28,
-                  height: 28,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: current ? scheme.primary : Colors.transparent,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: current ? scheme.primary : scheme.outline,
-                      width: current ? 0 : 1.5,
-                    ),
-                  ),
-                  child: complete
-                      ? Icon(
-                          Icons.check,
-                          size: 16,
-                          color: scheme.onSurfaceVariant,
-                        )
-                      : Text(
-                          '${index + 1}',
-                          style: theme.textTheme.labelMedium?.copyWith(
-                            color: current
-                                ? scheme.onPrimary
-                                : open
-                                ? scheme.onSurface
-                                : scheme.onSurfaceVariant,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  label,
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    color: current ? scheme.onSurface : scheme.onSurfaceVariant,
-                    fontWeight: current ? FontWeight.w700 : FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        if (showLine)
-          Container(
-            width: 20,
-            height: 2,
-            margin: const EdgeInsets.only(bottom: 18),
-            color: lineComplete ? scheme.onSurfaceVariant : scheme.outline,
+    return StepRail(
+      steps: [
+        for (var index = 0; index < labels.length; index++)
+          StepRailItem(
+            label: labels[index],
+            state: index == currentIndex
+                ? StepRailState.current
+                : index < currentIndex
+                ? StepRailState.done
+                : index <= farthestIndex
+                ? StepRailState.open
+                : StepRailState.locked,
+            onTap:
+                index <= farthestIndex &&
+                    index != currentIndex &&
+                    onStepSelected != null
+                ? () => onStepSelected!(index)
+                : null,
           ),
       ],
     );

@@ -3,10 +3,13 @@ import 'discovery_questions.dart';
 
 enum ClaimSectionStatus { notStarted, inProgress, done }
 
-ClaimSectionStatus firstClaimStatus(bool? firstClaim, {int documentCount = 0}) {
+ClaimSectionStatus firstClaimStatus(
+  bool? firstClaim, {
+  int supplementalCount = 0,
+}) {
   if (firstClaim == null) return ClaimSectionStatus.notStarted;
   if (firstClaim) return ClaimSectionStatus.done;
-  if (documentCount > 0) return ClaimSectionStatus.done;
+  if (supplementalCount > 0) return ClaimSectionStatus.done;
   return ClaimSectionStatus.inProgress;
 }
 
@@ -59,6 +62,6 @@ ClaimSectionStatus issuesStatus({
 }
 
 String firstClaimLabel(bool? firstClaim) {
-  if (firstClaim == false) return 'Earlier claim';
-  return 'First claim';
+  if (firstClaim == null) return 'Case Info';
+  return 'Case Info';
 }

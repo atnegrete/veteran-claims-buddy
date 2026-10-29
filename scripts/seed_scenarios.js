@@ -47,6 +47,8 @@ const scenarios = {
           sourceQuestionId: 'hearing',
           sourceType: 'veteranReported',
           schemaVersion: 1,
+          activeCaseId: 'case-b',
+          caseIds: ['case-b'],
         },
       },
       {
@@ -62,30 +64,14 @@ const scenarios = {
           sourceQuestionId: 'knee',
           sourceType: 'veteranReported',
           schemaVersion: 1,
-        },
-      },
-      {
-        path: 'claimIssues/hearing',
-        data: {
-          conditionId: 'hearing',
-          displayName: 'Hearing loss',
           activeCaseId: 'case-b',
-          status: 'potential',
-        },
-      },
-      {
-        path: 'claimIssues/knee',
-        data: {
-          conditionId: 'knee',
-          displayName: 'Knee pain',
-          activeCaseId: 'case-b',
-          status: 'potential',
+          caseIds: ['case-b'],
         },
       },
       {
         path: 'evidenceLinks/hearing-diagnosis',
         data: {
-          claimIssueId: 'hearing',
+          conditionId: 'hearing',
           documentId: null,
           factId: null,
           questionnaireId: null,
@@ -145,15 +131,8 @@ const scenarios = {
           sourceQuestionId: 'knee',
           sourceType: 'veteranReported',
           schemaVersion: 1,
-        },
-      },
-      {
-        path: 'claimIssues/knee',
-        data: {
-          conditionId: 'knee',
-          displayName: 'Knee pain',
           activeCaseId: 'case-c',
-          status: 'potential',
+          caseIds: ['case-c'],
         },
       },
       {
@@ -176,7 +155,7 @@ const scenarios = {
         path: 'decisionIssues/knee-denial',
         data: {
           decisionId: 'decision-c',
-          claimIssueId: 'knee',
+          conditionId: 'knee',
           displayName: 'Knee pain',
           outcome: 'denied',
           ratingPercent: null,
@@ -247,22 +226,15 @@ function issue(id, name, bodySystem, outcome, rating) {
         sourceQuestionId: id,
         sourceType: 'veteranReported',
         schemaVersion: 1,
-      },
-    },
-    {
-      path: `claimIssues/${id}`,
-      data: {
-        conditionId: id,
-        displayName: name,
         activeCaseId: 'case-d',
-        status: 'potential',
+        caseIds: ['case-d'],
       },
     },
     {
       path: `decisionIssues/${id}`,
       data: {
         decisionId: 'decision-d',
-        claimIssueId: id,
+        conditionId: id,
         displayName: name,
         outcome,
         ratingPercent: rating,

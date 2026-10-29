@@ -14,10 +14,10 @@ class ClaimIssueRepository {
   final FirebaseAuth _auth;
 
   Stream<List<ClaimIssue>> watch(String uid) {
-    return _issues(uid).snapshots().map((snapshot) {
+    return _conditions(uid).snapshots().map((snapshot) {
       return [
         for (final doc in snapshot.docs)
-          ClaimIssue.fromData(doc.id, doc.data()),
+          if (_onClaim(doc.data())) ClaimIssue.fromData(doc.id, doc.data()),
       ];
     });
   }
@@ -30,24 +30,51 @@ class ClaimIssueRepository {
   }) async {
     final user = _auth.currentUser;
     if (user != null) await user.getIdToken(true);
-    final ref = _issues(uid).doc(conditionId);
+    final ref = _conditions(uid).doc(conditionId);
     final existing = await ref.get();
-    if (existing.exists) return;
-    await ref.set({
-      'conditionId': conditionId,
+    if (!existing.exists) {
+      throw const ClaimGuideFailure('That condition could not be added.');
+    }
+    final data = existing.data() ?? const <String, dynamic>{};
+    final active = data['activeCaseId'];
+    if (active == caseId) return;
+    if (active is String && active.isNotEmpty) return;
+    await ref.update({
       'displayName': displayName,
       'caseIds': [caseId],
       'activeCaseId': caseId,
-      'status': 'potential',
-      'claimPurpose': 'initial',
-      'createdAt': FieldValue.serverTimestamp(),
       'updatedAt': FieldValue.serverTimestamp(),
-      'schemaVersion': 1,
     });
   }
 
-  CollectionReference<Map<String, dynamic>> _issues(String uid) {
-    return _firestore.collection('users').doc(uid).collection('claimIssues');
+  Future<void> removeFromClaim({
+    required String uid,
+    required String caseId,
+    required String conditionId,
+  }) async {
+    final user = _auth.currentUser;
+    if (user != null) await user.getIdToken(true);
+    final ref = _conditions(uid).doc(conditionId);
+    final existing = await ref.get();
+    if (!existing.exists) {
+      throw const ClaimGuideFailure('That condition could not be removed.');
+    }
+    final data = existing.data() ?? const <String, dynamic>{};
+    if (data['activeCaseId'] != caseId) return;
+    await ref.update({
+      'activeCaseId': FieldValue.delete(),
+      'caseIds': FieldValue.delete(),
+      'updatedAt': FieldValue.serverTimestamp(),
+    });
+  }
+
+  bool _onClaim(Map<String, dynamic> data) {
+    final active = data['activeCaseId'];
+    return active is String && active.isNotEmpty;
+  }
+
+  CollectionReference<Map<String, dynamic>> _conditions(String uid) {
+    return _firestore.collection('users').doc(uid).collection('conditions');
   }
 }
 
@@ -83,6 +110,26 @@ final addClaimIssueProvider = Provider<AddClaimIssue>((ref) {
       caseId: caseId,
       conditionId: conditionId,
       displayName: displayName,
+    );
+  };
+});
+
+typedef RemoveClaimIssue = Future<void> Function({
+  required String caseId,
+  required String conditionId,
+});
+
+final removeClaimIssueProvider = Provider<RemoveClaimIssue>((ref) {
+  final repository = ref.watch(claimIssueRepositoryProvider);
+  return ({required String caseId, required String conditionId}) {
+    final uid = ref.read(authControllerProvider).session?.uid;
+    if (uid == null) {
+      throw const ClaimGuideFailure('Sign in again, then try again.');
+    }
+    return repository.removeFromClaim(
+      uid: uid,
+      caseId: caseId,
+      conditionId: conditionId,
     );
   };
 });

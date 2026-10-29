@@ -7,6 +7,7 @@ import '../../claim/claim_review.dart';
 import '../../claim/decision_repository.dart';
 import '../../claim/exam_repository.dart';
 import '../../claim/review_repository.dart';
+import '../../app/app_ui.dart';
 import '../../claim/timeline.dart';
 import 'shell_pages.dart';
 
@@ -34,21 +35,40 @@ class TimelineScreen extends ConsumerWidget {
       decisions: decisions,
       reviews: reviews,
     );
+    final theme = Theme.of(context);
     return ShellPage(
       title: 'Timeline',
       child: rows.isEmpty
-          ? const Text(
-              'Exams, confirmed decisions, and review drafts for this claim show up here. Nothing is filed.',
+          ? const LeadText(
+              'Exams, confirmed decisions, and review drafts show up here.',
             )
           : Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                for (final row in rows) ...[
-                  Text(
-                    row.date.isEmpty ? row.title : '${row.date} · ${row.title}',
-                  ),
-                  if (row.detail.isNotEmpty) Text(row.detail),
-                  const SizedBox(height: 16),
+                for (final (index, row) in rows.indexed) ...[
+                  if (index > 0) ...[
+                    const SizedBox(height: 16),
+                    const Divider(height: 1),
+                    const SizedBox(height: 16),
+                  ],
+                  if (row.date.isNotEmpty)
+                    Text(
+                      row.date,
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  if (row.date.isNotEmpty) const SizedBox(height: 4),
+                  Text(row.title, style: theme.textTheme.titleMedium),
+                  if (row.detail.isNotEmpty) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      row.detail,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
                 ],
               ],
             ),

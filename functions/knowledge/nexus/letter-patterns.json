@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 2,
+  "patterns": {
+    "direct": {
+      "label": "Direct service connection letter",
+      "standardIds": ["directServiceConnection", "atLeastAsLikelyAsNot", "benefitOfDoubt", "continuityOfSymptomatology"],
+      "basisDescription": "the in-service event, injury, or exposure",
+      "interviewSlots": [
+        { "id": "reportedDiagnosis", "label": "Diagnosis", "guidance": "Ask whether a doctor has diagnosed this condition and what the doctor named it. If there is no diagnosis yet, that is fine to say." },
+        { "id": "symptomOnset", "label": "When symptoms started", "guidance": "Ask when the symptoms first began and whether they have continued since service." },
+        { "id": "inServiceEvent", "label": "In-service event", "guidance": "Ask about the in-service event, injury, or exposure the condition is tied to, with a date or place if known." },
+        { "id": "treatmentRecords", "label": "Treatment and records", "guidance": "Ask what treatment or records exist for this condition, such as service treatment records, VA care, or private care." },
+        { "id": "providerStatements", "label": "What a provider has said", "guidance": "Ask whether any doctor or provider has told the veteran this condition is connected to service, and what they said." }
+      ],
+      "components": [
+        { "id": "recordsReviewed", "label": "Records reviewed", "guidance": "Name, in general terms, the history and records reviewed (the Veteran's reported history, service treatment records, and current records). Do not invent records that were not provided." },
+        { "id": "currentDiagnosis", "label": "Current diagnosis", "guidance": "State the current, diagnosed condition. Do not diagnose a condition that was not provided in the facts." },
+        { "id": "inServiceEvent", "label": "In-service event or injury", "guidance": "Describe the in-service event, injury, or exposure the Veteran reported, with any date or place provided." },
+        { "id": "medicalRationale", "label": "Medical rationale", "guidance": "Explain, in plain clinical terms, why the current condition is consistent with that in-service event. This is the reasoning that supports the opinion." },
+        { "id": "opinionStatement", "label": "Opinion statement", "guidance": "End the body with the at-least-as-likely-as-not opinion sentence, framed as the reviewing physician's opinion." },
+        { "id": "signatureBlock", "label": "Signature block", "guidance": "Leave a signature block for the physician: name, credentials, license, date, and signature line. Leave these blank for the physician to complete." }
+      ]
+    },
+    "secondary": {
+      "label": "Secondary service connection letter",
+      "standardIds": ["secondaryServiceConnection", "atLeastAsLikelyAsNot", "benefitOfDoubt"],
+      "basisDescription": "the already service-connected condition",
+      "interviewSlots": [
+        { "id": "reportedDiagnosis", "label": "Diagnosis", "guidance": "Ask whether a doctor has diagnosed this condition and what the doctor named it. If there is no diagnosis yet, that is fine to say." },
+        { "id": "primaryCondition", "label": "Service-connected condition", "guidance": "Ask which condition the VA has already service-connected that is causing or worsening this one." },
+        { "id": "symptomOnset", "label": "When this started", "guidance": "Ask when this condition began relative to the service-connected condition." },
+        { "id": "treatmentRecords", "label": "Treatment and records", "guidance": "Ask what treatment or records exist for this condition, such as VA care or private care." },
+        { "id": "providerStatements", "label": "What a provider has said", "guidance": "Ask whether any doctor has told the veteran this condition was caused or worsened by the service-connected condition, and what they said." }
+      ],
+      "components": [
+        { "id": "recordsReviewed", "label": "Records reviewed", "guidance": "Name, in general terms, the history and records reviewed. Do not invent records that were not provided." },
+        { "id": "currentDiagnosis", "label": "Current diagnosis", "guidance": "State the current, diagnosed claimed condition." },
+        { "id": "primaryCondition", "label": "Primary service-connected condition", "guidance": "Name the condition the VA has already service connected that is said to have caused or worsened the claimed condition." },
+        { "id": "medicalRationale", "label": "Medical rationale", "guidance": "Explain why the primary condition caused or aggravated the claimed condition. A separate in-service event is not required." },
+        { "id": "opinionStatement", "label": "Opinion statement", "guidance": "End with the at-least-as-likely-as-not opinion sentence linking the claimed condition to the primary condition." },
+        { "id": "signatureBlock", "label": "Signature block", "guidance": "Leave a signature block for the physician to complete. Leave the fields blank." }
+      ]
+    },
+    "aggravation": {
+      "label": "Aggravation letter",
+      "standardIds": ["aggravation", "atLeastAsLikelyAsNot", "benefitOfDoubt"],
+      "basisDescription": "the worsening during service beyond natural progression",
+      "interviewSlots": [
+        { "id": "reportedDiagnosis", "label": "Diagnosis", "guidance": "Ask whether a doctor has diagnosed this condition and what the doctor named it." },
+        { "id": "baseline", "label": "Before service", "guidance": "Ask what this condition was like before service, as the veteran remembers it." },
+        { "id": "worsening", "label": "Worsening in service", "guidance": "Ask what happened during service that made it permanently worse beyond its normal course." },
+        { "id": "treatmentRecords", "label": "Treatment and records", "guidance": "Ask what treatment or records exist for this condition from before, during, and after service." },
+        { "id": "providerStatements", "label": "What a provider has said", "guidance": "Ask whether any doctor has told the veteran that service permanently worsened this condition, and what they said." }
+      ],
+      "components": [
+        { "id": "recordsReviewed", "label": "Records reviewed", "guidance": "Name, in general terms, the history and records reviewed. Do not invent records that were not provided." },
+        { "id": "currentDiagnosis", "label": "Current diagnosis", "guidance": "State the current, diagnosed condition." },
+        { "id": "baseline", "label": "Pre-service baseline", "guidance": "Describe what the condition was before service, as the Veteran reported it." },
+        { "id": "worsening", "label": "In-service worsening", "guidance": "Describe the specific duty, injury, or conditions of service that made it permanently worse beyond its natural progression." },
+        { "id": "medicalRationale", "label": "Medical rationale", "guidance": "Explain why the in-service worsening exceeds the normal course of the condition." },
+        { "id": "opinionStatement", "label": "Opinion statement", "guidance": "End with the at-least-as-likely-as-not opinion sentence framed in terms of aggravation." },
+        { "id": "signatureBlock", "label": "Signature block", "guidance": "Leave a signature block for the physician to complete. Leave the fields blank." }
+      ]
+    },
+    "supplemental": {
+      "label": "Supplemental or Board evidence letter",
+      "standardIds": ["directServiceConnection", "atLeastAsLikelyAsNot", "benefitOfDoubt"],
+      "basisDescription": "the in-service event, injury, or exposure",
+      "interviewSlots": [
+        { "id": "reportedDiagnosis", "label": "Diagnosis", "guidance": "Ask whether a doctor has diagnosed this condition and what the doctor named it." },
+        { "id": "priorDecision", "label": "Prior decision gap", "guidance": "Ask what the earlier VA decision said was missing, or why it denied the medical link." },
+        { "id": "inServiceEvent", "label": "In-service event", "guidance": "Ask about the in-service event, injury, or exposure the condition is tied to, with a date or place if known." },
+        { "id": "treatmentRecords", "label": "Treatment and records", "guidance": "Ask what treatment or records exist for this condition, including anything new since the prior decision." },
+        { "id": "providerStatements", "label": "What a provider has said", "guidance": "Ask whether any doctor has told the veteran this condition is connected to service, and what they said." }
+      ],
+      "components": [
+        { "id": "recordsReviewed", "label": "Records reviewed", "guidance": "Name, in general terms, the history and records reviewed. Do not invent records that were not provided." },
+        { "id": "priorDecision", "label": "What the prior decision was missing", "guidance": "Address why the earlier decision denied the medical link. New evidence must be new and relevant; do not repeat a letter the VA already has." },
+        { "id": "currentDiagnosis", "label": "Current diagnosis", "guidance": "State the current, diagnosed condition." },
+        { "id": "inServiceEvent", "label": "In-service event or injury", "guidance": "Describe the in-service event, injury, or exposure the Veteran reported." },
+        { "id": "medicalRationale", "label": "Medical rationale", "guidance": "Explain, with reasoning, why the current condition is related to service, filling the gap the prior decision identified." },
+        { "id": "opinionStatement", "label": "Opinion statement", "guidance": "End with the at-least-as-likely-as-not opinion sentence." },
+        { "id": "signatureBlock", "label": "Signature block", "guidance": "Leave a signature block for the physician to complete. Leave the fields blank." }
+      ]
+    }
+  }
+}

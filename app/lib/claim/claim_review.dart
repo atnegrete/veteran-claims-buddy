@@ -1,4 +1,11 @@
-const reviewOutcomes = <String>{'denied', 'deferred', 'reduced', 'other'};
+const reviewOutcomes = <String>{
+  'denied',
+  'granted',
+  'increased',
+  'continued',
+  'reduced',
+  'other',
+};
 
 const boardDockets = <String, String>{
   'direct': 'Direct review',
@@ -43,9 +50,9 @@ String reviewTitle(ReviewPath path) {
 
 String reviewExplanation(ReviewPath path) {
   return switch (path) {
-    ReviewPath.supplemental => 'A Supplemental Claim asks the VA to look at this issue again with new and relevant evidence. Add that evidence in Documents. The form is 20-0995. This does not file the review.',
+    ReviewPath.supplemental => 'A Supplemental Claim asks the VA to look at this condition again with new and relevant evidence. Add that evidence in My Uploads. The form is 20-0995. This does not file the review.',
     ReviewPath.higherLevel => 'A Higher-Level Review asks a senior reviewer to look at the same evidence. You do not add new evidence on this path. You can ask for an informal conference. The form is 20-0996. This does not file the review.',
-    ReviewPath.board => 'A Board Appeal asks the Board of Veterans\' Appeals to review this issue. Direct review adds nothing. Evidence gives you time to add more. A hearing is with a Veterans Law Judge. The form is 10182. This does not file the appeal.',
+    ReviewPath.board => 'A Board Appeal asks the Board of Veterans\' Appeals to review this condition. Direct review adds nothing. Evidence gives you time to add more. A hearing is with a Veterans Law Judge. The form is 10182. This does not file the appeal.',
   };
 }
 
@@ -55,7 +62,7 @@ class ReviewCandidate {
   const ReviewCandidate({
     required this.decisionId,
     required this.decisionIssueId,
-    required this.claimIssueId,
+    required this.conditionId,
     required this.displayName,
     required this.outcome,
     required this.decisionDate,
@@ -63,7 +70,7 @@ class ReviewCandidate {
 
   final String decisionId;
   final String decisionIssueId;
-  final String? claimIssueId;
+  final String? conditionId;
   final String displayName;
   final String outcome;
   final String decisionDate;
@@ -77,7 +84,7 @@ class ClaimReview {
     required this.formId,
     required this.decisionId,
     required this.decisionIssueId,
-    required this.claimIssueId,
+    required this.conditionId,
     required this.displayName,
     required this.boardDocket,
     required this.informalConference,
@@ -89,7 +96,7 @@ class ClaimReview {
   final String formId;
   final String decisionId;
   final String decisionIssueId;
-  final String? claimIssueId;
+  final String? conditionId;
   final String displayName;
   final String? boardDocket;
   final bool? informalConference;
@@ -106,7 +113,7 @@ class ClaimReview {
     final formId = forms is List && forms.isNotEmpty && forms.first is String
         ? forms.first as String
         : '';
-    final claimIssueId = data['claimIssueId'];
+    final conditionId = data['conditionId'];
     final docket = data['boardDocket'];
     final conference = data['informalConference'];
     return ClaimReview(
@@ -116,8 +123,8 @@ class ClaimReview {
       formId: formId,
       decisionId: data['decisionId'] as String? ?? '',
       decisionIssueId: data['decisionIssueId'] as String? ?? '',
-      claimIssueId: claimIssueId is String && claimIssueId.isNotEmpty
-          ? claimIssueId
+      conditionId: conditionId is String && conditionId.isNotEmpty
+          ? conditionId
           : null,
       displayName: data['displayName'] as String? ?? '',
       boardDocket: docket is String && docket.isNotEmpty ? docket : null,
@@ -132,9 +139,9 @@ String? reviewDraftError({
   required String? boardDocket,
   required bool? informalConference,
 }) {
-  if (issue == null) return 'Choose an issue from a confirmed decision.';
+  if (issue == null) return 'Choose a condition from a confirmed decision.';
   if (!reviewOutcomeEligible(issue.outcome)) {
-    return 'Choose an issue that was denied, deferred, or reduced.';
+    return 'Choose a condition from a confirmed decision that can be reviewed.';
   }
   if (path == ReviewPath.board && !boardDockets.containsKey(boardDocket)) {
     return 'Choose a Board docket.';

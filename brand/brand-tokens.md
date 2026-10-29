@@ -2,6 +2,8 @@
 
 The app colors live in `app/lib/app/app_theme.dart` as `AppColors`. This page records the same values for the vector files. Do not add a second palette on a screen.
 
+The shared theme for the app and the static site is [docs/theme.md](../docs/theme.md). Screens still take color from `AppColors` until that file's missing tokens are added there.
+
 | Token | Value | Use |
 | --- | --- | --- |
 | Navy | `#1F4E79` | Mark fill |

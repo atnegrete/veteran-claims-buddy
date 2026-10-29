@@ -23,9 +23,7 @@ FirebaseOptions firebaseOptionsFor(AppEnvironment environment) {
 const String appCheckWebSiteKey = String.fromEnvironment('APP_CHECK_WEB_KEY');
 
 Future<void> bootstrapFirebase(AppEnvironment environment) async {
-  await Firebase.initializeApp(
-    options: firebaseOptionsFor(environment),
-  );
+  await Firebase.initializeApp(options: firebaseOptionsFor(environment));
   await activateAppCheck(environment);
   if (environment == AppEnvironment.dev) {
     // Fictional console numbers only. A real number is rejected.
@@ -54,8 +52,9 @@ Future<void> activateAppCheck(AppEnvironment environment) async {
     providerAndroid: isDev
         ? const AndroidDebugProvider()
         : const AndroidPlayIntegrityProvider(),
-    providerApple:
-        isDev ? const AppleDebugProvider() : const AppleAppAttestProvider(),
+    providerApple: isDev
+        ? const AppleDebugProvider()
+        : const AppleAppAttestProvider(),
     providerWeb: appCheckWebSiteKey.isEmpty
         ? null
         : ReCaptchaV3Provider(appCheckWebSiteKey),

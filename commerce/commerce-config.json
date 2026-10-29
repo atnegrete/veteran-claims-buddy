@@ -1,0 +1,10 @@
+{
+  "id": "current",
+  "digitalClaimPackageBusinessPriceCents": 25000,
+  "premiumMonthlyBusinessPriceCents": 2999,
+  "premiumYearlyBusinessPriceCents": 23499,
+  "caseUnlockPremiumDays": 365,
+  "premiumEnabled": true,
+  "caseUnlockEnabled": true,
+  "schemaVersion": 1
+}

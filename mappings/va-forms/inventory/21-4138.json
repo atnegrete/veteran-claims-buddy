@@ -1,0 +1,167 @@
+{
+  "formNumber": "21-4138",
+  "revision": "2021-06-16",
+  "fields": [
+    {
+      "name": "form1[0].#subform[0].AreaCode[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "form1[0].#subform[0].CurrentMailingAddress_ApartmentOrUnitNumber[0]",
+      "type": "PDFTextField",
+      "maxLength": 5
+    },
+    {
+      "name": "form1[0].#subform[0].CurrentMailingAddress_City[0]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "form1[0].#subform[0].CurrentMailingAddress_Country[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[0].CurrentMailingAddress_NumberAndStreet[0]",
+      "type": "PDFTextField",
+      "maxLength": 30
+    },
+    {
+      "name": "form1[0].#subform[0].CurrentMailingAddress_StateOrProvince[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[0].CurrentMailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 5
+    },
+    {
+      "name": "form1[0].#subform[0].CurrentMailingAddress_ZIPOrPostalCode_LastFourNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[0].Day[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[0].EMAIL_ADDRESS[0]",
+      "type": "PDFTextField",
+      "maxLength": 20
+    },
+    {
+      "name": "form1[0].#subform[0].EMAIL_ADDRESS[1]",
+      "type": "PDFTextField",
+      "maxLength": 20
+    },
+    {
+      "name": "form1[0].#subform[0].FirstThreeNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "form1[0].#subform[0].International_Phone_Number[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].Last_Name[0]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "form1[0].#subform[0].LastFourNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[0].Middle_Initial1[0]",
+      "type": "PDFTextField",
+      "maxLength": 1
+    },
+    {
+      "name": "form1[0].#subform[0].Month[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[0].REMARKS[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].VA_File_Number_If_Applicable[0]",
+      "type": "PDFTextField",
+      "maxLength": 9
+    },
+    {
+      "name": "form1[0].#subform[0].Veterans_Beneficiary_First_Name[0]",
+      "type": "PDFTextField",
+      "maxLength": 12
+    },
+    {
+      "name": "form1[0].#subform[0].Veterans_Service_Number_If_Applicable[0]",
+      "type": "PDFTextField",
+      "maxLength": 9
+    },
+    {
+      "name": "form1[0].#subform[0].VETERANSSOCIALSECURITYNUMBERFirstThreeNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "form1[0].#subform[0].VETERANSSOCIALSECURITYNUMBERLastFourNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[0].VETERANSSOCIALSECURITYNUMBERSecondTwoNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[0].Year[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[1].Day[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[1].Digital_Signature[0]",
+      "type": "PDFSignature"
+    },
+    {
+      "name": "form1[0].#subform[1].Month[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[1].REMARKS[1]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[1].VETERANSSOCIALSECURITYNUMBERFirstThreeNumbers[1]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "form1[0].#subform[1].VETERANSSOCIALSECURITYNUMBERLastFourNumbers[1]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[1].VETERANSSOCIALSECURITYNUMBERSecondTwoNumbers[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[1].Year[1]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    }
+  ]
+}

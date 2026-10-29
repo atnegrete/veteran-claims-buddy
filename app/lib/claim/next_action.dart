@@ -29,7 +29,7 @@ class NextAction {
     required this.caseId,
     this.route,
     this.buttonLabel,
-    this.claimIssueId,
+    this.conditionId,
   });
 
   final NextActionKind kind;
@@ -41,9 +41,9 @@ class NextAction {
   final String caseId;
   final String? route;
   final String? buttonLabel;
-  final String? claimIssueId;
+  final String? conditionId;
 
-  String get syncKey => '$kind|$title|$route|$claimIssueId';
+  String get syncKey => '$kind|$title|$route|$conditionId';
 }
 
 class NextActionInput {
@@ -84,15 +84,15 @@ NextAction nextActionFor(NextActionInput input) {
     for (final document in input.documents)
       if (document.uploadStatus == 'uploaded') document,
   ];
-  if (input.firstClaim == false && saved.isEmpty) {
+  if (input.firstClaim == false && !saved.any(supportsEarlierClaim)) {
     return NextAction(
       kind: NextActionKind.earlierPaperwork,
       type: 'uploadEvidence',
       title: 'Add the paperwork from your earlier claim',
-      description: 'Add the decision or claim paperwork you want to pursue again. It stays in Documents.',
+      description: 'Add the VA decision from the claim you want to pursue again. You can also add it in My Uploads.',
       caseId: caseId,
-      route: caseId.isEmpty ? null : AuthRoutes.caseDocumentUpload(caseId),
-      buttonLabel: 'Add paperwork',
+      route: caseId.isEmpty ? null : AuthRoutes.caseStep(caseId),
+      buttonLabel: 'Continue',
     );
   }
   if (questionsStatus(input.session) != ClaimSectionStatus.done) {
@@ -100,7 +100,7 @@ NextAction nextActionFor(NextActionInput input) {
       kind: NextActionKind.questions,
       type: 'completeQuestionnaire',
       title: 'Continue the symptom questions',
-      description: 'Nothing is filed with the VA.',
+      description: 'The symptom questions for this claim are still open.',
       caseId: caseId,
       route: caseId.isEmpty ? null : AuthRoutes.caseQuestions(caseId),
       buttonLabel: 'Continue',
@@ -119,9 +119,9 @@ NextAction nextActionFor(NextActionInput input) {
       kind: NextActionKind.addIssue,
       type: 'other',
       title: _fit('Add ${condition.name} to this claim'),
-      description: 'A condition is not part of this claim until you add it. Nothing is filed with the VA.',
+      description: 'A condition is not part of this claim until you add it.',
       caseId: caseId,
-      route: caseId.isEmpty ? null : AuthRoutes.caseIssues(caseId),
+      route: caseId.isEmpty ? null : AuthRoutes.caseConditions(caseId),
       buttonLabel: 'Add to this claim',
     );
   }
@@ -132,13 +132,13 @@ NextAction nextActionFor(NextActionInput input) {
       kind: NextActionKind.issueQuestions,
       type: 'completeQuestionnaire',
       title: _fit('Answer the questions for ${issue.displayName}'),
-      description: 'Nothing is filed with the VA.',
+      description: 'These questions are for this condition.',
       caseId: caseId,
       route: caseId.isEmpty
           ? null
-          : AuthRoutes.caseIssueQuestions(caseId, issue.id),
+          : AuthRoutes.caseConditionQuestions(caseId, issue.id),
       buttonLabel: 'Continue',
-      claimIssueId: issue.id,
+      conditionId: issue.id,
     );
   }
   for (final document in saved) {
@@ -147,7 +147,7 @@ NextAction nextActionFor(NextActionInput input) {
       kind: NextActionKind.reviewFile,
       type: 'uploadEvidence',
       title: _fit('Review the statements from ${document.name}'),
-      description: 'Confirm, correct, or set aside each statement. Nothing is filed with the VA.',
+      description: 'Confirm, correct, or set aside each statement.',
       caseId: caseId,
       route: caseId.isEmpty
           ? null
@@ -162,11 +162,12 @@ NextAction nextActionFor(NextActionInput input) {
       kind: NextActionKind.decisionReview,
       type: 'other',
       title: _fit('Choose a review for ${candidate.displayName}'),
-      description: 'A denied, deferred, or reduced issue can continue in this claim. Nothing is filed with the VA.',
+      description:
+          'A denied, deferred, or reduced issue can continue in this claim.',
       caseId: caseId,
       route: caseId.isEmpty ? null : AuthRoutes.casePrepare(caseId),
       buttonLabel: 'Choose a review',
-      claimIssueId: candidate.claimIssueId,
+      conditionId: candidate.conditionId,
     );
   }
   if (input.reviewDrafts.isNotEmpty) {
@@ -180,14 +181,14 @@ NextAction nextActionFor(NextActionInput input) {
       caseId: caseId,
       route: caseId.isEmpty ? null : AuthRoutes.casePackageSubmit(caseId),
       buttonLabel: 'How to submit',
-      claimIssueId: draft.claimIssueId,
+      conditionId: draft.conditionId,
     );
   }
   return NextAction(
     kind: NextActionKind.formsLater,
     type: 'other',
     title: 'Forms for this claim are not open yet',
-    description: 'The questions and issues for this claim are in. Nothing is filed with the VA.',
+    description: 'The questions and conditions for this claim are in.',
     caseId: caseId,
   );
 }

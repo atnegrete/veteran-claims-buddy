@@ -1,0 +1,484 @@
+{
+  "formNumber": "21-0966",
+  "revision": "2023-02-28",
+  "fields": [
+    {
+      "pdfField": "F[0].#subform[1].#field[2]",
+      "type": "checkbox",
+      "required": false,
+      "label": "#field",
+      "group": "ask:field",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].Compensation[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Compensation",
+      "group": null,
+      "source": "constant",
+      "constantValue": "Yes"
+    },
+    {
+      "pdfField": "F[0].#subform[1].DATE_SIGNED_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATE SIGNED Day",
+      "group": "ask:datesignedday",
+      "source": "ask",
+      "role": "signedDay"
+    },
+    {
+      "pdfField": "F[0].#subform[1].DATE_SIGNED_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATE SIGNED Month",
+      "group": "ask:datesignedmonth",
+      "source": "ask",
+      "role": "signedMonth"
+    },
+    {
+      "pdfField": "F[0].#subform[1].DATE_SIGNED_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATE SIGNED Year",
+      "group": "ask:datesignedyear",
+      "source": "ask",
+      "role": "signedYear"
+    },
+    {
+      "pdfField": "F[0].#subform[1].NAME_OF_ATTORNEY_AGENT_OR_VETERANS_SERVICE_ORGANIZATION_VSO[0]",
+      "type": "text",
+      "required": false,
+      "label": "NAME OF ATTORNEY AGENT OR VETERANS SERVICE ORGANIZATION VSO",
+      "group": "ask:nameofattorneyagentorveteransserviceorganizationvso",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].Pension[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Pension",
+      "group": "ask:pension",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].SignatureField1[0]",
+      "type": "text",
+      "required": false,
+      "label": "Signature Field1",
+      "group": null,
+      "source": "dev",
+      "role": "signature"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Address_Of_Parent_1[0]",
+      "type": "text",
+      "required": false,
+      "label": "Address Of Parent 1",
+      "group": "ask:addressofparent1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Address_Of_Parent_1[1]",
+      "type": "text",
+      "required": false,
+      "label": "Address Of Parent 1",
+      "group": "ask:addressofparent1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].CheckBox1[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Check Box1",
+      "group": "ask:checkbox1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].CheckBox1[1]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Check Box1",
+      "group": "ask:checkbox1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_DOB_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Claimants DOB Day",
+      "group": "ask:claimantsdobday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_DOB_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Claimants DOB Month",
+      "group": "ask:claimantsdobmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_DOB_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Claimants DOB Year",
+      "group": "ask:claimantsdobyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_EMAIL_ADDRESS[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 20,
+      "label": "Claimants EMAIL ADDRESS",
+      "group": "ask:claimantsemailaddress",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_EMAIL_ADDRESS[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 20,
+      "label": "Claimants EMAIL ADDRESS",
+      "group": "ask:claimantsemailaddress",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_International_Phone_Number[0]",
+      "type": "text",
+      "required": false,
+      "label": "Claimants International Phone Number",
+      "group": "ask:claimantsinternationalphonenumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_Telephone_Number_FirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Claimants Telephone Number First Three Numbers",
+      "group": "ask:claimantstelephonenumberfirstthreenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_Telephone_Number_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Claimants Telephone Number Last Four Numbers",
+      "group": "ask:claimantstelephonenumberlastfournumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Claimants_Telephone_Number_SecondThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Claimants Telephone Number Second Three Numbers",
+      "group": "ask:claimantstelephonenumbersecondthreenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ClaimantsFirstName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 12,
+      "label": "Claimants First Name",
+      "group": "ask:claimantsfirstname",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ClaimantsLastName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Claimants Last Name",
+      "group": "ask:claimantslastname",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ClaimantsMiddleInitial1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 1,
+      "label": "Claimants Middle Initial1",
+      "group": "ask:claimantsmiddleinitial1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ClaimantsSocialSecurityNumber_FirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Claimants Social Security Number First Three Numbers",
+      "group": "ask:claimantssocialsecuritynumberfirstthreenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ClaimantsSocialSecurityNumber_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Claimants Social Security Number Last Four Numbers",
+      "group": "ask:claimantssocialsecuritynumberlastfournumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].ClaimantsSocialSecurityNumber_SecondTwoNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Claimants Social Security Number Second Two Numbers",
+      "group": "ask:claimantssocialsecuritynumbersecondtwonumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBday[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBday",
+      "group": "vet.dateOfBirth",
+      "source": "auto",
+      "canonicalKey": "vet.dobDay"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBmonth[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBmonth",
+      "group": "vet.dateOfBirth",
+      "source": "auto",
+      "canonicalKey": "vet.dobMonth"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOByear[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DOByear",
+      "group": "vet.dateOfBirth",
+      "source": "auto",
+      "canonicalKey": "vet.dobYear"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].EMAIL_ADDRESS[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 20,
+      "label": "Email address",
+      "group": "vet.email",
+      "source": "auto",
+      "canonicalKey": "vet.email"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].EMAIL_ADDRESS[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 20,
+      "label": "Email address",
+      "group": "vet.email",
+      "source": "auto",
+      "canonicalKey": "vet.email"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].International_Phone_Number[0]",
+      "type": "text",
+      "required": false,
+      "label": "International Phone Number",
+      "group": "ask:internationalphonenumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].RadioButtonList[0]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].RadioButtonList[1]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].RadioButtonList[2]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2"
+      ],
+      "label": "Have you ever filed a VA claim?",
+      "group": "vet.priorVaClaim",
+      "source": "auto",
+      "canonicalKey": "vet.priorVaClaim"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].RelationshipToVeteranOther_Specify[0]",
+      "type": "text",
+      "required": false,
+      "label": "Relationship To Veteran Other Specify",
+      "group": "ask:relationshiptoveteranotherspecify",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].TelephoneNumber_FirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Telephone Number First Three Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneAreaCode"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].TelephoneNumber_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Telephone Number Last Four Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneLine"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].TelephoneNumber_SecondThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Telephone Number Second Three Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phonePrefix"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].VA_File_Number[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "VA file number",
+      "group": "vet.priorClaimFileNumber",
+      "source": "auto",
+      "canonicalKey": "vet.priorClaimFileNumber"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].VA_File_Number[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "VA File Number",
+      "group": "ask:vafilenumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Veterans_First_Name[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 12,
+      "label": "Legal first name",
+      "group": "vet.legalFirstName",
+      "source": "auto",
+      "canonicalKey": "vet.legalFirstName"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Veterans_Last_Name[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Legal last name",
+      "group": "vet.legalLastName",
+      "source": "auto",
+      "canonicalKey": "vet.legalLastName"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Veterans_Middle_Initial1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 1,
+      "label": "Veterans Middle Initial1",
+      "group": "vet.legalMiddleName",
+      "source": "auto",
+      "canonicalKey": "vet.legalMiddleInitial"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Veterans_Service_Number[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "Veterans Service Number",
+      "group": "ask:veteransservicenumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Veterans_Social_SecurityNumber_FirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Veterans Social Security Number First Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea",
+      "role": "veteranSsnArea"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Veterans_Social_SecurityNumber_SecondTwoNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Veterans Social Security Number Second Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup",
+      "role": "veteranSsnGroup"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].VeteransSocialSecurityNumber_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Veterans Social Security Number Last Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial",
+      "role": "veteranSsnSerial"
+    }
+  ],
+  "download": {
+    "access": "free",
+    "collect": [
+      "legalName",
+      "ssn"
+    ],
+    "actions": [
+      "unsigned",
+      "signed"
+    ]
+  }
+}

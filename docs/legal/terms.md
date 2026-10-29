@@ -10,7 +10,7 @@ The service is an independent workspace. It is not part of, affiliated with, or 
 
 ## The service
 
-Veteran Claims Buddy helps you organize disability-claim information, prepare documents, and see what to do next. You are the claimant. You review every package and you submit it to VA yourself. We do not file claims for you in this version.
+Veteran Claims Buddy helps you organize disability-claim information, prepare documents, and see what to do next. You are the Veteran and the claimant. This version does not prepare forms for a spouse, survivor, or anyone filing on a Veteran’s behalf. You review every package and you submit it to VA yourself. We do not file claims for you in this version.
 
 We do not promise a rating, an approval, a timeline, or any other VA outcome.
 

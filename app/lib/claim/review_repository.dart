@@ -41,13 +41,13 @@ class ReviewRepository {
         for (final issue in issues.docs) {
           final outcome = issue.data()['outcome'] as String? ?? '';
           if (!reviewOutcomeEligible(outcome)) continue;
-          final claimIssueId = issue.data()['claimIssueId'];
+          final conditionId = issue.data()['conditionId'];
           candidates.add(
             ReviewCandidate(
               decisionId: decision.id,
               decisionIssueId: issue.id,
-              claimIssueId: claimIssueId is String && claimIssueId.isNotEmpty
-                  ? claimIssueId
+              conditionId: conditionId is String && conditionId.isNotEmpty
+                  ? conditionId
                   : null,
               displayName: issue.data()['displayName'] as String? ?? '',
               outcome: outcome,
@@ -92,7 +92,7 @@ class ReviewRepository {
       'ruleVersionIds': <String>[],
       'decisionId': issue.decisionId,
       'decisionIssueId': issue.decisionIssueId,
-      'claimIssueId': issue.claimIssueId,
+      'conditionId': issue.conditionId,
       'displayName': issue.displayName,
       'boardDocket': boardDocket,
       'informalConference': informalConference,
@@ -104,8 +104,8 @@ class ReviewRepository {
     try {
       await _submissionIssues(uid).doc().set({
         'submissionId': submission.id,
-        'claimIssueId': issue.claimIssueId,
-        'claimIssueDisplayName': issue.displayName,
+        'conditionId': issue.conditionId,
+        'conditionDisplayName': issue.displayName,
         'requestedAction': 'review',
         'status': 'included',
         'decisionIssueId': issue.decisionIssueId,

@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../account/profile.dart';
-import '../../app/app_badge.dart';
 import '../../app/app_theme.dart';
+import '../../app/app_ui.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_redirect.dart';
 import '../../auth/phone_number.dart';
@@ -38,11 +38,9 @@ class ExamsScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               EarlierClaimNote(caseId: caseId),
-              const Text(
-                'Add the exam after the VA schedules it. This does not schedule one.',
+              const LeadText(
+                'Add an exam once the VA schedules it. This does not schedule one.',
               ),
-              const SizedBox(height: 12),
-              const AppBadge.notFiled(),
               const SizedBox(height: 12),
               const _VaExamLink(),
               const SizedBox(height: 16),
@@ -111,14 +109,14 @@ class ExamPrepScreen extends ConsumerWidget {
             const SizedBox(height: 4),
             Text('${exam.examDate} at ${exam.examTime}'),
             const SizedBox(height: 12),
-            const Text(
-              'These are answers you already gave. Nothing here is new, and nothing is filed with the VA.',
+            const LeadText(
+              'Answers you already gave. Nothing here is filed with the VA.',
             ),
             const SizedBox(height: 12),
             const _VaExamLink(),
             const SizedBox(height: 16),
             if (lines.isEmpty)
-              const Text('No answers are saved yet.')
+              const LeadText('No answers are saved yet.')
             else
               for (final line in lines) ...[
                 Text(line.prompt, style: theme.textTheme.titleSmall),
@@ -337,10 +335,14 @@ class _ExamFormState extends ConsumerState<_ExamForm> {
           DropdownButtonFormField<String>(
             key: ValueKey('zone-$_timezone'),
             initialValue: _timezone,
+            isExpanded: true,
             decoration: const InputDecoration(labelText: 'Time zone'),
             items: [
               for (final entry in profileTimezones.entries)
-                DropdownMenuItem(value: entry.key, child: Text(entry.value)),
+                DropdownMenuItem(
+                  value: entry.key,
+                  child: Text(entry.value, overflow: TextOverflow.ellipsis),
+                ),
             ],
             onChanged: _busy
                 ? null
@@ -367,12 +369,16 @@ class _ExamFormState extends ConsumerState<_ExamForm> {
           DropdownButtonFormField<String>(
             key: ValueKey('provider-$_providerType'),
             initialValue: _providerType,
+            isExpanded: true,
             decoration: const InputDecoration(
               labelText: 'Who is giving the exam',
             ),
             items: [
               for (final entry in examProviderTypes.entries)
-                DropdownMenuItem(value: entry.key, child: Text(entry.value)),
+                DropdownMenuItem(
+                  value: entry.key,
+                  child: Text(entry.value, overflow: TextOverflow.ellipsis),
+                ),
             ],
             onChanged: _busy
                 ? null
@@ -427,10 +433,7 @@ class _ExamFormState extends ConsumerState<_ExamForm> {
           ),
           if (_error != null) ...[
             const SizedBox(height: 12),
-            Text(
-              _error!,
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
-            ),
+            ErrorText(_error!),
           ],
           if (_saved) ...[
             const SizedBox(height: 12),

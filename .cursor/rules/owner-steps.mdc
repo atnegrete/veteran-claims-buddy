@@ -20,7 +20,17 @@ You do not need to do anything.
 
 That sentence is not a stop. Do not wait for the owner to say continue. Keep building the next work that does not need them.
 
-A deploy, Hosting, a store step, a domain, a certificate, or a legal review goes under `Manual steps for the end` in `docs/build-progress.md`. Do not ask for it in that turn.
+A store step, a domain, a certificate, or a legal review goes under `Manual steps for the end` in `docs/build-progress.md`. Do not ask for it in that turn. Record a Firebase deploy there too, and still say it in the turn.
+
+Every turn that did work ends with one Firebase line, after the owner section.
+
+If the dev project must be updated for this change to work, that line is a title and a numbered list. Name only what changed: Cloud Functions, Firestore rules, indexes, Storage rules, Hosting, or a published Firestore document such as a form mapping. Each command includes the directory and how to tell it worked. Production is never in that list.
+
+If nothing on Firebase changed, the line is this sentence and nothing else:
+
+```text
+Firebase does not need a redeploy.
+```
 
 A max-length ask is a real stop. That reply is only the numbered list of field name and suggested max.
 

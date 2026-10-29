@@ -44,6 +44,29 @@ class CasesRepository {
     await _call('setWorkingCase', {'caseId': caseId});
   }
 
+  /// Marks a case completed, freeing the single Case-unlock slot.
+  Future<void> completeCase(String caseId) async {
+    await _callLifecycle('completeCase', caseId);
+  }
+
+  /// Keeps a case open for a review. The server allows this only for a full
+  /// denial or a reduction.
+  Future<void> appealCase(String caseId) async {
+    await _callLifecycle('appealCase', caseId);
+  }
+
+  Future<void> _callLifecycle(String name, String caseId) async {
+    await _auth.currentUser?.getIdToken(true);
+    try {
+      await _functions.httpsCallable(name).call({'caseId': caseId});
+    } on FirebaseFunctionsException catch (error) {
+      // These handlers return user-ready messages, so surface them directly.
+      throw CaseFailure(
+        error.message ?? 'That action could not be completed. Try again.',
+      );
+    }
+  }
+
   Future<Map<String, dynamic>> _call(
     String name,
     Map<String, dynamic> payload,

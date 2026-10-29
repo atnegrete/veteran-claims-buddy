@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/app_ui.dart';
 import '../../auth/auth_redirect.dart';
 import '../../cases/cases_progress.dart';
 import 'signed_in_bar.dart';
@@ -11,13 +12,22 @@ class ShellPage extends StatelessWidget {
     super.key,
     required this.title,
     required this.child,
+    this.eyebrow,
+    this.titleTrailing,
     this.footer,
     this.wrapInCard = true,
     this.expandChild = false,
-    this.maxWidth = 720,
+    this.maxWidth = double.infinity,
   });
 
   final String title;
+
+  /// Sits beside the title. Used for a status badge on a narrow page.
+  final Widget? titleTrailing;
+
+  /// A small sand label above the title. Sets the section a screen belongs to.
+  final String? eyebrow;
+
   final Widget child;
 
   /// Stays at the bottom of the card while [child] scrolls.
@@ -28,7 +38,7 @@ class ShellPage extends StatelessWidget {
   /// The child receives the card's height and handles its own scrolling.
   final bool expandChild;
 
-  /// The page column stays this wide. Pass [double.infinity] to fill the pane.
+  /// The page fills the pane. A smaller value keeps a focused column.
   final double maxWidth;
 
   @override
@@ -58,7 +68,25 @@ class ShellPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(title, style: Theme.of(context).textTheme.headlineMedium),
+                if (eyebrow != null) ...[
+                  Eyebrow(eyebrow!),
+                  const SizedBox(height: 8),
+                ],
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        title,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                    ),
+                    if (titleTrailing != null) ...[
+                      const SizedBox(width: 12),
+                      titleTrailing!,
+                    ],
+                  ],
+                ),
                 const SizedBox(height: 16),
                 Expanded(child: wrapInCard ? SurfaceCard(child: body) : body),
               ],
@@ -82,8 +110,8 @@ class EarlierClaimNote extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text(
-          'This is an earlier claim. Your open claim is still the one that opens when you sign in.',
+        const InfoNote(
+          text: 'This is an earlier claim. Your open claim is still the one that opens when you sign in.',
         ),
         Align(
           alignment: Alignment.centerLeft,

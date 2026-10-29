@@ -54,7 +54,7 @@ void main() {
           formId: '20-0995',
           decisionId: 'decision-1',
           decisionIssueId: 'issue-1',
-          claimIssueId: 'knee',
+          conditionId: 'knee',
           displayName: 'Knee pain',
           boardDocket: null,
           informalConference: null,
@@ -68,7 +68,7 @@ void main() {
       'Supplemental Claim draft',
     ]);
     expect(rows[1].detail, 'The knee claim was denied.');
-    expect(rows[2].detail, 'Form 20-0995. Nothing is filed.');
+    expect(rows[2].detail, 'Form 20-0995.');
     expect(rows.any((row) => row.detail == 'Still a draft.'), isFalse);
   });
 }

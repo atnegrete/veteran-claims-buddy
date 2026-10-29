@@ -42,7 +42,7 @@ Connecting these is an owner step at launch (build-progress M9). Until then ever
 
 - **`firebase.json`** has a `hosting` array with two entries, one per target. `marketing` serves `marketing-site/` (ignoring `build.js` and `*.test.js`). `app` serves `app/build/web` with a catch-all rewrite to `/index.html`.
 - **`.firebaserc`** maps the `marketing` and `app` targets to the site ids above, per project. This is what `firebase target:apply` would otherwise write; it is pre-filled so a deploy just works once the sites exist.
-- **`marketing-site/build.js`** is environment-aware. URLs default to the production domain, so committed pages and `marketing-site/site.test.js` stay on production. A dev build overrides them:
+- **`marketing-site/build.js`** is environment-aware. URLs default to the production domain, so committed pages and `marketing-site/site.test.js` stay on production. `npm run build:marketing` writes that HTML, then compiles `marketing-site/css/site.css` from `marketing-site/styles/input.css`. A dev build overrides the URLs:
   - `npm run build:marketing` — production URLs (the default).
   - `npm run build:marketing:dev` — dev `.web.app` URLs.
 - **The Flutter web build** comes from `fvm flutter build web --dart-define=APP_ENV=<dev|prod>` and lands in `app/build/web`. Web has no `--flavor`, so the environment is passed as the `APP_ENV` dart-define, which `app/lib/app/app_environment.dart` reads. Mobile still uses `--flavor`.
@@ -55,20 +55,15 @@ One-time, create the dev app site (the marketing site already exists as the defa
 npx -y firebase-tools@latest hosting:sites:create veteran-claims-buddy-dev-app --project dev
 ```
 
-Then, each deploy:
+From the repo root:
 
-```bash
-# from the repo root
-npm run build:marketing:dev
-# build the app web bundle
-cd app && fvm flutter build web --dart-define=APP_ENV=dev && cd ..
-# deploy both sites
-npx -y firebase-tools@latest deploy --only hosting --project dev
-```
+- `npm run build:deploy:marketing:dev` builds the marketing pages with dev URLs and deploys that site.
+- `npm run build:deploy:app:dev` builds the Flutter web app for dev and deploys that site.
+- `npm run build:deploy:hosting:dev` builds both, then deploys both.
 
-Deploy one surface at a time with `--only hosting:marketing` or `--only hosting:app`.
+Deploy without rebuilding with `npm run deploy:marketing:dev`, `npm run deploy:app:dev`, or `npm run deploy:hosting:dev`.
 
-Success: the command prints a `Hosting URL` for each of `veteran-claims-buddy-dev` and `veteran-claims-buddy-dev-app`.
+Success: the command prints a `Hosting URL` for `veteran-claims-buddy-dev`, `veteran-claims-buddy-dev-app`, or both.
 
 ## Deploy — prod (later, owner gate)
 
@@ -78,11 +73,11 @@ One-time, create the prod app site:
 npx -y firebase-tools@latest hosting:sites:create veteran-claims-buddy-prod-app --project prod
 ```
 
-Then build with production defaults (`npm run build:marketing`, `fvm flutter build web --dart-define=APP_ENV=prod`) and `deploy --only hosting --project prod`. Connecting the custom domains is build-progress M9.
+From the repo root, `npm run build:deploy:marketing:prod`, `npm run build:deploy:app:prod`, or `npm run build:deploy:hosting:prod`. Those use production URLs. Connecting the custom domains is build-progress M9.
 
 ## Best-practice notes
 
 - One project, multiple sites, addressed by target names. Do not create a second Firebase project just to host a second site.
 - A custom domain binds to a site, so the dev/prod split and the marketing/app split are both just site choices. Moving a domain later is a console action, not a code change.
-- The app site must have the SPA rewrite, or deep links (for example `/cases/123/issues`) return 404 on refresh.
+- The app site must have the SPA rewrite, or deep links (for example `/cases/123/conditions`) return 404 on refresh.
 - Keep secrets and the real domain out of the committed marketing build; dev URLs come from the dev build script, not committed files.

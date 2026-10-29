@@ -1,0 +1,480 @@
+{
+  "formNumber": "21-4142a",
+  "revision": "2021-07-18",
+  "review": [
+    {
+      "pdfField": "form1[0].#subform[0].Conditions_You_Are_Being_Treated_For[0]",
+      "label": "Conditions You Are Being Treated For",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Conditions_You_Are_Being_Treated_For[1]",
+      "label": "Conditions You Are Being Treated For",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Day[0]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Day[1]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Day[2]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Day[3]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Day[4]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].MailingAddress_ApartmentOrUnitNumber[0]",
+      "label": "Mailing Address Apartment Or Unit Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].MailingAddress_ApartmentOrUnitNumber[1]",
+      "label": "Mailing Address Apartment Or Unit Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Month[0]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Month[1]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Month[2]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Month[3]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Month[4]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Provider_Facility_Address_City[0]",
+      "label": "Provider Facility Address City",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Provider_Facility_Address_City[1]",
+      "label": "Provider Facility Address City",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Provider_Facility_Address_Country[0]",
+      "label": "Provider Facility Address Country",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Provider_Facility_Address_Country[1]",
+      "label": "Provider Facility Address Country",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Provider_Facility_Address_StateOrProvince[0]",
+      "label": "Provider Facility Address State Or Province",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Provider_Facility_Address_StateOrProvince[1]",
+      "label": "Provider Facility Address State Or Province",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Provider_Facility_Address_ZIPOrPostalCode_FirstFiveNumbers[0]",
+      "label": "Provider Facility Address ZIPOr Postal Code First Five Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Provider_Facility_Address_ZIPOrPostalCode_FirstFiveNumbers[1]",
+      "label": "Provider Facility Address ZIPOr Postal Code First Five Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Provider_Facility_Address_ZIPOrPostalCode_LastFourNumbers[0]",
+      "label": "Provider Facility Address ZIPOr Postal Code Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Provider_Facility_Address_ZIPOrPostalCode_LastFourNumbers[1]",
+      "label": "Provider Facility Address ZIPOr Postal Code Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Provider_Facility_Street_Address_NumberAndStreet[0]",
+      "label": "Provider Facility Street Address Number And Street",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Provider_Facility_Street_Address_NumberAndStreet[1]",
+      "label": "Provider Facility Street Address Number And Street",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Provider_Or_Facility_Name[0]",
+      "label": "Provider Or Facility Name",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Provider_Or_Facility_Name[1]",
+      "label": "Provider Or Facility Name",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].VeteransServiceNumber_If_Applicable[0]",
+      "label": "Veterans Service Number If Applicable",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Year[0]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Year[1]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Year[2]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Year[3]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Year[4]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Conditions_You_Are_Being_Treated_For[2]",
+      "label": "Conditions You Are Being Treated For",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Conditions_You_Are_Being_Treated_For[3]",
+      "label": "Conditions You Are Being Treated For",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Conditions_You_Are_Being_Treated_For[4]",
+      "label": "Conditions You Are Being Treated For",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Day[10]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Day[5]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Day[6]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Day[7]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Day[8]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Day[9]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].MailingAddress_ApartmentOrUnitNumber[2]",
+      "label": "Mailing Address Apartment Or Unit Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].MailingAddress_ApartmentOrUnitNumber[3]",
+      "label": "Mailing Address Apartment Or Unit Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].MailingAddress_ApartmentOrUnitNumber[4]",
+      "label": "Mailing Address Apartment Or Unit Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Month[10]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Month[5]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Month[6]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Month[7]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Month[8]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Month[9]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Address_City[2]",
+      "label": "Provider Facility Address City",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Address_City[3]",
+      "label": "Provider Facility Address City",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Address_City[4]",
+      "label": "Provider Facility Address City",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Address_Country[2]",
+      "label": "Provider Facility Address Country",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Address_Country[3]",
+      "label": "Provider Facility Address Country",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Address_Country[4]",
+      "label": "Provider Facility Address Country",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Address_StateOrProvince[2]",
+      "label": "Provider Facility Address State Or Province",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Address_StateOrProvince[3]",
+      "label": "Provider Facility Address State Or Province",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Address_StateOrProvince[4]",
+      "label": "Provider Facility Address State Or Province",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Address_ZIPOrPostalCode_FirstFiveNumbers[2]",
+      "label": "Provider Facility Address ZIPOr Postal Code First Five Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Address_ZIPOrPostalCode_FirstFiveNumbers[3]",
+      "label": "Provider Facility Address ZIPOr Postal Code First Five Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Address_ZIPOrPostalCode_FirstFiveNumbers[4]",
+      "label": "Provider Facility Address ZIPOr Postal Code First Five Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Address_ZIPOrPostalCode_LastFourNumbers[2]",
+      "label": "Provider Facility Address ZIPOr Postal Code Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Address_ZIPOrPostalCode_LastFourNumbers[3]",
+      "label": "Provider Facility Address ZIPOr Postal Code Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Address_ZIPOrPostalCode_LastFourNumbers[4]",
+      "label": "Provider Facility Address ZIPOr Postal Code Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Street_Address_NumberAndStreet[2]",
+      "label": "Provider Facility Street Address Number And Street",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Street_Address_NumberAndStreet[3]",
+      "label": "Provider Facility Street Address Number And Street",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Facility_Street_Address_NumberAndStreet[4]",
+      "label": "Provider Facility Street Address Number And Street",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Or_Facility_Name[2]",
+      "label": "Provider Or Facility Name",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Or_Facility_Name[3]",
+      "label": "Provider Or Facility Name",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Provider_Or_Facility_Name[4]",
+      "label": "Provider Or Facility Name",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Year[10]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Year[5]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Year[6]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Year[7]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Year[8]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].Year[9]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    }
+  ]
+}

@@ -13,10 +13,15 @@ test('the public pages keep the draft banner, the prices, and the disclaimer', (
   const privacy = fs.readFileSync(path.join(root, 'privacy/index.html'), 'utf8');
   const sitemap = fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8');
   assert.match(home, /Draft\. A lawyer has not reviewed this site\./);
+  assert.match(home, /Organize the claim\. See the next step\./);
+  assert.match(home, /assets\/hero\.jpg/);
+  assert.match(home, /summary_large_image/);
   assert.match(home, /not affiliated with or endorsed by the U\.S\. Department of Veterans Affairs/);
   assert.match(home, /does not file it/);
+  assert.match(fs.readFileSync(path.join(root, 'faq/index.html'), 'utf8'), /<details/);
   assert.match(pricing, /\$250/);
-  assert.match(pricing, /\$30/);
+  assert.match(pricing, /\$29\.99/);
+  assert.match(pricing, /\$234\.99/);
   assert.match(pricing, /\$9\.95/);
   assert.match(pricing, /Buying is not open in the app yet/);
   assert.match(privacy, /support@veteranclaimsbuddy\.com/);

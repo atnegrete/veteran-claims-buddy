@@ -93,10 +93,12 @@ class MobileNumberField extends StatefulWidget {
     super.key,
     required this.controller,
     this.enabled = true,
+    this.onChanged,
   });
 
   final TextEditingController controller;
   final bool enabled;
+  final ValueChanged<String>? onChanged;
 
   @override
   State<MobileNumberField> createState() => _MobileNumberFieldState();
@@ -120,6 +122,7 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
       enabled: widget.enabled,
       keyboardType: TextInputType.phone,
       inputFormatters: const [UsPhoneInputFormatter()],
+      onChanged: widget.onChanged,
       decoration: const InputDecoration(labelText: 'Mobile number'),
     );
   }

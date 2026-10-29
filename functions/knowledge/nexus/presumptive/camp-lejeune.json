@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "campLejeune",
+  "label": "Camp Lejeune contaminated water",
+  "authority": "Honoring America's Veterans and Caring for Camp Lejeune Families Act of 2012; Camp Lejeune Justice Act of 2022",
+  "citation": "38 CFR 3.307(a)(7), 3.309(f)",
+  "sourceAsOf": "2026-10-22",
+  "qualifyingService": {
+    "locations": ["Camp Lejeune", "Marine Corps Base Camp Lejeune", "Marine Corps Air Station New River", "Jacksonville North Carolina"],
+    "dateRanges": [
+      { "start": "1953-08-01", "end": "1987-12-31", "label": "Camp Lejeune contaminated water period" }
+    ],
+    "branches": ["marineCorps", "navy"]
+  },
+  "exposures": ["solvent", "other"],
+  "presumptiveConditions": [
+    "Adult leukemia",
+    "Aplastic anemia and other myelodysplastic syndromes",
+    "Bladder cancer",
+    "Kidney cancer",
+    "Liver cancer",
+    "Multiple myeloma",
+    "Non-Hodgkin's lymphoma",
+    "Parkinson's disease"
+  ],
+  "notes": "At least 30 cumulative days of service at Camp Lejeune between August 1953 and December 1987 presumes exposure to contaminated water for the listed conditions. A presumptive condition usually does not need a paid nexus letter."
+}

@@ -99,7 +99,7 @@ class ClaimDecisionIssue {
   const ClaimDecisionIssue({
     required this.id,
     required this.decisionId,
-    required this.claimIssueId,
+    required this.conditionId,
     required this.displayName,
     required this.outcome,
     required this.ratingPercent,
@@ -113,7 +113,7 @@ class ClaimDecisionIssue {
 
   final String id;
   final String decisionId;
-  final String? claimIssueId;
+  final String? conditionId;
   final String displayName;
   final String outcome;
   final int? ratingPercent;
@@ -125,15 +125,15 @@ class ClaimDecisionIssue {
   final bool userConfirmed;
 
   static ClaimDecisionIssue fromData(String id, Map<String, dynamic> data) {
-    final claimIssueId = data['claimIssueId'];
+    final conditionId = data['conditionId'];
     final rating = data['ratingPercent'];
     final effective = data['effectiveDate'];
     final confidence = data['extractionConfidence'];
     return ClaimDecisionIssue(
       id: id,
       decisionId: data['decisionId'] as String? ?? '',
-      claimIssueId: claimIssueId is String && claimIssueId.isNotEmpty
-          ? claimIssueId
+      conditionId: conditionId is String && conditionId.isNotEmpty
+          ? conditionId
           : null,
       displayName: data['displayName'] as String? ?? '',
       outcome: data['outcome'] as String? ?? 'other',

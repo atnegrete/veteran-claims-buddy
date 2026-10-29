@@ -101,14 +101,14 @@ ClaimIssue? findClaimIssue(
 class EvidenceLink {
   const EvidenceLink({
     required this.id,
-    required this.claimIssueId,
+    required this.conditionId,
     required this.evidenceType,
     required this.relationship,
     required this.summary,
   });
 
   final String id;
-  final String claimIssueId;
+  final String conditionId;
   final String evidenceType;
   final String relationship;
   final String summary;
@@ -116,7 +116,7 @@ class EvidenceLink {
   static EvidenceLink fromData(String id, Map<String, dynamic> data) {
     return EvidenceLink(
       id: id,
-      claimIssueId: data['claimIssueId'] as String? ?? '',
+      conditionId: data['conditionId'] as String? ?? '',
       evidenceType: data['evidenceType'] as String? ?? '',
       relationship: data['relationship'] as String? ?? 'supports',
       summary: data['summary'] as String? ?? '',
@@ -126,7 +126,7 @@ class EvidenceLink {
 
 const connectionTypes = <String, String>{
   'direct': 'Directly from service',
-  'secondary': 'Connected to another condition on this claim',
+  'secondary': 'Connected to another condition',
   'aggravation': 'Made worse in service',
   'presumptive': 'One service may presume',
   'increase': 'A higher rating than one already granted',
@@ -152,23 +152,85 @@ class ClaimTheory {
     required this.id,
     required this.type,
     required this.summary,
-    this.relatedClaimIssueId,
+    this.relatedConditionName,
   });
 
   final String id;
   final String type;
   final String summary;
-  final String? relatedClaimIssueId;
+  final String? relatedConditionName;
 
   static ClaimTheory fromData(String id, Map<String, dynamic> data) {
-    final related = data['relatedClaimIssueId'];
+    final related = data['relatedConditionName'];
     return ClaimTheory(
       id: id,
       type: data['type'] as String? ?? 'direct',
       summary: data['summary'] as String? ?? '',
-      relatedClaimIssueId: related is String && related.isNotEmpty
+      relatedConditionName: related is String && related.isNotEmpty
           ? related
           : null,
+    );
+  }
+}
+
+const layFrequencyLabel = 'How often:';
+const layDurationLabel = 'How long:';
+const layImpactLabel = 'What it keeps you from doing:';
+
+/// Frequency, duration, and impact saved as one lay-statement body.
+class LayEffects {
+  const LayEffects({this.frequency = '', this.duration = '', this.impact = ''});
+
+  final String frequency;
+  final String duration;
+  final String impact;
+
+  bool get isEmpty =>
+      frequency.trim().isEmpty &&
+      duration.trim().isEmpty &&
+      impact.trim().isEmpty;
+
+  String toBody() {
+    final parts = <String>[];
+    final often = frequency.trim();
+    final lasts = duration.trim();
+    final limits = impact.trim();
+    if (often.isNotEmpty) parts.add('$layFrequencyLabel $often');
+    if (lasts.isNotEmpty) parts.add('$layDurationLabel $lasts');
+    if (limits.isNotEmpty) parts.add('$layImpactLabel $limits');
+    return parts.join('\n\n');
+  }
+
+  static LayEffects fromBody(String body) {
+    final text = body.trim();
+    if (text.isEmpty) return const LayEffects();
+    final labeled =
+        text.startsWith(layFrequencyLabel) ||
+        text.startsWith(layDurationLabel) ||
+        text.startsWith(layImpactLabel);
+    if (!labeled) return LayEffects(impact: text);
+
+    String take(String label) {
+      final start = text.indexOf(label);
+      if (start < 0) return '';
+      final from = start + label.length;
+      var end = text.length;
+      for (final other in const [
+        layFrequencyLabel,
+        layDurationLabel,
+        layImpactLabel,
+      ]) {
+        if (other == label) continue;
+        final index = text.indexOf(other, from);
+        if (index >= 0 && index < end) end = index;
+      }
+      return text.substring(from, end).trim();
+    }
+
+    return LayEffects(
+      frequency: take(layFrequencyLabel),
+      duration: take(layDurationLabel),
+      impact: take(layImpactLabel),
     );
   }
 }
@@ -193,33 +255,51 @@ class RecordedDecision {
     required this.decisionDate,
     required this.outcome,
     required this.displayName,
+    this.decisionId = '',
     this.ratingPercent,
     this.effectiveDate,
+    this.reasonCategories = const [],
   });
 
   final String id;
   final String decisionDate;
   final String outcome;
   final String displayName;
+  final String decisionId;
   final int? ratingPercent;
   final String? effectiveDate;
+  final List<String> reasonCategories;
 
   static RecordedDecision fromIssue(
     String id,
     Map<String, dynamic> data, {
     required String decisionDate,
+    String decisionId = '',
   }) {
     final rating = data['ratingPercent'];
     final effective = data['effectiveDate'];
     return RecordedDecision(
       id: id,
       decisionDate: decisionDate,
+      decisionId: decisionId,
       outcome: data['outcome'] as String? ?? '',
       displayName: data['displayName'] as String? ?? '',
       ratingPercent: rating is int ? rating : null,
       effectiveDate: effective is String && effective.isNotEmpty
           ? effective
           : null,
+      reasonCategories: reasonCategoriesFrom(data['reasons']),
     );
   }
+}
+
+List<String> reasonCategoriesFrom(Object? raw) {
+  if (raw is! List) return const [];
+  final categories = <String>[];
+  for (final item in raw) {
+    if (item is! Map) continue;
+    final category = item['category'];
+    if (category is String && category.isNotEmpty) categories.add(category);
+  }
+  return categories;
 }

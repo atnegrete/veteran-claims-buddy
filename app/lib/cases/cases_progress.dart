@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../auth/auth_controller.dart';
+import '../billing/entitlement_service.dart';
 import '../home/home_snapshot.dart';
 import '../onboarding/onboarding_progress.dart';
 import 'cases_repository.dart';
@@ -38,6 +39,16 @@ final ensureWorkingCaseCallerProvider = Provider<Future<String> Function()>((
   ref,
 ) {
   return () => ref.read(casesRepositoryProvider).ensureWorkingCase();
+});
+
+/// Completes a case (frees the single Case-unlock slot).
+final completeCaseProvider = Provider<Future<void> Function(String)>((ref) {
+  return (caseId) => ref.read(casesRepositoryProvider).completeCase(caseId);
+});
+
+/// Keeps a case open for a review. Allowed only for a full denial or reduction.
+final appealCaseProvider = Provider<Future<void> Function(String)>((ref) {
+  return (caseId) => ref.read(casesRepositoryProvider).appealCase(caseId);
 });
 
 class CaseEnsure extends Notifier<String?> {
@@ -76,9 +87,6 @@ class CaseEnsure extends Notifier<String?> {
 final caseEnsureProvider = NotifierProvider<CaseEnsure, String?>(
   CaseEnsure.new,
 );
-
-/// Buying is not open, so this stays false until an entitlement exists.
-final premiumActiveProvider = Provider<bool>((ref) => false);
 
 final homeSnapshotProvider = Provider<HomeSnapshot>((ref) {
   final cases = ref

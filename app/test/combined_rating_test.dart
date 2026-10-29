@@ -17,14 +17,8 @@ void main() {
   });
 
   test('symptom entry opens plans until Premium is active', () {
-    expect(
-      symptomDestination(premiumActive: false),
-      '/plans?reason=symptoms',
-    );
-    expect(
-      symptomDestination(premiumActive: true),
-      '/symptoms/events/new',
-    );
+    expect(symptomDestination(premiumActive: false), '/plans?reason=symptoms');
+    expect(symptomDestination(premiumActive: true), '/symptoms/events/new');
   });
 
   test('plans copy follows the reason it was opened', () {

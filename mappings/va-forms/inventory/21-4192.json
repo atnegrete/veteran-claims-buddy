@@ -1,0 +1,307 @@
+{
+  "formNumber": "21-4192",
+  "revision": "2021-07-06",
+  "fields": [
+    {
+      "name": "F[0].Page_1[0].Amount[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_1[0].Amount[1]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_1[0].CentsAmount[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].completeaddress[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_1[0].Concessions[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_1[0].DOBday[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].DOBday[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].DOBday[2]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].DOBday[3]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].DOBday[4]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].DOBday[5]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].DOBmonth[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].DOBmonth[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].DOBmonth[2]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].DOBmonth[3]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].DOBmonth[4]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].DOBmonth[5]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].DOByear[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_1[0].DOByear[1]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_1[0].DOByear[2]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_1[0].DOByear[3]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_1[0].DOByear[4]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_1[0].DOByear[5]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_1[0].HundredsDollarAmount[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "F[0].Page_1[0].Last_Name[0]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "F[0].Page_1[0].Middle_Initial1[0]",
+      "type": "PDFTextField",
+      "maxLength": 1
+    },
+    {
+      "name": "F[0].Page_1[0].nameandaddress[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_1[0].NumberHoursWorkedDaily[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "F[0].Page_1[0].NumberHoursWorkedWeekly[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "F[0].Page_1[0].RadioButtonList[0]",
+      "type": "PDFRadioGroup",
+      "options": [
+        "YES",
+        "NO"
+      ]
+    },
+    {
+      "name": "F[0].Page_1[0].RadioButtonList[1]",
+      "type": "PDFRadioGroup",
+      "options": [
+        "YES",
+        "NO"
+      ]
+    },
+    {
+      "name": "F[0].Page_1[0].ReasonVeteranNotWorking[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_1[0].SocialSecurityNumber_FirstThreeNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "F[0].Page_1[0].SocialSecurityNumber_LastFourNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_1[0].SocialSecurityNumber_SecondTwoNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].ThousandsDollarAmount[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "F[0].Page_1[0].timelost[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_1[0].TypeOfWork[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_1[0].VA_File_Number_If_Applicable[0]",
+      "type": "PDFTextField",
+      "maxLength": 9
+    },
+    {
+      "name": "F[0].Page_1[0].Veterans_First_Name[0]",
+      "type": "PDFTextField",
+      "maxLength": 12
+    },
+    {
+      "name": "F[0].Page_1[0].VeteransCurrentDutyStatus[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_2[0].CentsAmount[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_2[0].Date[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_2[0].Digital_Signature[0]",
+      "type": "PDFSignature"
+    },
+    {
+      "name": "F[0].Page_2[0].DOBday[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_2[0].DOBday[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_2[0].DOBday[2]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_2[0].DOBmonth[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_2[0].DOBmonth[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_2[0].DOBmonth[2]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_2[0].DOByear[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_2[0].DOByear[1]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_2[0].DOByear[2]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_2[0].HundredsDollarAmount[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "F[0].Page_2[0].RadioButtonList[0]",
+      "type": "PDFRadioGroup",
+      "options": [
+        "YES",
+        "NO"
+      ]
+    },
+    {
+      "name": "F[0].Page_2[0].Remarks[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_2[0].SocialSecurityNumber_FirstThreeNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "F[0].Page_2[0].SocialSecurityNumber_LastFourNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_2[0].SocialSecurityNumber_SecondTwoNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_2[0].ThousandsDollarAmount[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "F[0].Page_2[0].TYPEOFBENEFIT[0]",
+      "type": "PDFTextField"
+    }
+  ]
+}

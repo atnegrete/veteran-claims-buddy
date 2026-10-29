@@ -57,8 +57,13 @@ abstract final class AuthRoutes {
   static String casePackageSubmit(String caseId) =>
       '/cases/$caseId/package/submit';
   static String caseQuestions(String caseId) => '/cases/$caseId/questions';
-  static String caseIssues(String caseId) => '/cases/$caseId/issues';
+  static String caseConditions(String caseId) => '/cases/$caseId/conditions';
+  static String caseIntent(String caseId) => '/cases/$caseId/intent';
   static String casePrepare(String caseId) => '/cases/$caseId/prepare';
+  static String casePrepareForm(String caseId, String formNumber) =>
+      '/cases/$caseId/prepare/$formNumber';
+  static String caseIdentifiers(String caseId) =>
+      '/cases/$caseId/prepare/identifiers';
   static String caseSupplemental(String caseId) =>
       '/cases/$caseId/prepare/supplemental';
   static String caseHigherLevelReview(String caseId) =>
@@ -69,20 +74,37 @@ abstract final class AuthRoutes {
       '/cases/$caseId/decisions/upload';
   static String caseDecision(String caseId, String decisionId) =>
       '/cases/$caseId/decisions/$decisionId';
-  static String caseIssue(String caseId, String issueId) =>
-      '/cases/$caseId/issues/$issueId';
-  static String caseIssueQuestions(String caseId, String issueId) =>
-      '/cases/$caseId/issues/$issueId/questions';
-  static String caseIssueEvidence(String caseId, String issueId) =>
-      '/cases/$caseId/issues/$issueId/evidence';
-  static String caseIssueConnection(String caseId, String issueId) =>
-      '/cases/$caseId/issues/$issueId/connection';
-  static String caseIssueLay(String caseId, String issueId) =>
-      '/cases/$caseId/issues/$issueId/statements/lay';
-  static String caseIssueDoctorDraft(String caseId, String issueId) =>
-      '/cases/$caseId/issues/$issueId/statements/doctor-draft';
-  static String caseIssueDecisions(String caseId, String issueId) =>
-      '/cases/$caseId/issues/$issueId/decisions';
+  static String caseCondition(String caseId, String conditionId) =>
+      '/cases/$caseId/conditions/$conditionId';
+  static String caseConditionQuestions(String caseId, String conditionId) =>
+      '/cases/$caseId/conditions/$conditionId/questions';
+  static String caseConditionEvidence(String caseId, String conditionId) =>
+      '/cases/$caseId/conditions/$conditionId/evidence';
+  static String caseConditionConnection(String caseId, String conditionId) =>
+      '/cases/$caseId/conditions/$conditionId/connection';
+  static String caseConditionLay(String caseId, String conditionId) =>
+      '/cases/$caseId/conditions/$conditionId/statements/lay';
+  static String caseConditionDoctorDraft(String caseId, String conditionId) =>
+      '/cases/$caseId/conditions/$conditionId/statements/doctor-draft';
+  static String caseConditionDecisions(String caseId, String conditionId) =>
+      '/cases/$caseId/conditions/$conditionId/decisions';
+
+  /// Opens [panel]. When [panel] is null, opens the conditions list.
+  static String caseConditionPanel(
+    String caseId,
+    String conditionId,
+    String? panel,
+  ) {
+    return switch (panel) {
+      'questions' => caseConditionQuestions(caseId, conditionId),
+      'decisions' => caseConditionDecisions(caseId, conditionId),
+      'connection' => caseConditionConnection(caseId, conditionId),
+      'lay' => caseConditionLay(caseId, conditionId),
+      'doctor' => caseConditionDoctorDraft(caseId, conditionId),
+      _ => caseConditions(caseId),
+    };
+  }
+
   static String caseOverview(String caseId) => '/cases/$caseId/overview';
   static String caseTasks(String caseId) => '/cases/$caseId/tasks';
   static String caseTimeline(String caseId) => '/cases/$caseId/timeline';

@@ -23,6 +23,15 @@ service cloud.firestore {
       return isOwner(uid) && emailVerified() && mfaConfirmed();
     }
 
+    // Premium is active when the server-written projection grants it past now.
+    // The webhook is the only writer of billing/premium.
+    function premiumActive(uid) {
+      return isOwner(uid)
+        && exists(/databases/$(database)/documents/users/$(uid)/billing/premium)
+        && get(/databases/$(database)/documents/users/$(uid)/billing/premium).data.get('premiumUntil', null) != null
+        && get(/databases/$(database)/documents/users/$(uid)/billing/premium).data.premiumUntil > request.time;
+    }
+
     function catalogReader() {
       return signedIn() && emailVerified() && mfaConfirmed();
     }
@@ -41,7 +50,7 @@ service cloud.firestore {
     function profileFieldsOk() {
       return (!('displayName' in request.resource.data)
           || (request.resource.data.displayName is string
-            && request.resource.data.displayName.size() <= 80))
+            && request.resource.data.displayName.size() <= 102))
         && (!('timezone' in request.resource.data)
           || request.resource.data.timezone in [
             'America/New_York',
@@ -256,6 +265,29 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // The RevenueCat webhook and commerce callables write all billing docs.
+    // Clients read their own and never write. Completed cases stay readable
+    // after Premium expires, so reads are not gated on an active entitlement.
+    match /users/{uid}/billing/{document} {
+      allow read: if veteranReady(uid);
+      allow write: if false;
+    }
+
+    match /users/{uid}/caseUnlocks/{caseId} {
+      allow read: if veteranReady(uid);
+      allow write: if false;
+    }
+
+    match /users/{uid}/purchaseIntents/{intentId} {
+      allow read: if veteranReady(uid);
+      allow write: if false;
+    }
+
+    match /users/{uid}/billingTransactions/{transactionId} {
+      allow read: if veteranReady(uid);
+      allow write: if false;
+    }
+
     match /users/{uid}/settings/{settingId} {
       allow read: if veteranReady(uid)
         && settingId in ['notifications', 'push'];
@@ -300,8 +332,19 @@ service cloud.firestore {
       return request.resource.data.keys().hasOnly([
           'displayName', 'bodySystem', 'status', 'current', 'diagnosed',
           'discoverySource', 'sourceQuestionnaireId', 'sourceQuestionId',
-          'sourceType', 'schemaVersion', 'createdAt', 'updatedAt'
+          'sourceType', 'schemaVersion', 'createdAt', 'updatedAt',
+          'activeCaseId', 'caseIds'
         ])
+        && (
+          (!('activeCaseId' in request.resource.data.keys())
+            && !('caseIds' in request.resource.data.keys()))
+          || (request.resource.data.activeCaseId is string
+            && request.resource.data.activeCaseId.size() > 0
+            && request.resource.data.activeCaseId.size() <= 128
+            && request.resource.data.caseIds is list
+            && request.resource.data.caseIds.size() == 1
+            && request.resource.data.caseIds[0] == request.resource.data.activeCaseId)
+        )
         && request.resource.data.displayName is string
         && request.resource.data.displayName.size() > 0
         && request.resource.data.displayName.size() <= 120
@@ -372,47 +415,29 @@ service cloud.firestore {
         && request.resource.data.updatedAt == request.time;
     }
 
-    function claimIssueFieldsOk() {
-      return request.resource.data.keys().hasOnly([
-          'conditionId', 'displayName', 'caseIds', 'activeCaseId', 'status',
-          'claimPurpose', 'createdAt', 'updatedAt', 'schemaVersion'
-        ])
-        && request.resource.data.conditionId is string
-        && request.resource.data.conditionId.size() > 0
-        && request.resource.data.conditionId.size() <= 120
-        && request.resource.data.displayName is string
-        && request.resource.data.displayName.size() > 0
-        && request.resource.data.displayName.size() <= 120
-        && request.resource.data.caseIds is list
-        && request.resource.data.caseIds.size() == 1
-        && request.resource.data.caseIds[0] == request.resource.data.activeCaseId
-        && request.resource.data.activeCaseId is string
-        && request.resource.data.activeCaseId.size() > 0
-        && request.resource.data.activeCaseId.size() <= 128
-        && request.resource.data.status == 'potential'
-        && request.resource.data.claimPurpose == 'initial'
-        && request.resource.data.schemaVersion == 1
-        && request.resource.data.updatedAt == request.time;
+    function conditionPath(uid, conditionId) {
+      return /databases/$(database)/documents/users/$(uid)/conditions/$(conditionId);
     }
 
-    function conditionCanBeClaimed(uid) {
-      let conditionPath = /databases/$(database)/documents/users/$(uid)/conditions/$(request.resource.data.conditionId);
-      let casePath = /databases/$(database)/documents/users/$(uid)/cases/$(request.resource.data.activeCaseId);
-      return exists(conditionPath)
-        && exists(casePath)
-        && get(conditionPath).data.status == 'potential'
-        && get(conditionPath).data.displayName == request.resource.data.displayName;
+    function conditionOnClaim(uid, conditionId) {
+      return exists(conditionPath(uid, conditionId))
+        && get(conditionPath(uid, conditionId)).data.get('activeCaseId', '') != '';
     }
 
-    match /users/{uid}/claimIssues/{claimIssueId} {
-      allow read: if veteranReady(uid);
-      allow create: if veteranReady(uid)
-        && accountOpen(uid)
-        && claimIssueId == request.resource.data.conditionId
-        && claimIssueFieldsOk()
-        && conditionCanBeClaimed(uid)
-        && request.resource.data.createdAt == request.time;
-      allow update, delete: if false;
+    function claimPlacementOk(uid) {
+      let nextId = request.resource.data.get('activeCaseId', '');
+      let prevId = resource.data.get('activeCaseId', '');
+      let nextCases = request.resource.data.get('caseIds', []);
+      let prevCases = resource.data.get('caseIds', []);
+      return (nextId == prevId && nextCases == prevCases)
+        || (prevId == ''
+          && nextId is string
+          && nextId.size() > 0
+          && nextId.size() <= 128
+          && exists(/databases/$(database)/documents/users/$(uid)/cases/$(nextId)))
+        || (prevId != ''
+          && !('activeCaseId' in request.resource.data.keys())
+          && !('caseIds' in request.resource.data.keys()));
     }
 
     match /users/{uid}/conditions/{conditionId} {
@@ -433,8 +458,59 @@ service cloud.firestore {
         && request.resource.data.sourceQuestionnaireId == resource.data.sourceQuestionnaireId
         && request.resource.data.sourceType == resource.data.sourceType
         && request.resource.data.schemaVersion == resource.data.schemaVersion
-        && request.resource.data.updatedAt == request.time;
+        && request.resource.data.updatedAt == request.time
+        && claimPlacementOk(uid);
       allow delete: if false;
+
+      match /theories/{theoryId} {
+        allow read: if veteranReady(uid);
+        allow create: if veteranReady(uid)
+          && accountOpen(uid)
+          && conditionOnClaim(uid, conditionId)
+          && theoryFieldsOk()
+          && request.resource.data.createdAt == request.time;
+        allow update: if false;
+        allow delete: if veteranReady(uid) && accountOpen(uid);
+      }
+
+      match /statements/{statementId} {
+        allow read: if veteranReady(uid);
+        allow create: if veteranReady(uid)
+          && accountOpen(uid)
+          && conditionOnClaim(uid, conditionId)
+          && statementFieldsOk(statementId)
+          && request.resource.data.createdAt == request.time;
+        allow update: if veteranReady(uid)
+          && accountOpen(uid)
+          && statementFieldsOk(statementId)
+          && request.resource.data.createdAt == resource.data.createdAt
+          && request.resource.data.kind == resource.data.kind;
+        allow delete: if veteranReady(uid) && accountOpen(uid);
+      }
+
+      // The Nexus Letters interview transcript and drafted sections. Written
+      // only by the server (nexus_interview.js / nexus_generate.js) with the
+      // admin SDK; the client reads it to resume and to know the step is done.
+      match /nexusLetter/{docId} {
+        allow read: if veteranReady(uid);
+        allow write: if false;
+      }
+
+      match /lane/{laneId} {
+        allow read: if veteranReady(uid);
+        allow create: if veteranReady(uid)
+          && accountOpen(uid)
+          && laneId == 'current'
+          && conditionOnClaim(uid, conditionId)
+          && laneFieldsOk()
+          && request.resource.data.createdAt == request.time;
+        allow update: if veteranReady(uid)
+          && accountOpen(uid)
+          && laneId == 'current'
+          && laneFieldsOk()
+          && request.resource.data.createdAt == resource.data.createdAt;
+        allow delete: if veteranReady(uid) && accountOpen(uid);
+      }
     }
 
     match /users/{uid}/questionnaires/{questionnaireId} {
@@ -484,18 +560,10 @@ service cloud.firestore {
       }
     }
 
-    function claimIssuePath(uid, claimIssueId) {
-      return /databases/$(database)/documents/users/$(uid)/claimIssues/$(claimIssueId);
-    }
-
-    function claimIssueExists(uid, claimIssueId) {
-      return exists(claimIssuePath(uid, claimIssueId));
-    }
-
-    function theoryFieldsOk(uid, claimIssueId) {
+    function theoryFieldsOk() {
       return request.resource.data.keys().hasOnly([
           'type', 'status', 'summary', 'sourceType', 'needsUserConfirmation',
-          'relatedClaimIssueId', 'presumptionRuleId', 'schemaVersion',
+          'relatedConditionName', 'presumptionRuleId', 'schemaVersion',
           'createdAt', 'updatedAt'
         ])
         && request.resource.data.type in [
@@ -512,18 +580,16 @@ service cloud.firestore {
         && request.resource.data.updatedAt == request.time
         && (
           (request.resource.data.type == 'secondary'
-            && request.resource.data.relatedClaimIssueId is string
-            && request.resource.data.relatedClaimIssueId.size() > 0
-            && request.resource.data.relatedClaimIssueId.size() <= 120
-            && request.resource.data.relatedClaimIssueId != claimIssueId
-            && claimIssueExists(uid, request.resource.data.relatedClaimIssueId))
+            && request.resource.data.relatedConditionName is string
+            && request.resource.data.relatedConditionName.size() > 0
+            && request.resource.data.relatedConditionName.size() <= 120)
           || (request.resource.data.type != 'secondary'
-            && request.resource.data.relatedClaimIssueId == null)
+            && request.resource.data.relatedConditionName == null)
         );
     }
 
     function statementFieldsOk(statementId) {
-      return statementId in ['lay', 'doctorDraft']
+      return statementId == 'lay'
         && request.resource.data.keys().hasOnly([
           'kind', 'body', 'sourceType', 'schemaVersion', 'createdAt', 'updatedAt'
         ])
@@ -538,13 +604,13 @@ service cloud.firestore {
 
     function evidenceLinkFieldsOk() {
       return request.resource.data.keys().hasOnly([
-          'claimIssueId', 'documentId', 'factId', 'questionnaireId',
+          'conditionId', 'documentId', 'factId', 'questionnaireId',
           'responseId', 'evidenceType', 'relationship', 'summary',
           'sourceType', 'userConfirmed', 'createdAt'
         ])
-        && request.resource.data.claimIssueId is string
-        && request.resource.data.claimIssueId.size() > 0
-        && request.resource.data.claimIssueId.size() <= 120
+        && request.resource.data.conditionId is string
+        && request.resource.data.conditionId.size() > 0
+        && request.resource.data.conditionId.size() <= 120
         && request.resource.data.documentId == null
         && request.resource.data.factId == null
         && request.resource.data.questionnaireId == null
@@ -592,16 +658,16 @@ service cloud.firestore {
 
     function decisionIssueFieldsOk(uid) {
       let decisionPath = /databases/$(database)/documents/users/$(uid)/decisions/$(request.resource.data.decisionId);
-      let issuePath = claimIssuePath(uid, request.resource.data.claimIssueId);
+      let issuePath = conditionPath(uid, request.resource.data.conditionId);
       return request.resource.data.keys().hasOnly([
-          'decisionId', 'claimIssueId', 'displayName', 'outcome',
+          'decisionId', 'conditionId', 'displayName', 'outcome',
           'ratingPercent', 'effectiveDate', 'schemaVersion', 'createdAt'
         ])
         && request.resource.data.decisionId is string
         && request.resource.data.decisionId.size() > 0
-        && request.resource.data.claimIssueId is string
-        && request.resource.data.claimIssueId.size() > 0
-        && request.resource.data.claimIssueId.size() <= 120
+        && request.resource.data.conditionId is string
+        && request.resource.data.conditionId.size() > 0
+        && request.resource.data.conditionId.size() <= 120
         && request.resource.data.displayName is string
         && request.resource.data.displayName.size() > 0
         && request.resource.data.displayName.size() <= 120
@@ -619,30 +685,31 @@ service cloud.firestore {
         && get(issuePath).data.displayName == request.resource.data.displayName;
     }
 
-    match /users/{uid}/claimIssues/{claimIssueId}/theories/{theoryId} {
-      allow read: if veteranReady(uid);
-      allow create: if veteranReady(uid)
-        && accountOpen(uid)
-        && claimIssueExists(uid, claimIssueId)
-        && theoryFieldsOk(uid, claimIssueId)
-        && request.resource.data.createdAt == request.time;
-      allow update: if false;
-      allow delete: if veteranReady(uid) && accountOpen(uid);
-    }
-
-    match /users/{uid}/claimIssues/{claimIssueId}/statements/{statementId} {
-      allow read: if veteranReady(uid);
-      allow create: if veteranReady(uid)
-        && accountOpen(uid)
-        && claimIssueExists(uid, claimIssueId)
-        && statementFieldsOk(statementId)
-        && request.resource.data.createdAt == request.time;
-      allow update: if veteranReady(uid)
-        && accountOpen(uid)
-        && statementFieldsOk(statementId)
-        && request.resource.data.createdAt == resource.data.createdAt
-        && request.resource.data.kind == resource.data.kind;
-      allow delete: if veteranReady(uid) && accountOpen(uid);
+    function laneFieldsOk() {
+      return request.resource.data.keys().hasOnly([
+          'choice', 'againPath', 'hasNewEvidence', 'lawChanged',
+          'medicalLinkMissing', 'origin', 'pursue', 'pursueAnswered',
+          'sourceType', 'schemaVersion', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.choice in ['leave', 'worse', 'disagree', '']
+        && request.resource.data.againPath in [
+          'supplemental', 'higherLevel', 'board', ''
+        ]
+        && request.resource.data.hasNewEvidence is bool
+        && request.resource.data.lawChanged is bool
+        && request.resource.data.medicalLinkMissing is bool
+        && request.resource.data.origin in ['new', 'decided', '']
+        && request.resource.data.pursue is bool
+        && request.resource.data.pursueAnswered is bool
+        && (request.resource.data.origin == 'new'
+          || request.resource.data.pursue == false)
+        && (request.resource.data.pursue == false
+          || request.resource.data.pursueAnswered == true)
+        && (request.resource.data.origin == 'new'
+          || request.resource.data.pursueAnswered == false)
+        && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.updatedAt == request.time;
     }
 
     match /users/{uid}/evidenceLinks/{linkId} {
@@ -650,7 +717,7 @@ service cloud.firestore {
       allow create: if veteranReady(uid)
         && accountOpen(uid)
         && evidenceLinkFieldsOk()
-        && claimIssueExists(uid, request.resource.data.claimIssueId)
+        && conditionOnClaim(uid, request.resource.data.conditionId)
         && request.resource.data.createdAt == request.time;
       allow update: if false;
       allow delete: if veteranReady(uid)
@@ -769,18 +836,18 @@ service cloud.firestore {
         && get(decisionPath).data.sourceType == 'documentExtracted'
         && get(decisionPath).data.status == 'needsReview'
         && request.resource.data.keys().hasOnly([
-          'decisionId', 'claimIssueId', 'displayName', 'outcome',
+          'decisionId', 'conditionId', 'displayName', 'outcome',
           'ratingPercent', 'effectiveDate', 'favorableFindings', 'reasons',
           'evidenceConsidered', 'extractionConfidence', 'userConfirmed',
           'schemaVersion', 'createdAt', 'updatedAt'
         ])
         && request.resource.data.decisionId == resource.data.decisionId
-        && (request.resource.data.claimIssueId == null
-          || (request.resource.data.claimIssueId is string
-            && request.resource.data.claimIssueId.size() > 0
-            && request.resource.data.claimIssueId.size() <= 120
-            && exists(claimIssuePath(uid, request.resource.data.claimIssueId))
-            && get(claimIssuePath(uid, request.resource.data.claimIssueId)).data.activeCaseId
+        && (request.resource.data.conditionId == null
+          || (request.resource.data.conditionId is string
+            && request.resource.data.conditionId.size() > 0
+            && request.resource.data.conditionId.size() <= 120
+            && exists(conditionPath(uid, request.resource.data.conditionId))
+            && get(conditionPath(uid, request.resource.data.conditionId)).data.activeCaseId
               == get(decisionPath).data.caseId))
         && request.resource.data.displayName is string
         && request.resource.data.displayName.size() > 0
@@ -849,7 +916,7 @@ service cloud.firestore {
           'caseId', 'name', 'originalFileName', 'documentType', 'contentType',
           'sizeBytes', 'storagePath', 'uploadStatus', 'processingStatus',
           'documentDate', 'pageCount', 'providerName', 'facilityName', 'tags',
-          'sha256', 'schemaVersion', 'createdAt', 'updatedAt'
+          'sha256', 'packet', 'schemaVersion', 'createdAt', 'updatedAt'
         ])
         && request.resource.data.caseId is string
         && request.resource.data.caseId.size() > 0
@@ -897,6 +964,11 @@ service cloud.firestore {
         && request.resource.data.tags is list
         && request.resource.data.tags.size() == 0
         && request.resource.data.sha256 == null
+        && (!('packet' in request.resource.data.keys())
+          || request.resource.data.packet in [
+            'newClaim', 'supplemental', 'higherLevel', 'board', 'record',
+            'shared', ''
+          ])
         && request.resource.data.schemaVersion == 1
         && request.resource.data.updatedAt == request.time;
     }
@@ -953,7 +1025,7 @@ service cloud.firestore {
       return request.resource.data.keys().hasOnly([
           'schemaVersion', 'sourceType', 'status', 'type', 'title',
           'description', 'caseId', 'route', 'kind', 'priority',
-          'claimIssueId', 'createdAt', 'updatedAt'
+          'conditionId', 'createdAt', 'updatedAt'
         ])
         && request.resource.data.schemaVersion == 1
         && request.resource.data.sourceType == 'systemCalculated'
@@ -978,9 +1050,9 @@ service cloud.firestore {
           'formsLater'
         ]
         && request.resource.data.priority == 'normal'
-        && (request.resource.data.claimIssueId == null
-          || (request.resource.data.claimIssueId is string
-            && request.resource.data.claimIssueId.size() <= 120))
+        && (request.resource.data.conditionId == null
+          || (request.resource.data.conditionId is string
+            && request.resource.data.conditionId.size() <= 120))
         && request.resource.data.updatedAt == request.time;
     }
 
@@ -1088,7 +1160,7 @@ service cloud.firestore {
           'caseId', 'type', 'status', 'formIds', 'submissionMethod',
           'preparedAt', 'submittedAt', 'vaClaimId', 'confirmationNumber',
           'payloadSnapshotDocumentId', 'ruleVersionIds', 'decisionId',
-          'decisionIssueId', 'claimIssueId', 'displayName', 'boardDocket',
+          'decisionIssueId', 'conditionId', 'displayName', 'boardDocket',
           'informalConference', 'sourceType', 'schemaVersion', 'createdAt',
           'updatedAt'
         ])
@@ -1118,7 +1190,7 @@ service cloud.firestore {
         && get(issuePath).data.outcome in ['denied', 'deferred', 'reduced', 'other']
         && request.resource.data.decisionIssueId is string
         && request.resource.data.displayName == get(issuePath).data.displayName
-        && (request.resource.data.claimIssueId == get(issuePath).data.claimIssueId)
+        && (request.resource.data.conditionId == get(issuePath).data.conditionId)
         && (
           (request.resource.data.type == 'boardAppeal'
             && request.resource.data.boardDocket in ['direct', 'evidence', 'hearing']
@@ -1139,7 +1211,7 @@ service cloud.firestore {
     function submissionIssueOk(uid) {
       let submissionPath = /databases/$(database)/documents/users/$(uid)/submissions/$(request.resource.data.submissionId);
       return request.resource.data.keys().hasOnly([
-          'submissionId', 'claimIssueId', 'claimIssueDisplayName',
+          'submissionId', 'conditionId', 'conditionDisplayName',
           'requestedAction', 'status', 'decisionIssueId', 'schemaVersion',
           'createdAt'
         ])
@@ -1147,8 +1219,8 @@ service cloud.firestore {
         && request.resource.data.submissionId.size() > 0
         && exists(submissionPath)
         && get(submissionPath).data.status == 'draft'
-        && request.resource.data.claimIssueId == get(submissionPath).data.claimIssueId
-        && request.resource.data.claimIssueDisplayName == get(submissionPath).data.displayName
+        && request.resource.data.conditionId == get(submissionPath).data.conditionId
+        && request.resource.data.conditionDisplayName == get(submissionPath).data.displayName
         && request.resource.data.requestedAction == 'review'
         && request.resource.data.status == 'included'
         && request.resource.data.decisionIssueId == get(submissionPath).data.decisionIssueId
@@ -1209,6 +1281,128 @@ service cloud.firestore {
         && packageCheckOk(uid, caseId)
         && request.resource.data.createdAt == resource.data.createdAt
         && request.resource.data.caseId == resource.data.caseId;
+      allow delete: if false;
+    }
+
+    function packageFormOk(uid) {
+      return request.resource.data.keys().hasOnly([
+          'caseId', 'formNumber', 'status', 'multiplicityKey', 'displayLabel',
+          'answers', 'sectionDrafts', 'statementStatus', 'statementBody',
+          'revisionId', 'generatedFormId', 'packet', 'conditionId',
+          'nexusKind', 'sourceType', 'schemaVersion', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.caseId is string
+        && request.resource.data.caseId.size() > 0
+        && request.resource.data.caseId.size() <= 128
+        && request.resource.data.formNumber is string
+        && request.resource.data.formNumber.size() > 0
+        && request.resource.data.formNumber.size() <= 20
+        && request.resource.data.status in ['draft', 'needsInput', 'ready']
+        && request.resource.data.multiplicityKey is string
+        && request.resource.data.multiplicityKey.size() <= 200
+        && request.resource.data.displayLabel is string
+        && request.resource.data.displayLabel.size() <= 200
+        && request.resource.data.answers is map
+        && (!('sectionDrafts' in request.resource.data.keys())
+          || (request.resource.data.sectionDrafts is map
+            && request.resource.data.sectionDrafts.size() <= 40))
+        && request.resource.data.statementStatus in ['none', 'pending', 'drafted']
+        && (request.resource.data.statementBody == null
+          || (request.resource.data.statementBody is string
+            && request.resource.data.statementBody.size() <= 20000))
+        && (request.resource.data.revisionId == null
+          || request.resource.data.revisionId is string)
+        && (request.resource.data.generatedFormId == null
+          || request.resource.data.generatedFormId is string)
+        && (!('packet' in request.resource.data.keys())
+          || request.resource.data.packet in [
+            'newClaim', 'supplemental', 'higherLevel', 'board', 'record',
+            'shared', 'side', ''
+          ])
+        && (!('conditionId' in request.resource.data.keys())
+          || (request.resource.data.conditionId is string
+            && request.resource.data.conditionId.size() <= 120))
+        && (!('nexusKind' in request.resource.data.keys())
+          || request.resource.data.nexusKind in [
+            'direct', 'secondary', 'aggravation', 'supplemental', ''
+          ])
+        && request.resource.data.sourceType == 'veteranReported'
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.updatedAt == request.time
+        && exists(caseDocPath(uid, request.resource.data.caseId));
+    }
+
+    // The forms the Veteran added to their package for a claim. Nothing here is
+    // filed with the VA. A generated PDF lives under generatedForms, not here.
+    match /users/{uid}/packageForms/{packageFormId} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && packageFormOk(uid)
+        && request.resource.data.createdAt == request.time;
+      allow update: if veteranReady(uid)
+        && accountOpen(uid)
+        && packageFormOk(uid)
+        && request.resource.data.caseId == resource.data.caseId
+        && request.resource.data.formNumber == resource.data.formNumber
+        && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if veteranReady(uid) && accountOpen(uid);
+    }
+
+    function identifiersOk() {
+      return request.resource.data.keys().hasOnly([
+          'legalFirstName', 'legalMiddleName', 'legalLastName', 'dateOfBirth',
+          'ssn', 'vaFileNumber', 'phone', 'email', 'mailingStreet',
+          'mailingUnit', 'mailingCity', 'mailingState', 'mailingZip',
+          'schemaVersion', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.legalFirstName is string
+        && request.resource.data.legalFirstName.size() <= 60
+        && request.resource.data.legalMiddleName is string
+        && request.resource.data.legalMiddleName.size() <= 60
+        && request.resource.data.legalLastName is string
+        && request.resource.data.legalLastName.size() <= 60
+        && (request.resource.data.dateOfBirth == ''
+          || isoDateOk(request.resource.data.dateOfBirth))
+        && (request.resource.data.ssn == ''
+          || request.resource.data.ssn.matches('^[0-9]{3}-[0-9]{2}-[0-9]{4}$'))
+        && (request.resource.data.vaFileNumber == ''
+          || request.resource.data.vaFileNumber.matches('^[0-9]{8,9}$'))
+        && (request.resource.data.phone == ''
+          || request.resource.data.phone.matches('^\\+1[0-9]{10}$'))
+        && request.resource.data.email is string
+        && request.resource.data.email.size() <= 254
+        && (request.resource.data.email == ''
+          || request.resource.data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$'))
+        && request.resource.data.mailingStreet is string
+        && request.resource.data.mailingStreet.size() <= 150
+        && request.resource.data.mailingUnit is string
+        && request.resource.data.mailingUnit.size() <= 10
+        && request.resource.data.mailingCity is string
+        && request.resource.data.mailingCity.size() <= 50
+        && (request.resource.data.mailingState == ''
+          || request.resource.data.mailingState.matches('^[A-Z]{2}$'))
+        && (request.resource.data.mailingZip == ''
+          || request.resource.data.mailingZip.matches('^[0-9]{5}$')
+          || request.resource.data.mailingZip.matches('^[0-9]{5}-[0-9]{4}$'))
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    // Protected identifiers (legal name, DOB, SSN, VA file number), collected
+    // only when a form needs them. Owner-only; no other access path exists.
+    match /users/{uid}/identifiers/{document} {
+      allow read: if veteranReady(uid);
+      allow create: if veteranReady(uid)
+        && accountOpen(uid)
+        && document == 'profile'
+        && identifiersOk()
+        && request.resource.data.createdAt == request.time;
+      allow update: if veteranReady(uid)
+        && accountOpen(uid)
+        && document == 'profile'
+        && identifiersOk()
+        && request.resource.data.createdAt == resource.data.createdAt;
       allow delete: if false;
     }
 
@@ -1284,10 +1478,14 @@ service cloud.firestore {
         && request.resource.data.updatedAt == request.time;
     }
 
+    // Symptom Tracker entries are a Premium feature. Reading and deleting past
+    // entries stays open so history is never lost, but creating a new one needs
+    // an active entitlement (a subscription or an unexpired Case unlock).
     match /users/{uid}/symptomEntries/{entryId} {
       allow read: if veteranReady(uid);
       allow create: if veteranReady(uid)
         && accountOpen(uid)
+        && premiumActive(uid)
         && symptomEntryOk()
         && request.resource.data.createdAt == request.time;
       allow update: if false;
@@ -1312,6 +1510,37 @@ service cloud.firestore {
     match /vaKnowledgeSources/{sourceId} {
       allow read: if catalogReader();
       allow write: if false;
+    }
+
+    // VA form revisions, field mappings, and catalogs are published by the
+    // va:forms:* tooling with privileged credentials. Signed-in Veterans read
+    // the mappings to drive auto-fill; no client ever writes them. Immutable
+    // per revision (handoff 37.2, 37.6, 37.9, 37.16).
+    match /vaFormRevisions/{revisionId} {
+      allow read: if catalogReader();
+      allow write: if false;
+    }
+
+    match /vaFormMappings/{mappingId} {
+      allow read: if catalogReader();
+      allow write: if false;
+    }
+
+    match /vaFormCatalogs/{catalogId} {
+      allow read: if catalogReader();
+      allow write: if false;
+    }
+
+    // Published by scripts/publish_commerce_config.js. Clients read the current
+    // prices and flags; only the publish tooling writes.
+    match /commerceConfig/{configId} {
+      allow read: if catalogReader();
+      allow write: if false;
+    }
+
+    // The webhook's idempotency ledger. Never client-accessible.
+    match /billingEvents/{eventId} {
+      allow read, write: if false;
     }
 
     match /{document=**} {

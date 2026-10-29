@@ -159,12 +159,17 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Open Case'), findsOneWidget);
-    expect(find.text('Issues'), findsOneWidget);
+    expect(find.text('Conditions'), findsOneWidget);
     expect(find.text('Symptoms Tracker'), findsOneWidget);
     expect(find.text('VA Ratings Calculator'), findsOneWidget);
     expect(find.text('Next action'), findsNothing);
     expect(find.text('Compare plans'), findsNothing);
     await tester.tap(find.text('Yes, this is my first claim'));
+    await tester.pump();
+    await tester.pump();
+    expect(find.text('Prepare Intent to File'), findsOneWidget);
+    expect(find.textContaining('headaches, dizziness'), findsNothing);
+    await tester.tap(find.text('Continue'));
     await tester.pump();
     await tester.pump();
     expect(find.textContaining('headaches, dizziness'), findsOneWidget);
@@ -181,11 +186,11 @@ void main() {
     await tester.pump();
     expect(find.textContaining('eyes or vision'), findsOneWidget);
     await tester.pump(const Duration(seconds: 1));
-    await tester.tap(find.text('Documents').hitTestable());
+    await tester.tap(find.text('My Uploads').hitTestable());
     await tester.pump();
     await tester.pump();
     expect(
-      find.textContaining('Files for this claim stay here'),
+      find.textContaining('Files you add for this claim stay here'),
       findsOneWidget,
     );
     expect(find.text('Onboarding'), findsNothing);
@@ -212,13 +217,11 @@ void main() {
     await tester.tap(find.text('No, I have an earlier claim'));
     await tester.pump();
     await tester.pump();
-    expect(find.textContaining('It stays in Documents'), findsOneWidget);
-    expect(find.text('Add paperwork'), findsOneWidget);
+    expect(find.text('SUPPLEMENTAL CLAIM'), findsWidgets);
+    expect(find.text('Add paperwork'), findsNothing);
+    expect(find.text('Change this answer'), findsNothing);
     expect(find.textContaining('headaches, dizziness'), findsNothing);
-    await tester.tap(find.text('Add paperwork'));
-    await tester.pump();
-    await tester.pump();
-    expect(find.text('Choose a file'), findsOneWidget);
+    expect(find.text('Continue'), findsOneWidget);
   });
 
   testWidgets('Vet Buddy shows the safety footer and You opens support', (

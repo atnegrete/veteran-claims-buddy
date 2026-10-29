@@ -80,7 +80,7 @@ class DecisionRepository {
     });
     for (final issue in issues) {
       batch.update(_issues(uid).doc(issue.id), {
-        'claimIssueId': issue.claimIssueId,
+        'conditionId': issue.conditionId,
         'displayName': issue.displayName.trim(),
         'outcome': issue.outcome,
         'ratingPercent': issue.ratingPercent,
@@ -142,7 +142,7 @@ class DecisionRepository {
 class ConfirmDecisionIssue {
   const ConfirmDecisionIssue({
     required this.id,
-    required this.claimIssueId,
+    required this.conditionId,
     required this.displayName,
     required this.outcome,
     required this.ratingPercent,
@@ -153,7 +153,7 @@ class ConfirmDecisionIssue {
   });
 
   final String id;
-  final String? claimIssueId;
+  final String? conditionId;
   final String displayName;
   final String outcome;
   final int? ratingPercent;

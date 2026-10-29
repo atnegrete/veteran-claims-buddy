@@ -1,0 +1,1293 @@
+{
+  "formNumber": "21-4142",
+  "revision": "2021-07-26",
+  "fields": [
+    {
+      "pdfField": "F[0].#subform[1].Date_Signed_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Day",
+      "group": "ask:datesignedday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].Date_Signed_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Month",
+      "group": "ask:datesignedmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].Date_Signed_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Signed Year",
+      "group": "ask:datesignedyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].InformationIsLimitedToWhatIsWrittenInThisSpace[0]",
+      "type": "text",
+      "required": false,
+      "label": "Information Is Limited To What Is Written In This Space",
+      "group": "ask:informationislimitedtowhatiswritteninthisspace",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].Printed_Name_Of_Person_Signing_First[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 12,
+      "label": "Printed Name Of Person Signing First",
+      "group": "ask:printednameofpersonsigningfirst",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].Printed_Name_Of_Person_Signing_Last[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Printed Name Of Person Signing Last",
+      "group": "ask:printednameofpersonsigninglast",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].Printed_Name_Of_Person_Signing_Middle_Initial[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 1,
+      "label": "Printed Name Of Person Signing Middle Initial",
+      "group": "ask:printednameofpersonsigningmiddleinitial",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].Relationship_To_Veteran_Claimant[0]",
+      "type": "text",
+      "required": false,
+      "label": "Relationship To Veteran Claimant",
+      "group": "ask:relationshiptoveteranclaimant",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[1].SignatureField11[0]",
+      "type": "text",
+      "required": false,
+      "label": "Signature Field11",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "F[0].#subform[1].VeteransSocialSecurityNumber_FirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Veterans Social Security Number First Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].#subform[1].VeteransSocialSecurityNumber_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Veterans Social Security Number Last Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].#subform[1].VeteransSocialSecurityNumber_SecondTwoNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Veterans Social Security Number Second Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Conditions_You_Are_Being_Treated_For[0]",
+      "type": "text",
+      "required": false,
+      "label": "Conditions You Are Being Treated For",
+      "group": "ask:conditionsyouarebeingtreatedfor",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Conditions_You_Are_Being_Treated_For[1]",
+      "type": "text",
+      "required": false,
+      "label": "Conditions You Are Being Treated For",
+      "group": "ask:conditionsyouarebeingtreatedfor",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Day[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Day[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Day[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Day[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].FirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "First Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].#subform[14].LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Last Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].#subform[14].MailingAddress_ApartmentOrUnitNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Mailing Address Apartment Or Unit Number",
+      "group": "ask:mailingaddressapartmentorunitnumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].MailingAddress_ApartmentOrUnitNumber[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Mailing Address Apartment Or Unit Number",
+      "group": "ask:mailingaddressapartmentorunitnumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Month[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Month[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Month[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Month[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].PatientMiddleInitial1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 1,
+      "label": "Patient Middle Initial1",
+      "group": "vet.legalMiddleName",
+      "source": "auto",
+      "canonicalKey": "vet.legalMiddleInitial"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Patients_FirstName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 12,
+      "label": "Legal first name",
+      "group": "vet.legalFirstName",
+      "source": "auto",
+      "canonicalKey": "vet.legalFirstName"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Patients_LastName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Legal last name",
+      "group": "vet.legalLastName",
+      "source": "auto",
+      "canonicalKey": "vet.legalLastName"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Provider_Facility_Address_City[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Provider Facility Address City",
+      "group": "ask:providerfacilityaddresscity",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Provider_Facility_Address_City[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Provider Facility Address City",
+      "group": "ask:providerfacilityaddresscity",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Provider_Facility_Address_Country[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Provider Facility Address Country",
+      "group": "ask:providerfacilityaddresscountry",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Provider_Facility_Address_Country[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Provider Facility Address Country",
+      "group": "ask:providerfacilityaddresscountry",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Provider_Facility_Address_StateOrProvince[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Provider Facility Address State Or Province",
+      "group": "ask:providerfacilityaddressstateorprovince",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Provider_Facility_Address_StateOrProvince[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Provider Facility Address State Or Province",
+      "group": "ask:providerfacilityaddressstateorprovince",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Provider_Facility_Address_ZIPOrPostalCode_FirstFiveNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Provider Facility Address ZIPOr Postal Code First Five Numbers",
+      "group": "ask:providerfacilityaddressziporpostalcodefirstfivenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Provider_Facility_Address_ZIPOrPostalCode_FirstFiveNumbers[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Provider Facility Address ZIPOr Postal Code First Five Numbers",
+      "group": "ask:providerfacilityaddressziporpostalcodefirstfivenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Provider_Facility_Address_ZIPOrPostalCode_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Provider Facility Address ZIPOr Postal Code Last Four Numbers",
+      "group": "ask:providerfacilityaddressziporpostalcodelastfournumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Provider_Facility_Address_ZIPOrPostalCode_LastFourNumbers[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Provider Facility Address ZIPOr Postal Code Last Four Numbers",
+      "group": "ask:providerfacilityaddressziporpostalcodelastfournumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Provider_Facility_Street_Address_NumberAndStreet[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 30,
+      "label": "Provider Facility Street Address Number And Street",
+      "group": "ask:providerfacilitystreetaddressnumberandstreet",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Provider_Facility_Street_Address_NumberAndStreet[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 30,
+      "label": "Provider Facility Street Address Number And Street",
+      "group": "ask:providerfacilitystreetaddressnumberandstreet",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Provider_Or_Facility_Name[0]",
+      "type": "text",
+      "required": false,
+      "label": "Provider Or Facility Name",
+      "group": "ask:providerorfacilityname",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Provider_Or_Facility_Name[1]",
+      "type": "text",
+      "required": false,
+      "label": "Provider Or Facility Name",
+      "group": "ask:providerorfacilityname",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].SecondTwoNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Second Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "F[0].#subform[14].SSN1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "SSN1",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].#subform[14].SSN2[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "SSN2",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "F[0].#subform[14].SSN3[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "SSN3",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].#subform[14].VAFileNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "VA file number",
+      "group": "vet.vaFileNumber",
+      "source": "auto",
+      "canonicalKey": "vet.vaFileNumber"
+    },
+    {
+      "pdfField": "F[0].#subform[14].VAFileNumber[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "VA file number",
+      "group": "vet.vaFileNumber",
+      "source": "auto",
+      "canonicalKey": "vet.vaFileNumber"
+    },
+    {
+      "pdfField": "F[0].#subform[14].VeteranFirstName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 12,
+      "label": "Legal first name",
+      "group": "vet.legalFirstName",
+      "source": "auto",
+      "canonicalKey": "vet.legalFirstName"
+    },
+    {
+      "pdfField": "F[0].#subform[14].VeteranLastName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Legal last name",
+      "group": "vet.legalLastName",
+      "source": "auto",
+      "canonicalKey": "vet.legalLastName"
+    },
+    {
+      "pdfField": "F[0].#subform[14].VeteranMiddleInitial1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 1,
+      "label": "Veteran Middle Initial1",
+      "group": "vet.legalMiddleName",
+      "source": "auto",
+      "canonicalKey": "vet.legalMiddleInitial"
+    },
+    {
+      "pdfField": "F[0].#subform[14].VeteransServiceNumber_If_Applicable[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "Veterans Service Number If Applicable",
+      "group": "ask:veteransservicenumberifapplicable",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Year[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Year[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Year[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[14].Year[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Conditions_You_Are_Being_Treated_For[2]",
+      "type": "text",
+      "required": false,
+      "label": "Conditions You Are Being Treated For",
+      "group": "ask:conditionsyouarebeingtreatedfor",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Conditions_You_Are_Being_Treated_For[3]",
+      "type": "text",
+      "required": false,
+      "label": "Conditions You Are Being Treated For",
+      "group": "ask:conditionsyouarebeingtreatedfor",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Conditions_You_Are_Being_Treated_For[4]",
+      "type": "text",
+      "required": false,
+      "label": "Conditions You Are Being Treated For",
+      "group": "ask:conditionsyouarebeingtreatedfor",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Day[10]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Day[5]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Day[6]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Day[7]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Day[8]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Day[9]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].MailingAddress_ApartmentOrUnitNumber[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Mailing Address Apartment Or Unit Number",
+      "group": "ask:mailingaddressapartmentorunitnumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].MailingAddress_ApartmentOrUnitNumber[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Mailing Address Apartment Or Unit Number",
+      "group": "ask:mailingaddressapartmentorunitnumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].MailingAddress_ApartmentOrUnitNumber[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Mailing Address Apartment Or Unit Number",
+      "group": "ask:mailingaddressapartmentorunitnumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Month[10]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Month[5]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Month[6]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Month[7]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Month[8]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Month[9]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Address_City[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Provider Facility Address City",
+      "group": "ask:providerfacilityaddresscity",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Address_City[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Provider Facility Address City",
+      "group": "ask:providerfacilityaddresscity",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Address_City[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Provider Facility Address City",
+      "group": "ask:providerfacilityaddresscity",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Address_Country[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Provider Facility Address Country",
+      "group": "ask:providerfacilityaddresscountry",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Address_Country[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Provider Facility Address Country",
+      "group": "ask:providerfacilityaddresscountry",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Address_Country[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Provider Facility Address Country",
+      "group": "ask:providerfacilityaddresscountry",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Address_StateOrProvince[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Provider Facility Address State Or Province",
+      "group": "ask:providerfacilityaddressstateorprovince",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Address_StateOrProvince[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Provider Facility Address State Or Province",
+      "group": "ask:providerfacilityaddressstateorprovince",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Address_StateOrProvince[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Provider Facility Address State Or Province",
+      "group": "ask:providerfacilityaddressstateorprovince",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Address_ZIPOrPostalCode_FirstFiveNumbers[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Provider Facility Address ZIPOr Postal Code First Five Numbers",
+      "group": "ask:providerfacilityaddressziporpostalcodefirstfivenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Address_ZIPOrPostalCode_FirstFiveNumbers[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Provider Facility Address ZIPOr Postal Code First Five Numbers",
+      "group": "ask:providerfacilityaddressziporpostalcodefirstfivenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Address_ZIPOrPostalCode_FirstFiveNumbers[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Provider Facility Address ZIPOr Postal Code First Five Numbers",
+      "group": "ask:providerfacilityaddressziporpostalcodefirstfivenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Address_ZIPOrPostalCode_LastFourNumbers[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Provider Facility Address ZIPOr Postal Code Last Four Numbers",
+      "group": "ask:providerfacilityaddressziporpostalcodelastfournumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Address_ZIPOrPostalCode_LastFourNumbers[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Provider Facility Address ZIPOr Postal Code Last Four Numbers",
+      "group": "ask:providerfacilityaddressziporpostalcodelastfournumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Address_ZIPOrPostalCode_LastFourNumbers[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Provider Facility Address ZIPOr Postal Code Last Four Numbers",
+      "group": "ask:providerfacilityaddressziporpostalcodelastfournumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Street_Address_NumberAndStreet[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 30,
+      "label": "Provider Facility Street Address Number And Street",
+      "group": "ask:providerfacilitystreetaddressnumberandstreet",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Street_Address_NumberAndStreet[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 30,
+      "label": "Provider Facility Street Address Number And Street",
+      "group": "ask:providerfacilitystreetaddressnumberandstreet",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Facility_Street_Address_NumberAndStreet[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 30,
+      "label": "Provider Facility Street Address Number And Street",
+      "group": "ask:providerfacilitystreetaddressnumberandstreet",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Or_Facility_Name[2]",
+      "type": "text",
+      "required": false,
+      "label": "Provider Or Facility Name",
+      "group": "ask:providerorfacilityname",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Or_Facility_Name[3]",
+      "type": "text",
+      "required": false,
+      "label": "Provider Or Facility Name",
+      "group": "ask:providerorfacilityname",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Provider_Or_Facility_Name[4]",
+      "type": "text",
+      "required": false,
+      "label": "Provider Or Facility Name",
+      "group": "ask:providerorfacilityname",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].SSN1[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "SSN1",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].#subform[15].SSN2[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "SSN2",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "F[0].#subform[15].SSN3[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "SSN3",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Year[10]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Year[5]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Year[6]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Year[7]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Year[8]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[15].Year[9]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].CheckBox1[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Check Box1",
+      "group": "ask:checkbox1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBday[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBday",
+      "group": "vet.dateOfBirth",
+      "source": "auto",
+      "canonicalKey": "vet.dobDay"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOBmonth[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DOBmonth",
+      "group": "vet.dateOfBirth",
+      "source": "auto",
+      "canonicalKey": "vet.dobMonth"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].DOByear[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DOByear",
+      "group": "vet.dateOfBirth",
+      "source": "auto",
+      "canonicalKey": "vet.dobYear"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].E_Mail_Address[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 15,
+      "label": "Email address",
+      "group": "vet.email",
+      "source": "auto",
+      "canonicalKey": "vet.email"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].E_Mail_Address[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 15,
+      "label": "Email address",
+      "group": "vet.email",
+      "source": "auto",
+      "canonicalKey": "vet.email"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].International_Telephone_Number_If_Applicable[0]",
+      "type": "text",
+      "required": false,
+      "label": "International Telephone Number If Applicable",
+      "group": "ask:internationaltelephonenumberifapplicable",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].MailingAddress_ApartmentOrUnitNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Mailing Address Apartment Or Unit Number",
+      "group": "ask:mailingaddressapartmentorunitnumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].MailingAddress_City[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Mailing Address City",
+      "group": "ask:mailingaddresscity",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].MailingAddress_Country[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Mailing Address Country",
+      "group": "ask:mailingaddresscountry",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].MailingAddress_NumberAndStreet[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 30,
+      "label": "Mailing Address Number And Street",
+      "group": "ask:mailingaddressnumberandstreet",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].MailingAddress_StateOrProvince[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Mailing Address State Or Province",
+      "group": "ask:mailingaddressstateorprovince",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].MailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Mailing Address ZIPOr Postal Code First Five Numbers",
+      "group": "ask:mailingaddressziporpostalcodefirstfivenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].MailingAddress_ZIPOrPostalCode_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Mailing Address ZIPOr Postal Code Last Four Numbers",
+      "group": "ask:mailingaddressziporpostalcodelastfournumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Patient_SocialSecurityNumber_FirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Patient Social Security Number First Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Patient_SocialSecurityNumber_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Patient Social Security Number Last Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Patient_SocialSecurityNumber_SecondTwoNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Patient Social Security Number Second Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Patients_FirstName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 12,
+      "label": "Legal first name",
+      "group": "vet.legalFirstName",
+      "source": "auto",
+      "canonicalKey": "vet.legalFirstName"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Patients_LastName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Legal last name",
+      "group": "vet.legalLastName",
+      "source": "auto",
+      "canonicalKey": "vet.legalLastName"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Patients_MiddleInitial1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 1,
+      "label": "Patients Middle Initial1",
+      "group": "vet.legalMiddleName",
+      "source": "auto",
+      "canonicalKey": "vet.legalMiddleInitial"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].Patients_VAFileNumber_If_Applicable[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "VA file number",
+      "group": "vet.vaFileNumber",
+      "source": "auto",
+      "canonicalKey": "vet.vaFileNumber"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].TelephoneNumber_AreaCode[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Telephone Number Area Code",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneAreaCode"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].TelephoneNumber_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Telephone Number Last Four Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneLine"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].TelephoneNumber_SecondThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Telephone Number Second Three Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phonePrefix"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].VAFileNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "VA file number",
+      "group": "vet.vaFileNumber",
+      "source": "auto",
+      "canonicalKey": "vet.vaFileNumber"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].VeteranFirstName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 12,
+      "label": "Legal first name",
+      "group": "vet.legalFirstName",
+      "source": "auto",
+      "canonicalKey": "vet.legalFirstName"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].VeteranLastName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Legal last name",
+      "group": "vet.legalLastName",
+      "source": "auto",
+      "canonicalKey": "vet.legalLastName"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].VeteranMiddleInitial1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 1,
+      "label": "Veteran Middle Initial1",
+      "group": "vet.legalMiddleName",
+      "source": "auto",
+      "canonicalKey": "vet.legalMiddleInitial"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].VeteransServiceNumber_If_Applicable[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "Veterans Service Number If Applicable",
+      "group": "ask:veteransservicenumberifapplicable",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].VeteransSocialSecurityNumber_FirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Veterans Social Security Number First Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].VeteransSocialSecurityNumber_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Veterans Social Security Number Last Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].Page_1[0].VeteransSocialSecurityNumber_SecondTwoNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Veterans Social Security Number Second Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    }
+  ]
+}

@@ -21,8 +21,10 @@ test('scenario a is service history and an unfinished onboarding', () => {
 test('scenario b has two conditions, one evidence note, and an upcoming exam', () => {
   const scenario = scenarioById('b');
   const paths = scenario.documents.map((item) => item.path);
-  assert.ok(paths.includes('claimIssues/hearing'));
-  assert.ok(paths.includes('claimIssues/knee'));
+  assert.ok(paths.includes('conditions/hearing'));
+  assert.ok(paths.includes('conditions/knee'));
+  const hearing = scenario.documents.find((item) => item.path === 'conditions/hearing');
+  assert.equal(hearing.data.activeCaseId, 'case-b');
   assert.equal(paths.filter((path) => path.startsWith('evidenceLinks/')).length, 1);
   const exam = scenario.documents.find((item) => item.path === 'exams/exam-b');
   assert.equal(exam.data.examDate, '2026-11-02');

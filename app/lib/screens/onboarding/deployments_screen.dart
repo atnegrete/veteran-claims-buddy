@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../auth/auth_controller.dart';
 import '../../app/app_theme.dart';
+import '../../app/app_ui.dart';
 import '../../forms/iso_date_field.dart';
 import '../../forms/repeatable_entries.dart';
 import '../../forms/text_input_chain.dart';
@@ -186,10 +187,10 @@ class _DeploymentsScreenState extends ConsumerState<DeploymentsScreen> {
           : Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
+                const LeadText(
                   'Add a deployment if you have one. A month and year is enough, and a best guess is fine. You can continue without one.',
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 16),
                 RepeatableEntries(
                   entries: [
                     for (final deployment in _deployments)
@@ -210,12 +211,7 @@ class _DeploymentsScreenState extends ConsumerState<DeploymentsScreen> {
                 ),
                 if (_error != null) ...[
                   const SizedBox(height: 12),
-                  Text(
-                    _error!,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                  ),
+                  ErrorText(_error!),
                 ],
               ],
             ),
@@ -259,6 +255,7 @@ class _DeploymentsScreenState extends ConsumerState<DeploymentsScreen> {
           if (_periods.isNotEmpty) ...[
             DropdownButtonFormField<String>(
               initialValue: _periodId,
+              isExpanded: true,
               decoration: const InputDecoration(labelText: 'Service period'),
               items: [
                 for (final period in _periods)
@@ -266,6 +263,7 @@ class _DeploymentsScreenState extends ConsumerState<DeploymentsScreen> {
                     value: period.id,
                     child: Text(
                       '${serviceBranches[period.branch] ?? period.branch}, ${period.startDate}',
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
               ],

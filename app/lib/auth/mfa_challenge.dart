@@ -1,8 +1,5 @@
 class PhoneFactorHint {
-  const PhoneFactorHint({
-    required this.uid,
-    required this.label,
-  });
+  const PhoneFactorHint({required this.uid, required this.label});
 
   final String uid;
   final String label;

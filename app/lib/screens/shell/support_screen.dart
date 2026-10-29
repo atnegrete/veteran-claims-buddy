@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/app_theme.dart';
+import '../../app/app_ui.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_redirect.dart';
 import '../../forms/text_input_chain.dart';
@@ -22,15 +24,19 @@ class SupportScreen extends ConsumerWidget {
       wrapInCard: false,
       child: Column(
         children: [
-          const SurfaceCard(
+          SurfaceCard(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Email'),
-                SizedBox(height: 8),
-                SelectableText(supportEmail),
-                SizedBox(height: 12),
-                Text(supportPrivacyNote),
+                const Eyebrow('Email'),
+                const SizedBox(height: 8),
+                SelectableText(
+                  supportEmail,
+                  style: Theme.of(context).textTheme.titleLarge
+                      ?.copyWith(color: AppColors.sand),
+                ),
+                const SizedBox(height: 12),
+                const InfoNote(text: supportPrivacyNote),
               ],
             ),
           ),
@@ -44,19 +50,19 @@ class SupportScreen extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   if (items.isEmpty)
-                    const Text('No tickets yet.')
+                    const LeadText('No tickets yet.')
                   else
-                    for (final ticket in items)
-                      ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        title: Text(ticket.subject),
-                        subtitle: Text(
-                          '${supportStatusLabel(ticket.status)} · ${supportCategoryLabel(ticket.category)}',
-                        ),
+                    for (final ticket in items) ...[
+                      AppNavRow(
+                        title: ticket.subject,
+                        subtitle:
+                            '${supportStatusLabel(ticket.status)} · ${supportCategoryLabel(ticket.category)}',
                         onTap: () =>
                             context.go(AuthRoutes.supportTicket(ticket.id)),
                       ),
-                  const SizedBox(height: 16),
+                      const SizedBox(height: 8),
+                    ],
+                  const SizedBox(height: 8),
                   FilledButton(
                     onPressed: () => context.go(AuthRoutes.supportNew),
                     child: const Text('New ticket'),
@@ -132,7 +138,7 @@ class _NewSupportTicketScreenState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(supportPrivacyNote),
+            const InfoNote(text: supportPrivacyNote),
             const SizedBox(height: 16),
             ChainTextField(
               controller: _subject,
@@ -142,10 +148,14 @@ class _NewSupportTicketScreenState
             const SizedBox(height: 12),
             DropdownButtonFormField<String>(
               initialValue: _category,
+              isExpanded: true,
               decoration: const InputDecoration(labelText: 'Category'),
               items: [
                 for (final entry in supportCategories.entries)
-                  DropdownMenuItem(value: entry.key, child: Text(entry.value)),
+                  DropdownMenuItem(
+                    value: entry.key,
+                    child: Text(entry.value, overflow: TextOverflow.ellipsis),
+                  ),
               ],
               onChanged: _busy
                   ? null
@@ -163,10 +173,7 @@ class _NewSupportTicketScreenState
             ),
             if (_error != null) ...[
               const SizedBox(height: 12),
-              Text(
-                _error!,
-                style: TextStyle(color: Theme.of(context).colorScheme.error),
-              ),
+              ErrorText(_error!),
             ],
             const SizedBox(height: 16),
             FilledButton(
@@ -269,7 +276,7 @@ class _SupportTicketScreenState extends ConsumerState<SupportTicketScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text('That ticket is not on this account.'),
+                const LeadText('That ticket is not on this account.'),
                 const SizedBox(height: 16),
                 TextButton(
                   onPressed: () => context.go(AuthRoutes.support),
@@ -286,6 +293,9 @@ class _SupportTicketScreenState extends ConsumerState<SupportTicketScreen> {
             children: [
               Text(
                 '${supportStatusLabel(item.status)} · ${supportCategoryLabel(item.category)}',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
               const SizedBox(height: 12),
               messages.when(
@@ -303,7 +313,7 @@ class _SupportTicketScreenState extends ConsumerState<SupportTicketScreen> {
                 ),
               ),
               if (!item.isClosed) ...[
-                const Text(supportPrivacyNote),
+                const InfoNote(text: supportPrivacyNote),
                 const SizedBox(height: 12),
                 ChainTextField(
                   controller: _reply,
@@ -314,12 +324,7 @@ class _SupportTicketScreenState extends ConsumerState<SupportTicketScreen> {
                 ),
                 if (_error != null) ...[
                   const SizedBox(height: 12),
-                  Text(
-                    _error!,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                  ),
+                  ErrorText(_error!),
                 ],
                 const SizedBox(height: 16),
                 FilledButton(
@@ -331,7 +336,7 @@ class _SupportTicketScreenState extends ConsumerState<SupportTicketScreen> {
                   child: const Text('Close ticket'),
                 ),
               ] else
-                const Text('This ticket is closed.'),
+                const LeadText('This ticket is closed.'),
             ],
           ),
         );

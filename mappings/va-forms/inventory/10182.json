@@ -1,0 +1,124 @@
+{
+  "formNumber": "10182",
+  "revision": "2022-03-15",
+  "fields": [
+    {
+      "name": "form1[0].#subform[0].AdditionalIssues[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "form1[0].#subform[0].DateSigned[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].DOBVeteran[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].IAMEXPERIENCINGHOMELESSNESS[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "form1[0].#subform[0].MyDOB[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].MYPREFERREDE-MAILADDRESS[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].MYPREFERREDMAILINGADDRESS[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].MYREPRESENTATIVESNAME[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].NAMEIFNOTVETERAN[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].PREFERREDPHONENO[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].RadioButtonList[0]",
+      "type": "PDFRadioGroup",
+      "options": [
+        "10A. Direct Review by a Veterans Law Judge: I do not want a Board hearing, and will not submit any additional evidence in support of my appeal. (Choosing this option often results in the Board issuing its decision most quickly.)",
+        "10B. Evidence Submission Reviewed by a Veterans Law Judge: I have additional evidence in support of my appeal that I will submit to the Board with my VA Form 10182 or within the 90 days of the Board's receipt of my VA Form 10182. (Choosing this option may extend the time it takes for the Board to decide your appeal.)",
+        "10C. Hearing with a Veterans Law Judge: I want a Board hearing and the opportunity to submit additional evidence in support of my appeal that I will provide within 90 days after my hearing. I want the hearing type below: (Choosing this option may extend the time it takes for the Board to decide your appeal.)"
+      ]
+    },
+    {
+      "name": "form1[0].#subform[0].RadioButtonList[1]",
+      "type": "PDFRadioGroup",
+      "options": [
+        "Central Office Hearing (I will attend in person in Washington, DC)",
+        "Videoconference Hearing (I will go to a Regional Office)",
+        "Virtual Telehearing (I will attend using an internet-connected device) (Important: Provide your e-mail address and Representative in Part I) "
+      ]
+    },
+    {
+      "name": "form1[0].#subform[0].Signature1[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].SpecificIssues[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "form1[0].#subform[0].SpecificIssues[1]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "form1[0].#subform[0].Table1[0].Row1[0].DateDecision1[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].Table1[0].Row1[0].SpecificIssues1[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].Table1[0].Row2[0].DateDecision2[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].Table1[0].Row2[0].SpecificIssues2[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].Table1[0].Row3[0].DateDecision3[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].Table1[0].Row3[0].SpecificIssues3[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].Table1[0].Row4[0].DateDecision4[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].Table1[0].Row4[0].SpecificIssues4[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].Table1[0].Row5[0].DateDecision5[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].Table1[0].Row5[0].SpecificIssues5[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].VETERANSFILENUMBER[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[0].VETERANSNAME[0]",
+      "type": "PDFTextField"
+    }
+  ]
+}

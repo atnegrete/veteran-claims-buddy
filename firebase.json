@@ -31,7 +31,8 @@
         "**/.*",
         "**/node_modules/**",
         "build.js",
-        "**/*.test.js"
+        "**/*.test.js",
+        "styles/**"
       ]
     },
     {
@@ -39,6 +40,14 @@
       "public": "app/build/web",
       "ignore": [
         "**/.*"
+      ],
+      "headers": [
+        {
+          "source": "**/*.mjs",
+          "headers": [
+            { "key": "Content-Type", "value": "text/javascript" }
+          ]
+        }
       ],
       "rewrites": [
         { "source": "**", "destination": "/index.html" }

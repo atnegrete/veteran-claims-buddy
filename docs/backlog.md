@@ -42,21 +42,21 @@ These need a steer before any code is written.
 - **Today:** PDF, JPEG, and PNG are read. HEIC is rejected.
 - **Why it waits:** the prebuilt `sharp` library decodes AVIF, not iPhone HEIC, so those photos cannot be read safely. Needs a different decode path (a server-side HEIC converter or an image API) before HEIC can be accepted.
 
-## Deferred forms (prepare)
+## Deferred forms (prepare) — now scheduled, not backlog
 
-Only the three decision-review drafts are open (Supplemental Claim 20-0995, Higher-Level Review 20-0996, Board Appeal 10182). These form routes exist in the navigation map but are **not open yet**. Each one needs its own data, draft screen, and the "nothing is filed" handling before it is built.
+These are no longer backlog. The VA forms pipeline (handoff section 37) is scheduled in `docs/build-progress.md` under "VA forms pipeline" (steps F1-F8), because auto-filling official VA PDFs and packaging them for self-submission is the core deliverable. The Forms page is already guided (F1, 2026-10-06): a deterministic recommender sorts every supported form and the nexus letter into Recommended / Other. Preparing and filling each form is F7; the identifiers step is F6. The authoritative VA form source is owner gate M13.
 
-- **B5.** Intent to File — 21-0966.
-- **B6.** Initial claim — 21-526EZ.
-- **B7.** Unemployability — 21-8940 and 21-4192.
-- **B8.** Mental-health event — 21-0781.
-- **B9.** Records release — 21-4142 and 21-4142a.
-- **B10.** Records request — 20-10206.
-- **B11.** Identifiers step — SSN or VA file number, collected only when one of these forms needs it.
+- **B5.** Intent to File — 21-0966. → build-progress F7.
+- **B6.** Initial claim — 21-526EZ. → build-progress F7.
+- **B7.** Unemployability — 21-8940 and 21-4192. → build-progress F7.
+- **B8.** Mental-health event — 21-0781. → build-progress F7.
+- **B9.** Records release — 21-4142 and 21-4142a. → build-progress F7.
+- **B10.** Records request — 20-10206. → build-progress F7.
+- **B11.** Identifiers step — SSN or VA file number, collected only when a form needs it. → build-progress F6.
 
 ## Not-built screens
 
-- **B12.** Package `/review`, `/approve`, and `/download`. The digital package is not generated yet, so reviewing, approving, and re-downloading generated files are not built. Tied to package generation, which is a paid step.
+- **B12.** Package `/review`, `/approve`, and `/download`. → build-progress F8 (package assembly, review/approve/download, submission snapshots). Tied to form generation (F4) and a paid step.
 - **B13.** Document `/evidence/:documentId/processing` — a status screen shown while a file is read. Reading works; the dedicated status page is not built.
 
 ## Admin area
@@ -65,4 +65,4 @@ Only the three decision-review drafts are open (Supplemental Claim 20-0995, High
 
 ## Commerce and Print & Mail
 
-- **B15.** Entitlements, buying on `/plans`, and the Print & Mail flow (`/package/print/...`). Blocked behind the commerce owner gates (build-progress M11 and handoff 38A–38E). Do not add `purchases_flutter` or `flutter_stripe` before those gates are done. `/plans` stays the only sales page. Expand from handoff section 38 when the gates are complete.
+- **B15.** ~~Entitlements and buying on `/plans`.~~ RevenueCat entitlements and `/plans` buying are built as a code layer (2026-10-06): `purchases_flutter`/`purchases_ui_flutter`, `functions/commerce.js` + `functions/entitlements.js`, server-authoritative `users/{uid}/billing/premium` projection, Case unlock = one year of Premium for a single active Case, complete-vs-appeal lifecycle. **Still open:** live purchases wait on the commerce owner gates (build-progress M11a–M11c and handoff 38A–38C) — store products, the RevenueCat dashboard offering/paywall, the webhook secret, and deploying functions + rules + the commerce config. The **Print & Mail** flow (`/package/print/...`) stays blocked on Stripe (38D) and the provider (38E) and is not built. `/plans` stays the only sales page. Package PDF generation itself is still B12.

@@ -233,8 +233,13 @@ void main() {
     expect(firstClaimStatus(null), ClaimSectionStatus.notStarted);
     expect(firstClaimStatus(true), ClaimSectionStatus.done);
     expect(firstClaimStatus(false), ClaimSectionStatus.inProgress);
-    expect(firstClaimStatus(false, documentCount: 1), ClaimSectionStatus.done);
-    expect(firstClaimLabel(false), 'Earlier claim');
+    expect(
+      firstClaimStatus(false, supplementalCount: 1),
+      ClaimSectionStatus.done,
+    );
+    expect(firstClaimLabel(null), 'Case Info');
+    expect(firstClaimLabel(false), 'Case Info');
+    expect(firstClaimLabel(true), 'Case Info');
     final session = QuestionnaireSession(
       answers: const {
         'head': ['yes'],
@@ -342,7 +347,16 @@ void main() {
     );
     expect(
       catalogBlockedLabel(pain, questions, yes),
-      'Does not apply based on your answer to Which of these fit?',
+      "Does not apply based on your answer to 'Which of these fit?'",
+    );
+    expect(
+      catalogBlockedLabel(
+        pain,
+        questions,
+        yes,
+        labels: const {'gi.which': '2. Which of these fit?'},
+      ),
+      "Does not apply based on your answer to '2. Which of these fit?'",
     );
     final ibs = applyCatalogAnswer(questions, yes, 'gi.which', ['ibs']);
     expect(catalogBlockedLabel(pain, questions, ibs), isNull);

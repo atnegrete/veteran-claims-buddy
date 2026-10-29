@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../auth/auth_controller.dart';
 import '../../app/app_theme.dart';
+import '../../app/app_ui.dart';
 import '../../forms/repeatable_entries.dart';
 import '../../forms/text_input_chain.dart';
 import '../../auth/auth_redirect.dart';
@@ -159,10 +160,10 @@ class _ExposuresScreenState extends ConsumerState<ExposuresScreen> {
           : Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
-                  'Add exposures you know about. A suggestion from the app would stay unconfirmed until you accept it. You can continue without one.',
+                const LeadText(
+                  'Add exposures you know about. You can continue without one.',
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 16),
                 RepeatableEntries(
                   entries: [
                     for (final exposure in _exposures)
@@ -193,12 +194,7 @@ class _ExposuresScreenState extends ConsumerState<ExposuresScreen> {
                 ),
                 if (_error != null) ...[
                   const SizedBox(height: 12),
-                  Text(
-                    _error!,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                  ),
+                  ErrorText(_error!),
                 ],
               ],
             ),
@@ -211,10 +207,14 @@ class _ExposuresScreenState extends ConsumerState<ExposuresScreen> {
       children: [
         DropdownButtonFormField<String>(
           initialValue: _type,
+          isExpanded: true,
           decoration: const InputDecoration(labelText: 'Type'),
           items: [
             for (final entry in exposureTypes.entries)
-              DropdownMenuItem(value: entry.key, child: Text(entry.value)),
+              DropdownMenuItem(
+                value: entry.key,
+                child: Text(entry.value, overflow: TextOverflow.ellipsis),
+              ),
           ],
           onChanged: _busy ? null : (value) => setState(() => _type = value),
         ),
@@ -282,15 +282,13 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
+          const LeadText(
             'Nothing is filed from here. Your claim opens when you finish.',
           ),
-          const SizedBox(height: 16),
-          if (_error != null)
-            Text(
-              _error!,
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
-            ),
+          if (_error != null) ...[
+            const SizedBox(height: 16),
+            ErrorText(_error!),
+          ],
         ],
       ),
     );

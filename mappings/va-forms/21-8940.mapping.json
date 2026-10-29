@@ -1,0 +1,1628 @@
+{
+  "formNumber": "21-8940",
+  "revision": "2021-06-19",
+  "fields": [
+    {
+      "pdfField": "form1[0].#subform[0].AreaCode[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Area Code",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneAreaCode"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].CheckBox1[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Check Box1",
+      "group": "ask:checkbox1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].CurrentMailingAddress_ApartmentOrUnitNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Current Mailing Address Apartment Or Unit Number",
+      "group": "ask:currentmailingaddressapartmentorunitnumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].CurrentMailingAddress_City[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Current Mailing Address City",
+      "group": "ask:currentmailingaddresscity",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].CurrentMailingAddress_Country[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Current Mailing Address Country",
+      "group": "ask:currentmailingaddresscountry",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].CurrentMailingAddress_NumberAndStreet[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 30,
+      "label": "Current Mailing Address Number And Street",
+      "group": "ask:currentmailingaddressnumberandstreet",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].CurrentMailingAddress_StateOrProvince[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Current Mailing Address State Or Province",
+      "group": "ask:currentmailingaddressstateorprovince",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].CurrentMailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 5,
+      "label": "Current Mailing Address ZIPOr Postal Code First Five Numbers",
+      "group": "ask:currentmailingaddressziporpostalcodefirstfivenumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].CurrentMailingAddress_ZIPOrPostalCode_LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Current Mailing Address ZIPOr Postal Code Last Four Numbers",
+      "group": "ask:currentmailingaddressziporpostalcodelastfournumbers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Day[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Day[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Day[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Day[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Day[5]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Day[6]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Day[7]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].E_Mail_Address_If_Applicable[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 17,
+      "label": "Email address",
+      "group": "vet.email",
+      "source": "auto",
+      "canonicalKey": "vet.email"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].E_Mail_Address_If_Applicable[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 17,
+      "label": "Email address",
+      "group": "vet.email",
+      "source": "auto",
+      "canonicalKey": "vet.email"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].FirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "First Three Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phonePrefix"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].International_Telephone_Number_If_Applicable[0]",
+      "type": "text",
+      "required": false,
+      "label": "International Telephone Number If Applicable",
+      "group": "ask:internationaltelephonenumberifapplicable",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Last Four Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneLine"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Month[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Month[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Month[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Month[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Month[5]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Month[6]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Month[7]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Name_And_Address_Of_Doctors[0]",
+      "type": "text",
+      "required": false,
+      "label": "Name And Address Of Doctors",
+      "group": "ask:nameandaddressofdoctors",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Name_And_Address_Of_Hospital[0]",
+      "type": "text",
+      "required": false,
+      "label": "Name And Address Of Hospital",
+      "group": "ask:nameandaddressofhospital",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Occupation_During_That_Year[0]",
+      "type": "text",
+      "required": false,
+      "label": "Occupation During That Year",
+      "group": "ask:occupationduringthatyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].RadioButtonList[0]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "YES",
+        "NO"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Service_Connected_Disability[0]",
+      "type": "text",
+      "required": false,
+      "label": "Service Connected Disability",
+      "group": "ask:serviceconnecteddisability",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].SSNFirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "SSNFirst Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].SSNLastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "SSNLast Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].SSNSecondTwoNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "SSNSecond Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].VAFileNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "VA file number",
+      "group": "vet.vaFileNumber",
+      "source": "auto",
+      "canonicalKey": "vet.vaFileNumber"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].ValueOfYourPortionOfProperty2_10b3[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Value Of Your Portion Of Property2 10b3",
+      "group": "ask:valueofyourportionofproperty210b3",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].ValueOfYourPortionOfProperty3_10b3[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Value Of Your Portion Of Property3 10b3",
+      "group": "ask:valueofyourportionofproperty310b3",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].VeteransFirstName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 12,
+      "label": "Legal first name",
+      "group": "vet.legalFirstName",
+      "source": "auto",
+      "canonicalKey": "vet.legalFirstName"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].VeteransLastName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Legal last name",
+      "group": "vet.legalLastName",
+      "source": "auto",
+      "canonicalKey": "vet.legalLastName"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].VeteransMiddleInitial[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 1,
+      "label": "Veterans Middle Initial",
+      "group": "vet.legalMiddleName",
+      "source": "auto",
+      "canonicalKey": "vet.legalMiddleInitial"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].WHATYEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "WHATYEAR",
+      "group": "ask:whatyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Year[10]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Year[11]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Year[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Year[4]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Year[6]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Year[8]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[0].Year[9]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT1_FROM_DAY[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT1 FROM DAY",
+      "group": "ask:datesofemployment1fromday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT1_FROM_MONTH[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT1 FROM MONTH",
+      "group": "ask:datesofemployment1frommonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT1_FROM_YEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFEMPLOYMENT1 FROM YEAR",
+      "group": "ask:datesofemployment1fromyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT1_TO_DAY[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT1 TO DAY",
+      "group": "ask:datesofemployment1today",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT1_TO_MONTH[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT1 TO MONTH",
+      "group": "ask:datesofemployment1tomonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT1_TO_YEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFEMPLOYMENT1 TO YEAR",
+      "group": "ask:datesofemployment1toyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT2_FROM_DAY[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT2 FROM DAY",
+      "group": "ask:datesofemployment2fromday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT2_FROM_MONTH[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT2 FROM MONTH",
+      "group": "ask:datesofemployment2frommonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT2_FROM_YEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFEMPLOYMENT2 FROM YEAR",
+      "group": "ask:datesofemployment2fromyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT2_TO_DAY[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT2 TO DAY",
+      "group": "ask:datesofemployment2today",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT2_TO_MONTH[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT2 TO MONTH",
+      "group": "ask:datesofemployment2tomonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT2_TO_YEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFEMPLOYMENT2 TO YEAR",
+      "group": "ask:datesofemployment2toyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT3_FROM_DAY[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT3 FROM DAY",
+      "group": "ask:datesofemployment3fromday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT3_FROM_MONTH[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT3 FROM MONTH",
+      "group": "ask:datesofemployment3frommonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT3_FROM_YEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFEMPLOYMENT3 FROM YEAR",
+      "group": "ask:datesofemployment3fromyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT3_TO_DAY[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT3 TO DAY",
+      "group": "ask:datesofemployment3today",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT3_TO_MONTH[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT3 TO MONTH",
+      "group": "ask:datesofemployment3tomonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT3_TO_YEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFEMPLOYMENT3 TO YEAR",
+      "group": "ask:datesofemployment3toyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT4_FROM_DAY[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT4 FROM DAY",
+      "group": "ask:datesofemployment4fromday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT4_FROM_MONTH[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT4 FROM MONTH",
+      "group": "ask:datesofemployment4frommonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT4_FROM_YEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFEMPLOYMENT4 FROM YEAR",
+      "group": "ask:datesofemployment4fromyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT4_TO_DAY[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT4 TO DAY",
+      "group": "ask:datesofemployment4today",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT4_TO_MONTH[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT4 TO MONTH",
+      "group": "ask:datesofemployment4tomonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT4_TO_YEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFEMPLOYMENT4 TO YEAR",
+      "group": "ask:datesofemployment4toyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT5_FROM_DAY[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT5 FROM DAY",
+      "group": "ask:datesofemployment5fromday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT5_FROM_MONTH[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT5 FROM MONTH",
+      "group": "ask:datesofemployment5frommonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT5_FROM_YEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFEMPLOYMENT5 FROM YEAR",
+      "group": "ask:datesofemployment5fromyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT5_TO_DAY[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT5 TO DAY",
+      "group": "ask:datesofemployment5today",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT5_TO_MONTH[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT5 TO MONTH",
+      "group": "ask:datesofemployment5tomonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].DATESOFEMPLOYMENT5_TO_YEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFEMPLOYMENT5 TO YEAR",
+      "group": "ask:datesofemployment5toyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].HIGHESTGROSSEARNINGSPERMONTH181_1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "HIGHESTGROSSEARNINGSPERMONTH181 1",
+      "group": "ask:highestgrossearningspermonth1811",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].HIGHESTGROSSEARNINGSPERMONTH181_2[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "HIGHESTGROSSEARNINGSPERMONTH181 2",
+      "group": "ask:highestgrossearningspermonth1812",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].HIGHESTGROSSEARNINGSPERMONTH182_1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "HIGHESTGROSSEARNINGSPERMONTH182 1",
+      "group": "ask:highestgrossearningspermonth1821",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].HIGHESTGROSSEARNINGSPERMONTH182_2[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "HIGHESTGROSSEARNINGSPERMONTH182 2",
+      "group": "ask:highestgrossearningspermonth1822",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].HIGHESTGROSSEARNINGSPERMONTH183_1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "HIGHESTGROSSEARNINGSPERMONTH183 1",
+      "group": "ask:highestgrossearningspermonth1831",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].HIGHESTGROSSEARNINGSPERMONTH183_2[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "HIGHESTGROSSEARNINGSPERMONTH183 2",
+      "group": "ask:highestgrossearningspermonth1832",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].HIGHESTGROSSEARNINGSPERMONTH184_1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "HIGHESTGROSSEARNINGSPERMONTH184 1",
+      "group": "ask:highestgrossearningspermonth1841",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].HIGHESTGROSSEARNINGSPERMONTH184_2[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "HIGHESTGROSSEARNINGSPERMONTH184 2",
+      "group": "ask:highestgrossearningspermonth1842",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].HIGHESTGROSSEARNINGSPERMONTH185_1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "HIGHESTGROSSEARNINGSPERMONTH185 1",
+      "group": "ask:highestgrossearningspermonth1851",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].HIGHESTGROSSEARNINGSPERMONTH185_2[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "HIGHESTGROSSEARNINGSPERMONTH185 2",
+      "group": "ask:highestgrossearningspermonth1852",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].HOURSPERWEEK1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "HOURSPERWEEK1",
+      "group": "ask:hoursperweek1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].HOURSPERWEEK2[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "HOURSPERWEEK2",
+      "group": "ask:hoursperweek2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].HOURSPERWEEK3[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "HOURSPERWEEK3",
+      "group": "ask:hoursperweek3",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].HOURSPERWEEK4[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "HOURSPERWEEK4",
+      "group": "ask:hoursperweek4",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].HOURSPERWEEK5[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "HOURSPERWEEK5",
+      "group": "ask:hoursperweek5",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].NAMEANDADDRESSOFEMPLOYERORUNIT1[0]",
+      "type": "text",
+      "required": false,
+      "label": "NAMEANDADDRESSOFEMPLOYERORUNIT1",
+      "group": "ask:nameandaddressofemployerorunit1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].NAMEANDADDRESSOFEMPLOYERORUNIT2[0]",
+      "type": "text",
+      "required": false,
+      "label": "NAMEANDADDRESSOFEMPLOYERORUNIT2",
+      "group": "ask:nameandaddressofemployerorunit2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].NAMEANDADDRESSOFEMPLOYERORUNIT3[0]",
+      "type": "text",
+      "required": false,
+      "label": "NAMEANDADDRESSOFEMPLOYERORUNIT3",
+      "group": "ask:nameandaddressofemployerorunit3",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].NAMEANDADDRESSOFEMPLOYERORUNIT4[0]",
+      "type": "text",
+      "required": false,
+      "label": "NAMEANDADDRESSOFEMPLOYERORUNIT4",
+      "group": "ask:nameandaddressofemployerorunit4",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].NAMEANDADDRESSOFEMPLOYERORUNIT5[0]",
+      "type": "text",
+      "required": false,
+      "label": "NAMEANDADDRESSOFEMPLOYERORUNIT5",
+      "group": "ask:nameandaddressofemployerorunit5",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].SSNFirstThreeNumbers[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "SSNFirst Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].SSNLastFourNumbers[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "SSNLast Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].SSNSecondTwoNumbers[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "SSNSecond Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].TIMELOSTFROMILLNESS1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "TIMELOSTFROMILLNESS1",
+      "group": "ask:timelostfromillness1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].TIMELOSTFROMILLNESS2[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "TIMELOSTFROMILLNESS2",
+      "group": "ask:timelostfromillness2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].TIMELOSTFROMILLNESS3[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "TIMELOSTFROMILLNESS3",
+      "group": "ask:timelostfromillness3",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].TIMELOSTFROMILLNESS4[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "TIMELOSTFROMILLNESS4",
+      "group": "ask:timelostfromillness4",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].TIMELOSTFROMILLNESS5[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "TIMELOSTFROMILLNESS5",
+      "group": "ask:timelostfromillness5",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].TYPEOFWORK1[0]",
+      "type": "text",
+      "required": false,
+      "label": "TYPEOFWORK1",
+      "group": "ask:typeofwork1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].TYPEOFWORK2[0]",
+      "type": "text",
+      "required": false,
+      "label": "TYPEOFWORK2",
+      "group": "ask:typeofwork2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].TYPEOFWORK3[0]",
+      "type": "text",
+      "required": false,
+      "label": "TYPEOFWORK3",
+      "group": "ask:typeofwork3",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].TYPEOFWORK4[0]",
+      "type": "text",
+      "required": false,
+      "label": "TYPEOFWORK4",
+      "group": "ask:typeofwork4",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[1].TYPEOFWORK5[0]",
+      "type": "text",
+      "required": false,
+      "label": "TYPEOFWORK5",
+      "group": "ask:typeofwork5",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].CURRENTMONTHLYEARNEDINCOME_1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "CURRENTMONTHLYEARNEDINCOME 1",
+      "group": "ask:currentmonthlyearnedincome1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].CURRENTMONTHLYEARNEDINCOME_2[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "CURRENTMONTHLYEARNEDINCOME 2",
+      "group": "ask:currentmonthlyearnedincome2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].DATESOFTRAINING_BEGINNING_DAY[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFTRAINING BEGINNING DAY",
+      "group": "ask:datesoftrainingbeginningday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].DATESOFTRAINING_BEGINNING_DAY[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFTRAINING BEGINNING DAY",
+      "group": "ask:datesoftrainingbeginningday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].DATESOFTRAINING_BEGINNING_MONTH[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFTRAINING BEGINNING MONTH",
+      "group": "ask:datesoftrainingbeginningmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].DATESOFTRAINING_BEGINNING_MONTH[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFTRAINING BEGINNING MONTH",
+      "group": "ask:datesoftrainingbeginningmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].DATESOFTRAINING_BEGINNING_YEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFTRAINING BEGINNING YEAR",
+      "group": "ask:datesoftrainingbeginningyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].DATESOFTRAINING_BEGINNING_YEAR[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFTRAINING BEGINNING YEAR",
+      "group": "ask:datesoftrainingbeginningyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].DATESOFTRAINING_COMPLETION_DAY[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFTRAINING COMPLETION DAY",
+      "group": "ask:datesoftrainingcompletionday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].DATESOFTRAINING_COMPLETION_DAY[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFTRAINING COMPLETION DAY",
+      "group": "ask:datesoftrainingcompletionday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].DATESOFTRAINING_COMPLETION_MONTH[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFTRAINING COMPLETION MONTH",
+      "group": "ask:datesoftrainingcompletionmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].DATESOFTRAINING_COMPLETION_MONTH[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFTRAINING COMPLETION MONTH",
+      "group": "ask:datesoftrainingcompletionmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].DATESOFTRAINING_COMPLETION_YEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFTRAINING COMPLETION YEAR",
+      "group": "ask:datesoftrainingcompletionyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].DATESOFTRAINING_COMPLETION_YEAR[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFTRAINING COMPLETION YEAR",
+      "group": "ask:datesoftrainingcompletionyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].EducationRadioButtonList[0]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "label": "Education Radio Button List",
+      "group": "ask:educationradiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].EducationRadioButtonList[1]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "13",
+        "14",
+        "15",
+        "10"
+      ],
+      "label": "Education Radio Button List",
+      "group": "ask:educationradiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].EducationRadioButtonList[2]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "Fresh",
+        "Soph",
+        "Jr",
+        "Sr"
+      ],
+      "label": "Education Radio Button List",
+      "group": "ask:educationradiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].RadioButtonList[1]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "YES",
+        "NO"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].RadioButtonList[2]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "YES (If \"Yes,\" explain in Item 26, \"Remarks\")",
+        "NO"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].RadioButtonList[3]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "YES",
+        "NO"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].RadioButtonList[4]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "YES",
+        "NO"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].RadioButtonList[5]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "YES (If \"Yes,\" complete Items 22A, 22B, and 22C)",
+        "NO"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].RadioButtonList[6]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "NO"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].RadioButtonList[7]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "YES (If \"Yes,\" complete Items 25B and 25C)",
+        "NO"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].SSNFirstThreeNumbers[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "SSNFirst Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].SSNLastFourNumbers[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "SSNLast Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].SSNSecondTwoNumbers[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "SSNSecond Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Table1[0].Row1[0].#subform[0].DATESOFEMPLOYMENT5_FROM_DAY[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT5 FROM DAY",
+      "group": "ask:datesofemployment5fromday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Table1[0].Row1[0].#subform[0].DATESOFEMPLOYMENT5_FROM_MONTH[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT5 FROM MONTH",
+      "group": "ask:datesofemployment5frommonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Table1[0].Row1[0].#subform[0].DATESOFEMPLOYMENT5_FROM_YEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFEMPLOYMENT5 FROM YEAR",
+      "group": "ask:datesofemployment5fromyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Table1[0].Row1[0].NAME_AND_ADDRESS_OF_EMPLOYER[0]",
+      "type": "text",
+      "required": false,
+      "label": "NAME AND ADDRESS OF EMPLOYER",
+      "group": "ask:nameandaddressofemployer",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Table1[0].Row1[0].TYPE_OF-WORK[0]",
+      "type": "text",
+      "required": false,
+      "label": "TYPE OF-WORK",
+      "group": "ask:typeofwork",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Table1[0].Row2[0].#subform[0].DATESOFEMPLOYMENT5_FROM_DAY[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT5 FROM DAY",
+      "group": "ask:datesofemployment5fromday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Table1[0].Row2[0].#subform[0].DATESOFEMPLOYMENT5_FROM_MONTH[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT5 FROM MONTH",
+      "group": "ask:datesofemployment5frommonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Table1[0].Row2[0].#subform[0].DATESOFEMPLOYMENT5_FROM_YEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFEMPLOYMENT5 FROM YEAR",
+      "group": "ask:datesofemployment5fromyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Table1[0].Row2[0].NAME_AND_ADDRESS_OF_EMPLOYER[0]",
+      "type": "text",
+      "required": false,
+      "label": "NAME AND ADDRESS OF EMPLOYER",
+      "group": "ask:nameandaddressofemployer",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Table1[0].Row2[0].TYPE_OF-WORK[0]",
+      "type": "text",
+      "required": false,
+      "label": "TYPE OF-WORK",
+      "group": "ask:typeofwork",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Table1[0].Row3[0].#subform[0].DATESOFEMPLOYMENT5_FROM_DAY[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT5 FROM DAY",
+      "group": "ask:datesofemployment5fromday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Table1[0].Row3[0].#subform[0].DATESOFEMPLOYMENT5_FROM_MONTH[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT5 FROM MONTH",
+      "group": "ask:datesofemployment5frommonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Table1[0].Row3[0].#subform[0].DATESOFEMPLOYMENT5_FROM_YEAR[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFEMPLOYMENT5 FROM YEAR",
+      "group": "ask:datesofemployment5fromyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Table1[0].Row3[0].NAME_AND_ADDRESS_OF_EMPLOYER[0]",
+      "type": "text",
+      "required": false,
+      "label": "NAME AND ADDRESS OF EMPLOYER",
+      "group": "ask:nameandaddressofemployer",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Table1[0].Row3[0].TYPE_OF-WORK[0]",
+      "type": "text",
+      "required": false,
+      "label": "TYPE OF-WORK",
+      "group": "ask:typeofwork",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].totalearnedincome20a_1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Totalearnedincome20a 1",
+      "group": "ask:totalearnedincome20a1",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].totalearnedincome20a_2[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Totalearnedincome20a 2",
+      "group": "ask:totalearnedincome20a2",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Type_Of_Education_Or_Training[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 12,
+      "label": "Type Of Education Or Training",
+      "group": "ask:typeofeducationortraining",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[2].Type_Of_Education_Or_Training[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 12,
+      "label": "Type Of Education Or Training",
+      "group": "ask:typeofeducationortraining",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[4].ADDRESS_OF_WITNESS[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 17,
+      "label": "ADDRESS OF WITNESS",
+      "group": "ask:addressofwitness",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[4].ADDRESS_OF_WITNESS[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 17,
+      "label": "ADDRESS OF WITNESS",
+      "group": "ask:addressofwitness",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[4].ADDRESS_OF_WITNESS[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 17,
+      "label": "ADDRESS OF WITNESS",
+      "group": "ask:addressofwitness",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[4].ADDRESS_OF_WITNESS[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 17,
+      "label": "ADDRESS OF WITNESS",
+      "group": "ask:addressofwitness",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[4].DATESOFEMPLOYMENT5_FROM_DAY[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT5 FROM DAY",
+      "group": "ask:datesofemployment5fromday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[4].DATESOFEMPLOYMENT5_FROM_MONTH[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "DATESOFEMPLOYMENT5 FROM MONTH",
+      "group": "ask:datesofemployment5frommonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[4].DATESOFEMPLOYMENT5_FROM_YEAR[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "DATESOFEMPLOYMENT5 FROM YEAR",
+      "group": "ask:datesofemployment5fromyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[4].Remarks_Ifany[0]",
+      "type": "text",
+      "required": false,
+      "label": "Remarks Ifany",
+      "group": "ask:remarksifany",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[4].Signature[0]",
+      "type": "text",
+      "required": false,
+      "label": "Signature",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "form1[0].#subform[4].Signature[1]",
+      "type": "text",
+      "required": false,
+      "label": "Signature",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "form1[0].#subform[4].SignatureField11[0]",
+      "type": "text",
+      "required": false,
+      "label": "Signature Field11",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "form1[0].#subform[4].SSNFirstThreeNumbers[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "SSNFirst Three Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "form1[0].#subform[4].SSNLastFourNumbers[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "SSNLast Four Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "form1[0].#subform[4].SSNSecondTwoNumbers[3]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "SSNSecond Two Numbers",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    }
+  ]
+}

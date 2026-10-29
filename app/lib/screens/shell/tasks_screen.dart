@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../auth/auth_redirect.dart';
-import '../../app/app_badge.dart';
 import '../../claim/next_action_repository.dart';
 import 'shell_pages.dart';
 
@@ -34,8 +33,6 @@ class TasksScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(value.description),
-                const SizedBox(height: 12),
-                const AppBadge.notFiled(),
                 if (value.route != null) ...[
                   const SizedBox(height: 16),
                   FilledButton(

@@ -8,15 +8,15 @@ Veteran Claims Buddy LLC. Contact: support@veteranclaimsbuddy.com
 
 ## Digital Claim Package
 
-A one-time purchase of the Digital Claim Package unlocks digital package generation for one Case. The business target price is $250. The store may show the closest allowed price, such as $249.99.
+A one-time purchase of the Digital Claim Package gives one active Case a full year of Premium features, limited to that single Case. The business target price is $250. The store may show the closest allowed price, such as $249.99.
 
-That purchase stays with that Case. You can regenerate and download packages for that Case, including later review packages for issues that remain in the Case, without buying it again. A different Case needs its own purchase, or an active Premium subscription. An account can buy up to 12 Case unlocks.
+That purchase stays with that Case for one year. You can regenerate and download packages for that Case, including later review packages for issues that remain in the Case, without buying it again. You keep one active Case at a time: complete the Case to start another, or hold an active Premium subscription to work every Case at once. Completed Cases stay viewable and downloadable.
 
 A Digital Claim Package does not guarantee a VA outcome.
 
 ## Premium
 
-Premium is an auto-renewing monthly subscription. The business target price is $30 per month. The store shows the price and the renewal length before you confirm.
+Premium is an auto-renewing subscription. The business target price is $29.99 per month, or $234.99 per year (about 34% off the monthly rate). The store shows the price and the renewal length before you confirm.
 
 Premium includes, while it is active:
 
@@ -26,7 +26,7 @@ Premium includes, while it is active:
 
 When Premium ends, generation stops on Cases that were never purchased. Files already generated stay downloadable. Symptom history stays readable. New symptom entries stop until Premium is active again.
 
-Payment is charged to the Apple ID, Google Play account, or web payment method you use. The subscription renews each month until you cancel. Cancel at least a day before renewal if you do not want the next charge. Cancel through Apple, Google, or the web subscription page. Deleting the app does not cancel the subscription.
+Payment is charged to the Apple ID, Google Play account, or web payment method you use. The subscription renews each term (monthly or yearly) until you cancel. Cancel at least a day before renewal if you do not want the next charge. Cancel through Apple, Google, or the web subscription page. Deleting the app does not cancel the subscription.
 
 Manage or cancel:
 

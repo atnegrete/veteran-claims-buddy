@@ -1,0 +1,374 @@
+{
+  "formNumber": "21-10210",
+  "revision": "2021-06-18",
+  "fields": [
+    {
+      "name": "vba210304[0].#subform[0].AreaCode[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "vba210304[0].#subform[0].AreaCode[1]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "vba210304[0].#subform[0].CheckBox1[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "vba210304[0].#subform[0].CheckBox1[1]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "vba210304[0].#subform[0].CurrentMailingAddress_ApartmentOrUnitNumber[0]",
+      "type": "PDFTextField",
+      "maxLength": 5
+    },
+    {
+      "name": "vba210304[0].#subform[0].CurrentMailingAddress_ApartmentOrUnitNumber[1]",
+      "type": "PDFTextField",
+      "maxLength": 5
+    },
+    {
+      "name": "vba210304[0].#subform[0].CurrentMailingAddress_City[0]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "vba210304[0].#subform[0].CurrentMailingAddress_City[1]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "vba210304[0].#subform[0].CurrentMailingAddress_Country[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "vba210304[0].#subform[0].CurrentMailingAddress_Country[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "vba210304[0].#subform[0].CurrentMailingAddress_NumberAndStreet[0]",
+      "type": "PDFTextField",
+      "maxLength": 30
+    },
+    {
+      "name": "vba210304[0].#subform[0].CurrentMailingAddress_NumberAndStreet[1]",
+      "type": "PDFTextField",
+      "maxLength": 30
+    },
+    {
+      "name": "vba210304[0].#subform[0].CurrentMailingAddress_StateOrProvince[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "vba210304[0].#subform[0].CurrentMailingAddress_StateOrProvince[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "vba210304[0].#subform[0].CurrentMailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 5
+    },
+    {
+      "name": "vba210304[0].#subform[0].CurrentMailingAddress_ZIPOrPostalCode_FirstFiveNumbers[1]",
+      "type": "PDFTextField",
+      "maxLength": 5
+    },
+    {
+      "name": "vba210304[0].#subform[0].CurrentMailingAddress_ZIPOrPostalCode_LastFourNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "vba210304[0].#subform[0].CurrentMailingAddress_ZIPOrPostalCode_LastFourNumbers[1]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "vba210304[0].#subform[0].Day[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "vba210304[0].#subform[0].Day[3]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "vba210304[0].#subform[0].EMAIL_ADDRESS[0]",
+      "type": "PDFTextField",
+      "maxLength": 20
+    },
+    {
+      "name": "vba210304[0].#subform[0].EMAIL_ADDRESS[1]",
+      "type": "PDFTextField",
+      "maxLength": 20
+    },
+    {
+      "name": "vba210304[0].#subform[0].EMAIL_ADDRESS[2]",
+      "type": "PDFTextField",
+      "maxLength": 20
+    },
+    {
+      "name": "vba210304[0].#subform[0].EMAIL_ADDRESS[3]",
+      "type": "PDFTextField",
+      "maxLength": 20
+    },
+    {
+      "name": "vba210304[0].#subform[0].FirstThreeNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "vba210304[0].#subform[0].FirstThreeNumbers[1]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "vba210304[0].#subform[0].FirstThreeNumbers[2]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "vba210304[0].#subform[0].International_Phone_Number[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "vba210304[0].#subform[0].International_Phone_Number[1]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "vba210304[0].#subform[0].Last_Name[0]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "vba210304[0].#subform[0].Last_Name[1]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "vba210304[0].#subform[0].LastFourNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "vba210304[0].#subform[0].LastFourNumbers[1]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "vba210304[0].#subform[0].LastFourNumbers[2]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "vba210304[0].#subform[0].Middle_Initial1[0]",
+      "type": "PDFTextField",
+      "maxLength": 1
+    },
+    {
+      "name": "vba210304[0].#subform[0].Middle_Initial1[1]",
+      "type": "PDFTextField",
+      "maxLength": 1
+    },
+    {
+      "name": "vba210304[0].#subform[0].Month[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "vba210304[0].#subform[0].Month[3]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "vba210304[0].#subform[0].SecondTwoNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "vba210304[0].#subform[0].SSN1[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "vba210304[0].#subform[0].SSN2[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "vba210304[0].#subform[0].SSN3[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "vba210304[0].#subform[0].VA_File_Number_If_Applicable[0]",
+      "type": "PDFTextField",
+      "maxLength": 9
+    },
+    {
+      "name": "vba210304[0].#subform[0].VA_File_Number_If_Applicable[1]",
+      "type": "PDFTextField",
+      "maxLength": 9
+    },
+    {
+      "name": "vba210304[0].#subform[0].VA_INSURANCE_FILE_NUMBER[0]",
+      "type": "PDFTextField",
+      "maxLength": 20
+    },
+    {
+      "name": "vba210304[0].#subform[0].VA_INSURANCE_FILE_NUMBER[1]",
+      "type": "PDFTextField",
+      "maxLength": 20
+    },
+    {
+      "name": "vba210304[0].#subform[0].Veterans_First_Name[0]",
+      "type": "PDFTextField",
+      "maxLength": 12
+    },
+    {
+      "name": "vba210304[0].#subform[0].Veterans_First_Name[1]",
+      "type": "PDFTextField",
+      "maxLength": 12
+    },
+    {
+      "name": "vba210304[0].#subform[0].Year[1]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "vba210304[0].#subform[0].Year[3]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "vba210304[0].#subform[1].SSN1[1]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "vba210304[0].#subform[1].SSN2[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "vba210304[0].#subform[1].SSN3[1]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "vba210304[0].#subform[1].TextField1[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "vba210304[0].#subform[2].AreaCode[2]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "vba210304[0].#subform[2].COWORKER_OR_SUPERVISOR_OF_CLAIMANT[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "vba210304[0].#subform[2].Day[5]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "vba210304[0].#subform[2].Digital_Signature[0]",
+      "type": "PDFSignature"
+    },
+    {
+      "name": "vba210304[0].#subform[2].EMAIL_ADDRESS[4]",
+      "type": "PDFTextField",
+      "maxLength": 20
+    },
+    {
+      "name": "vba210304[0].#subform[2].EMAIL_ADDRESS[5]",
+      "type": "PDFTextField",
+      "maxLength": 20
+    },
+    {
+      "name": "vba210304[0].#subform[2].FAMILY_OR_FRIEND_OF_CLAIMANT[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "vba210304[0].#subform[2].FirstThreeNumbers[3]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "vba210304[0].#subform[2].International_Phone_Number[2]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "vba210304[0].#subform[2].Last_Name[2]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "vba210304[0].#subform[2].LastFourNumbers[3]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "vba210304[0].#subform[2].Middle_Initial1[2]",
+      "type": "PDFTextField",
+      "maxLength": 1
+    },
+    {
+      "name": "vba210304[0].#subform[2].Month[5]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "vba210304[0].#subform[2].OTHER_Specify[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "vba210304[0].#subform[2].OTHER_Specify[1]",
+      "type": "PDFTextField",
+      "maxLength": 30
+    },
+    {
+      "name": "vba210304[0].#subform[2].SERVED_WITH_CLAIMANT[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "vba210304[0].#subform[2].SSN1[2]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "vba210304[0].#subform[2].SSN2[2]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "vba210304[0].#subform[2].SSN3[2]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "vba210304[0].#subform[2].TextField1[1]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "vba210304[0].#subform[2].WITNESS_FIRST_NAME[0]",
+      "type": "PDFTextField",
+      "maxLength": 12
+    },
+    {
+      "name": "vba210304[0].#subform[2].Year[5]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    }
+  ]
+}

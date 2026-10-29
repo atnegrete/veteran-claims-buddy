@@ -54,7 +54,7 @@ void main() {
   test('an earlier claim without paperwork asks for that file', () {
     final step = action(firstClaim: false);
     expect(step.kind, NextActionKind.earlierPaperwork);
-    expect(step.route, '/cases/case-1/evidence/upload');
+    expect(step.route, '/cases/case-1');
   });
 
   test('symptom questions come before adding a condition', () {
@@ -76,7 +76,7 @@ void main() {
     );
     expect(step.kind, NextActionKind.addIssue);
     expect(step.title, 'Add Stomach and bowel to this claim');
-    expect(step.route, '/cases/case-1/issues');
+    expect(step.route, '/cases/case-1/conditions');
   });
 
   test(
@@ -118,7 +118,7 @@ void main() {
     const candidate = ReviewCandidate(
       decisionId: 'decision-1',
       decisionIssueId: 'issue-1',
-      claimIssueId: null,
+      conditionId: null,
       displayName: 'Hearing loss',
       outcome: 'denied',
       decisionDate: '2026-01-15',
@@ -179,7 +179,7 @@ void main() {
             formId: '20-0995',
             decisionId: 'decision-1',
             decisionIssueId: 'issue-1',
-            claimIssueId: null,
+            conditionId: null,
             displayName: 'Hearing loss',
             boardDocket: null,
             informalConference: null,

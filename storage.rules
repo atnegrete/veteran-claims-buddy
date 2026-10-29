@@ -26,5 +26,25 @@ service firebase.storage {
         );
       allow delete: if signedInOwner(uid);
     }
+
+    // Veteran-specific generated form PDFs. The owner may read them; only
+    // backend tooling (privileged credentials) writes them (handoff 37.5).
+    match /users/{uid}/generatedForms/{generatedFormId}/{fileName} {
+      allow read: if signedInOwner(uid);
+      allow write: if false;
+    }
+
+    // Disposable, watermarked form previews rendered by the previewForm
+    // callable. The owner may read them; only the backend writes them.
+    match /users/{uid}/formPreviews/{fileName} {
+      allow read: if signedInOwner(uid);
+      allow write: if false;
+    }
+
+    // The authoritative VA reference templates are backend-only. No client
+    // read or write (handoff 37.5).
+    match /reference/va-forms/{allPaths=**} {
+      allow read, write: if false;
+    }
   }
 }

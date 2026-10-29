@@ -162,7 +162,7 @@ async function saveDecisionDraft({ db, uid, caseId, documentId, decision }) {
     return existing.docs[0].id;
   }
   const decisionRef = existing.empty ? decisions.doc() : existing.docs[0].ref;
-  const issues = db.collection(`users/${uid}/claimIssues`);
+  const issues = db.collection(`users/${uid}/conditions`);
   const onCase = await issues.where("activeCaseId", "==", caseId).get();
   const byName = new Map();
   for (const doc of onCase.docs) {
@@ -199,10 +199,10 @@ async function saveDecisionDraft({ db, uid, caseId, documentId, decision }) {
     { merge: true },
   );
   for (const issue of decision.issues) {
-    const claimIssueId = byName.get(issue.displayName.toLowerCase()) || null;
+    const conditionId = byName.get(issue.displayName.toLowerCase()) || null;
     batch.set(db.collection(`users/${uid}/decisionIssues`).doc(), {
       decisionId: decisionRef.id,
-      claimIssueId,
+      conditionId,
       displayName: issue.displayName,
       outcome: issue.outcome,
       ratingPercent: issue.ratingPercent,

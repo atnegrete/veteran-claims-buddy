@@ -1,0 +1,253 @@
+{
+  "formNumber": "21-0966",
+  "revision": "2023-02-28",
+  "fields": [
+    {
+      "name": "F[0].#subform[1].#field[2]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "F[0].#subform[1].Compensation[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "F[0].#subform[1].DATE_SIGNED_Day[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].#subform[1].DATE_SIGNED_Month[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].#subform[1].DATE_SIGNED_Year[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].#subform[1].NAME_OF_ATTORNEY_AGENT_OR_VETERANS_SERVICE_ORGANIZATION_VSO[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].#subform[1].Pension[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "F[0].#subform[1].SignatureField1[0]",
+      "type": "PDFSignature"
+    },
+    {
+      "name": "F[0].Page_1[0].Address_Of_Parent_1[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_1[0].Address_Of_Parent_1[1]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_1[0].CheckBox1[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "F[0].Page_1[0].CheckBox1[1]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "F[0].Page_1[0].Claimants_DOB_Day[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].Claimants_DOB_Month[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].Claimants_DOB_Year[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_1[0].Claimants_EMAIL_ADDRESS[0]",
+      "type": "PDFTextField",
+      "maxLength": 20
+    },
+    {
+      "name": "F[0].Page_1[0].Claimants_EMAIL_ADDRESS[1]",
+      "type": "PDFTextField",
+      "maxLength": 20
+    },
+    {
+      "name": "F[0].Page_1[0].Claimants_International_Phone_Number[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_1[0].Claimants_Telephone_Number_FirstThreeNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "F[0].Page_1[0].Claimants_Telephone_Number_LastFourNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_1[0].Claimants_Telephone_Number_SecondThreeNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "F[0].Page_1[0].ClaimantsFirstName[0]",
+      "type": "PDFTextField",
+      "maxLength": 12
+    },
+    {
+      "name": "F[0].Page_1[0].ClaimantsLastName[0]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "F[0].Page_1[0].ClaimantsMiddleInitial1[0]",
+      "type": "PDFTextField",
+      "maxLength": 1
+    },
+    {
+      "name": "F[0].Page_1[0].ClaimantsSocialSecurityNumber_FirstThreeNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "F[0].Page_1[0].ClaimantsSocialSecurityNumber_LastFourNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_1[0].ClaimantsSocialSecurityNumber_SecondTwoNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].DOBday[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].DOBmonth[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].DOByear[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_1[0].EMAIL_ADDRESS[0]",
+      "type": "PDFTextField",
+      "maxLength": 20
+    },
+    {
+      "name": "F[0].Page_1[0].EMAIL_ADDRESS[1]",
+      "type": "PDFTextField",
+      "maxLength": 20
+    },
+    {
+      "name": "F[0].Page_1[0].International_Phone_Number[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_1[0].RadioButtonList[0]",
+      "type": "PDFRadioGroup",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "name": "F[0].Page_1[0].RadioButtonList[1]",
+      "type": "PDFRadioGroup",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "name": "F[0].Page_1[0].RadioButtonList[2]",
+      "type": "PDFRadioGroup",
+      "options": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "name": "F[0].Page_1[0].RelationshipToVeteranOther_Specify[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "F[0].Page_1[0].TelephoneNumber_FirstThreeNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "F[0].Page_1[0].TelephoneNumber_LastFourNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "F[0].Page_1[0].TelephoneNumber_SecondThreeNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "F[0].Page_1[0].VA_File_Number[0]",
+      "type": "PDFTextField",
+      "maxLength": 9
+    },
+    {
+      "name": "F[0].Page_1[0].VA_File_Number[1]",
+      "type": "PDFTextField",
+      "maxLength": 9
+    },
+    {
+      "name": "F[0].Page_1[0].Veterans_First_Name[0]",
+      "type": "PDFTextField",
+      "maxLength": 12
+    },
+    {
+      "name": "F[0].Page_1[0].Veterans_Last_Name[0]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "F[0].Page_1[0].Veterans_Middle_Initial1[0]",
+      "type": "PDFTextField",
+      "maxLength": 1
+    },
+    {
+      "name": "F[0].Page_1[0].Veterans_Service_Number[0]",
+      "type": "PDFTextField",
+      "maxLength": 9
+    },
+    {
+      "name": "F[0].Page_1[0].Veterans_Social_SecurityNumber_FirstThreeNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "F[0].Page_1[0].Veterans_Social_SecurityNumber_SecondTwoNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "F[0].Page_1[0].VeteransSocialSecurityNumber_LastFourNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    }
+  ]
+}

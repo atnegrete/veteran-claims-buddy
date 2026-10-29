@@ -73,7 +73,7 @@ class NextActionRepository {
         'route': action.route ?? '',
         'kind': action.kind.name,
         'priority': 'normal',
-        'claimIssueId': action.claimIssueId,
+        'conditionId': action.conditionId,
         'updatedAt': FieldValue.serverTimestamp(),
       };
       if (!existing.exists) {

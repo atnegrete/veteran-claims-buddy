@@ -311,17 +311,21 @@ List<CatalogQuestion> catalogTopicQuestions(
 }
 
 /// Why a question is off, naming each answer that does not match.
+///
+/// [labels] is the numbered prompt for a question on the current page.
+/// A parent that is not on this page is quoted without a number.
 String? catalogBlockedLabel(
   CatalogQuestion question,
   List<CatalogQuestion> questions,
-  Map<String, List<String>> answers,
-) {
+  Map<String, List<String>> answers, {
+  Map<String, String> labels = const {},
+}) {
   if (catalogQuestionVisible(question, answers)) return null;
   final byId = {for (final item in questions) item.id: item};
   final prompts = <String>[
     for (final rule in question.showWhen)
       if (!catalogRuleMatches(rule, answers))
-        byId[rule.questionId]?.prompt ?? rule.questionId,
+        "'${labels[rule.questionId] ?? byId[rule.questionId]?.prompt ?? rule.questionId}'",
   ];
   if (prompts.isEmpty) return 'Does not apply.';
   if (prompts.length == 1) {

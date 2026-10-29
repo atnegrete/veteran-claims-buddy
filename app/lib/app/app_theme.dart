@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'app_scroll.dart';
+
 /// Dark palette. One blue family for the product, one red family for danger.
 abstract final class AppColors {
   static const navy = Color(0xFF1F4E79);
@@ -10,11 +12,106 @@ abstract final class AppColors {
   static const line = Color(0xFF2C3A50);
   static const text = Color(0xFFF8FAFC);
   static const textMuted = Color(0xFF94A3B8);
+  static const sand = Color(0xFFE8C39E);
   static const dangerFill = Color(0xFFB91C1C);
   static const dangerText = Color(0xFFF87171);
+
+  /// Money green. The one positive-figure color, aligned with the blue family
+  /// (emerald, same tonal step as `dangerText`). Only for the estimated dollar
+  /// amount on the calculator. Not a general success color.
+  static const money = Color(0xFF34D399);
 }
 
 const _radius = 12.0;
+
+/// Display face. Headlines, section titles, card titles, prices.
+const _display = 'Fraunces';
+
+/// UI and body face. Everything that is not a display headline.
+const _ui = 'Source Sans 3';
+
+/// A Fraunces display style. Weight drives the variable font's weight axis,
+/// so `copyWith(fontWeight:)` keeps working on screens.
+TextStyle _displayStyle({
+  required double size,
+  FontWeight weight = FontWeight.w600,
+  double height = 1.1,
+  double letterSpacing = -0.4,
+}) {
+  return TextStyle(
+    fontFamily: _display,
+    fontSize: size,
+    height: height,
+    letterSpacing: letterSpacing,
+    fontWeight: weight,
+  );
+}
+
+/// A Source Sans 3 UI or body style.
+TextStyle _uiStyle({
+  required double size,
+  FontWeight weight = FontWeight.w400,
+  double height = 1.45,
+  double letterSpacing = 0,
+}) {
+  return TextStyle(
+    fontFamily: _ui,
+    fontSize: size,
+    height: height,
+    letterSpacing: letterSpacing,
+    fontWeight: weight,
+  );
+}
+
+/// Sand, uppercase, tracked label that sits above a title.
+TextStyle eyebrowStyle() {
+  return _uiStyle(
+    size: 12,
+    weight: FontWeight.w600,
+    letterSpacing: 1.6,
+  ).copyWith(color: AppColors.sand);
+}
+
+/// A link inside a paragraph. Sand and underlined.
+TextStyle sandLinkStyle() {
+  return _uiStyle(size: 15.5, weight: FontWeight.w600).copyWith(
+    color: AppColors.sand,
+    decoration: TextDecoration.underline,
+    decorationColor: AppColors.sand,
+  );
+}
+
+TextTheme _buildTextTheme() {
+  final theme = TextTheme(
+    displayLarge: _displayStyle(size: 44, height: 1.04),
+    displayMedium: _displayStyle(size: 36, height: 1.06),
+    displaySmall: _displayStyle(size: 30, height: 1.08),
+    headlineLarge: _displayStyle(size: 29, height: 1.1),
+    headlineMedium: _displayStyle(size: 25, height: 1.12),
+    headlineSmall: _displayStyle(size: 22, height: 1.15),
+    titleLarge: _displayStyle(size: 20, height: 1.2),
+    titleMedium: _displayStyle(size: 17, height: 1.3, letterSpacing: -0.2),
+    titleSmall: _uiStyle(size: 14, weight: FontWeight.w600, letterSpacing: 0.1),
+    bodyLarge: _uiStyle(size: 17, height: 1.55),
+    bodyMedium: _uiStyle(size: 15.5, height: 1.5),
+    bodySmall: _uiStyle(size: 13.5, height: 1.45),
+    labelLarge: _uiStyle(size: 15, weight: FontWeight.w600, letterSpacing: 0.1),
+    labelMedium: _uiStyle(
+      size: 13,
+      weight: FontWeight.w600,
+      letterSpacing: 0.1,
+    ),
+    labelSmall: _uiStyle(size: 11, weight: FontWeight.w600, letterSpacing: 0.4),
+  );
+  return theme.apply(bodyColor: AppColors.text, displayColor: AppColors.text);
+}
+
+/// Weight-600 label for buttons and other controls.
+const _buttonTextStyle = TextStyle(
+  fontFamily: _ui,
+  fontWeight: FontWeight.w600,
+  letterSpacing: 0.1,
+);
 
 /// Text button that opens a dangerous step or removes one item.
 ///
@@ -90,24 +187,25 @@ ThemeData appTheme() {
 
   return ThemeData(
     colorScheme: scheme,
+    fontFamily: _ui,
+    textTheme: _buildTextTheme(),
     scaffoldBackgroundColor: AppColors.canvas,
     dividerColor: AppColors.line,
     iconTheme: const IconThemeData(color: AppColors.text),
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       color: AppColors.blue,
     ),
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       backgroundColor: AppColors.canvas,
       foregroundColor: AppColors.text,
       elevation: 0,
       scrolledUnderElevation: 0,
       centerTitle: false,
-      titleTextStyle: TextStyle(
-        color: AppColors.text,
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-      ),
-      shape: Border(bottom: BorderSide(color: AppColors.line)),
+      titleTextStyle: _displayStyle(
+        size: 19,
+        height: 1.1,
+      ).copyWith(color: AppColors.text),
+      shape: const Border(bottom: BorderSide(color: AppColors.line)),
     ),
     cardTheme: const CardThemeData(
       color: AppColors.card,
@@ -160,7 +258,7 @@ ThemeData appTheme() {
       style: FilledButton.styleFrom(
         minimumSize: const Size.fromHeight(48),
         shape: shape,
-        textStyle: const TextStyle(fontWeight: FontWeight.w600),
+        textStyle: _buttonTextStyle,
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
@@ -169,13 +267,21 @@ ThemeData appTheme() {
         side: const BorderSide(color: AppColors.line),
         minimumSize: const Size.fromHeight(48),
         shape: shape,
+        textStyle: _buttonTextStyle,
       ),
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: AppColors.text,
-        textStyle: const TextStyle(fontWeight: FontWeight.w600),
+        textStyle: _buttonTextStyle,
       ),
+    ),
+    scrollbarTheme: const ScrollbarThemeData(
+      thickness: WidgetStatePropertyAll(scrollbarThumbThickness),
+      crossAxisMargin: scrollbarCrossAxisMargin,
+      radius: Radius.circular(8),
+      thumbColor: WidgetStatePropertyAll(AppColors.textMuted),
+      interactive: true,
     ),
   );
 }

@@ -26,8 +26,20 @@ String normalizeProfileName(String value) {
   return value.trim().replaceAll(RegExp(r'\s+'), ' ');
 }
 
+const profileNameMax = 102;
+
+String joinLegalName({
+  required String first,
+  required String middle,
+  required String last,
+}) {
+  return normalizeProfileName(
+    [first, middle, last].where((part) => part.trim().isNotEmpty).join(' '),
+  );
+}
+
 bool profileNameOk(String value) {
-  return normalizeProfileName(value).length <= 80;
+  return normalizeProfileName(value).length <= profileNameMax;
 }
 
 String profileTimezoneOrDefault(String? value) {

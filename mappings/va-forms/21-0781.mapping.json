@@ -1,0 +1,1057 @@
+{
+  "formNumber": "21-0781",
+  "revision": "2021-06-11",
+  "fields": [
+    {
+      "pdfField": "F[0].#subform[2].AreaCode[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "Area Code",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneAreaCode"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Brief_Description_Of_The_Traumatic_Events[0]",
+      "type": "text",
+      "required": false,
+      "label": "Statement",
+      "group": "statement.body",
+      "source": "auto",
+      "canonicalKey": "statement.body"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Brief_Description_Of_The_Traumatic_Events[1]",
+      "type": "text",
+      "required": false,
+      "label": "Brief Description Of The Traumatic Events",
+      "group": "ask:briefdescriptionofthetraumaticevents",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Brief_Description_Of_The_Traumatic_Events[2]",
+      "type": "text",
+      "required": false,
+      "label": "Brief Description Of The Traumatic Events",
+      "group": "ask:briefdescriptionofthetraumaticevents",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Combat_Traumatic_Events[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Combat Traumatic Events",
+      "group": "ask:combattraumaticevents",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Dates_The_Traumatic_Events_Occured[0]",
+      "type": "text",
+      "required": false,
+      "label": "Dates The Traumatic Events Occured",
+      "group": "ask:datesthetraumaticeventsoccured",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Dates_The_Traumatic_Events_Occured[1]",
+      "type": "text",
+      "required": false,
+      "label": "Dates The Traumatic Events Occured",
+      "group": "ask:datesthetraumaticeventsoccured",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Dates_The_Traumatic_Events_Occured[2]",
+      "type": "text",
+      "required": false,
+      "label": "Dates The Traumatic Events Occured",
+      "group": "ask:datesthetraumaticeventsoccured",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Day",
+      "group": "ask:day",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].E_Mail_Address_Optional[0]",
+      "type": "text",
+      "required": false,
+      "label": "Email address",
+      "group": "vet.email",
+      "source": "auto",
+      "canonicalKey": "vet.email"
+    },
+    {
+      "pdfField": "F[0].#subform[2].FirstThreeNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "First Three Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phonePrefix"
+    },
+    {
+      "pdfField": "F[0].#subform[2].International_Telephone_Number_If_Applicable[0]",
+      "type": "text",
+      "required": false,
+      "label": "International Telephone Number If Applicable",
+      "group": "ask:internationaltelephonenumberifapplicable",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].LastFourNumbers[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Last Four Numbers",
+      "group": "vet.phone",
+      "source": "auto",
+      "canonicalKey": "vet.phoneLine"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Location_Of_The_Traumatic_Events[0]",
+      "type": "text",
+      "required": false,
+      "label": "Location Of The Traumatic Events",
+      "group": "ask:locationofthetraumaticevents",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Location_Of_The_Traumatic_Events[1]",
+      "type": "text",
+      "required": false,
+      "label": "Location Of The Traumatic Events",
+      "group": "ask:locationofthetraumaticevents",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Location_Of_The_Traumatic_Events[2]",
+      "type": "text",
+      "required": false,
+      "label": "Location Of The Traumatic Events",
+      "group": "ask:locationofthetraumaticevents",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Month",
+      "group": "ask:month",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Other_Traumatic_Events[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Other Traumatic Events",
+      "group": "ask:othertraumaticevents",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Personal_Traumatic_Events_Involving_Military_Sexual_Trauma[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Personal Traumatic Events Involving Military Sexual Trauma",
+      "group": "ask:personaltraumaticeventsinvolvingmilitarysexualtrauma",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Personal_Traumatic_Events_Not_Involving_Military_Sexual_Trauma[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Personal Traumatic Events Not Involving Military Sexual Trauma",
+      "group": "ask:personaltraumaticeventsnotinvolvingmilitarysexualtrauma",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].SSN1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 3,
+      "label": "SSN1",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnArea"
+    },
+    {
+      "pdfField": "F[0].#subform[2].SSN2[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "SSN2",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnGroup"
+    },
+    {
+      "pdfField": "F[0].#subform[2].SSN3[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "SSN3",
+      "group": "vet.ssn",
+      "source": "auto",
+      "canonicalKey": "vet.ssnSerial"
+    },
+    {
+      "pdfField": "F[0].#subform[2].VAFileNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 9,
+      "label": "VA file number",
+      "group": "vet.vaFileNumber",
+      "source": "auto",
+      "canonicalKey": "vet.vaFileNumber"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Veterans_Service_Members_First_Name[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 12,
+      "label": "Legal first name",
+      "group": "vet.legalFirstName",
+      "source": "auto",
+      "canonicalKey": "vet.legalFirstName"
+    },
+    {
+      "pdfField": "F[0].#subform[2].VeteransLastName[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 18,
+      "label": "Legal last name",
+      "group": "vet.legalLastName",
+      "source": "auto",
+      "canonicalKey": "vet.legalLastName"
+    },
+    {
+      "pdfField": "F[0].#subform[2].VeteransMiddleInitial1[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 1,
+      "label": "Veterans Middle Initial1",
+      "group": "vet.legalMiddleName",
+      "source": "auto",
+      "canonicalKey": "vet.legalMiddleInitial"
+    },
+    {
+      "pdfField": "F[0].#subform[2].VeteransServiceNumber[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 10,
+      "label": "Veterans Service Number",
+      "group": "ask:veteransservicenumber",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[2].Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Year",
+      "group": "ask:year",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Additional_Information_About_Behavioral_Changes[0]",
+      "type": "text",
+      "required": false,
+      "label": "Additional Information About Behavioral Changes",
+      "group": "ask:additionalinformationaboutbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Additional_Information_About_Behavioral_Changes[1]",
+      "type": "text",
+      "required": false,
+      "label": "Additional Information About Behavioral Changes",
+      "group": "ask:additionalinformationaboutbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Additional_Information_About_Behavioral_Changes[2]",
+      "type": "text",
+      "required": false,
+      "label": "Additional Information About Behavioral Changes",
+      "group": "ask:additionalinformationaboutbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Additional_Information_About_Behavioral_Changes[3]",
+      "type": "text",
+      "required": false,
+      "label": "Additional Information About Behavioral Changes",
+      "group": "ask:additionalinformationaboutbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Additional_Information_About_Behavioral_Changes[4]",
+      "type": "text",
+      "required": false,
+      "label": "Additional Information About Behavioral Changes",
+      "group": "ask:additionalinformationaboutbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Additional_Information_About_Behavioral_Changes[5]",
+      "type": "text",
+      "required": false,
+      "label": "Additional Information About Behavioral Changes",
+      "group": "ask:additionalinformationaboutbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Additional_Information_About_Behavioral_Changes[6]",
+      "type": "text",
+      "required": false,
+      "label": "Additional Information About Behavioral Changes",
+      "group": "ask:additionalinformationaboutbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Additional_Information_About_Behavioral_Changes[7]",
+      "type": "text",
+      "required": false,
+      "label": "Additional Information About Behavioral Changes",
+      "group": "ask:additionalinformationaboutbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Additional_Information_About_Behavioral_Changes[8]",
+      "type": "text",
+      "required": false,
+      "label": "Additional Information About Behavioral Changes",
+      "group": "ask:additionalinformationaboutbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Additional_Information_About_Behavioral_Changes[9]",
+      "type": "text",
+      "required": false,
+      "label": "Additional Information About Behavioral Changes",
+      "group": "ask:additionalinformationaboutbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Brief_Description_Of_The_Traumatic_Events[3]",
+      "type": "text",
+      "required": false,
+      "label": "Brief Description Of The Traumatic Events",
+      "group": "ask:briefdescriptionofthetraumaticevents",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Brief_Description_Of_The_Traumatic_Events[4]",
+      "type": "text",
+      "required": false,
+      "label": "Brief Description Of The Traumatic Events",
+      "group": "ask:briefdescriptionofthetraumaticevents",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Brief_Description_Of_The_Traumatic_Events[5]",
+      "type": "text",
+      "required": false,
+      "label": "Brief Description Of The Traumatic Events",
+      "group": "ask:briefdescriptionofthetraumaticevents",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Changes_In_Eating_Habits_Such_As_Overeating_Or_Undereating_Or_Significant_Changes_In_Weight[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Changes In Eating Habits Such As Overeating Or Undereating Or Significant Changes In Weight",
+      "group": "ask:changesineatinghabitssuchasovereatingorundereatingorsignificantchangesinweight",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Changes_In_Performance_Or_Performance_Evaluations[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Changes In Performance Or Performance Evaluations",
+      "group": "ask:changesinperformanceorperformanceevaluations",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Dates_The_Traumatic_Events_Occured[3]",
+      "type": "text",
+      "required": false,
+      "label": "Dates The Traumatic Events Occured",
+      "group": "ask:datesthetraumaticeventsoccured",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Dates_The_Traumatic_Events_Occured[4]",
+      "type": "text",
+      "required": false,
+      "label": "Dates The Traumatic Events Occured",
+      "group": "ask:datesthetraumaticeventsoccured",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Dates_The_Traumatic_Events_Occured[5]",
+      "type": "text",
+      "required": false,
+      "label": "Dates The Traumatic Events Occured",
+      "group": "ask:datesthetraumaticeventsoccured",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Disciplinary_Or_Legal_Difficulties[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Disciplinary Or Legal Difficulties",
+      "group": "ask:disciplinaryorlegaldifficulties",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Episodes_Of_Depression_Panic_Attacks_Or_Anxiety[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Episodes Of Depression Panic Attacks Or Anxiety",
+      "group": "ask:episodesofdepressionpanicattacksoranxiety",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Increased_Decreased_Use_Of_Alcohol_Or_Drugs[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Increased Decreased Use Of Alcohol Or Drugs",
+      "group": "ask:increaseddecreaseduseofalcoholordrugs",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Increased_Decreased_Use_Of_Leave[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Increased Decreased Use Of Leave",
+      "group": "ask:increaseddecreaseduseofleave",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Increased_Decreased_Use_Of_Over_The_Counter_Medications[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Increased Decreased Use Of Over The Counter Medications",
+      "group": "ask:increaseddecreaseduseofoverthecountermedications",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Increased_Decreased_Use_Of_Prescription_Medications[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Increased Decreased Use Of Prescription Medications",
+      "group": "ask:increaseddecreaseduseofprescriptionmedications",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Increased_Decreased_Visits_To_A_Healthcare_Professional_Counselor_Or_Treatment_Facility[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Increased Decreased Visits To A Healthcare Professional Counselor Or Treatment Facility",
+      "group": "ask:increaseddecreasedvisitstoahealthcareprofessionalcounselorortreatmentfacility",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Location_Of_The_Traumatic_Events[3]",
+      "type": "text",
+      "required": false,
+      "label": "Location Of The Traumatic Events",
+      "group": "ask:locationofthetraumaticevents",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Location_Of_The_Traumatic_Events[4]",
+      "type": "text",
+      "required": false,
+      "label": "Location Of The Traumatic Events",
+      "group": "ask:locationofthetraumaticevents",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Location_Of_The_Traumatic_Events[5]",
+      "type": "text",
+      "required": false,
+      "label": "Location Of The Traumatic Events",
+      "group": "ask:locationofthetraumaticevents",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[3].Request_For_A_Change_In_Occupational_Series_Or_Duty_Assignment[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Request For A Change In Occupational Series Or Duty Assignment",
+      "group": "ask:requestforachangeinoccupationalseriesordutyassignment",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].A_Chaplain_Or_Clergy[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "A Chaplain Or Clergy",
+      "group": "ask:achaplainorclergy",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].A_Counseling_Facility_Or_Health_Clinic[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "A Counseling Facility Or Health Clinic",
+      "group": "ask:acounselingfacilityorhealthclinic",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].A_Faculty_Member[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "A Faculty Member",
+      "group": "ask:afacultymember",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].A_Rape_Crisis_Center_Or_Center_For_Domestic_Abuse[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "A Rape Crisis Center Or Center For Domestic Abuse",
+      "group": "ask:arapecrisiscenterorcenterfordomesticabuse",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Additional_Information_About_Behavioral_Changes[10]",
+      "type": "text",
+      "required": false,
+      "label": "Additional Information About Behavioral Changes",
+      "group": "ask:additionalinformationaboutbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Additional_Information_About_Behavioral_Changes[11]",
+      "type": "text",
+      "required": false,
+      "label": "Additional Information About Behavioral Changes",
+      "group": "ask:additionalinformationaboutbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Additional_Information_About_Behavioral_Changes[12]",
+      "type": "text",
+      "required": false,
+      "label": "Additional Information About Behavioral Changes",
+      "group": "ask:additionalinformationaboutbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Additional_Information_About_Behavioral_Changes[13]",
+      "type": "text",
+      "required": false,
+      "label": "Additional Information About Behavioral Changes",
+      "group": "ask:additionalinformationaboutbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Changes_In_Or_Breakup_Of_A_Significant_Relationship[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Changes In Or Breakup Of A Significant Relationship",
+      "group": "ask:changesinorbreakupofasignificantrelationship",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Civilian_Police_Reports[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Civilian Police Reports",
+      "group": "ask:civilianpolicereports",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Combat_Traumatic_Events[1]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Combat Traumatic Events",
+      "group": "ask:combattraumaticevents",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Community_Care_Paid_For_By_VA[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Community Care Paid For By VA",
+      "group": "ask:communitycarepaidforbyva",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Department_Of_Defense_Military_Treatment_Facilities[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Department Of Defense Military Treatment Facilities",
+      "group": "ask:departmentofdefensemilitarytreatmentfacilities",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Economic_Or_Social_Behavioral_Changes[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Economic Or Social Behavioral Changes",
+      "group": "ask:economicorsocialbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Family_Member_Or_Roomates[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Family Member Or Roomates",
+      "group": "ask:familymemberorroomates",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Fellow_Service_Members[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Fellow Service Members",
+      "group": "ask:fellowservicemembers",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].List_Additional_Behavioral_Changes[0]",
+      "type": "text",
+      "required": false,
+      "label": "List Additional Behavioral Changes",
+      "group": "ask:listadditionalbehavioralchanges",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Medical_Reports_From_Civilian_Physicians_Or_Caregivers_Who_Treated_You_Immediately_Following_The_Incident_Or_Sometime_Later[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Medical Reports From Civilian Physicians Or Caregivers Who Treated You Immediately Following The Incident Or Sometime Later",
+      "group": "ask:medicalreportsfromcivilianphysiciansorcaregiverswhotreatedyouimmediatelyfollowingtheincidentorsometimelater",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Other_Report[0]",
+      "type": "text",
+      "required": false,
+      "label": "Other Report",
+      "group": "ask:otherreport",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Other_Report[1]",
+      "type": "text",
+      "required": false,
+      "label": "Other Report",
+      "group": "ask:otherreport",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Other_Specify_Below[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Other Specify Below",
+      "group": "ask:otherspecifybelow",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Personal_Diaries_Or_Journals[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Personal Diaries Or Journals",
+      "group": "ask:personaldiariesorjournals",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Police_Report_Location_If_Known[0]",
+      "type": "text",
+      "required": false,
+      "label": "Police Report Location If Known",
+      "group": "ask:policereportlocationifknown",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Pregnancy_Tests_Around_The_Time_Of_The_Traumatic_Events[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Pregnancy Tests Around The Time Of The Traumatic Events",
+      "group": "ask:pregnancytestsaroundthetimeofthetraumaticevents",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Private_Healthcare_Provider[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Private Healthcare Provider",
+      "group": "ask:privatehealthcareprovider",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].RadioButtonList[0]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "YES (If \"Yes,\" check the appropriate box below indicating which type of report was filed)",
+        "NO (If \"No,\" skip to Item 12)"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].RadioButtonList[1]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "1",
+        "4",
+        "7",
+        "2",
+        "3"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].RadioButtonList[2]",
+      "type": "radio",
+      "required": false,
+      "options": [
+        "YES (If \"Yes,\" complete Items 13B through 13E)",
+        "NO (If \"No,\" skip to Item 14)"
+      ],
+      "label": "Radio Button List",
+      "group": "ask:radiobuttonlist",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].Tests_For_Sexually_Transmitted_Infections[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Tests For Sexually Transmitted Infections",
+      "group": "ask:testsforsexuallytransmittedinfections",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].VA_Medical_Center_And_Community_Based_Outpatient_Clinics[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "VA Medical Center And Community Based Outpatient Clinics",
+      "group": "ask:vamedicalcenterandcommunitybasedoutpatientclinics",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[4].VA_Vet_Center[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "VA Vet Center",
+      "group": "ask:vavetcenter",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Check_Box_Do_Not_Have_Date_s[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Check Box Do Not Have Date s",
+      "group": "ask:checkboxdonothavedates",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Check_Box_Do_Not_Have_Date_s[1]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Check Box Do Not Have Date s",
+      "group": "ask:checkboxdonothavedates",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Check_Box_Do_Not_Have_Date_s[2]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Check Box Do Not Have Date s",
+      "group": "ask:checkboxdonothavedates",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Date_Of_Treatment_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Of Treatment Month",
+      "group": "ask:dateoftreatmentmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Date_Of_Treatment_Month[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Of Treatment Month",
+      "group": "ask:dateoftreatmentmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Date_Of_Treatment_Month[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Of Treatment Month",
+      "group": "ask:dateoftreatmentmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Date_Of_Treatment_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Of Treatment Year",
+      "group": "ask:dateoftreatmentyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Date_Of_Treatment_Year[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Of Treatment Year",
+      "group": "ask:dateoftreatmentyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Date_Of_Treatment_Year[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Of Treatment Year",
+      "group": "ask:dateoftreatmentyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Date_Signed_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Day",
+      "group": "ask:datesignedday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Date_Signed_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Month",
+      "group": "ask:datesignedmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Date_Signed_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Signed Year",
+      "group": "ask:datesignedyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Digital_Signature[0]",
+      "type": "text",
+      "required": false,
+      "label": "Digital Signature",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "F[0].#subform[5].I_Consent_To_Have_VBA_Notify_VHA_About_Certain_Upcoming_Events_Related_To_My_Claim_And_Or_Appeal[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "I Consent To Have VBA Notify VHA About Certain Upcoming Events Related To My Claim And Or Appeal",
+      "group": "ask:iconsenttohavevbanotifyvhaaboutcertainupcomingeventsrelatedtomyclaimandorappeal",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].I_Do_Not_Consent_To_Have_VBA_Notify_VHA_About_Certain_Upcoming_Events_Related_To_My_Claim_And_Or_Appeal[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "I Do Not Consent To Have VBA Notify VHA About Certain Upcoming Events Related To My Claim And Or Appeal",
+      "group": "ask:idonotconsenttohavevbanotifyvhaaboutcertainupcomingeventsrelatedtomyclaimandorappeal",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].I_Revoke_Prior_Consent_To_Have_VBA_Notify_VHA_About_Certain_Upcoming_Events_Related_To_My_Claim_And_Or_Appeal[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "I Revoke Prior Consent To Have VBA Notify VHA About Certain Upcoming Events Related To My Claim And Or Appeal",
+      "group": "ask:irevokepriorconsenttohavevbanotifyvhaaboutcertainupcomingeventsrelatedtomyclaimandorappeal",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Name_And_Location_Of_Treatment_Facility[0]",
+      "type": "text",
+      "required": false,
+      "label": "Name And Location Of Treatment Facility",
+      "group": "ask:nameandlocationoftreatmentfacility",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Name_And_Location_Of_Treatment_Facility[1]",
+      "type": "text",
+      "required": false,
+      "label": "Name And Location Of Treatment Facility",
+      "group": "ask:nameandlocationoftreatmentfacility",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Name_And_Location_Of_Treatment_Facility[2]",
+      "type": "text",
+      "required": false,
+      "label": "Name And Location Of Treatment Facility",
+      "group": "ask:nameandlocationoftreatmentfacility",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Not_Applicable_And_Or_Not_Enrolled_In_VHA_Healthcare[0]",
+      "type": "checkbox",
+      "required": false,
+      "label": "Not Applicable And Or Not Enrolled In VHA Healthcare",
+      "group": "ask:notapplicableandornotenrolledinvhahealthcare",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[5].Remarks_If_Any[0]",
+      "type": "text",
+      "required": false,
+      "label": "Remarks If Any",
+      "group": "ask:remarksifany",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[6].Accreditation_Number[0]",
+      "type": "text",
+      "required": false,
+      "label": "Accreditation Number",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "F[0].#subform[6].Date_Day[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Day",
+      "group": "ask:dateday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[6].Date_Last_VAF_21_22_Or_21_22A_Submitted_Month[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Last VAF 21 22 Or 21 22 A Submitted Month",
+      "group": "ask:datelastvaf2122or2122asubmittedmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[6].Date_Signed_Day[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Day",
+      "group": "ask:datesignedday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[6].Date_Signed_Day[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Day",
+      "group": "ask:datesignedday",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[6].Date_Signed_Month[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Month",
+      "group": "ask:datesignedmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[6].Date_Signed_Month[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 2,
+      "label": "Date Signed Month",
+      "group": "ask:datesignedmonth",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[6].Date_Signed_Year[1]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Signed Year",
+      "group": "ask:datesignedyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[6].Date_Signed_Year[2]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Signed Year",
+      "group": "ask:datesignedyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[6].Date_Year[0]",
+      "type": "text",
+      "required": false,
+      "maxLength": 4,
+      "label": "Date Year",
+      "group": "ask:dateyear",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[6].Digital_Signature[1]",
+      "type": "text",
+      "required": false,
+      "label": "Digital Signature",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "F[0].#subform[6].Digital_Signature[2]",
+      "type": "text",
+      "required": false,
+      "label": "Digital Signature",
+      "group": null,
+      "source": "dev"
+    },
+    {
+      "pdfField": "F[0].#subform[6].Printed_Name_And_Address_Of_Witness[0]",
+      "type": "text",
+      "required": false,
+      "label": "Printed Name And Address Of Witness",
+      "group": "ask:printednameandaddressofwitness",
+      "source": "ask"
+    },
+    {
+      "pdfField": "F[0].#subform[6].Printed_Name_And_Address_Of_Witness[1]",
+      "type": "text",
+      "required": false,
+      "label": "Printed Name And Address Of Witness",
+      "group": "ask:printednameandaddressofwitness",
+      "source": "ask"
+    }
+  ]
+}

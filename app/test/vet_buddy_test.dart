@@ -60,7 +60,7 @@ void main() {
           issueId: 'back',
         ),
       ),
-      '/cases/case-1/issues/back',
+      '/cases/case-1/conditions/back',
     );
     expect(
       vetBuddyLocation(

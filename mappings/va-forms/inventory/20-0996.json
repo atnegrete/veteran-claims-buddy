@@ -1,0 +1,588 @@
+{
+  "formNumber": "20-0996",
+  "revision": "2024-03-09",
+  "fields": [
+    {
+      "name": "form1[0].#subform[2].Claimants_First_Name[0]",
+      "type": "PDFTextField",
+      "maxLength": 12
+    },
+    {
+      "name": "form1[0].#subform[2].Claimants_Last_Name[0]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "form1[0].#subform[2].Claimants_Middle_Initial1[0]",
+      "type": "PDFTextField",
+      "maxLength": 1
+    },
+    {
+      "name": "form1[0].#subform[2].Claimants_SocialSecurityNumber_FirstThreeNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "form1[0].#subform[2].Claimants_SocialSecurityNumber_LastFourNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[2].Claimants_SocialSecurityNumber_SecondTwoNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[2].CurrentMailingAddress_ApartmentOrUnitNumber[0]",
+      "type": "PDFTextField",
+      "maxLength": 5
+    },
+    {
+      "name": "form1[0].#subform[2].CurrentMailingAddress_ApartmentOrUnitNumber[1]",
+      "type": "PDFTextField",
+      "maxLength": 5
+    },
+    {
+      "name": "form1[0].#subform[2].CurrentMailingAddress_City[0]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "form1[0].#subform[2].CurrentMailingAddress_City[1]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "form1[0].#subform[2].CurrentMailingAddress_Country[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[2].CurrentMailingAddress_Country[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[2].CurrentMailingAddress_NumberAndStreet[0]",
+      "type": "PDFTextField",
+      "maxLength": 30
+    },
+    {
+      "name": "form1[0].#subform[2].CurrentMailingAddress_NumberAndStreet[1]",
+      "type": "PDFTextField",
+      "maxLength": 30
+    },
+    {
+      "name": "form1[0].#subform[2].CurrentMailingAddress_StateOrProvince[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[2].CurrentMailingAddress_StateOrProvince[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[2].CurrentMailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 5
+    },
+    {
+      "name": "form1[0].#subform[2].CurrentMailingAddress_ZIPOrPostalCode_FirstFiveNumbers[1]",
+      "type": "PDFTextField",
+      "maxLength": 5
+    },
+    {
+      "name": "form1[0].#subform[2].CurrentMailingAddress_ZIPOrPostalCode_LastFourNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[2].CurrentMailingAddress_ZIPOrPostalCode_LastFourNumbers[1]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[2].DOBday[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[2].DOBday[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[2].DOBmonth[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[2].DOBmonth[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[2].DOByear[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[2].DOByear[1]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[2].E_Mail_Address_Optional[0]",
+      "type": "PDFTextField",
+      "maxLength": 30
+    },
+    {
+      "name": "form1[0].#subform[2].E_Mail_Address_Optional[1]",
+      "type": "PDFTextField",
+      "maxLength": 30
+    },
+    {
+      "name": "form1[0].#subform[2].I_Am_Experiencing_Or_At_Risk_Of_Homelessness[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "form1[0].#subform[2].International_Telephone_Number_If_Applicable[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[2].International_Telephone_Number_If_Applicable[1]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[2].RadioButtonList[0]",
+      "type": "PDFRadioGroup",
+      "options": [
+        "ADULT BASIC EDUCATION",
+        "COMMUNITY BASED WORK EXPERIENCE",
+        "COOPERATIVE COURSE",
+        "FARM COOPERATIVE COURSE",
+        "INDEPENDENT INSTRUCTOR COURSE",
+        "INDEPENDENT STUDY COURSES",
+        "REHABILITATION FACILITY TRAINING",
+        "TRAINING AT HOME",
+        "VOCATIONAL COURSE IN A REHABILITATION FACILITY"
+      ]
+    },
+    {
+      "name": "form1[0].#subform[2].Telephone_Last_Four_Numbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[2].Telephone_Last_Four_Numbers[1]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[2].Telephone_Middle_Three_Numbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "form1[0].#subform[2].Telephone_Middle_Three_Numbers[1]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "form1[0].#subform[2].Telephone_Number_Area_Code[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "form1[0].#subform[2].Telephone_Number_Area_Code[1]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "form1[0].#subform[2].VA_Insurance_Policy_Number_If_Applicable[0]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "form1[0].#subform[2].VAFileNumber[0]",
+      "type": "PDFTextField",
+      "maxLength": 9
+    },
+    {
+      "name": "form1[0].#subform[2].Veterans_First_Name[0]",
+      "type": "PDFTextField",
+      "maxLength": 12
+    },
+    {
+      "name": "form1[0].#subform[2].Veterans_Last_Name[0]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "form1[0].#subform[2].Veterans_Middle_Initial1[0]",
+      "type": "PDFTextField",
+      "maxLength": 1
+    },
+    {
+      "name": "form1[0].#subform[2].Veterans_SocialSecurityNumber_FirstThreeNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "form1[0].#subform[2].Veterans_SocialSecurityNumber_LastFourNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[2].Veterans_SocialSecurityNumber_SecondTwoNumbers[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[3].Checkbox_Contact_The_Representative_By_Phone_In_The_Afternoon_Hours_Based_On_Time_Zone[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "form1[0].#subform[3].Checkbox_Contact_The_Representative_By_Phone_In_The_Morning_Hours_Based_On_Time_Zone[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "form1[0].#subform[3].Checkbox_Contact_The_Veteran_Claimant_By_Phone_In_The_Afternoon_Based_On_Time_Zone[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "form1[0].#subform[3].Checkbox_Contact_Veteran_By_Phone_In_The_Morning_Based_On_Time_Zone[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "form1[0].#subform[3].Checkbox_I_Would_Like_An_Optional_Informal_Conference[0]",
+      "type": "PDFCheckBox"
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Day[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Day[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Day[2]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Day[3]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Day[4]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Day[5]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Day[6]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Month[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Month[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Month[2]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Month[3]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Month[4]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Month[5]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Month[6]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Year[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Year[1]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Year[2]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Year[3]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Year[4]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Year[5]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[3].Date_Year[6]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[3].Representatives_E_Mail_Address[0]",
+      "type": "PDFTextField",
+      "maxLength": 30
+    },
+    {
+      "name": "form1[0].#subform[3].Representatives_First_Name[0]",
+      "type": "PDFTextField",
+      "maxLength": 12
+    },
+    {
+      "name": "form1[0].#subform[3].Representatives_Last_Name[0]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "form1[0].#subform[3].Representatives_Telephone_Number_Area_Code[0]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "form1[0].#subform[3].SPECIFICISSUE1[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[3].SPECIFICISSUE1[1]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[3].SPECIFICISSUE1[2]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[3].SPECIFICISSUE1[3]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[3].SPECIFICISSUE3[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[3].SPECIFICISSUE4[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[3].SPECIFICISSUE5[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[3].Telephone_Last_Four_Numbers[2]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[3].Telephone_Middle_Three_Numbers[2]",
+      "type": "PDFTextField",
+      "maxLength": 3
+    },
+    {
+      "name": "form1[0].#subform[4].Authorized_Representative_Last_Name[0]",
+      "type": "PDFTextField",
+      "maxLength": 18
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Day[10]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Day[11]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Day[12]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Day[7]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Day[8]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Day[9]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Month[10]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Month[11]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Month[12]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Month[7]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Month[8]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Month[9]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Signed_Day[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Signed_Day[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Signed_Month[0]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Signed_Month[1]",
+      "type": "PDFTextField",
+      "maxLength": 2
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Signed_Year[0]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Signed_Year[1]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Year[10]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Year[11]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Year[12]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Year[7]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Year[8]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[4].Date_Year[9]",
+      "type": "PDFTextField",
+      "maxLength": 4
+    },
+    {
+      "name": "form1[0].#subform[4].Digital_Signature[0]",
+      "type": "PDFSignature"
+    },
+    {
+      "name": "form1[0].#subform[4].Name_Of_VA_Authorized_Representative_First_And_Last[0]",
+      "type": "PDFTextField",
+      "maxLength": 12
+    },
+    {
+      "name": "form1[0].#subform[4].SIGNATUREOFALTERNATESIGNER[0]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[4].SPECIFICISSUE1[4]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[4].SPECIFICISSUE1[5]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[4].SPECIFICISSUE1[6]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[4].SPECIFICISSUE1[7]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[4].SPECIFICISSUE3[1]",
+      "type": "PDFTextField"
+    },
+    {
+      "name": "form1[0].#subform[4].SPECIFICISSUE3[2]",
+      "type": "PDFTextField"
+    }
+  ]
+}

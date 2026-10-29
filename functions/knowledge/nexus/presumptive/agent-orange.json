@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "agentOrange",
+  "label": "Agent Orange and herbicide exposure",
+  "authority": "Agent Orange Act of 1991; PACT Act (Pub. L. 117-168)",
+  "citation": "38 CFR 3.307(a)(6), 3.309(e)",
+  "sourceAsOf": "2026-10-22",
+  "qualifyingService": {
+    "locations": [
+      "Vietnam", "Republic of Vietnam", "Korean DMZ", "Korea demilitarized zone",
+      "Thailand", "Laos", "Cambodia", "Guam", "American Samoa", "Johnston Atoll"
+    ],
+    "dateRanges": [
+      { "start": "1962-01-09", "end": "1975-05-07", "label": "Vietnam era herbicide use" },
+      { "start": "1967-09-01", "end": "1971-08-31", "label": "Korean DMZ herbicide use" }
+    ],
+    "branches": []
+  },
+  "exposures": ["herbicide"],
+  "presumptiveConditions": [
+    "Type 2 diabetes mellitus",
+    "Ischemic heart disease",
+    "Parkinson's disease",
+    "Parkinsonism",
+    "Bladder cancer",
+    "High blood pressure (hypertension)",
+    "Monoclonal gammopathy of undetermined significance (MGUS)",
+    "Hypothyroidism",
+    "AL amyloidosis",
+    "Chronic B-cell leukemias",
+    "Chloracne",
+    "Hodgkin's disease",
+    "Multiple myeloma",
+    "Non-Hodgkin's lymphoma",
+    "Early-onset peripheral neuropathy",
+    "Porphyria cutanea tarda",
+    "Prostate cancer",
+    "Respiratory cancers (lung, bronchus, larynx, trachea)",
+    "Soft tissue sarcomas"
+  ],
+  "notes": "Herbicide exposure is presumed for service in these locations and periods. The PACT Act added hypertension and MGUS and expanded covered locations. A presumptive condition usually does not need a paid nexus letter."
+}

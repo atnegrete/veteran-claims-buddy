@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/app_theme.dart';
+import '../../app/app_ui.dart';
 import '../../auth/auth_redirect.dart';
-import '../../cases/cases_progress.dart';
+import '../../billing/entitlement_service.dart';
+import '../../billing/premium_status_view.dart';
 import '../../claim/claim_issue.dart';
 import '../../claim/claim_issue_repository.dart';
 import '../../claim/symptom_entry.dart';
@@ -20,7 +22,7 @@ class SymptomsTrackerScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final premium = ref.watch(homeSnapshotProvider).premiumActive;
+    final premiumAsync = ref.watch(premiumStatusProvider);
     final entries = ref
         .watch(symptomEntriesProvider)
         .maybeWhen(
@@ -32,12 +34,12 @@ class SymptomsTrackerScreen extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            'Track symptoms over time here. This is separate from the questions on your claim. It is not a diagnosis.',
+          const LeadText(
+            'Track symptoms over time. Separate from your claim questions, and not a diagnosis.',
           ),
           if (entries.isEmpty) ...[
             const SizedBox(height: 8),
-            const Text('No entries yet.'),
+            const LeadText('No entries yet.'),
           ] else ...[
             const SizedBox(height: 16),
             for (final entry in entries) ...[
@@ -45,34 +47,56 @@ class SymptomsTrackerScreen extends ConsumerWidget {
               const SizedBox(height: 8),
             ],
           ],
-          if (!premium) ...[
-            const SizedBox(height: 8),
-            const Text('New entries need Premium.'),
-            const SizedBox(height: 16),
-            FilledButton(
-              onPressed: () =>
-                  context.go(symptomDestination(premiumActive: false)),
-              child: const Text('Compare plans'),
-            ),
-          ] else ...[
-            const SizedBox(height: 16),
-            FilledButton(
-              style: FilledButton.styleFrom(minimumSize: const Size(160, 48)),
-              onPressed: () => context.go(AuthRoutes.symptomCheckIn),
-              child: const Text('Check in'),
-            ),
-            const SizedBox(height: 12),
-            FilledButton(
-              style: secondaryFilledStyle().copyWith(
-                minimumSize: const WidgetStatePropertyAll(Size(160, 48)),
-              ),
-              onPressed: () => context.go(AuthRoutes.symptomEventNew),
-              child: const Text('Add an event'),
-            ),
-          ],
+          ...premiumAsync.when(
+            loading: () => const [SizedBox(height: 16), PremiumStatusLoading()],
+            error: (_, _) => _needsPremium(context, PremiumStatus.inactive),
+            data: (status) => status.isActive
+                ? _premiumActions(context)
+                : _needsPremium(context, status),
+          ),
         ],
       ),
     );
+  }
+
+  List<Widget> _needsPremium(BuildContext context, PremiumStatus status) {
+    if (status.expired) {
+      return [
+        const SizedBox(height: 16),
+        ExpiredPremiumNotice(
+          status: status,
+          onRenew: () => context.go(symptomDestination(premiumActive: false)),
+        ),
+      ];
+    }
+    return [
+      const SizedBox(height: 8),
+      const LeadText('New entries need Premium.'),
+      const SizedBox(height: 16),
+      FilledButton(
+        onPressed: () => context.go(symptomDestination(premiumActive: false)),
+        child: const Text('Compare plans'),
+      ),
+    ];
+  }
+
+  List<Widget> _premiumActions(BuildContext context) {
+    return [
+      const SizedBox(height: 16),
+      FilledButton(
+        style: FilledButton.styleFrom(minimumSize: const Size(160, 48)),
+        onPressed: () => context.go(AuthRoutes.symptomCheckIn),
+        child: const Text('Check in'),
+      ),
+      const SizedBox(height: 12),
+      FilledButton(
+        style: secondaryFilledStyle().copyWith(
+          minimumSize: const WidgetStatePropertyAll(Size(160, 48)),
+        ),
+        onPressed: () => context.go(AuthRoutes.symptomEventNew),
+        child: const Text('Add an event'),
+      ),
+    ];
   }
 }
 
@@ -87,10 +111,9 @@ class _EntryTile extends StatelessWidget {
         ? '${entry.occurredDate} ${entry.occurredTime}'
         : entry.occurredDate;
     final title = entry.isEvent ? 'Event' : 'Check-in';
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      title: Text('$title · $when'),
-      subtitle: Text('Severity ${entry.severity}. ${entry.durationLabel}'),
+    return AppNavRow(
+      title: '$title · $when',
+      subtitle: 'Severity ${entry.severity}. ${entry.durationLabel}',
       onTap: () => context.go(AuthRoutes.symptomEntry(entry.id)),
     );
   }
@@ -173,22 +196,35 @@ class _SymptomFormScreenState extends ConsumerState<SymptomFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final premium = ref.watch(homeSnapshotProvider).premiumActive;
-    if (!premium) {
+    final premiumAsync = ref.watch(premiumStatusProvider);
+    if (premiumAsync.isLoading) {
       return ShellPage(
         title: widget.event ? 'Add an event' : 'Check in',
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text('New entries need Premium.'),
-            const SizedBox(height: 16),
-            FilledButton(
-              onPressed: () =>
-                  context.go(symptomDestination(premiumActive: false)),
-              child: const Text('Compare plans'),
-            ),
-          ],
-        ),
+        child: const PremiumStatusLoading(),
+      );
+    }
+    final status = premiumAsync.asData?.value ?? PremiumStatus.inactive;
+    if (!status.isActive) {
+      return ShellPage(
+        title: widget.event ? 'Add an event' : 'Check in',
+        child: status.expired
+            ? ExpiredPremiumNotice(
+                status: status,
+                onRenew: () =>
+                    context.go(symptomDestination(premiumActive: false)),
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const LeadText('New entries need Premium.'),
+                  const SizedBox(height: 16),
+                  FilledButton(
+                    onPressed: () =>
+                        context.go(symptomDestination(premiumActive: false)),
+                    child: const Text('Compare plans'),
+                  ),
+                ],
+              ),
       );
     }
     final issues = ref
@@ -209,10 +245,7 @@ class _SymptomFormScreenState extends ConsumerState<SymptomFormScreen> {
             if (_error != null)
               Padding(
                 padding: const EdgeInsets.only(bottom: 12),
-                child: Text(
-                  _error!,
-                  style: TextStyle(color: Theme.of(context).colorScheme.error),
-                ),
+                child: ErrorText(_error!),
               ),
             IsoDateField(controller: _date, label: 'Date'),
             if (widget.event) ...[
@@ -231,10 +264,14 @@ class _SymptomFormScreenState extends ConsumerState<SymptomFormScreen> {
             DropdownButtonFormField<String>(
               key: ValueKey('duration-$_duration'),
               initialValue: _duration,
+              isExpanded: true,
               decoration: const InputDecoration(labelText: 'How long'),
               items: [
                 for (final item in symptomDurations.entries)
-                  DropdownMenuItem(value: item.key, child: Text(item.value)),
+                  DropdownMenuItem(
+                    value: item.key,
+                    child: Text(item.value, overflow: TextOverflow.ellipsis),
+                  ),
               ],
               onChanged: (value) {
                 if (value != null) setState(() => _duration = value);
@@ -244,16 +281,23 @@ class _SymptomFormScreenState extends ConsumerState<SymptomFormScreen> {
             DropdownButtonFormField<String>(
               key: ValueKey('condition-$_conditionId-${issues.length}'),
               initialValue: _conditionId,
+              isExpanded: true,
               decoration: const InputDecoration(labelText: 'Condition'),
               items: [
                 const DropdownMenuItem(
                   value: '',
-                  child: Text('Not tied to a condition'),
+                  child: Text(
+                    'Not tied to a condition',
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 for (final issue in issues)
                   DropdownMenuItem(
                     value: issue.id,
-                    child: Text(issue.displayName),
+                    child: Text(
+                      issue.displayName,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
               ],
               onChanged: (value) {
@@ -316,11 +360,14 @@ class SymptomDetailScreen extends ConsumerWidget {
           : 'Check-in',
       footer: FormActions(onBack: () => context.go(AuthRoutes.symptoms)),
       child: entry == null
-          ? const Text('That entry is not on this account.')
+          ? const LeadText('That entry is not on this account.')
           : Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(entry.isEvent ? 'Event' : 'Check-in'),
+                Text(
+                  entry.isEvent ? 'Event' : 'Check-in',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 8),
                 Text(
                   entry.isEvent
@@ -360,7 +407,7 @@ class SymptomSummaryScreen extends StatelessWidget {
     return ShellPage(
       title: 'Summary',
       footer: FormActions(onBack: () => context.go(AuthRoutes.symptoms)),
-      child: const Text(
+      child: const LeadText(
         'A monthly summary is not ready. One is saved only after you confirm it.',
       ),
     );

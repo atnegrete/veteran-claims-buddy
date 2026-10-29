@@ -8,6 +8,7 @@ import '../../auth/auth_controller.dart';
 import '../../auth/auth_redirect.dart';
 import '../../cases/cases_progress.dart';
 import '../../cases/veteran_case.dart';
+import '../../claim/claim_document.dart';
 import '../../claim/claim_guide.dart';
 import '../../claim/claim_issue.dart';
 import '../../claim/claim_issue_repository.dart';
@@ -158,11 +159,16 @@ class _ShellNavState extends ConsumerState<_ShellNav> {
       for (final issue in issues)
         if (caseId != null && issue.activeCaseId == caseId) issue.conditionId,
     };
-    final documentCount = caseId == null
-        ? 0
+    final documents = caseId == null
+        ? const <ClaimDocument>[]
         : ref
               .watch(claimDocumentsProvider(caseId))
-              .maybeWhen(data: (value) => value.length, orElse: () => 0);
+              .maybeWhen(
+                data: (value) => value,
+                orElse: () => const <ClaimDocument>[],
+              );
+    final documentCount = documents.length;
+    final supplementalCount = documents.where(supportsEarlierClaim).length;
     final examCount = caseId == null
         ? 0
         : ref
@@ -219,7 +225,7 @@ class _ShellNavState extends ConsumerState<_ShellNav> {
                               selected: _onCaseStep(location),
                               status: firstClaimStatus(
                                 firstClaim,
-                                documentCount: documentCount,
+                                supplementalCount: supplementalCount,
                               ),
                               onTap: () => _open(context, _casePath(caseId)),
                             ),
@@ -235,21 +241,21 @@ class _ShellNavState extends ConsumerState<_ShellNav> {
                               ),
                             ),
                             _SectionRow(
-                              label: 'Issues',
+                              label: 'Conditions',
                               icon: Icons.fact_check_outlined,
                               selectedIcon: Icons.fact_check,
-                              selected: _onCaseSection(location, 'issues'),
+                              selected: _onCaseSection(location, 'conditions'),
                               status: issuesStatus(
                                 conditions: conditions,
                                 claimedIds: claimed,
                               ),
                               onTap: () => _open(
                                 context,
-                                _sectionPath(caseId, AuthRoutes.caseIssues),
+                                _sectionPath(caseId, AuthRoutes.caseConditions),
                               ),
                             ),
                             _SectionRow(
-                              label: 'Documents',
+                              label: 'My Uploads',
                               icon: Icons.description_outlined,
                               selectedIcon: Icons.description,
                               selected: _onCaseSection(location, 'evidence'),
@@ -533,7 +539,9 @@ bool _onCaseStep(String location) {
   if (location == AuthRoutes.home) return true;
   final id = caseIdFromLocation(location);
   if (id == null) return false;
-  return location == '/cases/$id' || location == '/cases/$id/overview';
+  return location == '/cases/$id' ||
+      location == '/cases/$id/overview' ||
+      location == '/cases/$id/intent';
 }
 
 bool _onCaseSection(String location, String section) {

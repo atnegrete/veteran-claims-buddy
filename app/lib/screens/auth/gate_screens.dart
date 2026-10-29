@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../account/account_deletion.dart';
+import '../../app/app_ui.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/auth_redirect.dart';
@@ -19,13 +20,14 @@ class AccountRecoveryScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            'There is no self-serve way to skip the text-message check. Email $supportEmail and we will verify it is you before anyone changes the phone on the account.',
+          const LeadText(
+            "The text-message check can't be skipped. Email $supportEmail and we'll verify it's you before changing the phone.",
           ),
           const SizedBox(height: 12),
-          const Text(
-            'Do not send a Social Security number or medical records in that email.',
+          const InfoNote(
+            text: 'Do not send a Social Security number or medical records in that email.',
           ),
+          const SizedBox(height: 8),
           TextButton(
             onPressed: () => context.go(AuthRoutes.signIn),
             child: const Text('Back'),
@@ -83,9 +85,9 @@ class _AccountReactivateScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(deletionWarning),
+          const InfoNote(text: deletionWarning),
           const SizedBox(height: 12),
-          const Text(
+          const LeadText(
             'Other pages stay closed until you reactivate. Enter your password to keep the account.',
           ),
           const SizedBox(height: 16),
@@ -99,10 +101,7 @@ class _AccountReactivateScreenState
           ),
           if (_error != null) ...[
             const SizedBox(height: 8),
-            Text(
-              _error!,
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
-            ),
+            ErrorText(_error!),
           ],
           const SizedBox(height: 16),
           FilledButton(

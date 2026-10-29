@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/app_badge.dart';
 import '../../app/app_theme.dart';
+import '../../app/app_ui.dart';
 import '../../auth/auth_redirect.dart';
 import '../../claim/claim_document.dart';
 import '../../claim/claim_guide.dart';
@@ -40,14 +41,12 @@ class DocumentFactsScreen extends ConsumerWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text(
-                'These are statements from the file. Confirm one, correct it, or set it aside. Nothing is filed.',
+              const LeadText(
+                'Statements pulled from the file. Confirm, correct, or set aside each one.',
               ),
-              const SizedBox(height: 12),
-              const AppBadge.notFiled(),
               const SizedBox(height: 16),
               if (saved.isEmpty)
-                const Text('No statements were found in this file.')
+                const LeadText('No statements were found in this file.')
               else
                 for (var i = 0; i < saved.length; i++) ...[
                   if (i > 0) const SizedBox(height: 12),
@@ -242,7 +241,7 @@ class _FactCardState extends ConsumerState<_FactCard> {
             ],
             if (_error != null) ...[
               const SizedBox(height: 8),
-              Text(_error!, style: TextStyle(color: theme.colorScheme.error)),
+              ErrorText(_error!),
             ],
           ],
         ),

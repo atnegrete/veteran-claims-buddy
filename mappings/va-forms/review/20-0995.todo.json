@@ -1,0 +1,704 @@
+{
+  "formNumber": "20-0995",
+  "revision": "2022-09-27",
+  "review": [
+    {
+      "pdfField": "form1[0].#subform[16].ClaimantsFirstThreeNumbers[0]",
+      "label": "Claimants First Three Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].ClaimantsInsurancePolicyNumber[0]",
+      "label": "Claimants Insurance Policy Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].ClaimantsLastFourNumbers[0]",
+      "label": "Claimants Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].ClaimantsSecondTwoNumbers[0]",
+      "label": "Claimants Second Two Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_ApartmentOrUnitNumber[0]",
+      "label": "Current Mailing Address Apartment Or Unit Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_ApartmentOrUnitNumber[1]",
+      "label": "Current Mailing Address Apartment Or Unit Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_City[0]",
+      "label": "Current Mailing Address City",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_City[1]",
+      "label": "Current Mailing Address City",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_Country[0]",
+      "label": "Current Mailing Address Country",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_Country[1]",
+      "label": "Current Mailing Address Country",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_NumberAndStreet[0]",
+      "label": "Current Mailing Address Number And Street",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_NumberAndStreet[1]",
+      "label": "Current Mailing Address Number And Street",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_StateOrProvince[0]",
+      "label": "Current Mailing Address State Or Province",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_StateOrProvince[1]",
+      "label": "Current Mailing Address State Or Province",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0]",
+      "label": "Current Mailing Address ZIPOr Postal Code First Five Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_ZIPOrPostalCode_FirstFiveNumbers[1]",
+      "label": "Current Mailing Address ZIPOr Postal Code First Five Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_ZIPOrPostalCode_LastFourNumbers[0]",
+      "label": "Current Mailing Address ZIPOr Postal Code Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].CurrentMailingAddress_ZIPOrPostalCode_LastFourNumbers[1]",
+      "label": "Current Mailing Address ZIPOr Postal Code Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].InsurancePolicyNumber[0]",
+      "label": "Insurance Policy Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].Other1[0]",
+      "label": "Other1",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].RadioButtonList[0]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "COMPENSATION",
+        "PENSION/DIC/SURVIVORS BENEFITS ",
+        "FIDUCIARY ",
+        "EDUCATION ",
+        "LOAN GUARANTY ",
+        "LIFE INSURANCE ",
+        "VETERAN READINESS AND EMPLOYMENT ",
+        "NATIONAL CEMETERY ADMINISTRATION ",
+        "VETERANS HEALTH ADMINISTRATION"
+      ]
+    },
+    {
+      "pdfField": "form1[0].#subform[16].RadioButtonList[1]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "SPOUSE",
+        "CHILD",
+        "FIDUCIARY",
+        "PARENT ",
+        "OTHER (Specify):"
+      ]
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VeteransPhoneInternational_Telephone_Number_If_Applicable[0]",
+      "label": "Veterans Phone International Telephone Number If Applicable",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VeteransServiceNumber[0]",
+      "label": "Veterans Service Number",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[16].VHASpecify[0]",
+      "label": "VHASpecify",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].NO4[0]",
+      "label": "NO4",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].NO4[1]",
+      "label": "NO4",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].NO4[2]",
+      "label": "NO4",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].NO4[3]",
+      "label": "NO4",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].NO4[4]",
+      "label": "NO4",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].NO4[5]",
+      "label": "NO4",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].NO4[6]",
+      "label": "NO4",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Other2[0]",
+      "label": "Other2",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].poc[0]",
+      "label": "Poc",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].POCInternational_Telephone_Number_If_Applicable[0]",
+      "label": "POCInternational Telephone Number If Applicable",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].POCPhoneNumberAreaCode[0]",
+      "label": "POCPhone Number Area Code",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].POCPhoneNumberFirstThreeNumbers[0]",
+      "label": "POCPhone Number First Three Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].POCPhoneNumberLastFourNumbers[0]",
+      "label": "POCPhone Number Last Four Numbers",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].RadioButtonList[2]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "NO (If \"No,\" skip to Item 21)",
+        "1"
+      ]
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row1[0].#subform[0].#subform[1].Day[0]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row1[0].#subform[0].#subform[1].Month[0]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row1[0].#subform[0].#subform[1].Year[0]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row1[0].SPECIFICISSUE1[0]",
+      "label": "SPECIFICISSUE1",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row2[0].#subform[0].Day[0]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row2[0].#subform[0].Month[0]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row2[0].#subform[0].Year[0]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row2[0].SPECIFICISSUE2[0]",
+      "label": "SPECIFICISSUE2",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row3[0].#subform[0].Day[0]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row3[0].#subform[0].Month[0]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row3[0].#subform[0].Year[0]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row3[0].SPECIFICISSUE2[0]",
+      "label": "SPECIFICISSUE2",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row4[0].#subform[0].Day[0]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row4[0].#subform[0].Month[0]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row4[0].#subform[0].Year[0]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row4[0].SPECIFICISSUE2[0]",
+      "label": "SPECIFICISSUE2",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row5[0].#subform[0].Day[0]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row5[0].#subform[0].Month[0]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row5[0].#subform[0].Year[0]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row5[0].SPECIFICISSUE2[0]",
+      "label": "SPECIFICISSUE2",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row6[0].#subform[0].Day[0]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row6[0].#subform[0].Month[0]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row6[0].#subform[0].Year[0]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row6[0].SPECIFICISSUE2[0]",
+      "label": "SPECIFICISSUE2",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row7[0].#subform[0].Day[0]",
+      "label": "Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row7[0].#subform[0].Month[0]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row7[0].#subform[0].Year[0]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].Table2[0].Row7[0].SPECIFICISSUE2[0]",
+      "label": "SPECIFICISSUE2",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[17].VeteransPhoneInternational_Telephone_Number_If_Applicable[1]",
+      "label": "Veterans Phone International Telephone Number If Applicable",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].other2[0]",
+      "label": "Other2",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].RadioButtonList[3]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "YES ",
+        "NO (If you check \"No,\" VA will send the 5103 notice to you via mail.) "
+      ]
+    },
+    {
+      "pdfField": "form1[0].#subform[19].RadioButtonList[4]",
+      "label": "Radio Button List",
+      "type": "radio",
+      "source": "ask",
+      "options": [
+        "A. I CONSENT TO HAVE VBA NOTIFY VHA ABOUT CERTAIN UPCOMING EVENT(S) RELATED TO MY CLAIM AND/OR APPEAL\n(Note: I understand that an indicator for these event(s) will appear in my VHA medical record.) ",
+        "B. I DO NOT CONSENT TO HAVE VBA NOTIFY VHA ABOUT CERTAIN UPCOMING EVENT(S) RELATED TO MY CLAIM AND/OR APPEAL\n(Note: I understand that an indicator for these event(s) will not appear in my VHA medical record.) ",
+        "C. I REVOKE PRIOR CONSENT TO HAVE VBA NOTIFY VHA ABOUT CERTAIN UPCOMING EVENT(S) RELATED TO MY CLAIM AND/OR APPEAL\n(Note: I understand that in the future, notice of these event(s) will no longer appear in my VHA medical record.)",
+        "D. NOT APPLICABLE AND/OR NOT ENROLLED OR REGISTERED IN VHA HEALTH CARE "
+      ]
+    },
+    {
+      "pdfField": "form1[0].#subform[19].ReceivedTreatment[0]",
+      "label": "Received Treatment",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].ReceivedTreatment[1]",
+      "label": "Received Treatment",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].ReceivedTreatment[2]",
+      "label": "Received Treatment",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].ReceivedTreatment[3]",
+      "label": "Received Treatment",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].ReceivedTreatment[4]",
+      "label": "Received Treatment",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].ReceivedTreatment[5]",
+      "label": "Received Treatment",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row1[0].#subform[0].Month[0]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row1[0].#subform[0].Year[0]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row1[0].ReceivedTreatment[0]",
+      "label": "Received Treatment",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row1[0].TextField1[0]",
+      "label": "Text Field1",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row2[0].#subform[0].Month[0]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row2[0].#subform[0].Year[0]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row2[0].ReceivedTreatment[0]",
+      "label": "Received Treatment",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row2[0].TextField1[0]",
+      "label": "Text Field1",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row3[0].#subform[0].Month[0]",
+      "label": "Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row3[0].#subform[0].Year[0]",
+      "label": "Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row3[0].ReceivedTreatment[0]",
+      "label": "Received Treatment",
+      "type": "checkbox",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[19].Table3[0].Row3[0].TextField1[0]",
+      "label": "Text Field1",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].ACCREDITATIONNUMBER[0]",
+      "label": "ACCREDITATIONNUMBER",
+      "type": "text",
+      "source": "dev"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedDay[0]",
+      "label": "Date Signed Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedDay[1]",
+      "label": "Date Signed Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedDay[2]",
+      "label": "Date Signed Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedMonth[0]",
+      "label": "Date Signed Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedMonth[1]",
+      "label": "Date Signed Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedMonth[2]",
+      "label": "Date Signed Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedYear[0]",
+      "label": "Date Signed Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedYear[1]",
+      "label": "Date Signed Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSignedYear[2]",
+      "label": "Date Signed Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSubmittedDay[0]",
+      "label": "Date Submitted Day",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSubmittedMonth[0]",
+      "label": "Date Submitted Month",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].DateSubmittedYear[0]",
+      "label": "Date Submitted Year",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].FirstWitnessAddress[0]",
+      "label": "First Witness Address",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].FirstWitnessName[0]",
+      "label": "First Witness Name",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].SecondWitnessAddress[0]",
+      "label": "Second Witness Address",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].SecondWitnessName[0]",
+      "label": "Second Witness Name",
+      "type": "text",
+      "source": "ask"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].SignatureField11[0]",
+      "label": "Signature Field11",
+      "type": "text",
+      "source": "dev"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].SignatureField11[1]",
+      "label": "Signature Field11",
+      "type": "text",
+      "source": "dev"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].SignatureField11[2]",
+      "label": "Signature Field11",
+      "type": "text",
+      "source": "dev"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].SignatureField11[3]",
+      "label": "Signature Field11",
+      "type": "text",
+      "source": "dev"
+    },
+    {
+      "pdfField": "form1[0].#subform[24].SignatureField11[4]",
+      "label": "Signature Field11",
+      "type": "text",
+      "source": "dev"
+    }
+  ]
+}

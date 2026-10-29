@@ -1,3 +1,5 @@
+import 'issue_lane.dart';
+
 const maxDocumentBytes = 100 * 1024 * 1024;
 
 const documentTypes = <String, String>{
@@ -29,6 +31,7 @@ class ClaimDocument {
     this.documentDate,
     this.pageCount,
     this.processingStatus = 'notStarted',
+    this.packet = '',
   });
 
   final String id;
@@ -40,6 +43,7 @@ class ClaimDocument {
   final String? documentDate;
   final int? pageCount;
   final String processingStatus;
+  final String packet;
 
   static ClaimDocument fromData(String id, Map<String, dynamic> data) {
     final date = data['documentDate'];
@@ -54,8 +58,18 @@ class ClaimDocument {
       documentDate: date is String && date.isNotEmpty ? date : null,
       pageCount: pages is int && pages > 0 ? pages : null,
       processingStatus: data['processingStatus'] as String? ?? 'notStarted',
+      packet: packetNameForDocument(
+        stored: data['packet'] as String? ?? '',
+        documentType: data['documentType'] as String? ?? 'other',
+      ),
     );
   }
+}
+
+/// A saved file tagged for the claim the Veteran wants to pursue again.
+bool supportsEarlierClaim(ClaimDocument document) {
+  return document.uploadStatus == 'uploaded' &&
+      document.packet == claimPacketNames[ClaimPacket.supplemental];
 }
 
 /// PDF, JPEG, and PNG only. HEIC waits until a file can be read on the server.

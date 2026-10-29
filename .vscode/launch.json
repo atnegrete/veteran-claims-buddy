@@ -1,0 +1,32 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Dev Web",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "app",
+      "program": "lib/main.dart",
+      "deviceId": "chrome",
+      "toolArgs": ["--flavor", "dev"]
+    },
+    {
+      "name": "Dev iOS",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "app",
+      "program": "lib/main.dart",
+      "deviceId": "ios",
+      "toolArgs": ["--flavor", "dev"]
+    },
+    {
+      "name": "Dev Android",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "app",
+      "program": "lib/main.dart",
+      "deviceId": "android",
+      "toolArgs": ["--flavor", "dev"]
+    }
+  ]
+}

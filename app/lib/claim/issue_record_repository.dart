@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../auth/auth_controller.dart';
 import 'claim_guide.dart';
 import 'claim_issue.dart';
+import 'issue_lane.dart';
 
 class IssueRecordRepository {
   IssueRecordRepository(this._firestore, {FirebaseAuth? auth})
@@ -35,7 +36,7 @@ class IssueRecordRepository {
 
   Stream<List<EvidenceLink>> watchLinks(String uid, String issueId) {
     return _links(uid)
-        .where('claimIssueId', isEqualTo: issueId)
+        .where('conditionId', isEqualTo: issueId)
         .snapshots()
         .map((snapshot) {
           return [
@@ -47,7 +48,7 @@ class IssueRecordRepository {
 
   Stream<List<RecordedDecision>> watchDecisions(String uid, String issueId) {
     return _decisionIssues(uid)
-        .where('claimIssueId', isEqualTo: issueId)
+        .where('conditionId', isEqualTo: issueId)
         .snapshots()
         .asyncMap((snapshot) async {
           final decisions = <RecordedDecision>[];
@@ -62,6 +63,7 @@ class IssueRecordRepository {
                 doc.id,
                 doc.data(),
                 decisionDate: date is String ? date : '',
+                decisionId: decisionId,
               ),
             );
           }
@@ -74,7 +76,7 @@ class IssueRecordRepository {
     required String issueId,
     required String type,
     required String summary,
-    String? relatedClaimIssueId,
+    String? relatedConditionName,
   }) async {
     await _refresh();
     await _theories(uid, issueId).add({
@@ -83,7 +85,7 @@ class IssueRecordRepository {
       'summary': summary,
       'sourceType': 'veteranReported',
       'needsUserConfirmation': false,
-      'relatedClaimIssueId': type == 'secondary' ? relatedClaimIssueId : null,
+      'relatedConditionName': type == 'secondary' ? relatedConditionName : null,
       'presumptionRuleId': null,
       'schemaVersion': 1,
       'createdAt': FieldValue.serverTimestamp(),
@@ -147,7 +149,7 @@ class IssueRecordRepository {
   }) async {
     await _refresh();
     await _links(uid).add({
-      'claimIssueId': issueId,
+      'conditionId': issueId,
       'documentId': null,
       'factId': null,
       'questionnaireId': null,
@@ -192,7 +194,7 @@ class IssueRecordRepository {
     try {
       await issue.set({
         'decisionId': decision.id,
-        'claimIssueId': issueId,
+        'conditionId': issueId,
         'displayName': displayName,
         'outcome': outcome,
         'ratingPercent': ratingPercent,
@@ -230,8 +232,57 @@ class IssueRecordRepository {
     return _issues(uid).doc(id).collection('statements');
   }
 
+  DocumentReference<Map<String, dynamic>> _lane(String uid, String id) {
+    return _issues(uid).doc(id).collection('lane').doc('current');
+  }
+
+  Stream<LaneAnswers> watchLane(String uid, String issueId) {
+    return _lane(uid, issueId).snapshots().map((doc) {
+      return LaneAnswers.fromData(doc.data());
+    });
+  }
+
+  /// The Nexus Letters state for a condition. Written only by the server; the
+  /// client reads it to resume the interview and to know the step is done.
+  Stream<NexusLetterState> watchNexusLetter(String uid, String issueId) {
+    return _issues(uid)
+        .doc(issueId)
+        .collection('nexusLetter')
+        .doc('current')
+        .snapshots()
+        .map((doc) => NexusLetterState.fromData(doc.data()));
+  }
+
+  Future<void> saveLane({
+    required String uid,
+    required String issueId,
+    required LaneAnswers answers,
+  }) async {
+    await _refresh();
+    final ref = _lane(uid, issueId);
+    final existing = await ref.get();
+    final data = {
+      'choice': answers.choice,
+      'againPath': answers.againPath,
+      'hasNewEvidence': answers.hasNewEvidence,
+      'lawChanged': answers.lawChanged,
+      'medicalLinkMissing': answers.medicalLinkMissing,
+      'origin': answers.origin,
+      'pursue': answers.pursue,
+      'pursueAnswered': answers.pursueAnswered,
+      'sourceType': 'veteranReported',
+      'schemaVersion': 1,
+      'updatedAt': FieldValue.serverTimestamp(),
+    };
+    if (existing.exists) {
+      await ref.update(data);
+    } else {
+      await ref.set({...data, 'createdAt': FieldValue.serverTimestamp()});
+    }
+  }
+
   CollectionReference<Map<String, dynamic>> _issues(String uid) {
-    return _firestore.collection('users').doc(uid).collection('claimIssues');
+    return _firestore.collection('users').doc(uid).collection('conditions');
   }
 
   CollectionReference<Map<String, dynamic>> _links(String uid) {
@@ -247,9 +298,48 @@ class IssueRecordRepository {
   }
 }
 
+/// Read model of the server-owned Nexus Letters document. [interviewComplete]
+/// marks the doctor-letter step done for case flow; [hasLetters] is true once
+/// both PDFs have been generated at least once.
+class NexusLetterState {
+  const NexusLetterState({
+    required this.interviewComplete,
+    required this.hasLetters,
+  });
+
+  final bool interviewComplete;
+  final bool hasLetters;
+
+  static const empty = NexusLetterState(
+    interviewComplete: false,
+    hasLetters: false,
+  );
+
+  factory NexusLetterState.fromData(Map<String, dynamic>? data) {
+    if (data == null) return empty;
+    final interview = data['interview'];
+    final complete = interview is Map && interview['complete'] == true;
+    final hasLetters =
+        data['doctorLetter'] != null && data['vetLetter'] != null;
+    return NexusLetterState(
+      interviewComplete: complete,
+      hasLetters: hasLetters,
+    );
+  }
+}
+
 final issueRecordRepositoryProvider = Provider<IssueRecordRepository>((ref) {
   return IssueRecordRepository(FirebaseFirestore.instance);
 });
+
+final nexusLetterStateProvider =
+    StreamProvider.family<NexusLetterState, String>((ref, issueId) {
+      final uid = ref.watch(authControllerProvider).session?.uid;
+      if (uid == null) return Stream.value(NexusLetterState.empty);
+      return ref
+          .watch(issueRecordRepositoryProvider)
+          .watchNexusLetter(uid, issueId);
+    });
 
 final issueTheoriesProvider = StreamProvider.family<List<ClaimTheory>, String>((
   ref,
@@ -278,6 +368,31 @@ final issueDecisionsProvider =
           .watchDecisions(uid, issueId);
     });
 
+final issueLaneAnswersProvider = StreamProvider.family<LaneAnswers, String>((
+  ref,
+  issueId,
+) {
+  final uid = ref.watch(authControllerProvider).session?.uid;
+  if (uid == null) return Stream.value(LaneAnswers.empty);
+  return ref.watch(issueRecordRepositoryProvider).watchLane(uid, issueId);
+});
+
+typedef SaveLane = Future<void> Function({
+  required String issueId,
+  required LaneAnswers answers,
+});
+
+final saveLaneProvider = Provider<SaveLane>((ref) {
+  final repository = ref.watch(issueRecordRepositoryProvider);
+  return ({required String issueId, required LaneAnswers answers}) {
+    final uid = ref.read(authControllerProvider).session?.uid;
+    if (uid == null) {
+      throw const ClaimGuideFailure('Sign in again, then try again.');
+    }
+    return repository.saveLane(uid: uid, issueId: issueId, answers: answers);
+  };
+});
+
 final issueStatementProvider =
     StreamProvider.family<IssueStatement?, (String, String)>((ref, key) {
       final uid = ref.watch(authControllerProvider).session?.uid;
@@ -297,7 +412,7 @@ final saveTheoryProvider = Provider<SaveTheory>((ref) {
     required String issueId,
     required String type,
     required String summary,
-    String? relatedClaimIssueId,
+    String? relatedConditionName,
   }) {
     final uid = _uid(ref);
     if (uid == null) {
@@ -308,7 +423,7 @@ final saveTheoryProvider = Provider<SaveTheory>((ref) {
       issueId: issueId,
       type: type,
       summary: summary,
-      relatedClaimIssueId: relatedClaimIssueId,
+      relatedConditionName: relatedConditionName,
     );
   };
 });
@@ -435,7 +550,7 @@ typedef SaveTheory = Future<void> Function({
   required String issueId,
   required String type,
   required String summary,
-  String? relatedClaimIssueId,
+  String? relatedConditionName,
 });
 
 typedef RemoveTheory = Future<void> Function({

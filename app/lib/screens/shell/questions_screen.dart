@@ -2,9 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../app/app_badge.dart';
+import '../../app/app_ui.dart';
+import '../../auth/auth_redirect.dart';
 import '../../claim/claim_guide.dart';
+import '../../claim/discovery_questions.dart';
 import '../../claim/questionnaire_catalog.dart';
 import '../../claim/questionnaire_repository.dart';
 import '../../forms/form_actions.dart';
@@ -44,13 +48,16 @@ class CatalogPanel extends ConsumerStatefulWidget {
     required this.caseId,
     this.onlyPageId,
     this.onLeave,
+    this.onContinue,
   });
 
   final String? caseId;
 
-  /// When set, only this topic is shown. Continue returns through [onLeave].
+  /// When set, only this topic is shown. Back returns through [onLeave].
+  /// Continue uses [onContinue] when it is set, and [onLeave] otherwise.
   final String? onlyPageId;
   final VoidCallback? onLeave;
+  final VoidCallback? onContinue;
 
   @override
   ConsumerState<CatalogPanel> createState() => _CatalogPanelState();
@@ -62,6 +69,7 @@ class _CatalogPanelState extends ConsumerState<CatalogPanel> {
   String? _pageId;
   List<CatalogQuestion> _shown = const [];
   var _hasEarlier = false;
+  var _returnToReview = false;
   var _seeded = false;
   var _busy = false;
   var _dirty = false;
@@ -150,12 +158,35 @@ class _CatalogPanelState extends ConsumerState<CatalogPanel> {
     return catalogTopicQuestions(questions, page.id);
   }
 
-  void _placeLast() {
+  void _openCondition(DiscoveryCondition condition) {
+    final questions = _questions;
+    if (questions == null) return;
+    final pageId = catalogPageIdForCondition(questions, condition.id);
+    if (pageId == null) return;
+    setState(() {
+      _returnToReview = true;
+      _place(pageId);
+      _error = null;
+      _showErrors = false;
+    });
+    _showTop();
+  }
+
+  void _closeReviewTopic() {
     final questions = _questions;
     final answers = _answers;
-    if (questions == null || answers == null) return;
-    final pages = catalogPages(questions, answers);
-    _place(pages.isEmpty ? null : pages.last.id);
+    setState(() {
+      _returnToReview = false;
+      _pageId = null;
+      _shown = const [];
+      _hasEarlier =
+          questions != null &&
+          answers != null &&
+          catalogPages(questions, answers).isNotEmpty;
+      _error = null;
+      _showErrors = false;
+    });
+    _showTop();
   }
 
   void _rememberSaver() {
@@ -354,7 +385,11 @@ class _CatalogPanelState extends ConsumerState<CatalogPanel> {
       await _persist();
       if (!mounted) return;
       if (widget.onlyPageId != null) {
-        widget.onLeave?.call();
+        (widget.onContinue ?? widget.onLeave)?.call();
+        return;
+      }
+      if (_returnToReview) {
+        _closeReviewTopic();
         return;
       }
       setState(() {
@@ -385,6 +420,14 @@ class _CatalogPanelState extends ConsumerState<CatalogPanel> {
     final answers = _answers;
     final page = _currentPage();
     if (questions == null || answers == null || page == null) return;
+    if (_returnToReview) {
+      _flush(page);
+      _rememberSaver();
+      _dirty = true;
+      unawaited(_persist());
+      _closeReviewTopic();
+      return;
+    }
     if (widget.onlyPageId != null) {
       _flush(page);
       _rememberSaver();
@@ -434,7 +477,7 @@ class _CatalogPanelState extends ConsumerState<CatalogPanel> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text('These questions are not open for this condition.'),
+          const LeadText('These questions are not open for this condition.'),
           FormActions(onBack: widget.onLeave),
         ],
       );
@@ -452,19 +495,16 @@ class _CatalogPanelState extends ConsumerState<CatalogPanel> {
                 child: ConditionReview(
                   caseId: widget.caseId,
                   conditions: catalogConditions(questions, answers),
-                  onBack: _busy || !_hasEarlier
-                      ? null
-                      : () {
-                          setState(() {
-                            _placeLast();
-                            _error = null;
-                            _showErrors = false;
-                          });
-                          _showTop();
-                        },
+                  questions: questions,
+                  onOpenQuestions: _busy ? null : _openCondition,
                 ),
               ),
             ),
+          ),
+          FormActions(
+            onPrimary: widget.caseId == null
+                ? null
+                : () => context.go(AuthRoutes.caseConditions(widget.caseId!)),
           ),
         ],
       );
@@ -472,13 +512,7 @@ class _CatalogPanelState extends ConsumerState<CatalogPanel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          page.title,
-          style: Theme.of(context).textTheme.headlineSmall
-              ?.copyWith(fontWeight: FontWeight.w600),
-        ),
-        const SizedBox(height: 8),
-        const AppBadge.notFiled(),
+        Text(page.title, style: Theme.of(context).textTheme.headlineSmall),
         const SizedBox(height: 12),
         const Divider(height: 1),
         const SizedBox(height: 12),
@@ -494,7 +528,11 @@ class _CatalogPanelState extends ConsumerState<CatalogPanel> {
                   children: [
                     for (var i = 0; i < page.questions.length; i++) ...[
                       if (i > 0) const Divider(height: 20),
-                      _questionBlock(page.questions[i]),
+                      _questionBlock(
+                        page.questions[i],
+                        index: i,
+                        pageQuestions: page.questions,
+                      ),
                     ],
                   ],
                 ),
@@ -504,13 +542,10 @@ class _CatalogPanelState extends ConsumerState<CatalogPanel> {
         ),
         if (_footerMessage(page) != null) ...[
           const SizedBox(height: 16),
-          Text(
-            _footerMessage(page)!,
-            style: TextStyle(color: Theme.of(context).colorScheme.error),
-          ),
+          ErrorText(_footerMessage(page)!),
         ],
         FormActions(
-          onBack: _hasEarlier ? _back : null,
+          onBack: _returnToReview || _hasEarlier ? _back : null,
           onPrimary: _continue,
           busy: _busy,
         ),
@@ -518,21 +553,39 @@ class _CatalogPanelState extends ConsumerState<CatalogPanel> {
     );
   }
 
-  Widget _questionBlock(CatalogQuestion question) {
+  Widget _questionBlock(
+    CatalogQuestion question, {
+    required int index,
+    required List<CatalogQuestion> pageQuestions,
+  }) {
     final questions = _questions ?? const <CatalogQuestion>[];
     final answers = _answers ?? const <String, List<String>>{};
-    final blocked = catalogBlockedLabel(question, questions, answers);
+    final labels = {
+      for (var i = 0; i < pageQuestions.length; i++)
+        pageQuestions[i].id: '${i + 1}. ${pageQuestions[i].prompt}',
+    };
+    final blocked = catalogBlockedLabel(
+      question,
+      questions,
+      answers,
+      labels: labels,
+    );
     final enabled = blocked == null && !_busy;
     final problem = _showErrors ? _problem(question) : null;
-    final promptStyle = Theme.of(context).textTheme.titleMedium?.copyWith(
-      color: problem == null ? null : Theme.of(context).colorScheme.error,
-    );
+    final theme = Theme.of(context);
     return KeyedSubtree(
       key: _anchor(question.id),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(question.prompt, style: promptStyle),
+          Text(
+            '${index + 1}. ${question.prompt}',
+            style: theme.textTheme.titleMedium?.copyWith(
+              color: blocked == null
+                  ? null
+                  : theme.colorScheme.onSurface.withValues(alpha: 0.38),
+            ),
+          ),
           if (blocked != null) ...[
             const SizedBox(height: 8),
             AppBadge.quiet(label: blocked),
@@ -541,10 +594,7 @@ class _CatalogPanelState extends ConsumerState<CatalogPanel> {
           _answer(question, enabled: enabled),
           if (problem != null) ...[
             const SizedBox(height: 4),
-            Text(
-              problem,
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
-            ),
+            ErrorText(problem),
           ],
         ],
       ),
@@ -579,7 +629,7 @@ class _CatalogPanelState extends ConsumerState<CatalogPanel> {
                   dense: true,
                   visualDensity: VisualDensity.compact,
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  minTileHeight: 36,
+                  minTileHeight: 28,
                   contentPadding: EdgeInsets.zero,
                   value: choice.value,
                   title: Text(
@@ -602,35 +652,47 @@ class _CatalogPanelState extends ConsumerState<CatalogPanel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        for (final choice in question.options)
-          CheckboxListTile(
-            dense: true,
-            visualDensity: VisualDensity.compact,
-            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            minTileHeight: 36,
-            contentPadding: EdgeInsets.zero,
-            value: picked.contains(choice.value),
-            title: Text(
-              choice.label,
-              style: Theme.of(context).textTheme.bodyMedium,
+        IgnorePointer(
+          ignoring: !enabled,
+          child: Opacity(
+            opacity: enabled ? 1 : 0.38,
+            child: Column(
+              children: [
+                for (final choice in question.options)
+                  CheckboxListTile(
+                    dense: true,
+                    visualDensity: VisualDensity.compact,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    minTileHeight: 28,
+                    contentPadding: EdgeInsets.zero,
+                    value: picked.contains(choice.value),
+                    title: Text(
+                      choice.label,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    onChanged: enabled
+                        ? (checked) {
+                            final next = [...picked];
+                            if (checked ?? false) {
+                              if (!next.contains(choice.value)) {
+                                next.add(choice.value);
+                              }
+                            } else {
+                              next.remove(choice.value);
+                            }
+                            _setAnswer(question, next);
+                          }
+                        : null,
+                  ),
+              ],
             ),
-            controlAffinity: ListTileControlAffinity.leading,
-            onChanged: enabled
-                ? (checked) {
-                    final next = [...picked];
-                    if (checked ?? false) {
-                      if (!next.contains(choice.value)) next.add(choice.value);
-                    } else {
-                      next.remove(choice.value);
-                    }
-                    _setAnswer(question, next);
-                  }
-                : null,
           ),
+        ),
         if (crisis) ...[
           const SizedBox(height: 8),
-          const Text(
-            'If this is an emergency, call or text 988, then press 1.',
+          const InfoNote(
+            text: 'If this is an emergency, call or text 988, then press 1.',
           ),
         ],
       ],

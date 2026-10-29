@@ -5,34 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Account deletion</title>
   <meta name="description" content="Draft explanation of the 30-day account deletion wait.">
-  <link rel="canonical" href="https://veteran-claims-buddy-dev.web.app/account-deletion/">
-  
+  <link rel="canonical" href="https://veteranclaimsbuddy.com/account-deletion/">
   <meta property="og:title" content="Account deletion">
   <meta property="og:description" content="Draft explanation of the 30-day account deletion wait.">
-  <meta property="og:url" content="https://veteran-claims-buddy-dev.web.app/account-deletion/">
+  <meta property="og:url" content="https://veteranclaimsbuddy.com/account-deletion/">
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://veteranclaimsbuddy.com/assets/og.jpg">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="720">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://veteranclaimsbuddy.com/assets/og.jpg">
+  <link rel="preload" href="/assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
   <meta name="theme-color" content="#10151C">
 </head>
 <body>
+  <a class="skip" href="#content">Skip to content</a>
   <p class="banner">Draft. A lawyer has not reviewed this site.</p>
-  <header>
-    <div class="wrap">
-      <a class="brand" href="/"><img src="/assets/logo-mark.svg" width="40" height="40" alt="">Veteran Claims Buddy</a>
-      <nav aria-label="Site"><a href="/how-it-works/">How it works</a>
-        <a href="/pricing/">Pricing</a>
-        <a href="/va-disability-calculator/">Calculator</a>
-        <a href="/faq/">FAQ</a>
-        <a href="/support/">Support</a>
-        <a href="/sign-in/">Sign in</a>
-        <a href="/get-started/" class="button">Get started</a></nav>
+  <header class="site-header">
+    <div class="wrap header-bar">
+      <a class="brand" href="/"><img src="/assets/logo-mark.svg" width="40" height="40" alt=""><span>Veteran Claims Buddy</span></a>
+      <div class="header-actions">
+        <nav class="desktop-nav" aria-label="Site">
+            <a href="/how-it-works/">How it works</a>
+            <a href="/pricing/">Pricing</a>
+            <a href="/va-disability-calculator/">Calculator</a>
+            <a href="/faq/">FAQ</a>
+            <a href="/support/">Support</a>
+            <a href="/sign-in/">Sign in</a>
+        </nav>
+        <a class="btn header-cta" href="/get-started/">Get started</a>
+        <details class="mobile-nav">
+          <summary>Menu</summary>
+          <nav aria-label="Site">
+            <a href="/how-it-works/">How it works</a>
+            <a href="/pricing/">Pricing</a>
+            <a href="/va-disability-calculator/">Calculator</a>
+            <a href="/faq/">FAQ</a>
+            <a href="/support/">Support</a>
+            <a href="/sign-in/">Sign in</a>
+          </nav>
+        </details>
+      </div>
     </div>
   </header>
-  <main>
-    <div class="wrap">
-      <h1>Account deletion</h1>
-      <p><strong>Draft.</strong> Scaffold only. Counsel must review this before publication.</p>
+  <main id="content">
+    <div class="wrap page-wrap">
+      <h1 class="display">Account deletion</h1>
+      <article class="prose">
+<p><strong>Draft.</strong> Scaffold only. Counsel must review this before publication.</p>
 <p><strong>Effective date:</strong> To be set at launch.</p>
 <p>You can delete your Veteran Claims Buddy account in the app. Before you confirm, the app explains that deletion removes your case data, uploaded files, generated documents, and symptom history after a waiting period.</p>
 <h2>The 30 days</h2>
@@ -43,22 +65,35 @@
 <h2>Premium</h2>
 <p>Deleting the account does not by itself cancel an Apple or Google subscription. Cancel Premium in the store or on the web billing page so it does not renew.</p>
 <h2>Questions</h2>
-<p>Email support@veteranclaimsbuddy.com.</p>
+<p>Email <a href="mailto:support@veteranclaimsbuddy.com">support@veteranclaimsbuddy.com</a>.</p>
+</article>
     </div>
   </main>
-  <footer>
-    <div class="wrap">
-      <nav class="links" aria-label="Legal">
-        <a href="/privacy/">Privacy</a>
-        <a href="/terms/">Terms</a>
-        <a href="/terms/subscription/">Subscription</a>
-        <a href="/terms/refunds/">Refunds</a>
-        <a href="/terms/print-and-mail/">Print and mail</a>
-        <a href="/ai-disclosure/">AI disclosure</a>
-        <a href="/account-deletion/">Account deletion</a>
-        <a href="/support/">Support</a>
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <a class="brand" href="/"><img src="/assets/logo-mark.svg" width="40" height="40" alt=""><span>Veteran Claims Buddy</span></a>
+        <p class="disclaimer">Veteran Claims Buddy is an independent service and is not affiliated with or endorsed by the U.S. Department of Veterans Affairs.</p>
+      </div>
+      <nav aria-label="Product">
+        <p class="footer-label">Product</p>
+        <a href="/how-it-works/">How it works</a>
+            <a href="/pricing/">Pricing</a>
+            <a href="/va-disability-calculator/">Calculator</a>
+            <a href="/faq/">FAQ</a>
+            <a href="/support/">Support</a>
       </nav>
-      <p>Veteran Claims Buddy is an independent service and is not affiliated with or endorsed by the U.S. Department of Veterans Affairs.</p>
+      <nav aria-label="Legal">
+        <p class="footer-label">Legal</p>
+        <a href="/privacy/">Privacy</a>
+            <a href="/terms/">Terms</a>
+            <a href="/terms/subscription/">Subscription</a>
+            <a href="/terms/refunds/">Refunds</a>
+            <a href="/terms/print-and-mail/">Print and mail</a>
+            <a href="/ai-disclosure/">AI disclosure</a>
+            <a href="/account-deletion/" aria-current="page">Account deletion</a>
+            <a href="/support/">Support</a>
+      </nav>
     </div>
   </footer>
 </body>

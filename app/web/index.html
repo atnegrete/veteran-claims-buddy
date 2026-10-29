@@ -31,6 +31,29 @@
 
   <title>Veteran Claims Buddy</title>
   <link rel="manifest" href="manifest.json">
+
+  <!--
+    The browser overlay scrollbar paints on top of the Flutter view. The app
+    scrolls inside its own pages, so the document itself does not scroll.
+  -->
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+
+  <!--
+    The form preview rasterizes official PDFs in the browser with pdf.js.
+    These files live in web/pdfjs/ (pdfjs-dist 6.2.108, the version the
+    printing plugin expects). The path is root-absolute so it still resolves
+    when the address bar is a deep route. iOS and Android use the printing
+    plugin's own renderer and do not load this script.
+  -->
+  <script>
+    var dartPdfJsBaseUrl = "/pdfjs/";
+  </script>
 </head>
 <body>
   <!--
@@ -62,7 +85,7 @@
 
     _flutter.loader.load({
       config: {
-        canvasKitForceCpuOnly: flutterWebShouldUseCpu(),
+        canvasKitForceCpuOnly: false //flutterWebShouldUseCpu(),
       },
     });
   </script>

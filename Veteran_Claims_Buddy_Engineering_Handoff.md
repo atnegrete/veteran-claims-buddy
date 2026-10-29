@@ -685,48 +685,49 @@ currentWorkingCaseId
 
 Do not trust an `isCurrentWorkingCase` flag alone. A server-controlled function/transaction should update the user's `currentWorkingCaseId` and Case projections consistently.
 
-## 2A.7 One-time $250 product is tied to a Case
+## 2A.7 One-time $250 product is a year of Premium for one Case
+
+**Revised 2026-10-06.** The one-time Case unlock is no longer a permanent per-Case license. It now grants a **full year of Premium features limited to a single active Case**.
 
 The one-time digital purchase is:
 
 ```text
-Digital Claim Package — $250 business target
+Digital Claim Package (Case unlock) — $250 business target (store may show $249.99)
 ```
 
-It unlocks **digital package generation for one Case**, not one PDF and not merely one initial submission.
+It grants **one year of Premium, scoped to one active Case**: digital package generation and the Premium recurring features (such as symptom tracking) for that Case.
 
-If that Case later needs related Supplemental Claim/HLR/other review forms because of the VA result, the one-time Case purchase remains valid for that Case.
-
-The Veteran may:
+While the unlocked year is active, the Veteran may, for that Case:
 
 - modify confirmed information;
 - add/remove supporting evidence before submission;
 - correct fields;
 - regenerate package artifacts;
 - redownload regenerated artifacts;
-- continue related review package generation within that purchased Case;
+- continue related review package generation within that Case;
 
-without paying another $250 for that Case.
+without paying again.
 
-A new Case later requires a new $250 purchase unless the user has active Premium when generating the new Case's package.
+The account keeps **one active Case at a time** on the Case-unlock plan. The Veteran completes the current Case to free the slot and unlock another, or holds an active Premium subscription to work every Case at once. A completed Case stays viewable and downloadable. A new active Case later requires a new $250 purchase unless Premium is active.
 
 Do not charge per PDF or per individual claimed condition.
 
-## 2A.8 Premium — $30/month, monthly only at launch
+## 2A.8 Premium — $29.99/month or $234.99/year
 
-Premium launch price target:
+**Revised 2026-10-06.** Premium now offers a monthly and a yearly term.
+
+Premium launch price targets:
 
 ```text
-$30/month
+$29.99/month
+$234.99/year (about 34% off the monthly rate)
 ```
-
-No annual subscription at MVP launch.
 
 Premium provides digital Case-package generation while the subscription is active and unlocks Premium recurring features including symptom/health tracking.
 
-Premium users may generate packages for any eligible Case while Premium is active.
+Premium users may generate packages for any eligible Case while Premium is active, and the single-active-Case limit does not apply to them.
 
-The one-current-Working-Case UX applies to Premium and non-Premium users equally.
+The one-current-Working-Case UX applies to Premium and non-Premium users equally for the open claim.
 
 When Premium expires:
 
@@ -734,7 +735,7 @@ When Premium expires:
 - symptom history remains readable;
 - the user does not lose their data;
 - creating new Premium symptom entries is disabled until Premium resumes;
-- generating a **new or materially regenerated digital package** requires either active Premium or a one-time $250 purchase for that Case;
+- generating a **new or materially regenerated digital package** requires either active Premium or a one-time $250 Case unlock for that Case;
 - do not delete or hide historical generated packages because a subscription ended.
 
 Do not promise truly unlimited compute/AI in public copy. Apply reasonable anti-abuse controls across all plans.
@@ -1392,8 +1393,8 @@ Veteran Claims Buddy
             +-- full evidence/document workflow
             +-- manual C&P tracking + 2-hour push reminder
             +-- free VA rating/compensation calculator
-            +-- $250 one-time Case digital-package unlock
-            +-- $30/month Premium
+            +-- $250 Case unlock (one year of Premium for one active Case)
+            +-- $29.99/month or $234.99/year Premium
             |       +-- active package generation
             |       +-- Symptoms Tracker
             |       +-- monthly AI symptom summaries
@@ -4917,13 +4918,15 @@ The paywall should occur when the user wants to unlock a completed, submission-r
 
 Do not make the free product intentionally unusable merely to force an early purchase.
 
-### One-time Digital Claim Package
+### One-time Digital Claim Package (Case unlock)
 
-**Business target price:** USD $250 for one claim-package unlock.
+**Revised 2026-10-06.** The Case unlock grants **one year of Premium for a single active Case**, not a permanent per-Case license.
+
+**Business target price:** USD $250 for one Case unlock.
 
 Mobile storefront price points may be represented by the closest approved store price point, for example $249.99, if the platform does not expose an exact $250.00 consumer price point. Web may use exactly $250.00 if desired.
 
-A Digital Claim Package unlock applies to **one Case**, not to one PDF, one individual submission, or the user's entire account forever. Related review/appeal package generation for issues that remain within that Case is covered by the Case unlock.
+A Case unlock applies to **one active Case** for **one year**, not to one PDF, one individual submission, or the user's entire account forever. Related review/appeal package generation for issues that remain within that Case is covered while the unlocked year is active. The account keeps one active Case at a time on this plan; completing the Case frees the slot to unlock another, and completed Cases stay viewable and downloadable.
 
 A package may include multiple documents, for example:
 
@@ -4935,13 +4938,15 @@ A package may include multiple documents, for example:
 - generated cover/instruction material;
 - other supported forms required by the selected workflow.
 
-Once the Case is legitimately unlocked by the one-time purchase, the Veteran may regenerate and re-download digital packages for that Case without paying another $250 merely because data was corrected, evidence changed, or a related review workflow within that Case requires new supported forms.
+Once the Case is legitimately unlocked by the one-time purchase, the Veteran may, for the remainder of the unlocked year, regenerate and re-download digital packages for that Case without paying another $250 merely because data was corrected, evidence changed, or a related review workflow within that Case requires new supported forms.
 
 If regeneration changes material content after user approval, normal review/approval invalidation rules still apply. Payment unlock and submission approval are separate concepts.
 
 ### Premium subscription
 
-**Business target price:** USD $30/month.
+**Revised 2026-10-06.** Premium offers a monthly and a yearly term.
+
+**Business target price:** USD $29.99/month, or USD $234.99/year (about 34% off the monthly rate).
 
 Mobile storefronts may use the closest approved platform price point if necessary. Do not silently change the business target price without owner approval.
 
@@ -5066,7 +5071,7 @@ Agents must use consistent consumer copy. Do not invent claims of guaranteed app
 
 **Product name:** `Premium`
 
-**Price:** `$30/month` business target.
+**Price:** `$29.99/month` or `$234.99/year` business target.
 
 **Short description:**
 
@@ -5118,18 +5123,27 @@ Possible state:
 }
 ```
 
-RevenueCat may be the upstream normalized source, but important product access should be projected into server-controlled application state for deterministic authorization and auditability.
+RevenueCat is the upstream normalized source, but product access is **projected into server-controlled application state** for deterministic authorization and auditability. This project does not use custom auth claims. **As built (2026-10-06):** a Cloud Function (`revenueCatWebhook`) writes `users/{uid}/billing/subscription` and recomputes a single gating projection `users/{uid}/billing/premium`:
+
+```json
+{
+  "premiumUntil": "<Timestamp>",
+  "source": "subscription|caseUnlock|null",
+  "willRenew": true,
+  "activeCaseLimit": 1
+}
+```
+
+Firestore rules gate Premium features by comparing `get(.../billing/premium).data.premiumUntil > request.time`, so expiry is enforced at evaluation time with no scheduler. The Flutter client reads this doc reactively (`premiumStatusProvider`).
 
 ### Case digital unlock
 
-Permanent one-time digital access is not represented solely by a general RevenueCat entitlement because a Veteran may purchase multiple Case unlocks over time.
+A Case unlock is a Case-scoped grant of **one year of Premium for a single active Case**, so it is not represented solely by a general RevenueCat entitlement.
 
-Use a Case-scoped ledger.
-
-Suggested Firestore path:
+**As built (2026-10-06):** a top-level, server-written ledger binds the purchase to a Case:
 
 ```text
-users/{uid}/caseUnlocks/{caseId}
+caseUnlocks/{caseId}
 ```
 
 Example:
@@ -5137,15 +5151,18 @@ Example:
 ```json
 {
   "caseId": "case_123",
-  "unlocked": true,
+  "uid": "user_abc",
   "unlockSource": "oneTimePurchase",
   "billingProvider": "apple",
   "providerTransactionId": "...",
   "purchaseIntentId": "...",
   "unlockedAt": "...",
+  "grantsPremiumUntil": "<purchase + 365 days>",
   "createdByFunction": true
 }
 ```
+
+`createPurchaseIntent` records a pending `purchaseIntents/{id}` for the caseId (enforcing the single-active-Case rule), and the webhook binds the most recent pending intent to `caseUnlocks/{caseId}` when the purchase settles.
 
 Other valid `unlockSource` values may include:
 
@@ -5325,7 +5342,7 @@ Reference: https://stripe.com/pricing
 
 ## 38.11 Store commission awareness
 
-The owner must understand that the $250/$30 consumer price is **gross retail price**, not net revenue.
+The owner must understand that the $250/$29.99 consumer price is **gross retail price**, not net revenue.
 
 Apple/Google store commissions and program eligibility materially affect net receipts and may change over time.
 
@@ -5545,7 +5562,7 @@ All of these stay on the order record:
 - estimated Stripe fee;
 - actual Stripe fee after settlement.
 
-The $250 Digital Claim Package and the $30/month Premium subscription remain the digital products sold through RevenueCat. Print & Mail stays this Stripe workflow.
+The $250 Case unlock and the $29.99/month or $234.99/year Premium subscription remain the digital products sold through RevenueCat. Print & Mail stays this Stripe workflow.
 
 ## 38.15 Total price scenarios
 
@@ -5918,10 +5935,10 @@ Choose how you want to unlock your claim package
 ONE-TIME
 Digital Claim Package
 $250
-Unlock this submission package permanently.
+Unlock a full year of Premium for this one Case.
 
 PREMIUM
-$30/month
+$29.99/month or $234.99/year
 Generate digital claim packages while active plus ongoing premium tools.
 
 [Continue with one-time package]
@@ -6008,8 +6025,8 @@ Owner tasks include:
 [ ] Complete banking/tax information required for paid IAP
 [ ] Create one-time repeat-purchasable Digital Claim Package product
 [ ] Set target U.S. storefront price to closest approved point to $250
-[ ] Create Premium auto-renewable monthly subscription
-[ ] Set target U.S. storefront price to closest approved point to $30/month
+[ ] Create Premium auto-renewable subscription with a monthly and a yearly base plan
+[ ] Set target U.S. storefront prices to closest approved points to $29.99/month and $234.99/year
 [ ] Record exact product IDs in the project's secure configuration documentation
 [ ] Confirm products are available for sandbox testing
 ```
@@ -6019,6 +6036,7 @@ Recommended IDs, subject to bundle naming rules:
 ```text
 com.<company>.<app>.claim_package_unlock
 com.<company>.<app>.premium_monthly
+com.<company>.<app>.premium_yearly
 ```
 
 Agent must not invent final production bundle/product IDs without reading the actual project configuration.
@@ -6037,8 +6055,8 @@ Owner tasks include:
 [ ] Review/enroll in applicable service-fee program if eligible
 [ ] Create repeat-purchasable one-time product for Digital Claim Package
 [ ] Set target U.S. price closest to $250
-[ ] Create monthly Premium subscription/base plan
-[ ] Set target U.S. price closest to $30/month
+[ ] Create Premium subscription with monthly and yearly base plans
+[ ] Set target U.S. prices closest to $29.99/month and $234.99/year
 [ ] Add license testers/test accounts
 [ ] Record exact product IDs
 ```
@@ -6230,7 +6248,7 @@ Unlock this submission package, including supported completed VA forms and gener
 
 ```text
 Premium
-$30/month
+$29.99/month or $234.99/year
 
 Generate digital claim packages while Premium is active and unlock ongoing tools including symptom tracking, longitudinal condition history, advanced C&P preparation, and premium assistant features.
 

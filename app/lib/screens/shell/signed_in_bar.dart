@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/app_theme.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_redirect.dart';
 
-/// Stand-in until the brand package supplies a logo.
+/// The brand mark: a navy tile with the white V.
 class AppLogoMark extends StatelessWidget {
   const AppLogoMark({super.key, this.size = 28});
 
@@ -14,23 +14,10 @@ class AppLogoMark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SvgPicture.asset(
+      'assets/brand/logo-mark.svg',
       width: size,
       height: size,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: AppColors.navy,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Text(
-        'V',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w700,
-          fontSize: size * 0.5,
-          height: 1,
-        ),
-      ),
     );
   }
 }

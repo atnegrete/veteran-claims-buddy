@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../account/account_deletion.dart';
 import '../../app/app_theme.dart';
+import '../../app/app_ui.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../forms/text_input_chain.dart';
@@ -56,9 +57,9 @@ class _DeleteAccountScreenState extends ConsumerState<DeleteAccountScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(deletionWarning),
+          const InfoNote(text: deletionWarning, tone: InfoNoteTone.danger),
           const SizedBox(height: 12),
-          const Text(
+          const LeadText(
             'Deleting the account does not cancel Premium. Cancel it in the App Store, Google Play, or on the web billing page. A Print & Mail order already sent still prints and is non-refundable.',
           ),
           const SizedBox(height: 16),
@@ -83,10 +84,7 @@ class _DeleteAccountScreenState extends ConsumerState<DeleteAccountScreen> {
           ),
           if (_error != null) ...[
             const SizedBox(height: 8),
-            Text(
-              _error!,
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
-            ),
+            ErrorText(_error!),
           ],
           const SizedBox(height: 16),
           FilledButton(

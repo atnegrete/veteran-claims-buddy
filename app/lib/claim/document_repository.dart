@@ -39,6 +39,7 @@ class DocumentRepository {
     required String documentType,
     required String? documentDate,
     required ReportProgress onProgress,
+    String packet = '',
   }) async {
     final contentType = documentContentType(fileName);
     final extension = contentType == null
@@ -87,6 +88,7 @@ class DocumentRepository {
         'facilityName': null,
         'tags': <String>[],
         'sha256': null,
+        'packet': packet,
         'schemaVersion': 1,
         'createdAt': FieldValue.serverTimestamp(),
         'updatedAt': FieldValue.serverTimestamp(),
@@ -112,16 +114,22 @@ class DocumentRepository {
     required String documentId,
     required String documentType,
     required String? documentDate,
+    String? packet,
   }) async {
     if (!documentTypes.containsKey(documentType)) {
       throw const ClaimGuideFailure('Choose what kind of file this is.');
     }
     await _refresh();
-    await _docs(uid).doc(documentId).update({
+    final data = <String, dynamic>{
       'documentType': documentType,
       'documentDate': documentDate,
       'updatedAt': FieldValue.serverTimestamp(),
-    });
+    };
+    final stored = documentType == 'decisionLetter' || documentType == 'dd214'
+        ? 'record'
+        : packet;
+    if (stored != null && stored.isNotEmpty) data['packet'] = stored;
+    await _docs(uid).doc(documentId).update(data);
   }
 
   Stream<List<DocumentFact>> watchFacts(String uid, String documentId) {
@@ -215,6 +223,7 @@ final uploadDocumentProvider = Provider<UploadDocument>((ref) {
     required String documentType,
     required String? documentDate,
     required ReportProgress onProgress,
+    String packet = '',
   }) {
     final uid = ref.read(authControllerProvider).session?.uid;
     if (uid == null) {
@@ -228,6 +237,7 @@ final uploadDocumentProvider = Provider<UploadDocument>((ref) {
       documentType: documentType,
       documentDate: documentDate,
       onProgress: onProgress,
+      packet: packet,
     );
   };
 });
@@ -238,6 +248,7 @@ final updateDocumentProvider = Provider<UpdateDocument>((ref) {
     required String documentId,
     required String documentType,
     required String? documentDate,
+    String? packet,
   }) {
     final uid = ref.read(authControllerProvider).session?.uid;
     if (uid == null) {
@@ -248,6 +259,7 @@ final updateDocumentProvider = Provider<UpdateDocument>((ref) {
       documentId: documentId,
       documentType: documentType,
       documentDate: documentDate,
+      packet: packet,
     );
   };
 });
@@ -304,6 +316,7 @@ typedef UploadDocument = Future<void> Function({
   required String documentType,
   required String? documentDate,
   required ReportProgress onProgress,
+  String packet,
 });
 
 typedef ReviewDocumentFact = Future<void> Function({
@@ -317,6 +330,7 @@ typedef UpdateDocument = Future<void> Function({
   required String documentId,
   required String documentType,
   required String? documentDate,
+  String? packet,
 });
 
 typedef RemoveDocument = Future<void> Function({

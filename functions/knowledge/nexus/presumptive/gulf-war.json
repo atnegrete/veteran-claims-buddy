@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "gulfWar",
+  "label": "Gulf War undiagnosed illness and chronic multisymptom illness",
+  "authority": "Persian Gulf War Veterans' Benefits Act",
+  "citation": "38 CFR 3.317",
+  "sourceAsOf": "2026-10-22",
+  "qualifyingService": {
+    "locations": [
+      "Southwest Asia", "Iraq", "Kuwait", "Saudi Arabia", "Bahrain", "Qatar",
+      "United Arab Emirates", "Oman", "Gulf of Aden", "Gulf of Oman",
+      "Persian Gulf", "Arabian Sea", "Red Sea", "Afghanistan"
+    ],
+    "dateRanges": [
+      { "start": "1990-08-02", "end": "", "label": "Gulf War period (Southwest Asia theater)" }
+    ],
+    "branches": []
+  },
+  "exposures": ["burnPit", "other"],
+  "presumptiveConditions": [
+    "Chronic fatigue syndrome",
+    "Fibromyalgia",
+    "Functional gastrointestinal disorders (including irritable bowel syndrome)",
+    "Undiagnosed illness with chronic fatigue",
+    "Undiagnosed illness with muscle or joint pain",
+    "Undiagnosed illness with headaches",
+    "Undiagnosed illness with sleep disturbance",
+    "Undiagnosed illness with respiratory symptoms",
+    "Undiagnosed illness with neurological symptoms",
+    "Undiagnosed illness with skin symptoms"
+  ],
+  "notes": "For Gulf War Veterans, qualifying chronic symptoms and defined illnesses can be presumptively service connected even without a known cause. These claims generally do not need a nexus letter."
+}

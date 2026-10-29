@@ -1,10 +1,9 @@
 import 'package:app/app/app_theme.dart';
-import 'package:app/cases/cases_progress.dart';
+import 'package:app/billing/entitlement_service.dart';
 import 'package:app/claim/claim_issue.dart';
 import 'package:app/claim/claim_issue_repository.dart';
 import 'package:app/claim/symptom_entry.dart';
 import 'package:app/claim/symptom_repository.dart';
-import 'package:app/home/home_snapshot.dart';
 import 'package:app/screens/shell/symptoms_tracker_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -91,8 +90,18 @@ Future<void> _pump(
   await tester.pumpWidget(
     ProviderScope(
       overrides: [
-        homeSnapshotProvider.overrideWithValue(
-          HomeSnapshot(premiumActive: premium),
+        premiumStatusProvider.overrideWith(
+          (ref) => Stream.value(
+            premium
+                ? PremiumStatus(
+                    isActive: true,
+                    source: 'subscription',
+                    premiumUntil: DateTime.now().add(const Duration(days: 30)),
+                    willRenew: true,
+                    activeCaseLimit: null,
+                  )
+                : PremiumStatus.inactive,
+          ),
         ),
         symptomEntriesProvider.overrideWith((ref) => Stream.value(entries)),
         claimIssuesProvider.overrideWith(

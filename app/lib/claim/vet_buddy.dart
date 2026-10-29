@@ -132,7 +132,7 @@ String? vetBuddyLocation(String caseId, VetBuddyLink link) {
     case 'questions':
       return AuthRoutes.caseQuestions(caseId);
     case 'issues':
-      return AuthRoutes.caseIssues(caseId);
+      return AuthRoutes.caseConditions(caseId);
     case 'documents':
       return AuthRoutes.caseDocuments(caseId);
     case 'forms':
@@ -146,7 +146,7 @@ String? vetBuddyLocation(String caseId, VetBuddyLink link) {
     case 'issue':
       final issueId = link.issueId;
       if (issueId == null || issueId.isEmpty) return null;
-      return AuthRoutes.caseIssue(caseId, issueId);
+      return AuthRoutes.caseCondition(caseId, issueId);
     case 'document':
       final documentId = link.documentId;
       if (documentId == null || documentId.isEmpty) return null;

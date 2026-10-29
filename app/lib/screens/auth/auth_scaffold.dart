@@ -131,12 +131,16 @@ class AuthMessageText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (message == null || message!.isEmpty) return const SizedBox.shrink();
+    final theme = Theme.of(context);
     final color = isError
-        ? Theme.of(context).colorScheme.error
-        : Theme.of(context).colorScheme.onSurface;
+        ? theme.colorScheme.error
+        : theme.colorScheme.onSurfaceVariant;
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
-      child: Text(message!, style: TextStyle(color: color)),
+      child: Text(
+        message!,
+        style: theme.textTheme.bodyMedium?.copyWith(color: color),
+      ),
     );
   }
 }

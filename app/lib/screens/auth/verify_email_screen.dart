@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../app/app_ui.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import 'auth_scaffold.dart';
@@ -79,8 +80,8 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            'Open the verification link sent to $sentTo. Claim information stays closed until that link is confirmed.',
+          LeadText(
+            'Open the verification link sent to $sentTo. Claim information stays closed until it is confirmed.',
           ),
           const SizedBox(height: 16),
           AuthMessageText(_message, isError: _messageIsError),

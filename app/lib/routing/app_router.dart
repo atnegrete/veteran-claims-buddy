@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../auth/auth_controller.dart';
 import '../auth/auth_redirect.dart';
+import '../billing/entitlement_service.dart';
 import '../cases/cases_progress.dart';
 import '../claim/claim_review.dart';
 import '../onboarding/onboarding_progress.dart';
@@ -28,6 +29,10 @@ import '../screens/shell/home_screen.dart';
 import '../screens/shell/document_facts_screen.dart';
 import '../screens/shell/documents_screen.dart';
 import '../screens/shell/exams_screen.dart';
+import '../screens/shell/form_detail_screen.dart';
+import '../screens/shell/forms_workspace.dart';
+import '../screens/shell/identifiers_screen.dart';
+import '../screens/shell/intent_preview_screen.dart';
 import '../screens/shell/issue_detail_screen.dart';
 import '../screens/shell/issues_screen.dart';
 import '../screens/shell/questions_screen.dart';
@@ -154,6 +159,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                         AuthRoutes.caseStep(state.pathParameters['caseId']!),
                   ),
                   GoRoute(
+                    path: 'intent',
+                    builder: (context, state) => IntentPreviewScreen(
+                      caseId: state.pathParameters['caseId']!,
+                    ),
+                  ),
+                  GoRoute(
                     path: 'questions',
                     builder: (context, state) => QuestionsScreen(
                       caseId: state.pathParameters['caseId']!,
@@ -169,7 +180,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                         path: 'upload',
                         builder: (context, state) => DocumentsScreen(
                           caseId: state.pathParameters['caseId']!,
-                          adding: true,
                         ),
                       ),
                       GoRoute(
@@ -263,8 +273,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                     routes: [
                       GoRoute(
                         path: 'generate',
-                        redirect: (context, state) =>
-                            '${AuthRoutes.plans}?reason=package&caseId=${state.pathParameters['caseId']}',
+                        redirect: (context, state) {
+                          final caseId = state.pathParameters['caseId']!;
+                          if (ref.read(canGeneratePackageProvider(caseId))) {
+                            return AuthRoutes.casePackageSubmit(caseId);
+                          }
+                          return '${AuthRoutes.plans}?reason=package&caseId=$caseId';
+                        },
                       ),
                       GoRoute(
                         path: 'submit',
@@ -280,10 +295,18 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                         FormsScreen(caseId: state.pathParameters['caseId']!),
                     routes: [
                       GoRoute(
+                        path: 'identifiers',
+                        builder: (context, state) => IdentifiersScreen(
+                          caseId: state.pathParameters['caseId']!,
+                        ),
+                      ),
+                      GoRoute(
                         path: 'supplemental',
                         builder: (context, state) => ReviewPathScreen(
                           caseId: state.pathParameters['caseId']!,
                           path: ReviewPath.supplemental,
+                          decisionIssueId:
+                              state.uri.queryParameters['issue'] ?? '',
                         ),
                       ),
                       GoRoute(
@@ -291,6 +314,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                         builder: (context, state) => ReviewPathScreen(
                           caseId: state.pathParameters['caseId']!,
                           path: ReviewPath.higherLevel,
+                          decisionIssueId:
+                              state.uri.queryParameters['issue'] ?? '',
                         ),
                       ),
                       GoRoute(
@@ -298,7 +323,30 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                         builder: (context, state) => ReviewPathScreen(
                           caseId: state.pathParameters['caseId']!,
                           path: ReviewPath.board,
+                          decisionIssueId:
+                              state.uri.queryParameters['issue'] ?? '',
                         ),
+                      ),
+                      GoRoute(
+                        path: ':formNumber',
+                        builder: (context, state) {
+                          final caseId = state.pathParameters['caseId']!;
+                          final formNumber =
+                              state.pathParameters['formNumber']!;
+                          return FormsWorkspace(
+                            caseId: caseId,
+                            formNumber: formNumber,
+                            child: FormDetailScreen(
+                              caseId: caseId,
+                              formNumber: formNumber,
+                              copyKey: state.uri.queryParameters['copy'] ?? '',
+                              packetName:
+                                  state.uri.queryParameters['packet'] ?? '',
+                              nexusKind:
+                                  state.uri.queryParameters['kind'] ?? '',
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -335,19 +383,19 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                         TimelineScreen(caseId: state.pathParameters['caseId']!),
                   ),
                   GoRoute(
-                    path: 'issues',
+                    path: 'conditions',
                     builder: (context, state) =>
                         IssuesScreen(caseId: state.pathParameters['caseId']!),
                     routes: [
                       ShellRoute(
                         builder: (context, state, child) => IssueWorkspace(
                           caseId: state.pathParameters['caseId']!,
-                          issueId: state.pathParameters['issueId']!,
+                          issueId: state.pathParameters['conditionId']!,
                           child: child,
                         ),
                         routes: [
                           GoRoute(
-                            path: ':issueId',
+                            path: ':conditionId',
                             builder: (context, state) =>
                                 const SizedBox.shrink(),
                             routes: [
@@ -356,15 +404,16 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                                 builder: (context, state) =>
                                     IssueQuestionsScreen(
                                       caseId: state.pathParameters['caseId']!,
-                                      issueId: state.pathParameters['issueId']!,
+                                      issueId:
+                                          state.pathParameters['conditionId']!,
                                     ),
                               ),
                               GoRoute(
                                 path: 'evidence',
-                                builder: (context, state) =>
-                                    IssueEvidenceScreen(
-                                      caseId: state.pathParameters['caseId']!,
-                                      issueId: state.pathParameters['issueId']!,
+                                redirect: (context, state) =>
+                                    AuthRoutes.caseConditionConnection(
+                                      state.pathParameters['caseId']!,
+                                      state.pathParameters['conditionId']!,
                                     ),
                               ),
                               GoRoute(
@@ -372,7 +421,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                                 builder: (context, state) =>
                                     IssueConnectionScreen(
                                       caseId: state.pathParameters['caseId']!,
-                                      issueId: state.pathParameters['issueId']!,
+                                      issueId:
+                                          state.pathParameters['conditionId']!,
                                     ),
                               ),
                               GoRoute(
@@ -383,9 +433,9 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                                       path.endsWith('/doctor-draft')) {
                                     return null;
                                   }
-                                  return AuthRoutes.caseIssue(
+                                  return AuthRoutes.caseCondition(
                                     state.pathParameters['caseId']!,
-                                    state.pathParameters['issueId']!,
+                                    state.pathParameters['conditionId']!,
                                   );
                                 },
                                 routes: [
@@ -395,11 +445,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                                         IssueStatementScreen(
                                           caseId:
                                               state.pathParameters['caseId']!,
-                                          issueId:
-                                              state.pathParameters['issueId']!,
+                                          issueId: state
+                                              .pathParameters['conditionId']!,
                                           kind: 'lay',
-                                          heading: 'Your statement',
-                                          intro: 'In your own words. This is not sent to the VA from here.',
+                                          heading: 'How this affects you',
+                                          intro: 'How often it happens, how long it lasts, and what it keeps you from doing. This is not sent to the VA from here.',
                                         ),
                                   ),
                                   GoRoute(
@@ -408,11 +458,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                                         IssueStatementScreen(
                                           caseId:
                                               state.pathParameters['caseId']!,
-                                          issueId:
-                                              state.pathParameters['issueId']!,
+                                          issueId: state
+                                              .pathParameters['conditionId']!,
                                           kind: 'doctorDraft',
-                                          heading: 'Draft for your doctor',
-                                          intro: 'A draft you can take to your doctor. This is not a finished medical opinion.',
+                                          heading: 'Nexus Letters',
+                                          intro: 'Two drafts grounded in your saved facts: an unsigned letter for your own doctor, and a statement you can sign yourself. Neither is a finished medical opinion.',
                                         ),
                                   ),
                                 ],
@@ -422,7 +472,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                                 builder: (context, state) =>
                                     IssueDecisionsScreen(
                                       caseId: state.pathParameters['caseId']!,
-                                      issueId: state.pathParameters['issueId']!,
+                                      issueId:
+                                          state.pathParameters['conditionId']!,
                                     ),
                               ),
                             ],

@@ -334,7 +334,7 @@ async function loadSnapshot(db, uid, caseId) {
   if (!caseDoc.exists) return null;
   const [issueSnap, documentSnap] = await Promise.all([
     db
-      .collection(`users/${uid}/claimIssues`)
+      .collection(`users/${uid}/conditions`)
       .where("activeCaseId", "==", caseId)
       .get(),
     db.collection(`users/${uid}/documents`).where("caseId", "==", caseId).get(),
