@@ -9,6 +9,7 @@ import '../../app/app_theme.dart';
 import '../../app/app_ui.dart';
 import '../../app/app_tabs.dart';
 import '../../app/app_badge.dart';
+import '../../ai/ai_chat_input.dart';
 import '../../ai/ai_refine_panel.dart';
 import '../../forms/pdf_preview_pane.dart';
 import '../../forms/text_input_chain.dart';
@@ -601,23 +602,15 @@ class _NexusLettersPanelState extends ConsumerState<NexusLettersPanel> {
             LeadText(question.help),
           ],
           const SizedBox(height: 12),
-          TextField(
+          AiChatInput(
             controller: _answer,
-            enabled: !_busy,
+            onSend: (_) => _submitAnswer(),
+            busy: _busy,
+            hintText: 'Type your answer',
+            maxLength: nexusAnswerMaxLength,
             minLines: 3,
             maxLines: 6,
-            maxLength: nexusAnswerMaxLength,
-            textCapitalization: TextCapitalization.sentences,
-            decoration: const InputDecoration(hintText: 'Type your answer'),
-          ),
-          const SizedBox(height: 8),
-          Align(
-            alignment: Alignment.centerRight,
-            child: FilledButton(
-              style: secondaryFilledStyle(),
-              onPressed: _busy ? null : _submitAnswer,
-              child: Text(_busy ? 'Saving…' : 'Next'),
-            ),
+            allowEmptySend: true,
           ),
         ],
         if (_error != null) ...[const SizedBox(height: 12), ErrorText(_error!)],

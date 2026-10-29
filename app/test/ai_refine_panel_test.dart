@@ -30,7 +30,8 @@ void main() {
       expect(find.text('- make it shorter'), findsOneWidget);
 
       await tester.enterText(find.byType(TextField), 'add my 2010 onset');
-      await tester.tap(find.widgetWithText(FilledButton, 'Update'));
+      await tester.pump();
+      await tester.tap(find.byTooltip('Send'));
       await tester.pump();
       await tester.pump();
 
@@ -55,7 +56,8 @@ void main() {
     );
 
     await tester.enterText(find.byType(TextField), 'do something');
-    await tester.tap(find.widgetWithText(FilledButton, 'Update'));
+    await tester.pump();
+    await tester.tap(find.byTooltip('Send'));
     await tester.pump();
     await tester.pump();
 

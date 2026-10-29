@@ -98,6 +98,62 @@ class _TextInputChainScope extends InheritedWidget {
 /// Email and password hide the count until the text reaches this fraction of the max.
 const authCountVisibleFrom = 0.9;
 
+/// True once [currentLength] reaches [countVisibleFrom] of [maxLength].
+///
+/// The one place the hide-until-near-the-limit rule is decided, shared by
+/// [ChainTextField] and the chat input.
+bool quietCountVisible(int currentLength, int? maxLength, double? countVisibleFrom) {
+  if (maxLength == null || maxLength <= 0 || countVisibleFrom == null) {
+    return false;
+  }
+  return currentLength * 100 >= (maxLength * countVisibleFrom * 100).round();
+}
+
+/// The quiet character counter, or null while it should stay hidden.
+///
+/// A muted `currentLength/maxLength` that appears only once the text nears the
+/// limit. Call it directly, or wrap it with [quietCountBuilder] for a
+/// [TextField.buildCounter].
+Widget? quietCount(
+  BuildContext context, {
+  required int currentLength,
+  required int? maxLength,
+  required double? countVisibleFrom,
+}) {
+  if (!quietCountVisible(currentLength, maxLength, countVisibleFrom)) return null;
+  final limit = maxLength!;
+  final remaining = (limit - currentLength).clamp(0, limit);
+  final theme = Theme.of(context);
+  return Text(
+    '$currentLength/$limit',
+    style: theme.textTheme.bodySmall?.copyWith(
+      color: theme.colorScheme.onSurfaceVariant,
+    ),
+    semanticsLabel: MaterialLocalizations.of(
+      context,
+    ).remainingTextFieldCharacterCount(remaining),
+  );
+}
+
+/// A [TextField.buildCounter] that shows [quietCount], or null to keep the
+/// default counter when [countVisibleFrom] is null.
+InputCounterWidgetBuilder? quietCountBuilder(double? countVisibleFrom) {
+  if (countVisibleFrom == null) return null;
+  return (
+    BuildContext context, {
+    required int currentLength,
+    required int? maxLength,
+    required bool isFocused,
+  }) {
+    return quietCount(
+      context,
+      currentLength: currentLength,
+      maxLength: maxLength,
+      countVisibleFrom: countVisibleFrom,
+    );
+  };
+}
+
 /// A text field that joins a [TextInputChain] when one is present.
 ///
 /// An explicit [textInputAction] wins. The last single-line field is Done.
@@ -157,28 +213,6 @@ class _ChainTextFieldState extends State<ChainTextField> {
     super.dispose();
   }
 
-  Widget? _quietCount(
-    BuildContext context, {
-    required int currentLength,
-    required int? maxLength,
-    required bool isFocused,
-  }) {
-    final limit = maxLength;
-    final from = widget.countVisibleFrom;
-    if (limit == null || limit <= 0 || from == null) return null;
-    if (currentLength * 100 < (limit * from * 100).round()) return null;
-    final remaining = (limit - currentLength).clamp(0, limit);
-    final theme = Theme.of(context);
-    return Text(
-      '$currentLength/$limit',
-      style: theme.textTheme.bodySmall?.copyWith(
-        color: theme.colorScheme.onSurfaceVariant,
-      ),
-      semanticsLabel: MaterialLocalizations.of(context)
-          .remainingTextFieldCharacterCount(remaining),
-    );
-  }
-
   bool get _multiline {
     final lines = widget.maxLines;
     return lines == null || lines > 1;
@@ -218,7 +252,7 @@ class _ChainTextFieldState extends State<ChainTextField> {
       minLines: widget.minLines,
       maxLines: widget.maxLines,
       maxLength: widget.maxLength,
-      buildCounter: widget.countVisibleFrom == null ? null : _quietCount,
+      buildCounter: quietCountBuilder(widget.countVisibleFrom),
       onChanged: widget.onChanged,
       onSubmitted: widget.onSubmitted,
       textInputAction: action,

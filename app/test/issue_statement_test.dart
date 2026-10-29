@@ -164,7 +164,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 50));
 
     await tester.enterText(find.byType(TextField), 'Yes, tinnitus.');
-    await tester.tap(find.widgetWithText(FilledButton, 'Next'));
+    await tester.tap(find.byTooltip('Send'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 50));
 

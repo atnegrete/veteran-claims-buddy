@@ -1,0 +1,39 @@
+name: Deploy dev
+
+# On merge to main: build the Flutter web app for dev and publish it to the live
+# dev `app` site (https://veteran-claims-buddy-dev-app.web.app). Scoped to the
+# `app` target only; it never touches prod, Functions, Firestore, or Storage.
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: deploy-dev
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.5
+          cache: true
+      - name: Install app dependencies
+        run: flutter pub get
+        working-directory: app
+      - name: Build web (dev)
+        run: flutter build web --dart-define=APP_ENV=dev
+        working-directory: app
+      - name: Deploy to live dev app site
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
+          projectId: veteran-claims-buddy-dev
+          target: app
+          channelId: live

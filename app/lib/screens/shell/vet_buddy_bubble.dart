@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../ai/ai_chat_input.dart';
 import '../../app/app_ui.dart';
 import '../../claim/claim_guide.dart';
 import '../../claim/vet_buddy.dart';
@@ -253,46 +254,14 @@ class _VetBuddySheetState extends ConsumerState<_VetBuddySheet> {
             ErrorText(_error!),
           ],
           const SizedBox(height: 8),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _question,
-                  enabled: !_busy,
-                  minLines: 1,
-                  maxLines: 4,
-                  maxLength: 2000,
-                  textInputAction: TextInputAction.send,
-                  decoration: const InputDecoration(hintText: 'Message'),
-                  onSubmitted: (_) => _send(),
-                ),
-              ),
-              const SizedBox(width: 8),
-              IconButton(
-                tooltip: 'Send',
-                style: IconButton.styleFrom(
-                  backgroundColor: theme.colorScheme.primary,
-                  foregroundColor: theme.colorScheme.onPrimary,
-                  disabledBackgroundColor: theme.colorScheme.primary.withValues(
-                    alpha: 0.38,
-                  ),
-                  fixedSize: const Size(48, 48),
-                  minimumSize: const Size(48, 48),
-                ),
-                onPressed: _busy ? null : _send,
-                icon: _busy
-                    ? SizedBox(
-                        width: 18,
-                        height: 18,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: theme.colorScheme.onPrimary,
-                        ),
-                      )
-                    : const Icon(Icons.send),
-              ),
-            ],
+          AiChatInput(
+            controller: _question,
+            onSend: (_) => _send(),
+            busy: _busy,
+            hintText: 'Message',
+            maxLength: 2000,
+            minLines: 1,
+            maxLines: 4,
           ),
           const SizedBox(height: 8),
           Text(

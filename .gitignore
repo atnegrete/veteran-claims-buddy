@@ -11,3 +11,6 @@ app/.fvm/flutter_sdk
 .env.*
 !.env.example
 .va-forms-cache/
+
+# Firebase CLI deploy cache (generated on every deploy; never commit).
+.firebase/

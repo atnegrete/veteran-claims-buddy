@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../app/app_theme.dart';
 import '../app/app_ui.dart';
+import 'ai_chat_input.dart';
 
-/// The confirmed maximum for the free-text tweak prompt. The count stays
-/// visible, per `.cursor/rules/form-layout.mdc`.
+/// The confirmed maximum for the free-text tweak prompt. The count stays hidden
+/// until the text nears this limit, per the chat input.
 const aiRefineMaxLength = 500;
 
 /// A reusable "iterate with the AI" control. It shows an artifact ([child],
@@ -25,7 +25,6 @@ class AiRefinePanel extends StatefulWidget {
     this.history = const <String>[],
     this.maxLength = aiRefineMaxLength,
     this.enabled = true,
-    this.submitLabel = 'Update',
   });
 
   /// The artifact being refined, shown above the controls.
@@ -44,7 +43,6 @@ class AiRefinePanel extends StatefulWidget {
 
   final int maxLength;
   final bool enabled;
-  final String submitLabel;
 
   @override
   State<AiRefinePanel> createState() => _AiRefinePanelState();
@@ -90,7 +88,6 @@ class _AiRefinePanelState extends State<AiRefinePanel> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final interactive = widget.enabled && !_busy;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -100,24 +97,15 @@ class _AiRefinePanelState extends State<AiRefinePanel> {
         const SizedBox(height: 8),
         LeadText(widget.intro),
         const SizedBox(height: 12),
-        TextField(
+        AiChatInput(
           controller: _controller,
-          enabled: interactive,
+          onSend: (_) => _submit(),
+          enabled: widget.enabled,
+          busy: _busy,
+          hintText: widget.hintText,
+          maxLength: widget.maxLength,
           minLines: 2,
           maxLines: 4,
-          maxLength: widget.maxLength,
-          textInputAction: TextInputAction.newline,
-          textCapitalization: TextCapitalization.sentences,
-          decoration: InputDecoration(hintText: widget.hintText),
-        ),
-        const SizedBox(height: 8),
-        Align(
-          alignment: Alignment.centerRight,
-          child: FilledButton(
-            style: secondaryFilledStyle(),
-            onPressed: interactive ? _submit : null,
-            child: Text(_busy ? 'Updating…' : widget.submitLabel),
-          ),
         ),
         if (_error != null) ...[
           const SizedBox(height: 8),

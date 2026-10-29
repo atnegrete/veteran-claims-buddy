@@ -14,3 +14,5 @@ alwaysApply: true
 `AppTabs` in `app/lib/app/app_tabs.dart` is the one tabbed view. Any place two or more views share one space uses it, with the selected panel directly under it. Do not stand a row of `FilledButton`s or `OutlinedButton`s up as tabs. The active tab carries the selection blue wash and a blue underline; the label stays white or gray.
 
 A floating explanation is Flutter's `Tooltip`. Do not build a hover card, an overlay, or an in-flow note for one. `docs/ui.md` has the hover, tap, and plain-text rules.
+
+`AiChatInput` in `app/lib/ai/ai_chat_input.dart` is the one control for sending text to the assistant; its send button lives inside the field. A text box that talks to the agent uses it and does not get an external Update, Next, or Send button beside it.
