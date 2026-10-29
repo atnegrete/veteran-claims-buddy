@@ -2,8 +2,10 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import 'app_theme.dart';
+
 /// The only badge. Color is the fill. The label is white or gray.
-enum AppBadgeRole { primary, secondary, quiet, danger }
+enum AppBadgeRole { primary, secondary, quiet, danger, success }
 
 class AppBadge extends StatelessWidget {
   const AppBadge._({required this.role, this.label, this.icon});
@@ -23,6 +25,10 @@ class AppBadge extends StatelessWidget {
   /// Red fill, white label.
   const AppBadge.danger({required String label, IconData? icon})
     : this._(role: AppBadgeRole.danger, label: label, icon: icon);
+
+  /// Green fill, white label. A finished part, often with a white check.
+  const AppBadge.success({String? label, IconData? icon})
+    : this._(role: AppBadgeRole.success, label: label, icon: icon);
 
   final AppBadgeRole role;
   final String? label;
@@ -117,6 +123,12 @@ class _BadgeColors {
           background: scheme.errorContainer,
           foreground: scheme.onErrorContainer,
           border: scheme.errorContainer,
+        );
+      case AppBadgeRole.success:
+        return const _BadgeColors(
+          background: AppColors.success,
+          foreground: Colors.white,
+          border: AppColors.success,
         );
     }
   }

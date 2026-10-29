@@ -1,0 +1,37 @@
+[debug] [2026-10-29T17:13:15.264Z] ----------------------------------------------------------------------
+[debug] [2026-10-29T17:13:15.268Z] Command:       /Users/alann/.nvm/versions/node/v24.14.0/bin/node /Users/alann/.npm/_npx/ba4f1959e38407b5/node_modules/.bin/firebase hosting:sites:create veteran-claims-buddy-dev-app --project dev
+[debug] [2026-10-29T17:13:15.268Z] CLI Version:   15.34.2
+[debug] [2026-10-29T17:13:15.268Z] Platform:      darwin
+[debug] [2026-10-29T17:13:15.269Z] Node Version:  v24.14.0
+[debug] [2026-10-29T17:13:15.269Z] Detected Agent: unknown
+[debug] [2026-10-29T17:13:15.269Z] Time:          Thu Oct 29 2026 12:13:15 GMT-0500 (Central Daylight Time)
+[debug] [2026-10-29T17:13:15.269Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-10-29T17:13:15.462Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-10-29T17:13:15.462Z] > authorizing via signed-in user (alan.t.negrete@gmail.com)
+[debug] [2026-10-29T17:13:15.463Z] [iam] checking project veteran-claims-buddy-dev for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-10-29T17:13:15.475Z] Checked if tokens are valid: true, expires at: 1793296984849
+[debug] [2026-10-29T17:13:15.475Z] Checked if tokens are valid: true, expires at: 1793296984849
+[debug] [2026-10-29T17:13:15.476Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/veteran-claims-buddy-dev:testIamPermissions [none]
+[debug] [2026-10-29T17:13:15.476Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/veteran-claims-buddy-dev:testIamPermissions  x-goog-user-project=veteran-claims-buddy-dev
+[debug] [2026-10-29T17:13:15.476Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/veteran-claims-buddy-dev:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-10-29T17:13:15.776Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/veteran-claims-buddy-dev:testIamPermissions 200
+[debug] [2026-10-29T17:13:15.776Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/veteran-claims-buddy-dev:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-10-29T17:13:15.777Z] Checked if tokens are valid: true, expires at: 1793296984849
+[debug] [2026-10-29T17:13:15.777Z] Checked if tokens are valid: true, expires at: 1793296984849
+[debug] [2026-10-29T17:13:15.777Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/veteran-claims-buddy-dev/services/firebasehosting.googleapis.com [none]
+[debug] [2026-10-29T17:13:15.777Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/veteran-claims-buddy-dev/services/firebasehosting.googleapis.com  x-goog-user-project=veteran-claims-buddy-dev
+[debug] [2026-10-29T17:13:16.161Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/veteran-claims-buddy-dev/services/firebasehosting.googleapis.com 200
+[debug] [2026-10-29T17:13:16.161Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/veteran-claims-buddy-dev/services/firebasehosting.googleapis.com [omitted]
+[debug] [2026-10-29T17:13:16.173Z] Checked if tokens are valid: true, expires at: 1793296984849
+[debug] [2026-10-29T17:13:16.173Z] Checked if tokens are valid: true, expires at: 1793296984849
+[debug] [2026-10-29T17:13:16.173Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/veteran-claims-buddy-dev [none]
+[debug] [2026-10-29T17:13:16.256Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/veteran-claims-buddy-dev 200
+[debug] [2026-10-29T17:13:16.256Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/veteran-claims-buddy-dev {"projectNumber":"889239170932","projectId":"veteran-claims-buddy-dev","lifecycleState":"ACTIVE","name":"veteran-claims-buddy-dev","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2026-09-29T19:14:25.295Z"}
+[debug] [2026-10-29T17:13:16.256Z] Checked if tokens are valid: true, expires at: 1793296984849
+[debug] [2026-10-29T17:13:16.256Z] Checked if tokens are valid: true, expires at: 1793296984849
+[debug] [2026-10-29T17:13:16.256Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/889239170932/sites siteId=veteran-claims-buddy-dev-app&validateOnly=true
+[debug] [2026-10-29T17:13:16.257Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/889239170932/sites {"appId":""}
+[debug] [2026-10-29T17:13:16.769Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/889239170932/sites 409
+[debug] [2026-10-29T17:13:16.769Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/889239170932/sites {"error":{"code":409,"message":"Site `projects/889239170932/sites/veteran-claims-buddy-dev-app` already exists.","status":"ALREADY_EXISTS"}}
+[warn] ⚠  Request to https://firebasehosting.googleapis.com/v1beta1/projects/889239170932/sites?siteId=veteran-claims-buddy-dev-app&validateOnly=true had HTTP Error: 409, Site `projects/889239170932/sites/veteran-claims-buddy-dev-app` already exists. 

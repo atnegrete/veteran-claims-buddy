@@ -450,7 +450,7 @@ class _SectionRow extends StatelessWidget {
                   ),
                 ),
                 if (status == ClaimSectionStatus.done)
-                  const AppBadge.quiet(icon: Icons.check),
+                  const AppBadge.success(icon: Icons.check),
               ],
             ),
           ),

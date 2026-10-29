@@ -258,7 +258,7 @@ class _FactBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (status) {
-      'confirmed' => const AppBadge.secondary(
+      'confirmed' => const AppBadge.success(
         label: 'Confirmed',
         icon: Icons.check,
       ),

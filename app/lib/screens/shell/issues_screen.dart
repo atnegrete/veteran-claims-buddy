@@ -14,7 +14,6 @@ import '../../claim/discovery_questions.dart';
 import '../../claim/form_recommendations.dart';
 import '../../claim/issue_lane.dart';
 import '../../claim/issue_progress.dart';
-import '../../claim/issue_record_repository.dart';
 import '../../claim/questionnaire_catalog.dart';
 import '../../claim/questionnaire_repository.dart';
 import '../../forms/nested_split.dart';
@@ -271,16 +270,23 @@ class _IssueMenu extends ConsumerWidget {
     final pursue = pursueStepStatus(laneAnswers, decisions: decisions);
     final lane = _laneFor(ref.watch(claimLanesProvider(caseId)), issue.id);
     final closed = _closedReason(lane, laneAnswers);
+    final questionCounts = topicQuestionCounts(
+      questions: session.questions,
+      answers: session.answers,
+      conditionId: issue.id,
+    );
     final questions = topicQuestionsStatus(
       questions: session.questions,
       answers: session.answers,
       conditionId: issue.id,
     );
+    final letterSettled =
+        doctor || (closed == null && nexusLetterNotNeeded(lane));
     final marks = <String, ProgressMark>{
       'questions': ProgressMark(
         status: questions,
         label: questions == ClaimSectionStatus.inProgress
-            ? 'In progress'
+            ? completionLabel(questionCounts.answered, questionCounts.total)
             : null,
       ),
       'connection': ProgressMark(
@@ -292,7 +298,7 @@ class _IssueMenu extends ConsumerWidget {
         status: lay ? ClaimSectionStatus.done : ClaimSectionStatus.notStarted,
       ),
       'doctor': ProgressMark(
-        status: doctor
+        status: letterSettled
             ? ClaimSectionStatus.done
             : ClaimSectionStatus.notStarted,
       ),
@@ -660,7 +666,7 @@ class _ReviewCard extends StatelessWidget {
                 runSpacing: 8,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  const AppBadge.secondary(
+                  const AppBadge.success(
                     label: 'Added to claim',
                     icon: Icons.check,
                   ),
@@ -700,9 +706,6 @@ class _IssueTile extends ConsumerWidget {
           data: (value) => value,
           orElse: () => QuestionnaireSession.empty,
         );
-    final links = ref
-        .watch(issueLinksProvider(issue.id))
-        .maybeWhen(data: (value) => value.length, orElse: () => 0);
     final theories = ref
         .watch(issueTheoriesProvider(issue.id))
         .maybeWhen(data: (value) => value.length, orElse: () => 0);
@@ -722,32 +725,33 @@ class _IssueTile extends ConsumerWidget {
         .watch(issueLaneAnswersProvider(issue.id))
         .maybeWhen(data: (value) => value, orElse: () => LaneAnswers.empty);
     final pursue = pursueStepStatus(laneAnswers, decisions: decisions);
-    final filled = filledPartCount(
-      questions: topicQuestionsStatus(
-        questions: session.questions,
-        answers: session.answers,
-        conditionId: issue.id,
-      ),
-      evidenceNotes: links,
-      connections: theories,
-      lay: lay,
-      doctorDraft: doctor,
-      decisions: pursue == ClaimSectionStatus.done ? 1 : 0,
-    );
-    final status = filled == 6
-        ? ClaimSectionStatus.done
-        : filled == 0
-        ? ClaimSectionStatus.notStarted
-        : ClaimSectionStatus.inProgress;
     final lane = ref
         .watch(claimLanesProvider(caseId))
         .where((item) => item.issueId == issue.id);
-    final laneLabel = lane.isEmpty ? '' : lane.first.label;
+    final laneResult = lane.isEmpty ? null : lane.first;
+    final laterClosed = _closedReason(laneResult, laneAnswers) != null;
+    final questions = topicQuestionsStatus(
+      questions: session.questions,
+      answers: session.answers,
+      conditionId: issue.id,
+    );
+    final progress = conditionPartProgress(
+      questions: questions,
+      decisions: pursue,
+      connectionSaved: theories > 0,
+      laySaved: lay,
+      doctorComplete: doctor || nexusLetterNotNeeded(laneResult),
+      laterClosed: laterClosed,
+    );
+    final laneLabel = laneResult?.label ?? '';
     return AppNavRow(
       title: issue.displayName,
       subtitle: laneLabel.isEmpty ? null : laneLabel,
       showChevron: false,
-      trailing: ProgressMark(status: status, label: issueFilledLabel(filled)),
+      trailing: ProgressMark(
+        status: progress.status,
+        label: completionLabel(progress.completed, progress.total),
+      ),
       onTap: () => context.go(AuthRoutes.caseCondition(caseId, issue.id)),
     );
   }

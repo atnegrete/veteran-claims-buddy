@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../app/app_scroll.dart';
+import '../app/app_theme.dart';
 
 /// Where one step sits in the flow.
 ///
@@ -23,8 +24,9 @@ class StepRailItem {
 
 /// The one horizontal step indicator.
 ///
-/// Numbered circles joined by a line, a check when a step is done, a filled
-/// circle for the current step, and a muted circle for a locked step. The rail
+/// Numbered circles joined by a line, a white check on green when a step is
+/// done, a blue circle for the current step, and a muted circle for a locked
+/// step. The rail
 /// scrolls when the steps do not fit: it centers the current step, a mouse or
 /// trackpad can drag it, the wheel moves it sideways, and outlined chevrons at
 /// the ends appear only when there is more to see.
@@ -315,15 +317,23 @@ class _RailNode extends StatelessWidget {
       height: _circle,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: current ? scheme.primary : Colors.transparent,
+        color: done
+            ? AppColors.success
+            : current
+            ? scheme.primary
+            : Colors.transparent,
         shape: BoxShape.circle,
         border: Border.all(
-          color: current ? scheme.primary : scheme.outline,
-          width: current ? 0 : 1.5,
+          color: done
+              ? AppColors.success
+              : current
+              ? scheme.primary
+              : scheme.outline,
+          width: current || done ? 0 : 1.5,
         ),
       ),
       child: done
-          ? Icon(Icons.check, size: 16, color: scheme.onSurfaceVariant)
+          ? const Icon(Icons.check, size: 16, color: Colors.white)
           : Text(
               '$number',
               style: theme.textTheme.labelMedium?.copyWith(
@@ -335,7 +345,7 @@ class _RailNode extends StatelessWidget {
 
     Color lineColor(bool show, bool complete) {
       if (!show) return Colors.transparent;
-      return complete ? scheme.onSurfaceVariant : scheme.outline;
+      return complete ? AppColors.success : scheme.outline;
     }
 
     final column = Column(

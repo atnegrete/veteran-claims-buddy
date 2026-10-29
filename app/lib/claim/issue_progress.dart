@@ -1,5 +1,6 @@
 import 'claim_issue.dart';
 import 'claim_sections.dart';
+import 'issue_lane.dart';
 import 'questionnaire_catalog.dart';
 
 /// Which part of an issue the path has open, or null when the list is alone.
@@ -117,26 +118,39 @@ String? previousConditionPanel(String from, {required bool laterClosed}) {
   return null;
 }
 
-ClaimSectionStatus topicQuestionsStatus({
+({int answered, int total}) topicQuestionCounts({
   required List<CatalogQuestion> questions,
   required Map<String, List<String>> answers,
   required String conditionId,
 }) {
   final pageId = catalogPageIdForCondition(questions, conditionId);
-  if (pageId == null) return ClaimSectionStatus.notStarted;
+  if (pageId == null) return (answered: 0, total: 0);
   final pages = [
     for (final page in catalogPages(questions, answers))
       if (page.id == pageId) page,
   ];
-  if (pages.isEmpty || pages.first.questions.isEmpty) {
-    return ClaimSectionStatus.notStarted;
-  }
+  if (pages.isEmpty) return (answered: 0, total: 0);
   final visible = pages.first.questions;
   final answered = visible.where((question) {
     return catalogAnswered(question, answers);
   }).length;
-  if (answered == 0) return ClaimSectionStatus.notStarted;
-  if (answered == visible.length) return ClaimSectionStatus.done;
+  return (answered: answered, total: visible.length);
+}
+
+ClaimSectionStatus topicQuestionsStatus({
+  required List<CatalogQuestion> questions,
+  required Map<String, List<String>> answers,
+  required String conditionId,
+}) {
+  final counts = topicQuestionCounts(
+    questions: questions,
+    answers: answers,
+    conditionId: conditionId,
+  );
+  if (counts.total == 0 || counts.answered == 0) {
+    return ClaimSectionStatus.notStarted;
+  }
+  if (counts.answered == counts.total) return ClaimSectionStatus.done;
   return ClaimSectionStatus.inProgress;
 }
 
@@ -172,28 +186,64 @@ String? addedLabel(int count) {
   return '$count added';
 }
 
-int filledPartCount({
-  required ClaimSectionStatus questions,
-  required int evidenceNotes,
-  required int connections,
-  required bool lay,
-  required bool doctorDraft,
-  required int decisions,
-}) {
-  var count = 0;
-  if (questions != ClaimSectionStatus.notStarted) count++;
-  if (evidenceNotes > 0) count++;
-  if (connections > 0) count++;
-  if (lay) count++;
-  if (doctorDraft) count++;
-  if (decisions > 0) count++;
-  return count;
+/// How far a condition's open parts are. [completed] counts parts that are
+/// finished. [total] is the parts still in play. A closed condition keeps
+/// Questions and New or already decided only.
+class ConditionProgress {
+  const ConditionProgress({
+    required this.completed,
+    required this.total,
+    required this.started,
+  });
+
+  final int completed;
+  final int total;
+  final bool started;
+
+  ClaimSectionStatus get status {
+    if (total > 0 && completed >= total) return ClaimSectionStatus.done;
+    if (started) return ClaimSectionStatus.inProgress;
+    return ClaimSectionStatus.notStarted;
+  }
 }
 
-String issueFilledLabel(int count) {
-  if (count <= 0) return 'Nothing filled in yet';
-  if (count == 1) return '1 part filled in';
-  return '$count parts filled in';
+/// "2 of 5 completed". The same words at zero, in the middle, and at the end.
+String completionLabel(int completed, int total) {
+  return '$completed of $total completed';
+}
+
+/// A letter is settled when the filing is chosen and does not ask for one.
+/// A condition that still needs that choice is not settled.
+bool nexusLetterNotNeeded(IssueLaneResult? lane) {
+  if (lane == null) return false;
+  if (lane.filing == IssueFiling.needsAnswer) return false;
+  return !lane.needsNexus;
+}
+
+ConditionProgress conditionPartProgress({
+  required ClaimSectionStatus questions,
+  required ClaimSectionStatus decisions,
+  required bool connectionSaved,
+  required bool laySaved,
+  required bool doctorComplete,
+  required bool laterClosed,
+}) {
+  final parts = <ClaimSectionStatus>[
+    questions,
+    decisions,
+    if (!laterClosed) ...[
+      connectionSaved
+          ? ClaimSectionStatus.done
+          : ClaimSectionStatus.notStarted,
+      laySaved ? ClaimSectionStatus.done : ClaimSectionStatus.notStarted,
+      doctorComplete ? ClaimSectionStatus.done : ClaimSectionStatus.notStarted,
+    ],
+  ];
+  return ConditionProgress(
+    completed: parts.where((part) => part == ClaimSectionStatus.done).length,
+    total: parts.length,
+    started: parts.any((part) => part != ClaimSectionStatus.notStarted),
+  );
 }
 
 bool statementSaved(IssueStatement? statement) {

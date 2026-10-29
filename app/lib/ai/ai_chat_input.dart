@@ -5,9 +5,10 @@ import '../forms/text_input_chain.dart';
 /// A chat-style text input with the send button built into the field.
 ///
 /// The one control for sending text to the assistant: Vet Buddy, Ask for a
-/// change, and the Nexus gap interview all use it. A rounded box with a round
-/// send button pinned inside its bottom-right corner, so there is no separate
-/// Update, Next, or Send button beside it.
+/// change, and the Nexus gap interview all use it. The text area and the round
+/// send button live inside one bordered surface that lights up on focus, so
+/// the button reads as part of the field rather than a separate control, and
+/// there is no Update, Next, or Send button beside it.
 ///
 /// The parent owns the [controller], the [busy] flag, errors, and clearing on
 /// success. This widget raises [onSend] with the trimmed text when the button
@@ -62,10 +63,13 @@ class AiChatInput extends StatefulWidget {
 }
 
 class _AiChatInputState extends State<AiChatInput> {
+  final _focus = FocusNode();
+
   @override
   void initState() {
     super.initState();
     widget.controller.addListener(_onChanged);
+    _focus.addListener(_onChanged);
   }
 
   @override
@@ -80,6 +84,7 @@ class _AiChatInputState extends State<AiChatInput> {
   @override
   void dispose() {
     widget.controller.removeListener(_onChanged);
+    _focus.dispose();
     super.dispose();
   }
 
@@ -90,9 +95,7 @@ class _AiChatInputState extends State<AiChatInput> {
   bool get _hasText => widget.controller.text.trim().isNotEmpty;
 
   bool get _canSend =>
-      widget.enabled &&
-      !widget.busy &&
-      (widget.allowEmptySend || _hasText);
+      widget.enabled && !widget.busy && (widget.allowEmptySend || _hasText);
 
   void _send() {
     if (!_canSend) return;
@@ -101,6 +104,12 @@ class _AiChatInputState extends State<AiChatInput> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    final disabled = !widget.enabled || widget.busy;
+    final focused = _focus.hasFocus && !disabled;
+    final fill =
+        theme.inputDecorationTheme.fillColor ?? scheme.surfaceContainerHighest;
     final counter = quietCount(
       context,
       currentLength: widget.controller.text.length,
@@ -110,39 +119,64 @@ class _AiChatInputState extends State<AiChatInput> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Stack(
-          children: [
-            TextField(
-              controller: widget.controller,
-              enabled: widget.enabled && !widget.busy,
-              minLines: widget.minLines,
-              maxLines: widget.maxLines,
-              maxLength: widget.maxLength,
-              textCapitalization: widget.textCapitalization,
-              textInputAction: TextInputAction.send,
-              onSubmitted: (_) => _send(),
-              decoration: InputDecoration(
-                hintText: widget.hintText,
-                // The field renders no counter; it sits below, outside the
-                // Stack, so the send button stays pinned to the box corner.
-                counterText: '',
-                contentPadding: const EdgeInsets.fromLTRB(16, 14, 56, 14),
-              ),
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          curve: Curves.easeOut,
+          padding: const EdgeInsets.fromLTRB(16, 4, 6, 4),
+          decoration: BoxDecoration(
+            color: fill,
+            borderRadius: BorderRadius.circular(22),
+            border: Border.all(
+              color: focused ? scheme.primary : scheme.outline,
+              width: focused ? 1.5 : 1,
             ),
-            Positioned(
-              right: 6,
-              bottom: 6,
-              child: _SendButton(
-                tooltip: widget.sendTooltip,
-                busy: widget.busy,
-                onPressed: _canSend ? _send : null,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Expanded(
+                // A borderless field so the surrounding surface is the only
+                // frame; the send button shares that frame.
+                child: TextField(
+                  controller: widget.controller,
+                  focusNode: _focus,
+                  enabled: !disabled,
+                  minLines: widget.minLines,
+                  maxLines: widget.maxLines,
+                  maxLength: widget.maxLength,
+                  textCapitalization: widget.textCapitalization,
+                  textInputAction: TextInputAction.send,
+                  onSubmitted: (_) => _send(),
+                  cursorColor: scheme.primary,
+                  style: theme.textTheme.bodyLarge,
+                  decoration: InputDecoration(
+                    isCollapsed: true,
+                    filled: false,
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    counterText: '',
+                    hintText: widget.hintText,
+                    contentPadding: const EdgeInsets.symmetric(vertical: 11),
+                  ),
+                ),
               ),
-            ),
-          ],
+              const SizedBox(width: 8),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 2),
+                child: _SendButton(
+                  tooltip: widget.sendTooltip,
+                  busy: widget.busy,
+                  onPressed: _canSend ? _send : null,
+                ),
+              ),
+            ],
+          ),
         ),
         if (counter != null)
           Padding(
-            padding: const EdgeInsets.only(top: 6, right: 4),
+            padding: const EdgeInsets.only(top: 6, right: 6),
             child: Align(alignment: Alignment.centerRight, child: counter),
           ),
       ],
@@ -175,7 +209,7 @@ class _SendButton extends StatelessWidget {
         child: Material(
           color: enabled
               ? scheme.primary
-              : scheme.primary.withValues(alpha: 0.38),
+              : scheme.primary.withValues(alpha: 0.32),
           shape: const CircleBorder(),
           clipBehavior: Clip.antiAlias,
           child: InkWell(
@@ -193,7 +227,9 @@ class _SendButton extends StatelessWidget {
                   : Icon(
                       Icons.arrow_upward_rounded,
                       size: 20,
-                      color: scheme.onPrimary,
+                      color: enabled
+                          ? scheme.onPrimary
+                          : scheme.onPrimary.withValues(alpha: 0.7),
                     ),
             ),
           ),

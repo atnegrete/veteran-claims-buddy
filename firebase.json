@@ -45,12 +45,18 @@
         {
           "source": "**/*.mjs",
           "headers": [
-            { "key": "Content-Type", "value": "text/javascript" }
+            {
+              "key": "Content-Type",
+              "value": "text/javascript"
+            }
           ]
         }
       ],
       "rewrites": [
-        { "source": "**", "destination": "/index.html" }
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
       ]
     }
   ]

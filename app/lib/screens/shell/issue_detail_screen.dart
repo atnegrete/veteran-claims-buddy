@@ -8,7 +8,7 @@ import 'package:printing/printing.dart';
 import '../../app/app_theme.dart';
 import '../../app/app_ui.dart';
 import '../../app/app_tabs.dart';
-import '../../app/app_badge.dart';
+import '../../claim/claim_sections.dart';
 import '../../ai/ai_chat_input.dart';
 import '../../ai/ai_refine_panel.dart';
 import '../../forms/pdf_preview_pane.dart';
@@ -23,6 +23,7 @@ import '../../claim/issue_lane.dart';
 import '../../claim/issue_progress.dart';
 import 'connection_form.dart';
 import 'issue_lane_panel.dart';
+import 'progress_mark.dart';
 import '../../claim/claim_issue_repository.dart';
 import '../../claim/issue_record_repository.dart';
 import '../../claim/questionnaire_catalog.dart';
@@ -591,7 +592,14 @@ class _NexusLettersPanelState extends ConsumerState<NexusLettersPanel> {
           const SizedBox(height: 12),
           Align(
             alignment: Alignment.centerLeft,
-            child: AppBadge.primary(label: '$_answered of $_total answered'),
+            child: ProgressMark(
+              status: _answered >= _total
+                  ? ClaimSectionStatus.done
+                  : _answered > 0
+                  ? ClaimSectionStatus.inProgress
+                  : ClaimSectionStatus.notStarted,
+              label: completionLabel(_answered, _total),
+            ),
           ),
         ],
         const SizedBox(height: 16),

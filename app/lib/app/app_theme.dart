@@ -16,9 +16,12 @@ abstract final class AppColors {
   static const dangerFill = Color(0xFFB91C1C);
   static const dangerText = Color(0xFFF87171);
 
-  /// Money green. The one positive-figure color, aligned with the blue family
-  /// (emerald, same tonal step as `dangerText`). Only for the estimated dollar
-  /// amount on the calculator. Not a general success color.
+  /// Finished-part fill. White label and white check. Dark enough that the
+  /// words stay readable. Not the calculator's money green.
+  static const success = Color(0xFF047857);
+
+  /// Money green. The estimated dollar amount on the calculator, and the
+  /// success edge on an InfoNote. Not the finished-part fill.
   static const money = Color(0xFF34D399);
 }
 

@@ -23,8 +23,8 @@ class ProgressMark extends StatelessWidget {
       return AppBadge.primary(label: hasLabel ? label! : 'In progress');
     }
     if (hasLabel) {
-      return AppBadge.secondary(label: label!, icon: Icons.check);
+      return AppBadge.success(label: label, icon: Icons.check);
     }
-    return const AppBadge.quiet(icon: Icons.check);
+    return const AppBadge.success(icon: Icons.check);
   }
 }
