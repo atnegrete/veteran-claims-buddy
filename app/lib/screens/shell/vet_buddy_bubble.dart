@@ -18,43 +18,44 @@ class VetBuddyBubble extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final surface = Theme.of(context).colorScheme.surface;
     return FloatingActionButton(
       tooltip: 'Vet Buddy',
-      onPressed: caseId.isEmpty
-          ? null
-          : () {
-              showModalBottomSheet<void>(
-                context: context,
-                isScrollControlled: true,
-                showDragHandle: true,
-                backgroundColor: surface,
-                builder: (sheetContext) {
-                  final inset = MediaQuery.viewInsetsOf(sheetContext).bottom;
-                  final available =
-                      MediaQuery.sizeOf(sheetContext).height - inset;
-                  return Padding(
-                    padding: EdgeInsets.only(bottom: inset),
-                    child: SizedBox(
-                      height: available * 0.9,
-                      child: SafeArea(
-                        top: false,
-                        child: _VetBuddySheet(
-                          caseId: caseId,
-                          onOpen: (route) {
-                            Navigator.of(sheetContext).pop();
-                            context.go(route);
-                          },
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              );
-            },
+      onPressed: caseId.isEmpty ? null : () => openVetBuddy(context, caseId),
       child: const Icon(Icons.chat_bubble_outline),
     );
   }
+}
+
+/// Opens the Vet Buddy sheet. A phone calls this from the app bar.
+void openVetBuddy(BuildContext context, String caseId) {
+  if (caseId.isEmpty) return;
+  final surface = Theme.of(context).colorScheme.surface;
+  showModalBottomSheet<void>(
+    context: context,
+    isScrollControlled: true,
+    showDragHandle: true,
+    backgroundColor: surface,
+    builder: (sheetContext) {
+      final inset = MediaQuery.viewInsetsOf(sheetContext).bottom;
+      final available = MediaQuery.sizeOf(sheetContext).height - inset;
+      return Padding(
+        padding: EdgeInsets.only(bottom: inset),
+        child: SizedBox(
+          height: available * 0.9,
+          child: SafeArea(
+            top: false,
+            child: _VetBuddySheet(
+              caseId: caseId,
+              onOpen: (route) {
+                Navigator.of(sheetContext).pop();
+                context.go(route);
+              },
+            ),
+          ),
+        ),
+      );
+    },
+  );
 }
 
 class _VetBuddySheet extends ConsumerStatefulWidget {

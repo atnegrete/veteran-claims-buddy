@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../app/app_layout.dart';
 import 'step_rail.dart';
 
 /// A list and the form that opens from it.
@@ -36,6 +37,7 @@ class NestedSplit extends StatelessWidget {
         final showMaster = !open || wide;
         final showDetail = open;
         final showSteps = !wide && open && (steps?.isNotEmpty ?? false);
+        final phone = isPhoneLayout(context);
         return Stack(
           fit: StackFit.expand,
           children: [
@@ -44,7 +46,7 @@ class NestedSplit extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   NestedStepBar(steps: steps!),
-                  const SizedBox(height: 16),
+                  SizedBox(height: phone ? 8 : 16),
                   Expanded(
                     child: NestedStepScope(inStepFlow: true, child: detail),
                   ),
@@ -147,9 +149,9 @@ class NestedStep {
 
 /// The step flow for a condition on a narrow pane.
 ///
-/// A "Step n of m" caption with the full current part name sits above a
-/// [StepRail]: numbered circles joined by a line, a check on a finished part,
-/// a filled current part, and a muted locked part. The rail scrolls and
+/// On a phone the current part name and "Step n of m" share one row, above a
+/// compact [StepRail]. On a wider pane the caption and the part name stack,
+/// and the rail shows a short label under each circle. The rail scrolls and
 /// centers the current part when the steps do not fit.
 class NestedStepBar extends StatelessWidget {
   const NestedStepBar({super.key, required this.steps});
@@ -160,13 +162,55 @@ class NestedStepBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
+    final phone = isPhoneLayout(context);
     final total = steps.length;
     final currentIndex = steps.indexWhere((step) => step.selected);
     final current = currentIndex >= 0 ? steps[currentIndex] : null;
+    final rail = StepRail(
+      compact: phone,
+      steps: [
+        for (final step in steps)
+          StepRailItem(
+            label: step.shortTitle,
+            state: step.selected
+                ? StepRailState.current
+                : !step.enabled
+                ? StepRailState.locked
+                : step.done
+                ? StepRailState.done
+                : StepRailState.open,
+            onTap: !step.enabled || step.selected ? null : step.onPressed,
+          ),
+      ],
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (current != null) ...[
+        if (current != null && phone)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  current.title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.titleMedium,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Padding(
+                padding: const EdgeInsets.only(top: 2),
+                child: Text(
+                  'Step ${currentIndex + 1} of $total',
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    color: scheme.onSurfaceVariant,
+                  ),
+                ),
+              ),
+            ],
+          )
+        else if (current != null) ...[
           Text(
             'Step ${currentIndex + 1} of $total',
             style: theme.textTheme.labelMedium?.copyWith(
@@ -175,24 +219,9 @@ class NestedStepBar extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(current.title, style: theme.textTheme.titleLarge),
-          const SizedBox(height: 16),
         ],
-        StepRail(
-          steps: [
-            for (final step in steps)
-              StepRailItem(
-                label: step.shortTitle,
-                state: step.selected
-                    ? StepRailState.current
-                    : !step.enabled
-                    ? StepRailState.locked
-                    : step.done
-                    ? StepRailState.done
-                    : StepRailState.open,
-                onTap: !step.enabled || step.selected ? null : step.onPressed,
-              ),
-          ],
-        ),
+        SizedBox(height: phone ? 8 : 16),
+        rail,
       ],
     );
   }
@@ -221,10 +250,12 @@ class NestedCloseButton extends StatelessWidget {
   }
 }
 
-/// A card that fills the pane. The title stays put. The body scrolls,
-/// unless [expandChild] is set and the child scrolls itself.
+/// The form pane. On a wide window it is a card. On a phone the card is gone
+/// and the intro scrolls with the body.
 ///
-/// The scrollbar sits in a gutter beside the form. It does not cover it.
+/// The title stays put. The body scrolls, unless [expandChild] is set and the
+/// child scrolls itself. The scrollbar sits in a gutter beside the form. It
+/// does not cover it.
 class NestedForm extends StatefulWidget {
   const NestedForm({
     super.key,
@@ -263,8 +294,33 @@ class _NestedFormState extends State<NestedForm> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final phone = isPhoneLayout(context);
     // A step bar already names the current part, so the form drops its title.
     final title = NestedStepScope.of(context) ? null : widget.title;
+    // On a phone the intro scrolls with the work. A child that fills the pane
+    // keeps the intro above it, because that child owns its own scroll.
+    final introScrolls = phone && !widget.expandChild;
+    final scrollChild = introScrolls
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (widget.intro != null)
+                Text(
+                  widget.intro!,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              if (widget.notice != null) ...[
+                if (widget.intro != null) const SizedBox(height: 12),
+                widget.notice!,
+              ],
+              if (widget.intro != null || widget.notice != null)
+                const SizedBox(height: 12),
+              widget.child,
+            ],
+          )
+        : widget.child;
     final body = widget.expandChild
         ? widget.child
         : Scrollbar(
@@ -272,58 +328,63 @@ class _NestedFormState extends State<NestedForm> {
             thumbVisibility: true,
             child: SingleChildScrollView(
               controller: _scroll,
-              child: widget.child,
+              child: scrollChild,
             ),
           );
+    final pinIntro = !introScrolls && widget.intro != null;
+    final pinNotice = !introScrolls && widget.notice != null;
+    final column = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (title != null ||
+            pinIntro ||
+            pinNotice ||
+            widget.headerAction != null) ...[
+          if (title != null || widget.headerAction != null)
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (title != null)
+                  Expanded(
+                    child: Text(
+                      title,
+                      maxLines: phone ? 2 : null,
+                      overflow: phone ? TextOverflow.ellipsis : null,
+                      style: phone
+                          ? theme.textTheme.titleMedium
+                          : theme.textTheme.titleLarge,
+                    ),
+                  )
+                else
+                  const Spacer(),
+                if (widget.headerAction != null) ...[
+                  if (title != null) const SizedBox(width: 12),
+                  widget.headerAction!,
+                ],
+              ],
+            ),
+          if (pinIntro) ...[
+            if (title != null) const SizedBox(height: 8),
+            Text(
+              widget.intro!,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ],
+          if (pinNotice) ...[const SizedBox(height: 12), widget.notice!],
+          const SizedBox(height: 12),
+          const Divider(height: 1),
+          SizedBox(height: phone ? 8 : 16),
+        ],
+        Expanded(child: body),
+        if (widget.footer != null) widget.footer!,
+      ],
+    );
+    if (phone) return column;
     return Card(
       margin: EdgeInsets.zero,
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (title != null ||
-                widget.intro != null ||
-                widget.notice != null ||
-                widget.headerAction != null) ...[
-              if (title != null || widget.headerAction != null)
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (title != null)
-                      Expanded(
-                        child: Text(title, style: theme.textTheme.titleLarge),
-                      )
-                    else
-                      const Spacer(),
-                    if (widget.headerAction != null) ...[
-                      if (title != null) const SizedBox(width: 12),
-                      widget.headerAction!,
-                    ],
-                  ],
-                ),
-              if (widget.intro != null) ...[
-                if (title != null) const SizedBox(height: 8),
-                Text(
-                  widget.intro!,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
-              ],
-              if (widget.notice != null) ...[
-                const SizedBox(height: 12),
-                widget.notice!,
-              ],
-              const SizedBox(height: 12),
-              const Divider(height: 1),
-              const SizedBox(height: 16),
-            ],
-            Expanded(child: body),
-            if (widget.footer != null) widget.footer!,
-          ],
-        ),
-      ),
+      child: Padding(padding: const EdgeInsets.all(20), child: column),
     );
   }
 }

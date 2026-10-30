@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/app_layout.dart';
 import '../../app/app_ui.dart';
 import '../../auth/auth_redirect.dart';
 import '../../cases/cases_progress.dart';
@@ -43,6 +44,8 @@ class ShellPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final phone = isPhoneLayout(context);
+    final theme = Theme.of(context);
     final body = expandChild
         ? child
         : Column(
@@ -60,7 +63,9 @@ class ShellPage extends StatelessWidget {
     return SafeArea(
       top: false,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
+        padding: phone
+            ? const EdgeInsets.fromLTRB(16, 8, 16, 12)
+            : const EdgeInsets.fromLTRB(24, 24, 24, 24),
         child: Align(
           alignment: Alignment.topCenter,
           child: ConstrainedBox(
@@ -70,7 +75,7 @@ class ShellPage extends StatelessWidget {
               children: [
                 if (eyebrow != null) ...[
                   Eyebrow(eyebrow!),
-                  const SizedBox(height: 8),
+                  SizedBox(height: phone ? 4 : 8),
                 ],
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,7 +83,11 @@ class ShellPage extends StatelessWidget {
                     Expanded(
                       child: Text(
                         title,
-                        style: Theme.of(context).textTheme.headlineMedium,
+                        maxLines: phone ? 2 : null,
+                        overflow: phone ? TextOverflow.ellipsis : null,
+                        style: phone
+                            ? theme.textTheme.titleLarge
+                            : theme.textTheme.headlineMedium,
                       ),
                     ),
                     if (titleTrailing != null) ...[
@@ -87,8 +96,10 @@ class ShellPage extends StatelessWidget {
                     ],
                   ],
                 ),
-                const SizedBox(height: 16),
-                Expanded(child: wrapInCard ? SurfaceCard(child: body) : body),
+                SizedBox(height: phone ? 8 : 16),
+                Expanded(
+                  child: wrapInCard && !phone ? SurfaceCard(child: body) : body,
+                ),
               ],
             ),
           ),

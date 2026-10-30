@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../app/app_layout.dart';
 import 'form_actions.dart';
 import 'step_rail.dart';
 
@@ -31,6 +32,7 @@ class StepForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final phone = isPhoneLayout(context);
     final reached = farthestIndex < currentIndex ? currentIndex : farthestIndex;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -41,14 +43,15 @@ class StepForm extends StatelessWidget {
             color: theme.colorScheme.onSurface,
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: phone ? 4 : 12),
         _StepTrack(
           labels: labels,
           currentIndex: currentIndex,
           farthestIndex: reached,
+          compact: phone,
           onStepSelected: busy ? null : onStepSelected,
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: phone ? 8 : 16),
         child,
         if (onNext != null || currentIndex > 0)
           FormActions(
@@ -69,17 +72,20 @@ class _StepTrack extends StatelessWidget {
     required this.labels,
     required this.currentIndex,
     required this.farthestIndex,
+    required this.compact,
     required this.onStepSelected,
   });
 
   final List<String> labels;
   final int currentIndex;
   final int farthestIndex;
+  final bool compact;
   final ValueChanged<int>? onStepSelected;
 
   @override
   Widget build(BuildContext context) {
     return StepRail(
+      compact: compact,
       steps: [
         for (var index = 0; index < labels.length; index++)
           StepRailItem(
