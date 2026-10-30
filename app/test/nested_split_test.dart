@@ -85,11 +85,12 @@ void main() {
     );
 
     expect(find.text('The form').hitTestable(), findsOneWidget);
-    // The caption names the current part once, and the rail shows short labels.
+    // The part name and the count share one row. Short names sit on the circles.
     expect(find.text('Step 1 of 2'), findsOneWidget);
     expect(find.text('Questions about this').hitTestable(), findsOneWidget);
-    expect(find.text('Questions').hitTestable(), findsOneWidget);
-    expect(find.text('Statement').hitTestable(), findsOneWidget);
+    expect(find.byTooltip('Questions'), findsOneWidget);
+    expect(find.byTooltip('Statement'), findsOneWidget);
+    expect(find.text('Questions'), findsNothing);
     expect(find.text('The list').hitTestable(), findsNothing);
   });
 
@@ -187,7 +188,7 @@ void main() {
       ),
     );
 
-    await tester.tap(find.text('Connection'));
+    await tester.tap(find.byTooltip('Connection'));
     await tester.pump();
     expect(opened, isFalse);
   });
@@ -225,7 +226,7 @@ void main() {
   });
 
   testWidgets('arrows scroll parts that sit past the edge', (tester) async {
-    tester.view.physicalSize = const Size(360, 800);
+    tester.view.physicalSize = const Size(800, 800);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
@@ -233,34 +234,39 @@ void main() {
     await tester.pumpWidget(
       const MaterialApp(
         home: Scaffold(
-          body: NestedStepBar(
-            steps: [
-              NestedStep(
-                title: 'Questions about this',
-                shortTitle: 'Questions',
-                selected: true,
+          body: Center(
+            child: SizedBox(
+              width: 280,
+              child: NestedStepBar(
+                steps: [
+                  NestedStep(
+                    title: 'Questions about this',
+                    shortTitle: 'Questions',
+                    selected: true,
+                  ),
+                  NestedStep(
+                    title: 'New or already decided',
+                    shortTitle: 'Decision',
+                    selected: false,
+                  ),
+                  NestedStep(
+                    title: 'How this connects to service',
+                    shortTitle: 'Connection',
+                    selected: false,
+                  ),
+                  NestedStep(
+                    title: 'Your statement',
+                    shortTitle: 'Statement',
+                    selected: false,
+                  ),
+                  NestedStep(
+                    title: 'Draft for your doctor',
+                    shortTitle: 'Doctor letter',
+                    selected: false,
+                  ),
+                ],
               ),
-              NestedStep(
-                title: 'New or already decided',
-                shortTitle: 'Decision',
-                selected: false,
-              ),
-              NestedStep(
-                title: 'How this connects to service',
-                shortTitle: 'Connection',
-                selected: false,
-              ),
-              NestedStep(
-                title: 'Your statement',
-                shortTitle: 'Statement',
-                selected: false,
-              ),
-              NestedStep(
-                title: 'Draft for your doctor',
-                shortTitle: 'Doctor letter',
-                selected: false,
-              ),
-            ],
+            ),
           ),
         ),
       ),
