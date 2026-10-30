@@ -1,0 +1,10 @@
+---
+description: Paste a preview URL when the action comments it
+alwaysApply: true
+---
+
+# Preview URL
+
+When a pull request opens a web preview, end the turn after the PR is open. When the Preview action comments the URL, paste that URL in Slack and stop.
+
+Do not open the URL. Do not screenshot the page. Do not keep the turn open to check the deploy.

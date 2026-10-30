@@ -11,6 +11,10 @@ How to build from your phone and get a live web preview of every change, without
 3. Open the preview URL on your phone. To iterate, reply in the same Slack thread; the agent pushes more commits and the preview updates.
 4. **Merge the PR from your phone.** The **Deploy dev** Action ([.github/workflows/deploy-dev.yml](../.github/workflows/deploy-dev.yml)) then publishes the merged build to the live dev app site, `https://veteran-claims-buddy-dev-app.web.app`.
 
+## Sending the URL
+
+The Preview action comments the URL on the PR. Paste that URL into Slack as soon as the comment exists, then stop. Do not open the URL. Do not screenshot the page. Do not keep the turn open while the action runs or to check that the page loaded.
+
 ```mermaid
 flowchart TD
     slack["Slack on phone: @cursor ..."] --> agent["Cursor Cloud Agent (cloud VM)"]
