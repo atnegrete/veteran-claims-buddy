@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/app_ui.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/auth_redirect.dart';
+import '../../forms/form_actions.dart';
 import '../../forms/text_input_chain.dart';
 import 'auth_scaffold.dart';
 
@@ -49,7 +49,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
       setState(() {
         _sent = true;
         _messageIsError = false;
-        _message = 'If an account exists, a reset link is on the way. This does not skip the text-message check.';
+        _message = 'If an account exists, a reset link is on the way.';
       });
     } on AuthFailure catch (failure) {
       setState(() {
@@ -64,13 +64,17 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return AuthScaffold(
+      eyebrow: 'Account',
       title: 'Forgot password',
+      lead: 'A reset link is emailed when an account exists. The text-message check still applies.',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ChainTextField(
             controller: _email,
+            enabled: !_sent && !_busy,
             keyboardType: TextInputType.emailAddress,
+            autofillHints: const [AutofillHints.email],
             decoration: const InputDecoration(labelText: 'Email'),
             maxLength: 254,
             countVisibleFrom: authCountVisibleFrom,
@@ -78,13 +82,12 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
           ),
           const SizedBox(height: 16),
           AuthMessageText(_message, isError: _messageIsError),
-          FilledButton(
-            onPressed: _busy || _sent ? null : _submit,
-            child: Text(_busy ? 'Sending…' : 'Send reset link'),
-          ),
-          TextButton(
-            onPressed: () => context.go(AuthRoutes.signIn),
-            child: const Text('Back to sign in'),
+          FormActions(
+            onBack: () => context.go(AuthRoutes.signIn),
+            onPrimary: _sent ? null : _submit,
+            primaryLabel: 'Send reset link',
+            busy: _busy,
+            busyLabel: 'Sending…',
           ),
         ],
       ),
@@ -161,54 +164,49 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
   Widget build(BuildContext context) {
     final missingCode = widget.code == null || widget.code!.isEmpty;
     return AuthScaffold(
+      eyebrow: 'Account',
       title: 'Reset password',
+      lead: missingCode
+          ? 'Open the reset link from your email, or request a new one.'
+          : 'Choose a new password for this account.',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (missingCode)
-            const LeadText(
-              'Open the reset link from your email, or request a new one.',
-            )
-          else
+          if (!missingCode)
             TextInputChain(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  ChainTextField(
+                  PasswordField(
                     controller: _password,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      labelText: 'New password',
-                    ),
-                    maxLength: 128,
-                    countVisibleFrom: authCountVisibleFrom,
+                    label: 'New password',
+                    enabled: !_done && !_busy,
+                    autofillHints: const [AutofillHints.newPassword],
                   ),
                   const SizedBox(height: 12),
-                  ChainTextField(
+                  PasswordField(
                     controller: _confirm,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      labelText: 'Confirm password',
-                    ),
-                    maxLength: 128,
-                    countVisibleFrom: authCountVisibleFrom,
+                    label: 'Confirm password',
+                    enabled: !_done && !_busy,
                     onSubmitted: (_) => _submit(),
                   ),
                 ],
               ),
             ),
-          const SizedBox(height: 16),
+          if (!missingCode) const SizedBox(height: 16),
           AuthMessageText(_message, isError: _messageIsError),
-          if (!missingCode)
-            FilledButton(
-              onPressed: _busy || _done ? null : _submit,
-              child: Text(_busy ? 'Updating…' : 'Update password'),
-            ),
-          TextButton(
-            onPressed: () => context.go(
-              missingCode ? AuthRoutes.forgotPassword : AuthRoutes.signIn,
-            ),
-            child: Text(missingCode ? 'Request a new link' : 'Back to sign in'),
+          FormActions(
+            onBack: () => context.go(AuthRoutes.signIn),
+            onPrimary: missingCode
+                ? () => context.go(AuthRoutes.forgotPassword)
+                : _done
+                ? null
+                : _submit,
+            primaryLabel: missingCode
+                ? 'Request a new link'
+                : 'Update password',
+            busy: _busy,
+            busyLabel: 'Updating…',
           ),
         ],
       ),

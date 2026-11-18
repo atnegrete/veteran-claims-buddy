@@ -58,7 +58,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return AuthScaffold(
+      eyebrow: 'Account',
       title: 'Sign in',
+      lead: 'Use the email and password for this account.',
       child: TextInputChain(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -72,32 +74,32 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               countVisibleFrom: authCountVisibleFrom,
             ),
             const SizedBox(height: 12),
-            ChainTextField(
+            PasswordField(
               controller: _password,
-              obscureText: true,
+              label: 'Password',
               autofillHints: const [AutofillHints.password],
-              decoration: const InputDecoration(labelText: 'Password'),
-              maxLength: 128,
-              countVisibleFrom: authCountVisibleFrom,
               onSubmitted: (_) => _submit(),
             ),
-            const SizedBox(height: 16),
+            AuthTextLink(
+              label: 'Forgot password',
+              alignment: Alignment.centerRight,
+              onPressed: () => context.go(AuthRoutes.forgotPassword),
+            ),
+            const SizedBox(height: 8),
             AuthMessageText(_error),
             FilledButton(
               onPressed: _busy ? null : _submit,
               child: Text(_busy ? 'Signing in…' : 'Sign in'),
             ),
-            TextButton(
-              onPressed: () => context.go(AuthRoutes.forgotPassword),
-              child: const Text('Forgot password'),
-            ),
-            TextButton(
+            const SizedBox(height: 8),
+            AuthSwitchLine(
+              prompt: 'New here?',
+              action: 'Create account',
               onPressed: () => context.go(AuthRoutes.register),
-              child: const Text('Create account'),
             ),
-            TextButton(
+            AuthTextLink(
+              label: 'Lost your phone?',
               onPressed: () => context.go(AuthRoutes.recovery),
-              child: const Text('Lost your phone?'),
             ),
           ],
         ),
