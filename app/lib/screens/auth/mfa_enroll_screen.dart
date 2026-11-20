@@ -11,6 +11,7 @@ import '../../claim/identifiers_repository.dart';
 import '../../onboarding/onboarding_progress.dart';
 import '../../forms/text_input_chain.dart';
 import 'auth_scaffold.dart';
+import 'opening_account_frame.dart';
 
 class MfaEnrollScreen extends ConsumerStatefulWidget {
   const MfaEnrollScreen({super.key});
@@ -96,12 +97,16 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
       final phone = toE164(_phone.text);
       if (session != null && phone != null) {
         try {
-          await ref.read(onboardingRepositoryProvider).ensureUserDocument(
+          await ref
+              .read(onboardingRepositoryProvider)
+              .ensureUserDocument(
                 uid: session.uid,
                 email: session.email ?? '',
                 timezone: profileTimezoneOrDefault(null),
               );
-          await ref.read(identifiersRepositoryProvider).seedFormContact(
+          await ref
+              .read(identifiersRepositoryProvider)
+              .seedFormContact(
                 uid: session.uid,
                 phone: phone,
                 email: session.email,
@@ -109,8 +114,7 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
         } catch (_) {
           if (mounted) {
             setState(() {
-              _message =
-                  'Your phone is enrolled. The number for your forms could not be saved. You can add it on your profile.';
+              _message = 'Your phone is enrolled. The number for your forms could not be saved. You can add it on your profile.';
               _messageIsError = true;
             });
           }
@@ -162,37 +166,12 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
     }
 
     if (enrolled && !gate.serverAuthConfirmed) {
-      return AuthScaffold(
-        title: 'Add a phone number',
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const LeadText(
-              'Your phone number is enrolled. Finishing security setup.',
-            ),
-            const SizedBox(height: 16),
-            if (!gate.serverConfirmFailed)
-              const Center(child: CircularProgressIndicator())
-            else ...[
-              const AuthMessageText(
-                'Security setup did not finish. Try again.',
-              ),
-              FilledButton(
-                onPressed: () {
-                  ref
-                      .read(authControllerProvider.notifier)
-                      .confirmServerAuthState();
-                },
-                child: const Text('Try again'),
-              ),
-            ],
-            TextButton(
-              onPressed: () =>
-                  ref.read(authControllerProvider.notifier).signOut(),
-              child: const Text('Sign out'),
-            ),
-          ],
-        ),
+      return OpeningAccountFrame(
+        failed: gate.serverConfirmFailed,
+        onRetry: () {
+          ref.read(authControllerProvider.notifier).confirmServerAuthState();
+        },
+        onSignOut: () => ref.read(authControllerProvider.notifier).signOut(),
       );
     }
 

@@ -2,7 +2,7 @@
 
 **Spec:** `Veteran_Claims_Buddy_Engineering_Handoff.md`  
 **Routes:** `docs/page-navigation.md` wins if a screen or route disagrees with the handoff.  
-**Updated:** 2026-10-29
+**Updated:** 2026-11-20
 
 This file is the implementation checklist. The handoff stays the spec. Update this file in the same change that finishes, blocks, or expands a step. Do not mark a phase complete while any item in it is open. Stop at owner gates.
 
@@ -224,7 +224,7 @@ The iOS `GoogleService-Info.plist` files are copied into the app bundle for `Deb
 
 **Production APNs stays closed** until a production release. At that time the same file is uploaded to both slots on `veteran-claims-buddy-prod`, for `com.veteranclaimsbuddy.app`.
 
-**SMS enrollment and the sign-in code step are in the app.** A verified account enters a phone number, agrees to the sign-in check, and confirms the 6-digit code. A later sign-in with an enrolled phone stops on `/mfa/challenge` and can choose among enrolled phone factors. The screen shows a masked label, not the raw number. The website uses the same enrollment screen. The dev flavor skips the live reCAPTCHA and accepts only a fictional number from the DEV console. Production keeps the live check. After the code succeeds, `confirmAuthState` records verified email and an enrolled factor at `users/{uid}/security/authState`. The client cannot write that document. Onboarding stays closed until that call succeeds.
+**SMS enrollment and the sign-in code step are in the app.** A verified account enters a phone number, agrees to the sign-in check, and confirms the 6-digit code. A later sign-in with an enrolled phone stops on `/mfa/challenge` and can choose among enrolled phone factors. The screen shows a masked label, not the raw number. The website uses the same enrollment screen. The dev flavor skips the live reCAPTCHA and accepts only a fictional number from the DEV console. Production keeps the live check. After the code succeeds, `confirmAuthState` records verified email and an enrolled factor at `users/{uid}/security/authState`. The client cannot write that document. Onboarding stays closed until that call succeeds. A return visit with a phone already enrolled shows Opening your account on `/mfa/enroll` until that call succeeds, and does not show the enroll form.
 
 **Auth gates share one frame.** `AuthScaffold` centers a 400-point column on phone and wide web. Color, inputs, and buttons come from `appTheme()`. The logo and a short description in the wide-web side space wait for the brand package.
 
@@ -291,6 +291,7 @@ Done on 2026-09-29. Ids are in `docs/environment-values.md`.
 
 | Date | What changed |
 | --- | --- |
+| 2026-11-20 | Return visits no longer flash the enroll form. While `confirmAuthState` is still running for a phone that is already enrolled, `/mfa/enroll` shows `OpeningAccountFrame`: title "Opening your account", a spinner, and Sign out. A failed check stays on that frame with Try again. The "Add a phone number" form shows only when no phone is enrolled. UI-only; no backend change. |
 | 2026-10-29 | Phone step rail fills the width. The circles stay a fixed size and the lines between them grow with the screen and the step count. The row scrolls only when the circles do not fit. UI-only; no backend change. |
 | 2026-10-29 | Phone pages give the work the screen. A phone (`shortestSide` under 600) drops the full-screen card on `ShellPage`, `NestedForm`, and onboarding, and tightens the page padding and title. A condition step puts the part name and "Step n of m" on one row above a compact `StepRail` (smaller circles, short name on a tooltip). The form intro scrolls with the body, and Back and Continue stay pinned. Vet Buddy moves from a floating button into the app bar so it no longer covers Continue. Wide windows keep the card, the stacked step header, and the floating button. UI-only; no backend change. |
 | 2026-10-29 | Preview URL handoff. After a PR is open, the agent ends the turn. When the Preview action comments the URL, it pastes that URL in Slack and stops. It does not open the URL, screenshot the page, or stay in the turn to check the deploy. `AGENTS.md`, `docs/preview-deploys.md`, and `.cursor/rules/preview-url.mdc`. |
