@@ -62,7 +62,7 @@ app
   /verify-email
   /forgot-password
   /reset-password              Email link handler
-  /mfa/enroll
+  /mfa/enroll                    Phone enrollment. An already enrolled phone waits here as Opening your account until the server marker is confirmed.
   /mfa/challenge
   /account/reactivate          Deletion grace period only
   /account/recovery            Lost phone. Contact support. No self-serve bypass

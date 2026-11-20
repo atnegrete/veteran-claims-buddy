@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app/app/app_environment.dart';
 import 'package:app/auth/auth_gateway.dart';
 import 'package:app/auth/auth_session.dart';
@@ -97,6 +99,61 @@ void main() {
     expect(find.textContaining('before any claim information'), findsOneWidget);
     expect(find.text('Onboarding'), findsNothing);
     expect(find.textContaining('DEV'), findsNothing);
+  });
+
+  testWidgets('enrolled phone waits on Opening your account', (tester) async {
+    final gateway = _HeldConfirmGateway(
+      session: const AuthSession(
+        uid: 'user-1',
+        email: 'veteran@example.com',
+        emailVerified: true,
+        mfaEnrolled: true,
+      ),
+    );
+    await _pumpApp(
+      tester,
+      VeteranClaimsBuddyApp(
+        environment: AppEnvironment.dev,
+        authGateway: gateway,
+      ),
+    );
+
+    expect(find.text('Opening your account'), findsOneWidget);
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    expect(find.text('Sign out'), findsOneWidget);
+    expect(find.text('Add a phone number'), findsNothing);
+    expect(find.text('Send code'), findsNothing);
+    expect(find.byType(TextField), findsNothing);
+  });
+
+  testWidgets('a failed account check stays on Opening your account', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      VeteranClaimsBuddyApp(
+        environment: AppEnvironment.dev,
+        authGateway: _FailingConfirmGateway(
+          session: const AuthSession(
+            uid: 'user-1',
+            email: 'veteran@example.com',
+            emailVerified: true,
+            mfaEnrolled: true,
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text('Opening your account'), findsOneWidget);
+    expect(
+      find.text('Security setup did not finish. Try again.'),
+      findsOneWidget,
+    );
+    expect(find.text('Try again'), findsOneWidget);
+    expect(find.text('Sign out'), findsOneWidget);
+    expect(find.byType(CircularProgressIndicator), findsNothing);
+    expect(find.text('Add a phone number'), findsNothing);
+    expect(find.byType(TextField), findsNothing);
   });
 
   testWidgets('enrollment sends E.164 and then shows only a masked number', (
@@ -464,6 +521,24 @@ class _IdleAuthGateway implements AuthGateway {
 
   @override
   Future<void> unenrollFactor(String factorUid) async {}
+}
+
+class _HeldConfirmGateway extends _IdleAuthGateway {
+  _HeldConfirmGateway({required AuthSession session}) : super(session: session);
+
+  final Completer<void> confirm = Completer<void>();
+
+  @override
+  Future<void> confirmServerAuthState() => confirm.future;
+}
+
+class _FailingConfirmGateway extends _IdleAuthGateway {
+  _FailingConfirmGateway({required super.session});
+
+  @override
+  Future<void> confirmServerAuthState() async {
+    throw StateError('confirm failed');
+  }
 }
 
 class _RecordingAuthGateway extends _IdleAuthGateway {

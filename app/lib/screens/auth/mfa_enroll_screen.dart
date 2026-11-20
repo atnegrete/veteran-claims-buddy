@@ -11,6 +11,7 @@ import '../../claim/identifiers_repository.dart';
 import '../../onboarding/onboarding_progress.dart';
 import '../../forms/text_input_chain.dart';
 import 'auth_scaffold.dart';
+import 'opening_account_frame.dart';
 
 class MfaEnrollScreen extends ConsumerStatefulWidget {
   const MfaEnrollScreen({super.key});
@@ -163,39 +164,12 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
     }
 
     if (enrolled && !gate.serverAuthConfirmed) {
-      return AuthScaffold(
-        eyebrow: 'Security',
-        title: 'Add a phone number',
-        lead: 'Your phone number is enrolled. Finishing security setup.',
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (!gate.serverConfirmFailed)
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 12),
-                child: Center(child: CircularProgressIndicator()),
-              )
-            else ...[
-              const AuthMessageText(
-                'Security setup did not finish. Try again.',
-              ),
-              FilledButton(
-                onPressed: () {
-                  ref
-                      .read(authControllerProvider.notifier)
-                      .confirmServerAuthState();
-                },
-                child: const Text('Try again'),
-              ),
-            ],
-            const SizedBox(height: 8),
-            AuthTextLink(
-              label: 'Sign out',
-              onPressed: () =>
-                  ref.read(authControllerProvider.notifier).signOut(),
-            ),
-          ],
-        ),
+      return OpeningAccountFrame(
+        failed: gate.serverConfirmFailed,
+        onRetry: () {
+          ref.read(authControllerProvider.notifier).confirmServerAuthState();
+        },
+        onSignOut: () => ref.read(authControllerProvider.notifier).signOut(),
       );
     }
 
