@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../app/app_ui.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import 'auth_scaffold.dart';
@@ -76,29 +75,29 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
     final email = ref.watch(authControllerProvider).session?.email;
     final sentTo = email == null || email.isEmpty ? 'your email' : email;
     return AuthScaffold(
+      eyebrow: 'Email',
       title: 'Verify your email',
+      lead:
+          'Open the verification link sent to $sentTo. Claim information stays closed until it is confirmed.',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          LeadText(
-            'Open the verification link sent to $sentTo. Claim information stays closed until it is confirmed.',
-          ),
-          const SizedBox(height: 16),
           AuthMessageText(_message, isError: _messageIsError),
           FilledButton(
             onPressed: _busy ? null : _checkVerified,
             child: Text(_busy ? 'Checking…' : 'I verified my email'),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           OutlinedButton(
             onPressed: _busy ? null : _resend,
             child: const Text('Resend email'),
           ),
-          TextButton(
+          const SizedBox(height: 8),
+          AuthTextLink(
+            label: 'Sign out',
             onPressed: _busy
                 ? null
                 : () => ref.read(authControllerProvider.notifier).signOut(),
-            child: const Text('Sign out'),
           ),
         ],
       ),

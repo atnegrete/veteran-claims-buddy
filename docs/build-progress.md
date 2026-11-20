@@ -2,7 +2,7 @@
 
 **Spec:** `Veteran_Claims_Buddy_Engineering_Handoff.md`  
 **Routes:** `docs/page-navigation.md` wins if a screen or route disagrees with the handoff.  
-**Updated:** 2026-10-29
+**Updated:** 2026-11-18
 
 This file is the implementation checklist. The handoff stays the spec. Update this file in the same change that finishes, blocks, or expands a step. Do not mark a phase complete while any item in it is open. Stop at owner gates.
 
@@ -291,6 +291,7 @@ Done on 2026-09-29. Ids are in `docs/environment-values.md`.
 
 | Date | What changed |
 | --- | --- |
+| 2026-11-18 | Signed-out auth screens share one frame. The mark sits above a form card on a phone, and a brand card sits beside the form on a wide window. Each screen opens with an eyebrow, a title, and a lead. Sign in, create account, and password reset can show the password. Forgot password and reset use Back with the primary action. Quiet paths such as Create account, Forgot password, and Sign out stay the size of their labels. Errors use `ErrorText`. A confirmation uses `InfoNote`. UI-only; no backend change. |
 | 2026-10-29 | Phone step rail fills the width. The circles stay a fixed size and the lines between them grow with the screen and the step count. The row scrolls only when the circles do not fit. UI-only; no backend change. |
 | 2026-10-29 | Phone pages give the work the screen. A phone (`shortestSide` under 600) drops the full-screen card on `ShellPage`, `NestedForm`, and onboarding, and tightens the page padding and title. A condition step puts the part name and "Step n of m" on one row above a compact `StepRail` (smaller circles, short name on a tooltip). The form intro scrolls with the body, and Back and Continue stay pinned. Vet Buddy moves from a floating button into the app bar so it no longer covers Continue. Wide windows keep the card, the stacked step header, and the floating button. UI-only; no backend change. |
 | 2026-10-29 | Preview URL handoff. After a PR is open, the agent ends the turn. When the Preview action comments the URL, it pastes that URL in Slack and stops. It does not open the URL, screenshot the page, or stay in the turn to check the deploy. `AGENTS.md`, `docs/preview-deploys.md`, and `.cursor/rules/preview-url.mdc`. |

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/app_ui.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/auth_redirect.dart';
@@ -62,18 +61,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return AuthScaffold(
+      eyebrow: 'Account',
       title: 'Create account',
+      lead: 'Create this account only if you are the Veteran. A spouse, survivor, or other claimant is not supported.',
       child: TextInputChain(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const InfoNote(text: independentProductDisclaimer),
-            const SizedBox(height: 12),
-            const InfoNote(
-              text:
-                  'Create this account only if you are the Veteran. A spouse, survivor, or other claimant is not supported.',
-            ),
-            const SizedBox(height: 16),
             ChainTextField(
               controller: _email,
               keyboardType: TextInputType.emailAddress,
@@ -83,21 +77,15 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               countVisibleFrom: authCountVisibleFrom,
             ),
             const SizedBox(height: 12),
-            ChainTextField(
+            PasswordField(
               controller: _password,
-              obscureText: true,
+              label: 'Password',
               autofillHints: const [AutofillHints.newPassword],
-              decoration: const InputDecoration(labelText: 'Password'),
-              maxLength: 128,
-              countVisibleFrom: authCountVisibleFrom,
             ),
             const SizedBox(height: 12),
-            ChainTextField(
+            PasswordField(
               controller: _confirm,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Confirm password'),
-              maxLength: 128,
-              countVisibleFrom: authCountVisibleFrom,
+              label: 'Confirm password',
               onSubmitted: (_) => _submit(),
             ),
             const SizedBox(height: 16),
@@ -106,9 +94,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               onPressed: _busy ? null : _submit,
               child: Text(_busy ? 'Creating account…' : 'Create account'),
             ),
-            TextButton(
+            const SizedBox(height: 8),
+            AuthSwitchLine(
+              prompt: 'Already have an account?',
+              action: 'Sign in',
               onPressed: () => context.go(AuthRoutes.signIn),
-              child: const Text('Already have an account? Sign in'),
             ),
           ],
         ),
