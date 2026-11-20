@@ -312,7 +312,10 @@ class _FileRow extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(16, 8, 4, 8),
           child: Row(
             children: [
-              Icon(_fileIcon(document.name), color: scheme.onSurfaceVariant),
+              Icon(
+                documentFileIcon(document.name),
+                color: scheme.onSurfaceVariant,
+              ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -354,7 +357,7 @@ class _FileRow extends StatelessWidget {
   }
 }
 
-IconData _fileIcon(String name) {
+IconData documentFileIcon(String name) {
   return switch (documentContentType(name)) {
     'application/pdf' => Icons.picture_as_pdf_outlined,
     'image/jpeg' || 'image/png' => Icons.image_outlined,
@@ -392,5 +395,196 @@ class _DashedBorderPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant _DashedBorderPainter oldDelegate) {
     return oldDelegate.color != color;
+  }
+}
+
+/// Asks for one file on the claim. [packet] is the filing tag stored on it.
+///
+/// [lockType] keeps the kind that the step already chose. Otherwise the
+/// Veteran picks from the same kind list as the file details.
+Future<bool> showClaimUpload({
+  required BuildContext context,
+  required String caseId,
+  required String packet,
+  String documentType = 'other',
+  bool lockType = false,
+}) async {
+  final saved = await showDialog<bool>(
+    context: context,
+    builder: (context) => _ClaimUploadDialog(
+      caseId: caseId,
+      packet: packet,
+      documentType: documentTypes.containsKey(documentType)
+          ? documentType
+          : 'other',
+      lockType: lockType,
+    ),
+  );
+  return saved ?? false;
+}
+
+class _ClaimUploadDialog extends ConsumerStatefulWidget {
+  const _ClaimUploadDialog({
+    required this.caseId,
+    required this.packet,
+    required this.documentType,
+    required this.lockType,
+  });
+
+  final String caseId;
+  final String packet;
+  final String documentType;
+  final bool lockType;
+
+  @override
+  ConsumerState<_ClaimUploadDialog> createState() => _ClaimUploadDialogState();
+}
+
+class _ClaimUploadDialogState extends ConsumerState<_ClaimUploadDialog> {
+  late String _type = widget.documentType;
+  var _hover = false;
+  var _busy = false;
+  String? _error;
+
+  Future<void> _pick() async {
+    final List<PlatformFile> picked;
+    try {
+      picked = await FilePicker.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: const ['pdf', 'jpg', 'jpeg', 'png'],
+      );
+    } catch (_) {
+      if (mounted) setState(() => _error = 'That file could not be opened.');
+      return;
+    }
+    if (!mounted || picked.isEmpty) return;
+    final file = picked.first;
+    final Uint8List bytes;
+    try {
+      bytes = await file.readAsBytes();
+    } catch (_) {
+      if (mounted) setState(() => _error = 'That file could not be opened.');
+      return;
+    }
+    await _upload(file.name, bytes);
+  }
+
+  Future<void> _drop(List<DropItem> items) async {
+    final files = [
+      for (final item in items)
+        if (item is! DropItemDirectory) item,
+    ];
+    if (files.isEmpty) return;
+    final file = files.first;
+    final Uint8List bytes;
+    try {
+      bytes = await file.readAsBytes();
+    } catch (_) {
+      if (mounted) setState(() => _error = 'That file could not be opened.');
+      return;
+    }
+    final name = file.name.trim().isEmpty ? 'Document' : file.name;
+    await _upload(name, bytes);
+  }
+
+  Future<void> _upload(String fileName, Uint8List bytes) async {
+    if (_busy) return;
+    if (bytes.isEmpty || bytes.length > maxDocumentBytes) {
+      setState(() => _error = 'That file must be under 100 MB.');
+      return;
+    }
+    if (documentContentType(fileName) == null) {
+      setState(() => _error = 'Use a PDF, JPEG, or PNG.');
+      return;
+    }
+    setState(() {
+      _busy = true;
+      _error = null;
+    });
+    final saved = await showFileUpload(
+      context: context,
+      fileName: fileName,
+      upload: (onProgress) {
+        return ref.read(uploadDocumentProvider)(
+          caseId: widget.caseId,
+          fileName: fileName,
+          bytes: bytes,
+          documentType: _type,
+          documentDate: null,
+          onProgress: onProgress,
+          packet: widget.packet,
+        );
+      },
+    );
+    if (!mounted) return;
+    setState(() => _busy = false);
+    if (saved) Navigator.of(context).pop(true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final kind = documentTypes[_type] ?? 'Something else';
+    return Dialog(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 420),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 12),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Add a file',
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              const SizedBox(height: 16),
+              if (widget.lockType)
+                LeadText('This file is saved as a $kind.')
+              else
+                DropdownButtonFormField<String>(
+                  initialValue: _type,
+                  isExpanded: true,
+                  decoration: const InputDecoration(labelText: 'Kind of file'),
+                  items: [
+                    for (final entry in documentTypes.entries)
+                      DropdownMenuItem(
+                        value: entry.key,
+                        child: Text(
+                          entry.value,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                  ],
+                  onChanged: _busy
+                      ? null
+                      : (value) {
+                          if (value == null) return;
+                          setState(() => _type = value);
+                        },
+                ),
+              const SizedBox(height: 16),
+              _DropZone(
+                hovering: _hover,
+                enabled: !_busy,
+                onTap: _pick,
+                onHover: (value) => setState(() => _hover = value),
+                onDrop: _drop,
+              ),
+              if (_error != null) ...[
+                const SizedBox(height: 12),
+                ErrorText(_error!),
+              ],
+              const SizedBox(height: 8),
+              OutlinedButton(
+                onPressed: _busy
+                    ? null
+                    : () => Navigator.of(context).pop(false),
+                child: const Text('Cancel'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -89,7 +89,7 @@ The symptom questionnaire is not an onboarding step. Finishing review creates th
 
 There is no separate Home. After onboarding, the app opens the open claim. That screen is the current step.
 
-A wide window keeps navigation on the left. A phone keeps that same list in the navigation drawer. The claim name is a parent that opens and closes. Under it, indented, are eight sections: Case Info, Questions, Issues, My Uploads, Forms, Package, C&P Prep, and Decisions. C&P Prep comes after the package, because a compensation and pension exam is scheduled after the VA has the claim. Any section can be opened. A section that has not started is muted. A section in progress uses the primary label. A finished section is a check with muted text. The Symptoms Tracker and the VA Ratings Calculator sit below the claim, not inside it, and they are not in the account menu.
+A wide window keeps navigation on the left. A phone keeps that same list in the navigation drawer. The claim name is a parent that opens and closes. Under it, indented, are eight sections: Case Info, Questions, Issues, Forms, Package, C&P Prep, Decisions, and My Uploads. My Uploads is a library for this claim, not the step between Issues and Forms. C&P Prep comes after the package, because a compensation and pension exam is scheduled after the VA has the claim. Any section can be opened. A section that has not started is muted. A section in progress uses the primary label. A finished section is a check with muted text. The Symptoms Tracker and the VA Ratings Calculator sit below the claim, not inside it, and they are not in the account menu.
 
 Account, billing, security, support, notifications, and legal open from the account menu. A purchase still opens `/plans`, and only when that step needs it.
 
@@ -114,12 +114,13 @@ The stored record is still a Case. The screens say "your claim." The open claim 
     Not the first claim                Stays on Case Info. The two choices
                                        stay on screen. Case Info asks for an
                                        optional VA file number only after
-                                       this answer. Supplemental Claim
-                                       is where the earlier decision is added.
-                                       New claims is a separate section in
-                                       My Uploads. Upload is into the app.
-                                       Nothing is automatically filed with
-                                       the VA at any point.
+                                       this answer. Add the earlier decision
+                                       opens the upload dialog, saved as a
+                                       decision letter on Supplemental Claim.
+                                       Other files are added from the condition
+                                       when that filing can take them. Upload
+                                       is into the app. Nothing is automatically
+                                       filed with the VA at any point.
     Prepare Intent to File             Opens /cases/:caseId/intent. Case Info
                                        stays selected. The page is the
                                        watermarked preview of VA Form 21-0966.
@@ -149,15 +150,15 @@ The stored record is still a Case. The screens say "your claim." The open claim 
         /questions                     The topic questions for this condition
         /decisions                     New or already decided. Under Questions about this. The two choices are tabs, and the next question sits inside the selected tab. Continue is the footer. A new condition asks whether to pursue disability compensation. A decision already received keeps the date, outcome, rating, and effective date, then leave it, it got worse, or disagree. Disagree can become a Supplemental Claim, a Higher-Level Review, or a Board Appeal. Forms and a nexus letter turn on only after that choice. Not on this claim, or leaving the decision, closes the parts below this one. Questions about this stays open. Not a prediction
         /evidence                      Redirects to /connection
-        /connection                    How this connects to service. The path, then the Service Connection fact that path needs. Direct asks what happened in service. Secondary asks the other condition by name, rated or not on this claim. Aggravation asks what existed before service and what in service made it worse. Presumptive asks the service, place, or exposure. No diagnosis re-ask and no medical-link sentence. How often it happens and what it limits is the next part
+        /connection                    How this connects to service. The path, then the Service Connection fact that path needs. Direct asks what happened in service. Secondary asks the other condition by name, rated or not on this claim. Aggravation asks what existed before service and what in service made it worse. Presumptive asks the service, place, or exposure. No diagnosis re-ask and no medical-link sentence. Add a file opens the upload dialog when this filing can take files. A file does not finish this part. How often it happens and what it limits is the next part
         /statements
           /lay                         How this affects you. Frequency, duration, and impact. Not sent from here
-          /doctor-draft                Nexus Letters. A short interview fills the gaps the saved facts leave, then two unsigned drafts are generated automatically: a letter for your own doctor and a statement you can sign yourself. Only when that filing needs one. Otherwise the screen says why
-    My Uploads                         Opens /evidence
+          /doctor-draft                Nexus Letters. A short interview fills the gaps the saved facts leave, then two unsigned drafts are generated automatically: a letter for your own doctor and a statement you can sign yourself. Only when that filing needs one. Otherwise the screen says why. Add a medical opinion you already have opens the upload dialog. That file does not finish this part
     Forms                              Opens /prepare
     Package                            Opens /package
     C&P Prep                           Opens /exams. After the package is sent
     Decisions                          Opens /decisions
+    My Uploads                         Opens /evidence. A library for this claim. Not the step after Conditions
   Chat bubble                          Vet Buddy, without leaving the section
   /overview                            Opens the current step of this claim
   /questions                           Symptom questionnaire for this claim. When every topic is answered, possible conditions can be added one by one or all at once. One already on the claim shows Added to claim and can be removed. Removing leaves its notes
@@ -177,8 +178,8 @@ The stored record is still a Case. The screens say "your claim." The open claim 
       /statements
         /lay                            How this affects you. Frequency, duration, and what it keeps the Veteran from doing, saved as one statement. Not sent from here
         /doctor-draft                   Nexus Letters for this condition when the filing needs one. A short gap interview runs first and the preview is gated until it is complete, then both unsigned drafts are generated and can be refined by asking for changes in plain words. The Doctor draft and Your statement sit in a real tabbed view (AppTabs). Each tab's preview carries a floating Download PDF button pinned to its top-right, a clean unwatermarked print copy to sign. Changes go through Ask for a change; there is no Edit answers button once the letters exist. When the filing does not need one, the screen says why and does not draft one. An increase-only connection does not get one
-  /evidence
-    /upload                             PDF, JPEG, or PNG. Each filing that is on screen has its own drop target and file list. An earlier claim always shows New claims and Supplemental Claim, even before a condition is added. A first claim does not add an empty Supplemental Claim section. Records, Higher-Level Review, and Board Appeal appear when a condition or a saved file belongs there. A decision letter or DD214 is a record. Higher-Level Review and Board Direct Review do not take new files. Choosing or dropping a file starts the upload and shows progress. The file is listed after it is stored. A PDF page count is filled in after that. The file is read once
+  /evidence                            Library for this claim. Name, kind, filing, a PDF or image icon, and Remove. Filter by kind and by filing. No drop target on this page
+    /upload                             The upload dialog, opened from Case Info, Decisions, How this connects to service, or Nexus Letters. It takes the case id. Kind of file is Service treatment record, Private medical record, VA medical record, Decision letter, Doctor exam form, Exam report, Personal statement, Buddy statement, DD214, Personnel record, Imaging, Lab result, Medical opinion, VA letter, or Something else. A step can lock the kind. The filing is preset by that step. PDF, JPEG, or PNG, under 100 MB. Drop a file or choose one. Higher-Level Review and Board Direct Review do not open it. A file does not finish a condition part
     /:documentId
       /details                          Type and date. Reclassify
       /facts                            Confirm, correct, or set aside a statement. The original stays

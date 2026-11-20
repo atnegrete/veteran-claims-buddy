@@ -6,7 +6,6 @@ import '../../app/app_theme.dart';
 import '../../app/app_ui.dart';
 import '../../auth/auth_redirect.dart';
 import '../../claim/claim_document.dart';
-import '../../claim/claim_file_sections.dart';
 import '../../claim/claim_guide.dart';
 import '../../claim/document_repository.dart';
 import '../../claim/form_recommendations.dart';
@@ -14,7 +13,6 @@ import '../../claim/issue_lane.dart';
 import '../../forms/claim_file_section.dart';
 import '../../forms/form_actions.dart';
 import '../../forms/iso_date_field.dart';
-import '../../onboarding/onboarding_progress.dart';
 import 'shell_pages.dart';
 
 class DocumentsScreen extends ConsumerWidget {
@@ -25,12 +23,6 @@ class DocumentsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final documents = ref.watch(claimDocumentsProvider(caseId));
-    final earlierClaim = ref
-        .watch(onboardingDocProvider)
-        .maybeWhen(
-          data: (value) => firstClaimAnswer(value) == false,
-          orElse: () => false,
-        );
     return ShellPage(
       title: 'My Uploads',
       child: documents.when(
@@ -39,31 +31,205 @@ class DocumentsScreen extends ConsumerWidget {
         data: (all) {
           final saved = [
             for (final document in all)
-              if (document.caseId == caseId) document,
+              if (document.caseId == caseId &&
+                  document.uploadStatus == 'uploaded')
+                document,
           ];
-          final lanes = ref.watch(claimLanesProvider(caseId));
-          final sections = claimFileSections(
-            earlierClaim: earlierClaim,
-            lanes: lanes,
-            documents: saved,
-          );
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              EarlierClaimNote(caseId: caseId),
-              const LeadText('Files you add for this claim stay here.'),
-              const SizedBox(height: 16),
-              for (final section in sections)
-                ClaimFileSection(
-                  caseId: caseId,
-                  packet: section.packet,
-                  note: section.note,
-                  showDropTarget: section.showDropTarget,
-                  sectionAcceptsEvidence: _sectionAccepts(section, lanes),
-                ),
-            ],
-          );
+          return _UploadsLibrary(caseId: caseId, documents: saved);
         },
+      ),
+    );
+  }
+}
+
+class _UploadsLibrary extends ConsumerStatefulWidget {
+  const _UploadsLibrary({required this.caseId, required this.documents});
+
+  final String caseId;
+  final List<ClaimDocument> documents;
+
+  @override
+  ConsumerState<_UploadsLibrary> createState() => _UploadsLibraryState();
+}
+
+class _UploadsLibraryState extends ConsumerState<_UploadsLibrary> {
+  String _kind = '';
+  String _filing = '';
+  String? _error;
+
+  Future<void> _remove(ClaimDocument document) async {
+    final remove = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Remove this file?'),
+          content: Text(document.name),
+          actions: [
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(minimumSize: const Size(112, 48)),
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('Cancel'),
+            ),
+            FilledButton(
+              style: dangerFilledStyle().merge(
+                FilledButton.styleFrom(minimumSize: const Size(112, 48)),
+              ),
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('Remove'),
+            ),
+          ],
+        );
+      },
+    );
+    if (remove != true || !mounted) return;
+    try {
+      await ref.read(removeDocumentProvider)(
+        documentId: document.id,
+        storagePath: document.storagePath,
+      );
+    } catch (_) {
+      if (mounted) setState(() => _error = 'That file could not be removed.');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final shown = [
+      for (final document in widget.documents)
+        if ((_kind.isEmpty || document.documentType == _kind) &&
+            (_filing.isEmpty || document.packet == _filing))
+          document,
+    ]..sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        EarlierClaimNote(caseId: widget.caseId),
+        const LeadText(
+          'Files you add for this claim show up here. Adding a file is part of the step that needs it.',
+        ),
+        if (widget.documents.isNotEmpty) ...[
+          const SizedBox(height: 16),
+          DropdownButtonFormField<String>(
+            initialValue: _kind,
+            isExpanded: true,
+            decoration: const InputDecoration(labelText: 'Kind of file'),
+            items: [
+              const DropdownMenuItem(value: '', child: Text('All kinds')),
+              for (final entry in documentTypes.entries)
+                DropdownMenuItem(value: entry.key, child: Text(entry.value)),
+            ],
+            onChanged: (value) {
+              if (value == null) return;
+              setState(() => _kind = value);
+            },
+          ),
+          const SizedBox(height: 12),
+          DropdownButtonFormField<String>(
+            initialValue: _filing,
+            isExpanded: true,
+            decoration: const InputDecoration(labelText: 'Filing'),
+            items: [
+              const DropdownMenuItem(value: '', child: Text('All filings')),
+              for (final entry in claimPacketLabels.entries)
+                if (entry.key != ClaimPacket.shared)
+                  DropdownMenuItem(
+                    value: claimPacketNames[entry.key],
+                    child: Text(entry.value),
+                  ),
+            ],
+            onChanged: (value) {
+              if (value == null) return;
+              setState(() => _filing = value);
+            },
+          ),
+        ],
+        const SizedBox(height: 16),
+        if (widget.documents.isNotEmpty && shown.isEmpty)
+          const LeadText('No files match.')
+        else
+          for (final document in shown) ...[
+            _LibraryRow(
+              document: document,
+              onOpen: () => context.go(
+                document.processingStatus == 'needsReview'
+                    ? AuthRoutes.caseDocumentFacts(widget.caseId, document.id)
+                    : AuthRoutes.caseDocument(widget.caseId, document.id),
+              ),
+              onRemove: () => _remove(document),
+            ),
+            const SizedBox(height: 12),
+          ],
+        if (_error != null) ErrorText(_error!),
+      ],
+    );
+  }
+}
+
+class _LibraryRow extends StatelessWidget {
+  const _LibraryRow({
+    required this.document,
+    required this.onOpen,
+    required this.onRemove,
+  });
+
+  final ClaimDocument document;
+  final VoidCallback onOpen;
+  final VoidCallback onRemove;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    final kind = documentTypes[document.documentType] ?? 'Something else';
+    final filing = claimPacketLabels.entries
+        .where((entry) => claimPacketNames[entry.key] == document.packet)
+        .map((entry) => entry.value)
+        .firstOrNull;
+    return Material(
+      color: scheme.surfaceContainerHighest,
+      borderRadius: BorderRadius.circular(12),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onOpen,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 12, 8, 12),
+          child: Row(
+            children: [
+              Icon(
+                documentFileIcon(document.name),
+                color: scheme.onSurfaceVariant,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      document.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.titleSmall,
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      filing == null ? kind : '$kind · $filing',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: scheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              TextButton(
+                style: dangerTextStyle().merge(
+                  TextButton.styleFrom(minimumSize: const Size(96, 40)),
+                ),
+                onPressed: onRemove,
+                child: const Text('Remove'),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -100,20 +266,6 @@ class DocumentDetailsScreen extends ConsumerWidget {
       ),
     );
   }
-}
-
-bool _sectionAccepts(
-  ClaimFileSectionSpec section,
-  List<IssueLaneResult> lanes,
-) {
-  final accepts = lanes.any(
-    (lane) => lane.packet == section.packet && lane.acceptsEvidence,
-  );
-  if (section.packet == ClaimPacket.newClaim ||
-      section.packet == ClaimPacket.supplemental) {
-    return section.showDropTarget || accepts;
-  }
-  return accepts;
 }
 
 class _DetailsForm extends ConsumerStatefulWidget {

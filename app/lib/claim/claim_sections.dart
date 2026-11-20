@@ -24,9 +24,10 @@ ClaimSectionStatus questionsStatus(QuestionnaireSession session) {
   return ClaimSectionStatus.inProgress;
 }
 
-ClaimSectionStatus documentsStatus(int count) {
-  if (count == 0) return ClaimSectionStatus.notStarted;
-  return ClaimSectionStatus.inProgress;
+/// My Uploads is a library for this claim, not a step between Conditions
+/// and Forms, so a saved file does not mark it in progress.
+ClaimSectionStatus documentsStatus(int _) {
+  return ClaimSectionStatus.notStarted;
 }
 
 ClaimSectionStatus examsStatus(int count) {
