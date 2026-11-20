@@ -90,14 +90,12 @@ class _MfaChallengeScreenState extends ConsumerState<MfaChallengeScreen> {
   Widget build(BuildContext context) {
     final hints = ref.watch(authControllerProvider).challengeHints;
     return AuthScaffold(
+      eyebrow: 'Security',
       title: 'Text-message check',
+      lead: 'Finish signing in with the code sent to a phone on this account.',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const LeadText(
-            'Finish signing in with the code sent to a phone on this account.',
-          ),
-          const SizedBox(height: 16),
           if (hints.isEmpty)
             const LeadText(
               'No phone is available for this sign-in. If you lost the phone, contact support.',
@@ -129,22 +127,23 @@ class _MfaChallengeScreenState extends ConsumerState<MfaChallengeScreen> {
               onSubmitted: (_) => _confirm(),
             ),
             const SizedBox(height: 16),
+            AuthMessageText(_message, isError: _messageIsError),
             FilledButton(
               onPressed: _busy ? null : _confirm,
               child: Text(_busy ? 'Checking…' : 'Confirm code'),
             ),
-          ],
+          ] else
+            AuthMessageText(_message, isError: _messageIsError),
           const SizedBox(height: 8),
-          AuthMessageText(_message, isError: _messageIsError),
-          TextButton(
+          AuthTextLink(
+            label: 'Lost your phone?',
             onPressed: () => context.go(AuthRoutes.recovery),
-            child: const Text('Lost your phone?'),
           ),
-          TextButton(
+          AuthTextLink(
+            label: 'Sign out',
             onPressed: _busy
                 ? null
                 : () => ref.read(authControllerProvider.notifier).signOut(),
-            child: const Text('Sign out'),
           ),
         ],
       ),

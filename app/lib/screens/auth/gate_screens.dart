@@ -7,7 +7,7 @@ import '../../app/app_ui.dart';
 import '../../auth/auth_controller.dart';
 import '../../auth/auth_failure.dart';
 import '../../auth/auth_redirect.dart';
-import '../../forms/text_input_chain.dart';
+import '../../forms/form_actions.dart';
 import 'auth_scaffold.dart';
 
 class AccountRecoveryScreen extends StatelessWidget {
@@ -16,22 +16,17 @@ class AccountRecoveryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthScaffold(
+      eyebrow: 'Help',
       title: 'Account recovery',
+      lead:
+          "The text-message check can't be skipped. Email $supportEmail and we'll verify it's you before changing the phone.",
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const LeadText(
-            "The text-message check can't be skipped. Email $supportEmail and we'll verify it's you before changing the phone.",
-          ),
-          const SizedBox(height: 12),
           const InfoNote(
             text: 'Do not send a Social Security number or medical records in that email.',
           ),
-          const SizedBox(height: 8),
-          TextButton(
-            onPressed: () => context.go(AuthRoutes.signIn),
-            child: const Text('Back'),
-          ),
+          FormActions(onBack: () => context.go(AuthRoutes.signIn)),
         ],
       ),
     );
@@ -81,23 +76,19 @@ class _AccountReactivateScreenState
   @override
   Widget build(BuildContext context) {
     return AuthScaffold(
+      eyebrow: 'Account',
       title: 'Reactivate account',
+      lead: 'Other pages stay closed until you reactivate. Enter your password to keep the account.',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const InfoNote(text: deletionWarning),
-          const SizedBox(height: 12),
-          const LeadText(
-            'Other pages stay closed until you reactivate. Enter your password to keep the account.',
-          ),
           const SizedBox(height: 16),
-          ChainTextField(
+          PasswordField(
             controller: _password,
-            obscureText: true,
-            decoration: const InputDecoration(labelText: 'Password'),
-            maxLength: 128,
-            countVisibleFrom: authCountVisibleFrom,
+            label: 'Password',
             onChanged: (_) => setState(() {}),
+            onSubmitted: (_) => _reactivate(),
           ),
           if (_error != null) ...[
             const SizedBox(height: 8),
@@ -108,11 +99,12 @@ class _AccountReactivateScreenState
             onPressed: _busy || _password.text.isEmpty ? null : _reactivate,
             child: Text(_busy ? 'Reactivating…' : 'Reactivate'),
           ),
-          TextButton(
+          const SizedBox(height: 8),
+          AuthTextLink(
+            label: 'Sign out',
             onPressed: _busy
                 ? null
                 : () => ref.read(authControllerProvider.notifier).signOut(),
-            child: const Text('Sign out'),
           ),
         ],
       ),

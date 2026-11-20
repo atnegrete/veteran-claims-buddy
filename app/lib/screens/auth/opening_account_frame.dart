@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../app/app_ui.dart';
 import 'auth_scaffold.dart';
 
 /// Waiting frame for a phone that is already enrolled.
@@ -22,18 +21,22 @@ class OpeningAccountFrame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthScaffold(
+      eyebrow: 'Security',
       title: 'Opening your account',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           if (!failed)
-            const Center(child: CircularProgressIndicator())
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 12),
+              child: Center(child: CircularProgressIndicator()),
+            )
           else ...[
-            const ErrorText('Security setup did not finish. Try again.'),
-            const SizedBox(height: 16),
+            const AuthMessageText('Security setup did not finish. Try again.'),
             FilledButton(onPressed: onRetry, child: const Text('Try again')),
           ],
-          TextButton(onPressed: onSignOut, child: const Text('Sign out')),
+          const SizedBox(height: 8),
+          AuthTextLink(label: 'Sign out', onPressed: onSignOut),
         ],
       ),
     );

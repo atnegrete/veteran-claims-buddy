@@ -63,8 +63,7 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
       setState(() {
         _codeSent = true;
         _sentLabel = maskPhoneNumber(e164);
-        _messageIsError = false;
-        _message = 'Enter the 6-digit code from the text message.';
+        _message = null;
       });
     } on AuthFailure catch (failure) {
       setState(() {
@@ -138,14 +137,12 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
     final enrolled = gate.session?.mfaEnrolled ?? false;
     if (!enrolled && gate.serverAuthConfirmed && gate.serverConfirmFailed) {
       return AuthScaffold(
+        eyebrow: 'Security',
         title: 'Add a phone number',
+        lead: 'The phone was removed, and security setup did not finish.',
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const LeadText(
-              'The phone was removed, and security setup did not finish.',
-            ),
-            const SizedBox(height: 16),
             const AuthMessageText('Security setup did not finish. Try again.'),
             FilledButton(
               onPressed: () {
@@ -155,10 +152,11 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
               },
               child: const Text('Try again'),
             ),
-            TextButton(
+            const SizedBox(height: 8),
+            AuthTextLink(
+              label: 'Sign out',
               onPressed: () =>
                   ref.read(authControllerProvider.notifier).signOut(),
-              child: const Text('Sign out'),
             ),
           ],
         ),
@@ -176,34 +174,45 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
     }
 
     return AuthScaffold(
+      eyebrow: 'Security',
       title: 'Add a phone number',
+      lead: 'A phone number is required before any claim information. It is only a second sign-in check.',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const LeadText(
-            'A phone number is required before any claim information. It is only a second sign-in check.',
-          ),
-          const SizedBox(height: 16),
           if (!_codeSent) ...[
             MobileNumberField(controller: _phone),
-            CheckboxListTile(
-              contentPadding: EdgeInsets.zero,
-              value: _agreed,
-              onChanged: _busy
-                  ? null
-                  : (value) => setState(() => _agreed = value ?? false),
-              title: const Text(
-                'I agree to use this mobile number as a second sign-in check.',
+            const SizedBox(height: 8),
+            MergeSemantics(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Checkbox(
+                    value: _agreed,
+                    onChanged: _busy
+                        ? null
+                        : (value) => setState(() => _agreed = value ?? false),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Text(
+                        'I agree to use this mobile number as a second sign-in check.',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              controlAffinity: ListTileControlAffinity.leading,
             ),
+            const SizedBox(height: 8),
             AuthMessageText(_message, isError: _messageIsError),
             FilledButton(
               onPressed: _busy ? null : _sendCode,
               child: Text(_busy ? 'Sending…' : 'Send code'),
             ),
           ] else ...[
-            Text('Code sent for $_sentLabel.'),
+            LeadText('Enter the 6-digit code sent to $_sentLabel.'),
             const SizedBox(height: 12),
             ChainTextField(
               controller: _code,
@@ -222,7 +231,9 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
               onPressed: _busy ? null : _confirm,
               child: Text(_busy ? 'Checking…' : 'Confirm phone'),
             ),
-            TextButton(
+            const SizedBox(height: 4),
+            AuthTextLink(
+              label: 'Use a different number',
               onPressed: _busy
                   ? null
                   : () => setState(() {
@@ -230,14 +241,14 @@ class _MfaEnrollScreenState extends ConsumerState<MfaEnrollScreen> {
                       _code.clear();
                       _message = null;
                     }),
-              child: const Text('Use a different number'),
             ),
           ],
-          TextButton(
+          const SizedBox(height: 4),
+          AuthTextLink(
+            label: 'Sign out',
             onPressed: _busy
                 ? null
                 : () => ref.read(authControllerProvider.notifier).signOut(),
-            child: const Text('Sign out'),
           ),
         ],
       ),

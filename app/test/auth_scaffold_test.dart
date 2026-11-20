@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app/app/app_theme.dart';
+import 'package:app/app/app_ui.dart';
 import 'package:app/screens/auth/auth_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,7 +20,9 @@ void main() {
 
     expect(find.text('Veteran Claims Buddy'), findsOneWidget);
     expect(find.text(authSideDescription), findsNothing);
-    expect(find.byType(SvgPicture), findsNothing);
+    expect(find.text(independentProductDisclaimer), findsOneWidget);
+    expect(find.byType(SvgPicture), findsOneWidget);
+    expect(find.byType(Card), findsOneWidget);
   });
 
   testWidgets('a wide sign-in page shows the mark beside the form', (
@@ -29,8 +32,57 @@ void main() {
 
     expect(find.text('Veteran Claims Buddy'), findsOneWidget);
     expect(find.text(authSideDescription), findsOneWidget);
+    expect(find.text(independentProductDisclaimer), findsOneWidget);
     expect(find.byType(SvgPicture), findsOneWidget);
     expect(find.text('Sign in'), findsOneWidget);
+    expect(find.byType(Card), findsNWidgets(2));
+  });
+
+  testWidgets('an auth error is an error sentence', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: AuthMessageText('Try again.'))),
+    );
+
+    expect(find.byType(ErrorText), findsOneWidget);
+    expect(find.byType(InfoNote), findsNothing);
+  });
+
+  testWidgets('an auth confirmation is a note', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: AuthMessageText('Password updated.', isError: false),
+        ),
+      ),
+    );
+
+    expect(find.byType(InfoNote), findsOneWidget);
+    expect(find.byType(ErrorText), findsNothing);
+  });
+
+  testWidgets('a password can be shown and hidden', (tester) async {
+    final controller = TextEditingController(text: 'secret');
+    addTearDown(controller.dispose);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: appTheme(),
+        home: Scaffold(
+          body: PasswordField(controller: controller, label: 'Password'),
+        ),
+      ),
+    );
+
+    expect(
+      tester.widget<TextField>(find.byType(TextField)).obscureText,
+      isTrue,
+    );
+    await tester.tap(find.byTooltip('Show password'));
+    await tester.pump();
+    expect(
+      tester.widget<TextField>(find.byType(TextField)).obscureText,
+      isFalse,
+    );
+    expect(find.byTooltip('Hide password'), findsOneWidget);
   });
 }
 
