@@ -50,7 +50,7 @@ String reviewTitle(ReviewPath path) {
 
 String reviewExplanation(ReviewPath path) {
   return switch (path) {
-    ReviewPath.supplemental => 'A Supplemental Claim asks the VA to look at this condition again with new and relevant evidence. Add that evidence in My Uploads. The form is 20-0995. This does not file the review.',
+    ReviewPath.supplemental => 'A Supplemental Claim asks the VA to look at this condition again with new and relevant evidence. Add that file from the condition. The form is 20-0995. This does not file the review.',
     ReviewPath.higherLevel => 'A Higher-Level Review asks a senior reviewer to look at the same evidence. You do not add new evidence on this path. You can ask for an informal conference. The form is 20-0996. This does not file the review.',
     ReviewPath.board => 'A Board Appeal asks the Board of Veterans\' Appeals to review this condition. Direct review adds nothing. Evidence gives you time to add more. A hearing is with a Veterans Law Judge. The form is 10182. This does not file the appeal.',
   };

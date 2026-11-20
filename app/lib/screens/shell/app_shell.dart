@@ -267,17 +267,6 @@ class _ShellNavState extends ConsumerState<_ShellNav> {
                               ),
                             ),
                             _SectionRow(
-                              label: 'My Uploads',
-                              icon: Icons.description_outlined,
-                              selectedIcon: Icons.description,
-                              selected: _onCaseSection(location, 'evidence'),
-                              status: documentsStatus(documentCount),
-                              onTap: () => _open(
-                                context,
-                                _sectionPath(caseId, AuthRoutes.caseDocuments),
-                              ),
-                            ),
-                            _SectionRow(
                               label: 'Forms',
                               icon: Icons.article_outlined,
                               selectedIcon: Icons.article,
@@ -319,6 +308,17 @@ class _ShellNavState extends ConsumerState<_ShellNav> {
                               onTap: () => _open(
                                 context,
                                 _sectionPath(caseId, AuthRoutes.caseDecisions),
+                              ),
+                            ),
+                            _SectionRow(
+                              label: 'My Uploads',
+                              icon: Icons.description_outlined,
+                              selectedIcon: Icons.description,
+                              selected: _onCaseSection(location, 'evidence'),
+                              status: documentsStatus(documentCount),
+                              onTap: () => _open(
+                                context,
+                                _sectionPath(caseId, AuthRoutes.caseDocuments),
                               ),
                             ),
                           ],

@@ -247,7 +247,7 @@ void main() {
     await tester.pump();
     await tester.pump();
     expect(
-      find.textContaining('Files you add for this claim stay here'),
+      find.textContaining('Files you add for this claim show up here'),
       findsOneWidget,
     );
     expect(find.text('Onboarding'), findsNothing);
@@ -274,7 +274,7 @@ void main() {
     await tester.tap(find.text('No, I have an earlier claim'));
     await tester.pump();
     await tester.pump();
-    expect(find.text('SUPPLEMENTAL CLAIM'), findsWidgets);
+    expect(find.text('Add the earlier decision'), findsOneWidget);
     expect(find.text('Add paperwork'), findsNothing);
     expect(find.text('Change this answer'), findsNothing);
     expect(find.textContaining('headaches, dizziness'), findsNothing);

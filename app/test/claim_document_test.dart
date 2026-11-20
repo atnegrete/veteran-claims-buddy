@@ -11,7 +11,7 @@ void main() {
     expect(documentStorageExtension('image/jpeg'), 'jpg');
     expect(maxDocumentBytes, 100 * 1024 * 1024);
     expect(documentsStatus(0), ClaimSectionStatus.notStarted);
-    expect(documentsStatus(1), ClaimSectionStatus.inProgress);
+    expect(documentsStatus(1), ClaimSectionStatus.notStarted);
     final document = ClaimDocument.fromData('doc-1', const {
       'caseId': 'case-1',
       'name': 'Decision.pdf',

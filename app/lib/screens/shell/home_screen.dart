@@ -213,12 +213,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             const _PriorClaimFileNumber(),
             const SizedBox(height: 16),
           ],
-          if (answer == false && caseId != null)
-            ClaimFileSection(
-              caseId: caseId,
-              packet: ClaimPacket.supplemental,
-              sectionAcceptsEvidence: true,
+          if (answer == false && caseId != null) ...[
+            const SizedBox(height: 16),
+            OutlinedButton(
+              onPressed: () => showClaimUpload(
+                context: context,
+                caseId: caseId,
+                packet: claimPacketNames[ClaimPacket.supplemental]!,
+                documentType: 'decisionLetter',
+                lockType: true,
+              ),
+              child: const Text('Add the earlier decision'),
             ),
+          ],
           if (_error != null) ...[
             const SizedBox(height: 12),
             ErrorText(_error!),

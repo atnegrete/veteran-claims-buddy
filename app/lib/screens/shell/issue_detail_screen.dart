@@ -29,6 +29,7 @@ import '../../claim/issue_record_repository.dart';
 import '../../claim/questionnaire_catalog.dart';
 import '../../claim/questionnaire_repository.dart';
 import '../../forms/form_questions.dart';
+import '../../forms/claim_file_section.dart';
 import '../../forms/form_actions.dart';
 import '../../forms/iso_date_field.dart';
 import '../../forms/nested_split.dart';
@@ -181,6 +182,17 @@ class _ConnectionPageState extends ConsumerState<_ConnectionPage> {
   Future<bool> Function()? _commit;
   var _busy = false;
 
+  String? get _uploadPacket {
+    final lanes = ref.watch(claimLanesProvider(widget.caseId));
+    for (final lane in lanes) {
+      if (lane.issueId != widget.issueId) continue;
+      final packet = lane.packet;
+      if (!lane.acceptsEvidence || packet == null) return null;
+      return claimPacketNames[packet];
+    }
+    return null;
+  }
+
   Future<void> _continue() async {
     setState(() => _busy = true);
     final ok = await _commit?.call() ?? true;
@@ -211,11 +223,29 @@ class _ConnectionPageState extends ConsumerState<_ConnectionPage> {
         onPrimary: _continue,
         busy: _busy,
       ),
-      child: ConnectionForm(
-        issueId: widget.issueId,
-        theories: widget.theories,
-        links: widget.links,
-        onBind: (commit) => _commit = commit,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ConnectionForm(
+            issueId: widget.issueId,
+            theories: widget.theories,
+            links: widget.links,
+            onBind: (commit) => _commit = commit,
+          ),
+          if (_uploadPacket case final packet?) ...[
+            const SizedBox(height: 16),
+            OutlinedButton(
+              onPressed: _busy
+                  ? null
+                  : () => showClaimUpload(
+                      context: context,
+                      caseId: widget.caseId,
+                      packet: packet,
+                    ),
+              child: const Text('Add a file'),
+            ),
+          ],
+        ],
       ),
     );
   }
@@ -562,6 +592,33 @@ class _NexusLettersPanelState extends ConsumerState<NexusLettersPanel> {
     );
   }
 
+  Widget _savedOpinion() {
+    final lanes = ref.watch(claimLanesProvider(widget.caseId));
+    ClaimPacket? packet;
+    for (final lane in lanes) {
+      if (lane.issueId != widget.issueId) continue;
+      if (!lane.needsNexus) return const SizedBox.shrink();
+      packet = lane.packet;
+    }
+    final chosen = packet;
+    if (chosen == null) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: OutlinedButton(
+        onPressed: _busy
+            ? null
+            : () => showClaimUpload(
+                context: context,
+                caseId: widget.caseId,
+                packet: claimPacketNames[chosen]!,
+                documentType: 'nexusOpinion',
+                lockType: true,
+              ),
+        child: const Text('Add a medical opinion you already have'),
+      ),
+    );
+  }
+
   Widget _child(ThemeData theme) {
     switch (_phase) {
       case _NexusPhase.loading:
@@ -588,6 +645,7 @@ class _NexusLettersPanelState extends ConsumerState<NexusLettersPanel> {
         const LeadText(
           'Answer a few quick questions so your letters are complete. They are written automatically when you are done. Do not include Social Security or account numbers.',
         ),
+        _savedOpinion(),
         if (_total > 0) ...[
           const SizedBox(height: 12),
           Align(
@@ -670,6 +728,7 @@ class _NexusLettersPanelState extends ConsumerState<NexusLettersPanel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        _savedOpinion(),
         AppTabs(
           tabs: const [
             AppTab(label: 'Doctor draft'),

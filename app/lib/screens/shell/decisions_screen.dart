@@ -1,6 +1,3 @@
-import 'dart:typed_data';
-
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -17,10 +14,11 @@ import '../../claim/va_rules.dart';
 import '../../claim/claim_issue_repository.dart';
 import '../../claim/decision_repository.dart';
 import '../../claim/document_repository.dart';
+import '../../claim/issue_lane.dart';
 import '../../cases/case_outcome.dart';
 import '../../cases/cases_progress.dart';
 import '../../cases/cases_repository.dart';
-import '../../forms/file_upload.dart';
+import '../../forms/claim_file_section.dart';
 import '../../forms/form_actions.dart';
 import '../../forms/iso_date_field.dart';
 import '../../forms/text_input_chain.dart';
@@ -243,56 +241,13 @@ class _LetterUpload extends ConsumerStatefulWidget {
 }
 
 class _LetterUploadState extends ConsumerState<_LetterUpload> {
-  String? _error;
-
   Future<void> _pick() async {
-    final List<PlatformFile> picked;
-    try {
-      picked = await FilePicker.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: const ['pdf', 'jpg', 'jpeg', 'png'],
-      );
-    } catch (_) {
-      if (mounted) setState(() => _error = 'That file could not be opened.');
-      return;
-    }
-    if (!mounted || picked.isEmpty) return;
-    final file = picked.first;
-    final known = file.lengthSync();
-    if (known != null && known > maxDocumentBytes) {
-      setState(() => _error = 'That file must be under 100 MB.');
-      return;
-    }
-    if (documentContentType(file.name) == null) {
-      setState(() => _error = 'Use a PDF, JPEG, or PNG.');
-      return;
-    }
-    final Uint8List bytes;
-    try {
-      bytes = await file.readAsBytes();
-    } catch (_) {
-      if (mounted) setState(() => _error = 'That file could not be opened.');
-      return;
-    }
-    if (!mounted) return;
-    if (bytes.isEmpty || bytes.length > maxDocumentBytes) {
-      setState(() => _error = 'That file must be under 100 MB.');
-      return;
-    }
-    setState(() => _error = null);
-    final saved = await showFileUpload(
+    final saved = await showClaimUpload(
       context: context,
-      fileName: file.name,
-      upload: (onProgress) {
-        return ref.read(uploadDocumentProvider)(
-          caseId: widget.caseId,
-          fileName: file.name,
-          bytes: bytes,
-          documentType: 'decisionLetter',
-          documentDate: null,
-          onProgress: onProgress,
-        );
-      },
+      caseId: widget.caseId,
+      packet: claimPacketNames[ClaimPacket.record]!,
+      documentType: 'decisionLetter',
+      lockType: true,
     );
     if (!mounted || !saved) return;
     context.go(AuthRoutes.caseDecisions(widget.caseId));
@@ -303,10 +258,12 @@ class _LetterUploadState extends ConsumerState<_LetterUpload> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const LeadText('Choose the decision letter. A PDF, JPEG, or PNG.'),
+        const LeadText('Add the decision letter. A PDF, JPEG, or PNG.'),
         const SizedBox(height: 12),
-        OutlinedButton(onPressed: _pick, child: const Text('Choose a file')),
-        if (_error != null) ...[const SizedBox(height: 12), ErrorText(_error!)],
+        OutlinedButton(
+          onPressed: _pick,
+          child: const Text('Add the decision letter'),
+        ),
       ],
     );
   }
